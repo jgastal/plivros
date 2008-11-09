@@ -1,0 +1,64 @@
+/**
+ * @file Author.h
+ *
+ * @date Oct 31, 2008
+ * @author Jonas M. Gastal
+ */
+
+#ifndef AUTHOR_H_
+#define AUTHOR_H_
+
+#include <string>
+
+#include <QtCore/QList>
+
+class Theme;
+
+using namespace std;
+
+enum author_field
+{
+	a_firstname,
+	a_lastname,
+	a_description,
+	a_critique,
+	a_rating,
+	a_picture,
+	a_themes
+};
+
+class Author
+{
+	public:
+		Author(string fn, string ln, string desc, string cri,
+			unsigned short int rat, string pic, QList<Theme*> t,
+			unsigned int id = 0);
+		unsigned int getId() const;
+		void setId(unsigned int id);
+		string getFirstName() const;
+		void setFirstName(string);
+		string getLastName() const;
+		void setLastName(string);
+		string getDescription() const;
+		void setDescription(string);
+		string getCritique() const;
+		void setCritique(string);
+		unsigned short int getRating() const;
+		void setRating(unsigned short int);
+		string getPicture() const;
+		void setPicture(string);
+		QList<Theme*> getThemes() const;
+		void setThemes(QList<Theme*> themes);
+
+	private:
+		unsigned int id;
+		string FirstName;
+		string LastName;
+		string Description;
+		string Critique;
+		unsigned short int rating;
+		string picture; //path to picture of author
+		QList<Theme*> themes; //List of pointers to themes
+};
+
+#endif /* AUTHOR_H_ */
