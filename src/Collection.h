@@ -26,24 +26,24 @@ class Collection
 		Collection(QString user, QString customDbName = "") throw(bad_alloc);
 		virtual ~Collection() throw();
 
-		bool insertBook(Book &b) throw(SQLiteException);
-		bool deleteBook(unsigned int id) throw(SQLiteException);
-		bool updateBook(unsigned int id, Book b) throw(SQLiteException);
+		bool insertBook(Book &b) throw(DataBaseException);
+		bool deleteBook(unsigned int id) throw(DataBaseException);
+		bool updateBook(unsigned int id, Book b) throw(DataBaseException);
 		QList<Book> searchBooks(book_field field, QString name);
 
-		bool insertAuthor(Author &a) throw(SQLiteException);
-		bool deleteAuthor(unsigned int id) throw(SQLiteException);
-		bool updateAuthor(unsigned int id, Author a) throw(SQLiteException);
+		bool insertAuthor(Author &a) throw(DataBaseException);
+		bool deleteAuthor(unsigned int id) throw(DataBaseException);
+		bool updateAuthor(unsigned int id, Author a) throw(DataBaseException);
 		QList<Author> searchAuthors(author_field field, QString name);
 
-		bool insertPublisher(Publisher &p) throw(SQLiteException);
-		bool deletePublisher(unsigned int id) throw(SQLiteException);
-		bool updatePublisher(unsigned int id, Publisher p) throw(SQLiteException);
+		bool insertPublisher(Publisher &p) throw(DataBaseException);
+		bool deletePublisher(unsigned int id) throw(DataBaseException);
+		bool updatePublisher(unsigned int id, Publisher p) throw(DataBaseException);
 		QList<Publisher> searchPublishers(publisher_field field, QString name);
 
-		bool insertTheme(Theme &t) throw(SQLiteException);
-		bool deleteTheme(unsigned int id) throw(SQLiteException);
-		bool updateTheme(unsigned int id, Theme t) throw(SQLiteException);
+		bool insertTheme(Theme &t) throw(DataBaseException);
+		bool deleteTheme(unsigned int id) throw(DataBaseException);
+		bool updateTheme(unsigned int id, Theme t) throw(DataBaseException);
 		QList<Theme> searchThemes(theme_field field, QString name);
 
 	private:

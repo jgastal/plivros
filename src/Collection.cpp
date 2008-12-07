@@ -9,7 +9,7 @@
 
 #include "DataBase.h"
 #include "ResultSet.h"
-#include "SQLiteException.h"
+#include "DataBaseException.h"
 
 #include "Collection.h"
 #include "PreparedStatement.h"
@@ -57,7 +57,7 @@ Collection::~Collection() throw()
  *
  * @return Whether the operation was successful.
  *
- * @exception SQLiteException Forwarding possible sqlite error.
+ * @exception DataBaseException Forwarding possible database error.
  *
  * @warn If the collection was opened as read only does nothing and returns false.
  *
@@ -65,7 +65,7 @@ Collection::~Collection() throw()
  * the statement then sets the id given by the database in the book and returns
  * success.
  */
-bool Collection::insertBook(Book &b) throw(SQLiteException)
+bool Collection::insertBook(Book &b) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -92,12 +92,12 @@ bool Collection::insertBook(Book &b) throw(SQLiteException)
 	return true;
 }
 
-bool Collection::deleteBook(unsigned int id) throw(SQLiteException)
+bool Collection::deleteBook(unsigned int id) throw(DataBaseException)
 {
 	return genericDelete(id, "book");
 }
 
-bool Collection::updateBook(unsigned int id, Book b) throw(SQLiteException)
+bool Collection::updateBook(unsigned int id, Book b) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -125,7 +125,7 @@ bool Collection::updateBook(unsigned int id, Book b) throw(SQLiteException)
 	return true;
 }
 
-bool Collection::insertAuthor(Author &a) throw(SQLiteException)
+bool Collection::insertAuthor(Author &a) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -146,12 +146,12 @@ bool Collection::insertAuthor(Author &a) throw(SQLiteException)
 	return true;
 }
 
-bool Collection::deleteAuthor(unsigned int id) throw(SQLiteException)
+bool Collection::deleteAuthor(unsigned int id) throw(DataBaseException)
 {
 	return genericDelete(id, "author");
 }
 
-bool Collection::updateAuthor(unsigned int id, Author a) throw(SQLiteException)
+bool Collection::updateAuthor(unsigned int id, Author a) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -172,7 +172,7 @@ bool Collection::updateAuthor(unsigned int id, Author a) throw(SQLiteException)
 	return true;
 }
 
-bool Collection::insertPublisher(Publisher &p) throw(SQLiteException)
+bool Collection::insertPublisher(Publisher &p) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -190,12 +190,12 @@ bool Collection::insertPublisher(Publisher &p) throw(SQLiteException)
 	return true;
 }
 
-bool Collection::deletePublisher(unsigned int id) throw(SQLiteException)
+bool Collection::deletePublisher(unsigned int id) throw(DataBaseException)
 {
 	return genericDelete(id, "publisher");
 }
 
-bool Collection::updatePublisher(unsigned int id, Publisher p) throw(SQLiteException)
+bool Collection::updatePublisher(unsigned int id, Publisher p) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -219,7 +219,7 @@ bool Collection::updatePublisher(unsigned int id, Publisher p) throw(SQLiteExcep
  *
  * @return Whether the operation was successful.
  *
- * @exception SQLiteException Forwarding possible sqlite error.
+ * @exception DataBaseException Forwarding possible database error.
  *
  * @warn If the collection was opened as read only does nothing and returns false.
  *
@@ -227,7 +227,7 @@ bool Collection::updatePublisher(unsigned int id, Publisher p) throw(SQLiteExcep
  * the statement then sets the id given by the database in the theme and returns
  * success.
  */
-bool Collection::insertTheme(Theme &t) throw(SQLiteException)
+bool Collection::insertTheme(Theme &t) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -240,7 +240,7 @@ bool Collection::insertTheme(Theme &t) throw(SQLiteException)
 	return true;
 }
 
-bool Collection::deleteTheme(unsigned int id) throw(SQLiteException)
+bool Collection::deleteTheme(unsigned int id) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -252,7 +252,7 @@ bool Collection::deleteTheme(unsigned int id) throw(SQLiteException)
 	return true;
 }
 
-bool Collection::updateTheme(unsigned int id, Theme t) throw(SQLiteException)
+bool Collection::updateTheme(unsigned int id, Theme t) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
