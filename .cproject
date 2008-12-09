@@ -45,6 +45,7 @@
 <listOptionValue builtIn="false" value="/usr/lib/qt4/"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/sqlitewrapper/Debug}&quot;"/>
 </option>
+<option id="gnu.cpp.link.option.flags.281655575" superClass="gnu.cpp.link.option.flags" value="-Wl,-rpath,&quot;${workspace_loc:/sqlitewrapper/Debug}&quot;" valueType="string"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.533887754" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 <additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -331,7 +332,7 @@
 <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1048463643" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release">
 <option id="gnu.cpp.compiler.exe.release.option.optimization.level.890451367" name="Optimization Level" superClass="gnu.cpp.compiler.exe.release.option.optimization.level" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.exe.release.option.debugging.level.210093978" name="Debug Level" superClass="gnu.cpp.compiler.exe.release.option.debugging.level" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
-<option id="gnu.cpp.compiler.option.include.paths.545374559" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+<option id="gnu.cpp.compiler.option.include.paths.545374559" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/sqlitewrapper/src}&quot;"/>
 <listOptionValue builtIn="false" value="/usr/include/qt4"/>
 </option>
@@ -344,14 +345,15 @@
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.release.123930031" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.release"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.release.845767858" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.release">
-<option id="gnu.cpp.link.option.libs.805281670" superClass="gnu.cpp.link.option.libs" valueType="libs">
+<option id="gnu.cpp.link.option.libs.805281670" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 <listOptionValue builtIn="false" value="sqlitewrapper"/>
 <listOptionValue builtIn="false" value="QtCore"/>
 </option>
-<option id="gnu.cpp.link.option.paths.159778231" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+<option id="gnu.cpp.link.option.paths.159778231" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/sqlitewrapper/Release}&quot;"/>
 <listOptionValue builtIn="false" value="/usr/lib/qt4"/>
 </option>
+<option id="gnu.cpp.link.option.flags.970187110" superClass="gnu.cpp.link.option.flags" value="-Wl,-rpath,&quot;${workspace_loc:/sqlitewrapper/Release}&quot;" valueType="string"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1900864317" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 <additionalInput kind="additionalinput" paths="$(LIBS)"/>
