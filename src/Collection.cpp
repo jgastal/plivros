@@ -72,7 +72,7 @@ bool Collection::insertBook(Book &b) throw(DataBaseException)
 	PreparedStatement prep_stmt("INSERT INTO books (isbn, title, edition, "
 		"critique, description, rating, cover, ebook, publishingyear, "
 		"udc, translator) VALUES ('%1', '%2', '%3', '%4', '%5', '%6', "
-		"'%7', '%8', '%9', '%10', '%11');");
+		"'%7', '%8', '%9', '%10', '%11');", db->getType());
 	prep_stmt.arg(b.getIsbn());
 	prep_stmt.arg(b.getTitle());
 	prep_stmt.arg(b.getEdition());
@@ -104,7 +104,7 @@ bool Collection::updateBook(unsigned int id, Book b) throw(DataBaseException)
 	PreparedStatement upd_book("UPDATE books SET isbn = '%1', title = '%2',"
 		" edition = '%3', description = '%4', critique = '%5', rating ="
 		" '%6', cover = '%7', ebook = '%8', publishingyear = '%9', udc ="
-		" '%10', translator = '%11' WHERE id = '%12'");
+		" '%10', translator = '%11' WHERE id = '%12'", db->getType());
 	upd_book.arg(b.getIsbn());
 	upd_book.arg(b.getTitle());
 	upd_book.arg(b.getEdition());
@@ -131,7 +131,7 @@ bool Collection::insertAuthor(Author &a) throw(DataBaseException)
 		return false;
 	PreparedStatement ins_author("INSERT INTO authors (firstname, lastname, "
 		"description, critique, rating, picture) VALUES ('%1', '%2', "
-		"'%3', '%4', '%5', '%6');");
+		"'%3', '%4', '%5', '%6');", db->getType());
 	ins_author.arg(a.getFirstName());
 	ins_author.arg(a.getLastName());
 	ins_author.arg(a.getDescription());
@@ -157,7 +157,7 @@ bool Collection::updateAuthor(unsigned int id, Author a) throw(DataBaseException
 		return false;
 	PreparedStatement upd_author("UPDATE authors SET firstname = '%1', "
 		"lastname = '%2', description = '%3', critique = '%4', rating = "
-		"'%5', picture = '%6' WHERE id = '%7'");
+		"'%5', picture = '%6' WHERE id = '%7'", db->getType());
 	upd_author.arg(a.getFirstName());
 	upd_author.arg(a.getLastName());
 	upd_author.arg(a.getDescription());
@@ -177,7 +177,7 @@ bool Collection::insertPublisher(Publisher &p) throw(DataBaseException)
 	if(readOnly)
 		return false;
 	PreparedStatement ins_pub("INSERT INTO publishers (name, description, critique,"
-		"logo) VALUES ('%1', '%2', '%3', '%4');");
+		"logo) VALUES ('%1', '%2', '%3', '%4');", db->getType());
 	ins_pub.arg(p.getName());
 	ins_pub.arg(p.getDescription());
 	ins_pub.arg(p.getCritique());
@@ -199,7 +199,8 @@ bool Collection::updatePublisher(unsigned int id, Publisher p) throw(DataBaseExc
 {
 	if(readOnly)
 		return false;
-	PreparedStatement upd_pub("UPDATE publishers SET name = '%1', description = '%2', critique = '%3', logo = '%4' WHERE id = '%5'");
+	PreparedStatement upd_pub("UPDATE publishers SET name = '%1', description"
+		" = '%2', critique = '%3', logo = '%4' WHERE id = '%5'", db->getType());
 	upd_pub.arg(p.getName());
 	upd_pub.arg(p.getDescription());
 	upd_pub.arg(p.getCritique());
@@ -231,7 +232,8 @@ bool Collection::insertTheme(Theme &t) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement prep_stmt("INSERT INTO themes (name, description) VALUES ('%1', '%2');");
+	PreparedStatement prep_stmt("INSERT INTO themes (name, description) "
+		"VALUES ('%1', '%2');", db->getType());
 	prep_stmt.arg(t.getName());
 	prep_stmt.arg(t.getDescription());
 
@@ -244,7 +246,7 @@ bool Collection::deleteTheme(unsigned int id) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement prep_stmt("DELETE FROM themes WHERE id = '%1';");
+	PreparedStatement prep_stmt("DELETE FROM themes WHERE id = '%1';", db->getType());
 	prep_stmt.arg(id);
 
 	db->exec(prep_stmt);
@@ -256,7 +258,8 @@ bool Collection::updateTheme(unsigned int id, Theme t) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement prep_stmt("UPDATE Themes SET name = '%1', description = '%2' WHERE id = '%3';");
+	PreparedStatement prep_stmt("UPDATE Themes SET name = '%1', description"
+		" = '%2' WHERE id = '%3';", db->getType());
 	prep_stmt.arg(t.getName());
 	prep_stmt.arg(t.getDescription());
 	prep_stmt.arg(id);
@@ -269,7 +272,7 @@ bool Collection::updateTheme(unsigned int id, Theme t) throw(DataBaseException)
 template <class T>
 void Collection::updateThemesReference(string type, T data)
 {
-	PreparedStatement del_themes("DELETE FROM %1themes WHERE %2ID = '%3'");
+	PreparedStatement del_themes("DELETE FROM %1themes WHERE %2ID = '%3'", db->getType());
 	del_themes.arg(type); //set table name
 	del_themes.arg(type); //set id field name
 	del_themes.arg(data.getId());
@@ -283,7 +286,8 @@ template <class T>
 void Collection::insertThemesReference(string type, T data)
 {
 	QList<Theme*> themes = data.getThemes();
-	PreparedStatement ins_theme_template("INSERT INTO %1themes (%2ID, themeID) VALUES ('%3', '%4');");
+	PreparedStatement ins_theme_template("INSERT INTO %1themes (%2ID, themeID)"
+		" VALUES ('%3', '%4');", db->getType());
 	ins_theme_template.arg(type); //set table name
 	ins_theme_template.arg(type); //set id field name
 	for(QList<Theme*>::iterator it = themes.begin(); it != themes.end(); it++)
@@ -299,8 +303,8 @@ bool Collection::genericDelete(unsigned int id, string type)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement del("DELETE FROM %1s WHERE id = '%2'");
-	PreparedStatement del_themes("DELETE FROM %1themes WHERE %2ID = '%3'");
+	PreparedStatement del("DELETE FROM %1s WHERE id = '%2'", db->getType());
+	PreparedStatement del_themes("DELETE FROM %1themes WHERE %2ID = '%3'", db->getType());
 	del.arg(type);
 	del.arg(id);
 
