@@ -47,7 +47,8 @@ unsigned int Book::getId() const
 
 void Book::setId(unsigned int id)
 {
-	this->id = id;
+	if(this->id == 0) //If id has never been set.
+		this->id = id;
 }
 
 const char* Book::getIsbn() const

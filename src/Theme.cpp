@@ -25,7 +25,8 @@ unsigned int Theme::getId() const
 
 void Theme::setId(unsigned int id)
 {
-	this->id = id;
+	if(this->id == 0) //If id has never been set.
+		this->id = id;
 }
 
 string Theme::getName() const

@@ -33,7 +33,8 @@ unsigned int Author::getId() const
 
 void Author::setId(unsigned int id)
 {
-	this->id = id;
+	if(this->id == 0) //If id has never been set.
+		this->id = id;
 }
 
 string Author::getFirstName() const
