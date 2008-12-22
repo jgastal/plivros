@@ -25,8 +25,8 @@ Collection::Collection(QString u, QString customDbName) throw(bad_alloc)
 }
 
 /**
- * @brief Opens the database file associated with this collection. Creating a new
- * one if none existed.
+ * @brief Opens the database associated with this collection. Creating a new
+ * one if it didn't exist.
  *
  * @param u The name of the user to whom this collection belongs.
  * @param ro If the database should be opened read only.
@@ -45,13 +45,14 @@ Collection::Collection(QString u, bool ro, QString customDbName) throw(bad_alloc
 	db = new DataBase(dbName.toStdString());
 }
 
+///@brief Closes database.
 Collection::~Collection() throw()
 {
 	delete db;
 }
 
 /**
- * @brief Add the book \a b to the collection.
+ * @brief Add book \a b to the collection.
  *
  * @param b Book to be added.
  *
@@ -59,7 +60,8 @@ Collection::~Collection() throw()
  *
  * @exception DataBaseException Forwarding possible database error.
  *
- * @warn If the collection was opened as read only does nothing and returns false.
+ * @warning If the collection was opened as read only does nothing and returns false.
+ * @warning Make sure you DON'T SET the books id before calling this method.
  *
  * The function creates a SQL insert statement based on the given book, executes
  * the statement then sets the id given by the database in the book and returns
@@ -92,12 +94,32 @@ bool Collection::insertBook(Book &b) throw(DataBaseException)
 	return true;
 }
 
+/**
+ * @brief Deletes book from collection.
+ *
+ * @param id ID of book to be deleted.
+ *
+ * @return Whether operation was successful.
+ *
+ * Note that this method actually does very little, it just calls genericDelete()
+ * with the appropriate arguments.
+ */
 bool Collection::deleteBook(unsigned int id) throw(DataBaseException)
 {
 	return genericDelete(id, "book");
 }
 
-bool Collection::updateBook(unsigned int id, Book b) throw(DataBaseException)
+/**
+ * @brief Updates book.
+ *
+ * @param b Book to be updated.
+ *
+ * @return Whether the operation was successful.
+ *
+ * This method constructs an SQL statement that updates every field of the book
+ * except the id to match the object.
+ */
+bool Collection::updateBook(Book b) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -116,7 +138,7 @@ bool Collection::updateBook(unsigned int id, Book b) throw(DataBaseException)
 	upd_book.arg(b.getPubDate().toString("yyyy-MM-dd").toStdString());
 	upd_book.arg(b.getUDC());
 	upd_book.arg(b.getTranslator()->getId());
-	upd_book.arg(id);
+	upd_book.arg(b.getId());
 
 	updateThemesReference("book", b);
 
@@ -125,6 +147,22 @@ bool Collection::updateBook(unsigned int id, Book b) throw(DataBaseException)
 	return true;
 }
 
+/**
+ * @brief Add Author \a a to the collection.
+ *
+ * @param a Author to be added.
+ *
+ * @return Whether the operation was successful.
+ *
+ * @exception DataBaseException Forwarding possible database error.
+ *
+ * @warning If the collection was opened as read only does nothing and returns false.
+ * @warning Make sure you DON'T SET the authors id before calling this method.
+ *
+ * The function creates a SQL insert statement based on the given author, executes
+ * the statement then sets the id given by the database in the author and returns
+ * success.
+ */
 bool Collection::insertAuthor(Author &a) throw(DataBaseException)
 {
 	if(readOnly)
@@ -146,12 +184,32 @@ bool Collection::insertAuthor(Author &a) throw(DataBaseException)
 	return true;
 }
 
+/**
+ * @brief Deletes author from collection.
+ *
+ * @param id ID of author to be deleted.
+ *
+ * @return Whether operation was successful.
+ *
+ * Note that this method actually does very little, it just calls genericDelete()
+ * with the appropriate arguments.
+ */
 bool Collection::deleteAuthor(unsigned int id) throw(DataBaseException)
 {
 	return genericDelete(id, "author");
 }
 
-bool Collection::updateAuthor(unsigned int id, Author a) throw(DataBaseException)
+/**
+ * @brief Updates author.
+ *
+ * @param a Book to be updated.
+ *
+ * @return Whether the operation was successful.
+ *
+ * This method constructs an SQL statement that updates every field of the author
+ * except the id to match the object.
+ */
+bool Collection::updateAuthor(Author a) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -172,6 +230,18 @@ bool Collection::updateAuthor(unsigned int id, Author a) throw(DataBaseException
 	return true;
 }
 
+/**
+ * @brief Adds publisher \a p to the collection.
+ *
+ * @param p Publisher to be added.
+ *
+ * @return Whether the operation was successful.
+ *
+ * This method creates two SQL commands, one to add the actual publisher and the
+ * other one to add the themes associated with it, since internally they are kept
+ * in separate tables. After the publisher is inserted in the database its ID is
+ * set.
+ */
 bool Collection::insertPublisher(Publisher &p) throw(DataBaseException)
 {
 	if(readOnly)
@@ -190,12 +260,32 @@ bool Collection::insertPublisher(Publisher &p) throw(DataBaseException)
 	return true;
 }
 
+/**
+ * @brief Removes publisher from collection.
+ *
+ * @param id ID of publisher to be removed.
+ *
+ * @return Whether operation was successful.
+ *
+ * This method actually does very little, it just calls generic delete which does
+ * all the heavy lifting.
+ */
 bool Collection::deletePublisher(unsigned int id) throw(DataBaseException)
 {
 	return genericDelete(id, "publisher");
 }
 
-bool Collection::updatePublisher(unsigned int id, Publisher p) throw(DataBaseException)
+/**
+ * @brief Updates publisher.
+ *
+ * @param p Publisher to be updated.
+ *
+ * @return Whether the operation was successful.
+ *
+ * This method constructs an SQL statement that updates every field of the publisher
+ * except the id to match the object.
+ */
+bool Collection::updatePublisher(Publisher p) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -214,7 +304,7 @@ bool Collection::updatePublisher(unsigned int id, Publisher p) throw(DataBaseExc
 }
 
 /**
- * @brief Adds the theme \a t to the collection.
+ * @brief Adds theme \a t to the collection.
  *
  * @param t The theme to be inserted.
  *
@@ -222,7 +312,8 @@ bool Collection::updatePublisher(unsigned int id, Publisher p) throw(DataBaseExc
  *
  * @exception DataBaseException Forwarding possible database error.
  *
- * @warn If the collection was opened as read only does nothing and returns false.
+ * @warning If the collection was opened as read only does nothing and returns false.
+ * @warning Make sure you DON'T SET the books id before calling this method.
  *
  * The function creates a SQL insert statement based on the given theme, executes
  * the statement then sets the id given by the database in the theme and returns
@@ -242,6 +333,17 @@ bool Collection::insertTheme(Theme &t) throw(DataBaseException)
 	return true;
 }
 
+/**
+ * @brief Removes a theme from the collection.
+ *
+ * @param id ID of theme to be removed.
+ *
+ * @return Whether the operation was successful.
+ *
+ * Notice that this is the only delete method that does not call genericDelete()
+ * this is so by design! genericDelete() also deletes theme references and since
+ * themes don't have theme references this is unnescessary.
+ */
 bool Collection::deleteTheme(unsigned int id) throw(DataBaseException)
 {
 	if(readOnly)
@@ -254,7 +356,17 @@ bool Collection::deleteTheme(unsigned int id) throw(DataBaseException)
 	return true;
 }
 
-bool Collection::updateTheme(unsigned int id, Theme t) throw(DataBaseException)
+/**
+ * @brief Updates theme.
+ *
+ * @param t Theme to be updated.
+ *
+ * @return Whether the operation was successful.
+ *
+ * This method constructs an SQL statement that updates every field of the theme
+ * except the id to match the object.
+ */
+bool Collection::updateTheme(Theme t) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -262,15 +374,24 @@ bool Collection::updateTheme(unsigned int id, Theme t) throw(DataBaseException)
 		" = '%2' WHERE id = '%3';", db->getType());
 	prep_stmt.arg(t.getName());
 	prep_stmt.arg(t.getDescription());
-	prep_stmt.arg(id);
+	prep_stmt.arg(t.getId());
 
 	if(db->exec(prep_stmt) == 0)
 		return false;
 	return true;
 }
 
+/**
+ * @brief Updates the themes references to match that of \a data.
+ *
+ * @param type Type of object being handled.
+ * @param data Object whose theme references need to be updated.
+ *
+ * @warning type MUST be one of "book", "author", "publisher"!
+ * @warning data must be a Book, Author or Publisher object!
+ */
 template <class T>
-void Collection::updateThemesReference(string type, T data)
+void Collection::updateThemesReference(string type, T data) throw(DataBaseException)
 {
 	PreparedStatement del_themes("DELETE FROM %1themes WHERE %2ID = '%3'", db->getType());
 	del_themes.arg(type); //set table name
@@ -282,8 +403,17 @@ void Collection::updateThemesReference(string type, T data)
 	insertThemesReference(type, data);
 }
 
+/**
+ * @brief Creates theme references to match that of \a data.
+ *
+ * @param type Type of object being handled.
+ * @param data Object whose theme references need to be added.
+ *
+ * @warning type MUST be one of "book", "author", "publisher"!
+ * @warning data must be a Book, Author or Publisher object!
+ */
 template <class T>
-void Collection::insertThemesReference(string type, T data)
+void Collection::insertThemesReference(string type, T data) throw(DataBaseException)
 {
 	QList<Theme*> themes = data.getThemes();
 	PreparedStatement ins_theme_template("INSERT INTO %1themes (%2ID, themeID)"
@@ -299,7 +429,22 @@ void Collection::insertThemesReference(string type, T data)
 	}
 }
 
-bool Collection::genericDelete(unsigned int id, string type)
+/**
+ * @brief Remove an object from the collection.
+ *
+ * @param id ID of object to removed from collection.
+ * @param type Type of object to be removed from collection.
+ *
+ * @return Whether operation was successful.
+ *
+ * @warning type MUST be one of "book", "author", "publisher"!
+ * @warning Under no circumstance use this method to delete a theme.
+ *
+ * This method first removes any theme references to the object being removed to
+ * only then remove the actual object. The order in which this is done is
+ * important to preserve data consistency in the database.
+ */
+bool Collection::genericDelete(unsigned int id, string type) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
