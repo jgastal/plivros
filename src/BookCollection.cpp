@@ -33,7 +33,7 @@ BookCollection::BookCollection(DataBase *db)
  * the statement then sets the id given by the database in the book and returns
  * success.
  */
-bool BookCollectioninsertBook(Book &b) throw(DataBaseException)
+bool BookCollection::insertBook(Book &b) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -72,7 +72,7 @@ bool BookCollectioninsertBook(Book &b) throw(DataBaseException)
  * Note that this method actually does very little, it just calls genericDelete()
  * with the appropriate arguments.
  */
-bool BookCollectiondeleteBook(unsigned int id) throw(DataBaseException)
+bool BookCollection::deleteBook(unsigned int id) throw(DataBaseException)
 {
 	return genericDelete(id, "book");
 }
@@ -87,7 +87,7 @@ bool BookCollectiondeleteBook(unsigned int id) throw(DataBaseException)
  * This method constructs an SQL statement that updates every field of the book
  * except the id to match the object.
  */
-bool BookCollectionupdateBook(Book b) throw(DataBaseException)
+bool BookCollection::updateBook(Book b) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
@@ -117,7 +117,7 @@ bool BookCollectionupdateBook(Book b) throw(DataBaseException)
 	return true;
 }
 
-QList<Book> BookCollectionsearchBooks(book_field field, string name) throw(DataBaseException)
+QList<Book> BookCollection::searchBooks(book_field field, string name) throw(DataBaseException)
 {
 	PreparedStatement query("SELECT * FROM books WHERE %1 %2 (%3)", db->getType());
 	if(field == b_authors)
@@ -202,7 +202,7 @@ QList<Book> BookCollectionsearchBooks(book_field field, string name) throw(DataB
  * @warning data must be a Book, Author or Publisher object!
  */
 template <class T>
-void BookCollectionupdateThemesReference(string type, T data) throw(DataBaseException)
+void BookCollection::updateThemesReference(string type, T data) throw(DataBaseException)
 {
 	PreparedStatement delThemes("DELETE FROM %1themes WHERE %2ID = '%3'", db->getType());
 	delThemes.arg(type); //set table name
@@ -224,7 +224,7 @@ void BookCollectionupdateThemesReference(string type, T data) throw(DataBaseExce
  * @warning data must be a Book, Author or Publisher object!
  */
 template <class T>
-void BookCollectioninsertThemesReference(string type, T data) throw(DataBaseException)
+void BookCollection::insertThemesReference(string type, T data) throw(DataBaseException)
 {
 	QList<Theme*> themes = data.getThemes();
 	PreparedStatement insThemeTemplate("INSERT INTO %1themes (%2ID, themeID)"
@@ -240,7 +240,7 @@ void BookCollectioninsertThemesReference(string type, T data) throw(DataBaseExce
 	}
 }
 
-void BookCollectioninsertAuthorsReference(Book b) throw(DataBaseException)
+void BookCollection::insertAuthorsReference(Book b) throw(DataBaseException)
 {
 	QList<Author*> authors = b.getAuthors();
 	PreparedStatement insAuthorTemplate("INSERT INTO bookauthor (bookID, authorID)"
@@ -254,7 +254,7 @@ void BookCollectioninsertAuthorsReference(Book b) throw(DataBaseException)
 	}
 }
 
-void BookCollectioninsertPublishersReference(Book b) throw(DataBaseException)
+void BookCollection::insertPublishersReference(Book b) throw(DataBaseException)
 {
 	QList<Publisher*> pubs = b.getPublishers();
 	PreparedStatement insPubTemplate("INSERT INTO bookpublisher (bookID, publisherID)"
@@ -267,3 +267,4 @@ void BookCollectioninsertPublishersReference(Book b) throw(DataBaseException)
 		db->insert(insPub);
 	}
 }
+
