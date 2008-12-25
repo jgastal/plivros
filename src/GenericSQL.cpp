@@ -7,7 +7,6 @@
 
 #include "GenericSQL.h"
 
-
 template <class Type, class Reference>
 void insertReference(string type, Type data, string refType, DataBase *db) throw(DataBaseException)
 {
