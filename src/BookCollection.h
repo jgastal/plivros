@@ -30,7 +30,7 @@ class BookCollection
 		void updateAuthorsReference(Book b) throw(DataBaseException);
 		void updatePublishersReference(Book b) throw(DataBaseException);
 		template <class T>
-		void insertThemesReference(string table, T data) throw(DataBaseException);
+		void insertThemesReference(Book b) throw(DataBaseException);
 		void insertAuthorsReference(Book b) throw(DataBaseException);
 		void insertPublishersReference(Book b) throw(DataBaseException);
 		QList<Book> parseBookResultSet(ResultSet rs);

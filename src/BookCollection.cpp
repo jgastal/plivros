@@ -223,14 +223,11 @@ void BookCollection::updateThemesReference(string type, T data) throw(DataBaseEx
  * @warning type MUST be one of "book", "author", "publisher"!
  * @warning data must be a Book, Author or Publisher object!
  */
-template <class T>
-void BookCollection::insertThemesReference(string type, T data) throw(DataBaseException)
+void BookCollection::insertThemesReference(Book b) throw(DataBaseException)
 {
 	QList<Theme*> themes = data.getThemes();
-	PreparedStatement insThemeTemplate("INSERT INTO %1themes (%2ID, themeID)"
-		" VALUES ('%3', '%4')", db->getType());
-	insThemeTemplate.arg(type); //set table name
-	insThemeTemplate.arg(type); //set id field name
+	PreparedStatement insThemeTemplate("INSERT INTO booktheme (bookID, themeID)"
+		" VALUES ('%1', '%2')", db->getType());
 	insThemeTemplate.arg(data.getId()); //id never changes
 	for(QList<Theme*>::iterator it = themes.begin(); it != themes.end(); it++)
 	{
