@@ -73,8 +73,9 @@ class Collection
 		void insertAuthorsReference(Book b) throw(DataBaseException);
 		void insertPublishersReference(Book b) throw(DataBaseException);
 		template <class Type, class Reference>
-		void insertReference(string type, Type data, string refType, Reference r) throw(DataBaseException);
+		void insertReference(string type, Type data, string refType) throw(DataBaseException);
 		bool genericDelete(unsigned int id, string type) throw(DataBaseException);
+		QList<Book> parseBookResultSet(ResultSet rs);
 };
 
 #endif /* COLLECTION_H_ */

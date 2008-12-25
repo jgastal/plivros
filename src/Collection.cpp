@@ -507,7 +507,6 @@ void Collection::insertThemesReference(string type, T data) throw(DataBaseExcept
 	}
 }
 
-
 void Collection::insertAuthorsReference(Book b) throw(DataBaseException)
 {
 	QList<Author*> authors = b.getAuthors();
@@ -537,25 +536,17 @@ void Collection::insertPublishersReference(Book b) throw(DataBaseException)
 }
 
 template <class Type, class Reference>
-void Collection::insertReference(string type, Type data, string refType, Reference r) throw(DataBaseException)
+void Collection::insertReference(string type, Type data, string refType) throw(DataBaseException)
 {
-	/*if(!refType.compare("theme"))
-	{
-		QList<Theme*> ref = data.getThemes();
-		QList<Theme*>::iterator it;
-	}
-	else if(!refType.compare("author"))
-	{
-		QList<Author*> ref = data.getAuthors();
-		QList<Author*>::iterator it;
-	}
-	else if(!refType.compare("publisher"))
-	{
-		QList<Publisher*> ref = data.getPublihsers();
-		QList<Publisher*>::iterator it;
-	}*/
 	QList<Reference*> ref;
-	QList<Reference*>::iterator it;
+	/*
+	 * Because of the use of templates ::iterator can be understood as a
+	 * nested class or a public name, thus requiring typename to make sure
+	 * the parser knows it is a nested class and is being used as a type.
+	 * For a full explanation see:
+	 * http://pages.cs.wisc.edu/~driscoll/typename.html
+	 */
+	typename QList<Reference*>::iterator it;
 	if(!refType.compare("theme"))
 		ref = data.getThemes();
 	else if(!refType.compare("author"))
@@ -572,7 +563,8 @@ void Collection::insertReference(string type, Type data, string refType, Referen
 	insTemplate.arg(type);
 	//second id is of referenced type
 	insTemplate.arg(refType);
-	insTemplate.arg(data.getId()); //id of type never changes
+	//id of type never changes
+	insTemplate.arg(data.getId());
 	for(it = ref.begin(); it != ref.end(); it++)
 	{
 		PreparedStatement ins = insTemplate;
