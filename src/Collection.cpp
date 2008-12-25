@@ -71,25 +71,27 @@ bool Collection::insertBook(Book &b) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement prep_stmt("INSERT INTO books (isbn, title, edition, "
+	PreparedStatement prepStmt("INSERT INTO books (isbn, title, edition, "
 		"critique, description, rating, cover, ebook, publishingyear, "
 		"udc, translator) VALUES ('%1', '%2', '%3', '%4', '%5', '%6', "
-		"'%7', '%8', '%9', '%10', '%11');", db->getType());
-	prep_stmt.arg(b.getIsbn());
-	prep_stmt.arg(b.getTitle());
-	prep_stmt.arg(b.getEdition());
-	prep_stmt.arg(b.getCritique());
-	prep_stmt.arg(b.getDescription());
-	prep_stmt.arg(b.getRating());
-	prep_stmt.arg(b.getCover());
-	prep_stmt.arg(b.getEbook());
-	prep_stmt.arg(b.getPubDate().toString("yyyy-MM-dd").toStdString());
-	prep_stmt.arg(b.getUDC());
-	prep_stmt.arg(b.getTranslator()->getId());
+		"'%7', '%8', '%9', '%10', '%11')", db->getType());
+	prepStmt.arg(b.getIsbn());
+	prepStmt.arg(b.getTitle());
+	prepStmt.arg(b.getEdition());
+	prepStmt.arg(b.getCritique());
+	prepStmt.arg(b.getDescription());
+	prepStmt.arg(b.getRating());
+	prepStmt.arg(b.getCover());
+	prepStmt.arg(b.getEbook());
+	prepStmt.arg(b.getPubDate().toString("yyyy-MM-dd").toStdString());
+	prepStmt.arg(b.getUDC());
+	prepStmt.arg(b.getTranslator()->getId());
 
-	b.setId(db->insert(prep_stmt));
+	b.setId(db->insert(prepStmt));
 
 	insertThemesReference("book", b);
+	insertAuthorsReference(b);
+	insertPublishersReference(b);
 
 	return true;
 }
@@ -123,28 +125,105 @@ bool Collection::updateBook(Book b) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement upd_book("UPDATE books SET isbn = '%1', title = '%2',"
+	PreparedStatement updBook("UPDATE books SET isbn = '%1', title = '%2',"
 		" edition = '%3', description = '%4', critique = '%5', rating ="
 		" '%6', cover = '%7', ebook = '%8', publishingyear = '%9', udc ="
 		" '%10', translator = '%11' WHERE id = '%12'", db->getType());
-	upd_book.arg(b.getIsbn());
-	upd_book.arg(b.getTitle());
-	upd_book.arg(b.getEdition());
-	upd_book.arg(b.getDescription());
-	upd_book.arg(b.getCritique());
-	upd_book.arg(b.getRating());
-	upd_book.arg(b.getCover());
-	upd_book.arg(b.getEbook());
-	upd_book.arg(b.getPubDate().toString("yyyy-MM-dd").toStdString());
-	upd_book.arg(b.getUDC());
-	upd_book.arg(b.getTranslator()->getId());
-	upd_book.arg(b.getId());
+	updBook.arg(b.getIsbn());
+	updBook.arg(b.getTitle());
+	updBook.arg(b.getEdition());
+	updBook.arg(b.getDescription());
+	updBook.arg(b.getCritique());
+	updBook.arg(b.getRating());
+	updBook.arg(b.getCover());
+	updBook.arg(b.getEbook());
+	updBook.arg(b.getPubDate().toString("yyyy-MM-dd").toStdString());
+	updBook.arg(b.getUDC());
+	updBook.arg(b.getTranslator()->getId());
+	updBook.arg(b.getId());
 
 	updateThemesReference("book", b);
+	updateAuthorsReference(b);
+	updatePublishersReference(b);
 
-	if(db->exec(upd_book) == 0)
+	if(db->exec(updBook) == 0)
 		return false;
 	return true;
+}
+
+QList<Book> Collection::searchBooks(book_field field, string name) throw(DataBaseException)
+{
+	PreparedStatement query("SELECT * FROM books WHERE %1 %2 (%3)", db->getType());
+	if(field == b_authors)
+	{
+		query.arg("id"); //search for book id
+		query.arg("IN"); //using subquery
+		string refQuery("SELECT bookID FROM bookauthors WHERE authorID IN (%1)");
+		string authorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
+		query.arg(refQuery); //select from reference table
+		query.arg(authorQuery); //select from authors table
+		query.arg(name); //search in first name
+		query.arg(name); //search in last name
+	}
+	else if(field == b_publishers)
+	{
+		query.arg("id"); //search for book id
+		query.arg("IN"); //using subquery
+		string refQuery("SELECT bookID FROM bookpublishers WHERE publisherID IN (%1)");
+		string authorQuery("SELECT id FROM publishers WHERE name LIKE '%%1%'");
+		query.arg(refQuery); //select from reference table
+		query.arg(authorQuery); //select from publishers table
+		query.arg(name); //search in name
+	}
+	else if(field == b_themes)
+	{
+		query.arg("id"); //search for book id
+		query.arg("IN"); //using subquery
+		string refQuery("SELECT bookID FROM bookthemes WHERE themeID IN (%1)");
+		string authorQuery("SELECT id FROM themes WHERE name LIKE '%%1%'");
+		query.arg(refQuery); //select from reference table
+		query.arg(authorQuery); //select from themes table
+		query.arg(name); //search in name
+	}
+	else if(field == b_translator)
+	{
+		query.arg("translator");
+		query.arg("IN");
+		string translatorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
+		query.arg(translatorQuery);
+		query.arg(name);
+	}
+	else
+	{
+		//what field to search for
+		if(field == b_isbn)
+			query.arg("isbn");
+		else if(field == b_title)
+			query.arg("title");
+		else if(field == b_edition)
+			query.arg("edition");
+		else if(field == b_critique)
+			query.arg("critique");
+		else if(field == b_description)
+			query.arg("description");
+		else if(field == b_rating)
+			query.arg("rating");
+		else if(field == b_cover)
+			query.arg("cover");
+		else if(field == b_ebook)
+			query.arg("ebook");
+		else if(field == b_pubdate)
+			query.arg("pubdate");
+		else if(field == b_UDC)
+			query.arg("UDC");
+
+		query.arg("LIKE"); //doesn't have to be exact match
+		name.insert(0, "'%").append("%'"); //SQLs LIKE requires a preceding '%' and a ending '%'
+		query.arg(name); //search term
+	}
+
+	ResultSet bookRS = db->query(query);
+	return parseBookResultSet(bookRS);
 }
 
 /**
@@ -167,17 +246,17 @@ bool Collection::insertAuthor(Author &a) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement ins_author("INSERT INTO authors (firstname, lastname, "
+	PreparedStatement insAuthor("INSERT INTO authors (firstname, lastname, "
 		"description, critique, rating, picture) VALUES ('%1', '%2', "
-		"'%3', '%4', '%5', '%6');", db->getType());
-	ins_author.arg(a.getFirstName());
-	ins_author.arg(a.getLastName());
-	ins_author.arg(a.getDescription());
-	ins_author.arg(a.getCritique());
-	ins_author.arg(a.getRating());
-	ins_author.arg(a.getPicture());
+		"'%3', '%4', '%5', '%6')", db->getType());
+	insAuthor.arg(a.getFirstName());
+	insAuthor.arg(a.getLastName());
+	insAuthor.arg(a.getDescription());
+	insAuthor.arg(a.getCritique());
+	insAuthor.arg(a.getRating());
+	insAuthor.arg(a.getPicture());
 
-	a.setId(db->insert(ins_author));
+	a.setId(db->insert(insAuthor));
 
 	insertThemesReference("author", a);
 
@@ -213,19 +292,18 @@ bool Collection::updateAuthor(Author a) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement upd_author("UPDATE authors SET firstname = '%1', "
+	PreparedStatement updAuthor("UPDATE authors SET firstname = '%1', "
 		"lastname = '%2', description = '%3', critique = '%4', rating = "
 		"'%5', picture = '%6' WHERE id = '%7'", db->getType());
-	upd_author.arg(a.getFirstName());
-	upd_author.arg(a.getLastName());
-	upd_author.arg(a.getDescription());
-	upd_author.arg(a.getCritique());
-	upd_author.arg(a.getRating());
-	upd_author.arg(a.getPicture());
+	updAuthor.arg(a.getFirstName());
+	updAuthor.arg(a.getDescription());
+	updAuthor.arg(a.getCritique());
+	updAuthor.arg(a.getRating());
+	updAuthor.arg(a.getPicture());
 
 	updateThemesReference("author", a);
 
-	if(db->exec(upd_author) == 0)
+	if(db->exec(updAuthor) == 0)
 		return false;
 	return true;
 }
@@ -246,14 +324,14 @@ bool Collection::insertPublisher(Publisher &p) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement ins_pub("INSERT INTO publishers (name, description, critique,"
-		"logo) VALUES ('%1', '%2', '%3', '%4');", db->getType());
-	ins_pub.arg(p.getName());
-	ins_pub.arg(p.getDescription());
-	ins_pub.arg(p.getCritique());
-	ins_pub.arg(p.getLogo());
+	PreparedStatement insPub("INSERT INTO publishers (name, description, critique,"
+		"logo) VALUES ('%1', '%2', '%3', '%4')", db->getType());
+	insPub.arg(p.getName());
+	insPub.arg(p.getDescription());
+	insPub.arg(p.getCritique());
+	insPub.arg(p.getLogo());
 
-	p.setId(db->insert(ins_pub));
+	p.setId(db->insert(insPub));
 
 	insertThemesReference("publisher", p);
 
@@ -289,16 +367,16 @@ bool Collection::updatePublisher(Publisher p) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement upd_pub("UPDATE publishers SET name = '%1', description"
+	PreparedStatement updPub("UPDATE publishers SET name = '%1', description"
 		" = '%2', critique = '%3', logo = '%4' WHERE id = '%5'", db->getType());
-	upd_pub.arg(p.getName());
-	upd_pub.arg(p.getDescription());
-	upd_pub.arg(p.getCritique());
-	upd_pub.arg(p.getLogo());
+	updPub.arg(p.getName());
+	updPub.arg(p.getDescription());
+	updPub.arg(p.getCritique());
+	updPub.arg(p.getLogo());
 
 	updateThemesReference("publisher", p);
 
-	if(db->exec(upd_pub) == 0)
+	if(db->exec(updPub) == 0)
 		return false;
 	return true;
 }
@@ -323,12 +401,12 @@ bool Collection::insertTheme(Theme &t) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement prep_stmt("INSERT INTO themes (name, description) "
-		"VALUES ('%1', '%2');", db->getType());
-	prep_stmt.arg(t.getName());
-	prep_stmt.arg(t.getDescription());
+	PreparedStatement prepStmt("INSERT INTO themes (name, description) "
+		"VALUES ('%1', '%2')", db->getType());
+	prepStmt.arg(t.getName());
+	prepStmt.arg(t.getDescription());
 
-	t.setId(db->insert(prep_stmt));
+	t.setId(db->insert(prepStmt));
 
 	return true;
 }
@@ -348,10 +426,10 @@ bool Collection::deleteTheme(unsigned int id) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement prep_stmt("DELETE FROM themes WHERE id = '%1';", db->getType());
-	prep_stmt.arg(id);
+	PreparedStatement prepStmt("DELETE FROM themes WHERE id = '%1'", db->getType());
+	prepStmt.arg(id);
 
-	db->exec(prep_stmt);
+	db->exec(prepStmt);
 
 	return true;
 }
@@ -370,13 +448,13 @@ bool Collection::updateTheme(Theme t) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement prep_stmt("UPDATE Themes SET name = '%1', description"
-		" = '%2' WHERE id = '%3';", db->getType());
-	prep_stmt.arg(t.getName());
-	prep_stmt.arg(t.getDescription());
-	prep_stmt.arg(t.getId());
+	PreparedStatement prepStmt("UPDATE Themes SET name = '%1', description"
+		" = '%2' WHERE id = '%3'", db->getType());
+	prepStmt.arg(t.getName());
+	prepStmt.arg(t.getDescription());
+	prepStmt.arg(t.getId());
 
-	if(db->exec(prep_stmt) == 0)
+	if(db->exec(prepStmt) == 0)
 		return false;
 	return true;
 }
@@ -393,12 +471,12 @@ bool Collection::updateTheme(Theme t) throw(DataBaseException)
 template <class T>
 void Collection::updateThemesReference(string type, T data) throw(DataBaseException)
 {
-	PreparedStatement del_themes("DELETE FROM %1themes WHERE %2ID = '%3'", db->getType());
-	del_themes.arg(type); //set table name
-	del_themes.arg(type); //set id field name
-	del_themes.arg(data.getId());
+	PreparedStatement delThemes("DELETE FROM %1themes WHERE %2ID = '%3'", db->getType());
+	delThemes.arg(type); //set table name
+	delThemes.arg(type); //set id field name
+	delThemes.arg(data.getId());
 
-	db->exec(del_themes);
+	db->exec(delThemes);
 
 	insertThemesReference(type, data);
 }
@@ -416,16 +494,90 @@ template <class T>
 void Collection::insertThemesReference(string type, T data) throw(DataBaseException)
 {
 	QList<Theme*> themes = data.getThemes();
-	PreparedStatement ins_theme_template("INSERT INTO %1themes (%2ID, themeID)"
-		" VALUES ('%3', '%4');", db->getType());
-	ins_theme_template.arg(type); //set table name
-	ins_theme_template.arg(type); //set id field name
+	PreparedStatement insThemeTemplate("INSERT INTO %1themes (%2ID, themeID)"
+		" VALUES ('%3', '%4')", db->getType());
+	insThemeTemplate.arg(type); //set table name
+	insThemeTemplate.arg(type); //set id field name
+	insThemeTemplate.arg(data.getId()); //id never changes
 	for(QList<Theme*>::iterator it = themes.begin(); it != themes.end(); it++)
 	{
-		PreparedStatement ins_theme = ins_theme_template;
-		ins_theme.arg(data.getId());
-		ins_theme.arg((*it)->getId());
-		db->insert(ins_theme);
+		PreparedStatement insTheme = insThemeTemplate;
+		insTheme.arg((*it)->getId());
+		db->insert(insTheme);
+	}
+}
+
+
+void Collection::insertAuthorsReference(Book b) throw(DataBaseException)
+{
+	QList<Author*> authors = b.getAuthors();
+	PreparedStatement insAuthorTemplate("INSERT INTO bookauthor (bookID, authorID)"
+		" VALUES ('%1', '%2')", db->getType());
+	insAuthorTemplate.arg(b.getId());
+	for(QList<Author*>::iterator it = authors.begin(); it != authors.end(); it++)
+	{
+		PreparedStatement insAuthor = insAuthorTemplate;
+		insAuthor.arg((*it)->getId());
+		db->insert(insAuthor);
+	}
+}
+
+void Collection::insertPublishersReference(Book b) throw(DataBaseException)
+{
+	QList<Publisher*> pubs = b.getPublishers();
+	PreparedStatement insPubTemplate("INSERT INTO bookpublisher (bookID, publisherID)"
+		" VALUES ('%1', '%2')", db->getType());
+	insPubTemplate.arg(b.getId());
+	for(QList<Publisher*>::iterator it = pubs.begin(); it != pubs.end(); it++)
+	{
+		PreparedStatement insPub = insPubTemplate;
+		insPub.arg((*it)->getId());
+		db->insert(insPub);
+	}
+}
+
+template <class Type, class Reference>
+void Collection::insertReference(string type, Type data, string refType, Reference r) throw(DataBaseException)
+{
+	/*if(!refType.compare("theme"))
+	{
+		QList<Theme*> ref = data.getThemes();
+		QList<Theme*>::iterator it;
+	}
+	else if(!refType.compare("author"))
+	{
+		QList<Author*> ref = data.getAuthors();
+		QList<Author*>::iterator it;
+	}
+	else if(!refType.compare("publisher"))
+	{
+		QList<Publisher*> ref = data.getPublihsers();
+		QList<Publisher*>::iterator it;
+	}*/
+	QList<Reference*> ref;
+	QList<Reference*>::iterator it;
+	if(!refType.compare("theme"))
+		ref = data.getThemes();
+	else if(!refType.compare("author"))
+		ref = data.getAuthors();
+	else if(!refType.compare("publisher"))
+		ref = data.getPublihsers();
+
+	PreparedStatement insTemplate("INSERT INTO %1%2s (%3ID, %4ID)"
+		" VALUES ('%5', '%6')", db->getType());
+	//table name is type+refType(i.e. booktheme, bookauthor, ...)
+	insTemplate.arg(type);
+	insTemplate.arg(refType);
+	//first id is of type
+	insTemplate.arg(type);
+	//second id is of referenced type
+	insTemplate.arg(refType);
+	insTemplate.arg(data.getId()); //id of type never changes
+	for(it = ref.begin(); it != ref.end(); it++)
+	{
+		PreparedStatement ins = insTemplate;
+		ins.arg((*it)->getId());
+		db->insert(ins);
 	}
 }
 
@@ -449,15 +601,15 @@ bool Collection::genericDelete(unsigned int id, string type) throw(DataBaseExcep
 	if(readOnly)
 		return false;
 	PreparedStatement del("DELETE FROM %1s WHERE id = '%2'", db->getType());
-	PreparedStatement del_themes("DELETE FROM %1themes WHERE %2ID = '%3'", db->getType());
+	PreparedStatement delThemes("DELETE FROM %1themes WHERE %2ID = '%3'", db->getType());
 	del.arg(type);
 	del.arg(id);
 
-	del_themes.arg(type);
-	del_themes.arg(type);
-	del_themes.arg(id);
+	delThemes.arg(type);
+	delThemes.arg(type);
+	delThemes.arg(id);
 
-	db->exec(del_themes);
+	db->exec(delThemes);
 	db->exec(del);
 
 	return true;

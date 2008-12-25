@@ -41,22 +41,22 @@ class Collection
 		bool insertBook(Book &b) throw(DataBaseException);
 		bool deleteBook(unsigned int id) throw(DataBaseException);
 		bool updateBook(Book b) throw(DataBaseException);
-		QList<Book> searchBooks(book_field field, QString name);
+		QList<Book> searchBooks(book_field field, string name) throw(DataBaseException);
 
 		bool insertAuthor(Author &a) throw(DataBaseException);
 		bool deleteAuthor(unsigned int id) throw(DataBaseException);
 		bool updateAuthor(Author a) throw(DataBaseException);
-		QList<Author> searchAuthors(author_field field, QString name);
+		QList<Author> searchAuthors(author_field field, string name);
 
 		bool insertPublisher(Publisher &p) throw(DataBaseException);
 		bool deletePublisher(unsigned int id) throw(DataBaseException);
 		bool updatePublisher(Publisher p) throw(DataBaseException);
-		QList<Publisher> searchPublishers(publisher_field field, QString name);
+		QList<Publisher> searchPublishers(publisher_field field, string name);
 
 		bool insertTheme(Theme &t) throw(DataBaseException);
 		bool deleteTheme(unsigned int id) throw(DataBaseException);
 		bool updateTheme(Theme t) throw(DataBaseException);
-		QList<Theme> searchThemes(theme_field field, QString name);
+		QList<Theme> searchThemes(theme_field field, string name);
 
 	private:
 		DataBase *db;
@@ -66,8 +66,14 @@ class Collection
 
 		template <class T>
 		void updateThemesReference(string table, T data) throw(DataBaseException);
+		void updateAuthorsReference(Book b) throw(DataBaseException);
+		void updatePublishersReference(Book b) throw(DataBaseException);
 		template <class T>
 		void insertThemesReference(string table, T data) throw(DataBaseException);
+		void insertAuthorsReference(Book b) throw(DataBaseException);
+		void insertPublishersReference(Book b) throw(DataBaseException);
+		template <class Type, class Reference>
+		void insertReference(string type, Type data, string refType, Reference r) throw(DataBaseException);
 		bool genericDelete(unsigned int id, string type) throw(DataBaseException);
 };
 
