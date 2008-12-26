@@ -5,8 +5,24 @@
  * @author Jonas M. Gastal
  */
 
+#include <QtCore/QList>
+
 #include "GenericSQL.h"
 
+/**
+ * @brief Adds entries in a table that represent a n:n relationship.
+ *
+ * @param type Type of element which is referencing others.
+ * @param data Element which is referencing others.
+ * @param refType Type of element being referenced.
+ * @param db Database in which to perform operation.
+ *
+ * @warning If \a refType is not one of: "theme", "author", "publisher" or \a type
+ * is not one of: "book", "publisher", "author" behavior is UNDEFINED. Obviously
+ * if the type of \a data is not \a type behavior is also UNDEFINED. DON'T DO THIS!
+ *
+ * @warning HAS NOT BEEN PROPERLY TESTED! MAY BLOW UP YOUR COMPUTER!
+ */
 template <class Type, class Reference>
 void insertReference(string type, Type data, string refType, DataBase *db) throw(DataBaseException)
 {
@@ -23,10 +39,10 @@ void insertReference(string type, Type data, string refType, DataBase *db) throw
 		ref = data.getThemes();
 	else if(refType == "author")
 		ref = data.getAuthors();
-	else if(!refType == "publisher")
+	else if(refType == "publisher")
 		ref = data.getPublihsers();
 
-	PreparedStatement insTemplate("INSERT INTO %1%2s (%3ID, %4ID)"
+	PreparedStatement insTemplate("INSERT INTO %1%2 (%3ID, %4ID)"
 		" VALUES ('%5', '%6')", db->getType());
 	//table name is type+refType(i.e. booktheme, bookauthor, ...)
 	insTemplate.arg(type);
@@ -60,7 +76,7 @@ void insertReference(string type, Type data, string refType, DataBase *db) throw
  * only then remove the actual object. The order in which this is done is
  * important to preserve data consistency in the database.
  */
-void genericDelete(unsigned int id, string type, DataBase *db) throw(DataBaseException)
+unsigned int genericDelete(unsigned int id, string type, DataBase *db) throw(DataBaseException)
 {
 	PreparedStatement del("DELETE FROM %1s WHERE id = '%2'", db->getType());
 	del.arg(type);
@@ -77,5 +93,5 @@ void genericDelete(unsigned int id, string type, DataBase *db) throw(DataBaseExc
 		db->exec(delThemes);
 	}
 
-	db->exec(del);
+	return db->exec(del);
 }
