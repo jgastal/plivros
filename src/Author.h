@@ -8,11 +8,11 @@
 #ifndef AUTHOR_H_
 #define AUTHOR_H_
 
+class Theme;
+
 #include <string>
 
 #include <QtCore/QList>
-
-class Theme;
 
 using namespace std;
 
