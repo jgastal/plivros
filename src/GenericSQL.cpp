@@ -19,11 +19,11 @@ void insertReference(string type, Type data, string refType, DataBase *db) throw
 	 * http://pages.cs.wisc.edu/~driscoll/typename.html
 	 */
 	typename QList<Reference*>::iterator it;
-	if(!refType.compare("theme"))
+	if(refType == "theme")
 		ref = data.getThemes();
-	else if(!refType.compare("author"))
+	else if(refType == "author")
 		ref = data.getAuthors();
-	else if(!refType.compare("publisher"))
+	else if(!refType == "publisher")
 		ref = data.getPublihsers();
 
 	PreparedStatement insTemplate("INSERT INTO %1%2s (%3ID, %4ID)"
@@ -66,7 +66,7 @@ void genericDelete(unsigned int id, string type, DataBase *db) throw(DataBaseExc
 	del.arg(type);
 	del.arg(id);
 
-	if(type.compare("theme"))
+	if(type != "theme")
 	{
 		PreparedStatement delThemes("DELETE FROM %1theme WHERE %2ID = '%3'", db->getType());
 
