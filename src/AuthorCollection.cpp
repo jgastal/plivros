@@ -7,6 +7,14 @@
 
 #include "AuthorCollection.h"
 
+#include "DataBase.h"
+#include "DataBaseException.h"
+#include "PreparedStatement.h"
+
+#include "Author.h"
+#include "Theme.h"
+#include "GenericSQL.h"
+
 AuthorsCollection::AuthorsCollection(DataBase *db)
 {
 	this->db = db;
@@ -30,8 +38,6 @@ AuthorsCollection::AuthorsCollection(DataBase *db)
  */
 bool AuthorsCollection::insertAuthor(Author &a) throw(DataBaseException)
 {
-	if(readOnly)
-		return false;
 	PreparedStatement insAuthor("INSERT INTO authors (firstname, lastname, "
 		"description, critique, rating, picture) VALUES ('%1', '%2', "
 		"'%3', '%4', '%5', '%6')", db->getType());
@@ -61,7 +67,8 @@ bool AuthorsCollection::insertAuthor(Author &a) throw(DataBaseException)
  */
 bool AuthorsCollection::deleteAuthor(unsigned int id) throw(DataBaseException)
 {
-	return genericDelete(id, "author");
+	genericDelete(id, "author", *db);
+	return true;
 }
 
 /**
@@ -76,8 +83,6 @@ bool AuthorsCollection::deleteAuthor(unsigned int id) throw(DataBaseException)
  */
 bool AuthorsCollection::updateAuthor(Author a) throw(DataBaseException)
 {
-	if(readOnly)
-		return false;
 	PreparedStatement updAuthor("UPDATE authors SET firstname = '%1', "
 		"lastname = '%2', description = '%3', critique = '%4', rating = "
 		"'%5', picture = '%6' WHERE id = '%7'", db->getType());
@@ -104,7 +109,7 @@ bool AuthorsCollection::updateAuthor(Author a) throw(DataBaseException)
  * @warning data must be a Book, Author or Publisher object!
  */
 template <class T>
-void Collection::updateThemesReference(string type, T data) throw(DataBaseException)
+void AuthorsCollection::updateThemesReference(string type, T data) throw(DataBaseException)
 {
 	PreparedStatement delThemes("DELETE FROM %1themes WHERE %2ID = '%3'", db->getType());
 	delThemes.arg(type); //set table name
@@ -126,7 +131,7 @@ void Collection::updateThemesReference(string type, T data) throw(DataBaseExcept
  * @warning data must be a Book, Author or Publisher object!
  */
 template <class T>
-void Collection::insertThemesReference(string type, T data) throw(DataBaseException)
+void AuthorsCollection::insertThemesReference(string type, T data) throw(DataBaseException)
 {
 	QList<Theme*> themes = data.getThemes();
 	PreparedStatement insThemeTemplate("INSERT INTO %1themes (%2ID, themeID)"

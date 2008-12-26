@@ -8,6 +8,11 @@
 #ifndef AUTHORSCOLLECTION_H_
 #define AUTHORSCOLLECTION_H_
 
+class DataBase;
+
+#include "DataBaseException.h"
+#include "Author.h"
+
 class AuthorsCollection
 {
 	public:

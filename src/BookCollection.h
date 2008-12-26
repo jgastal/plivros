@@ -8,28 +8,28 @@
 #ifndef BOOKCOLLECTION_H_
 #define BOOKCOLLECTION_H_
 
-#include "DataBaseException.h"
-
 class DataBase;
+class ResultSet;
+
+#include "DataBaseException.h"
+#include "Book.h"
 
 class BookCollection
 {
 	public:
 		BookCollection(DataBase *db);
 
-		bool insertBook(Book &b) throw(DataBaseException);
+		void insertBook(Book &b) throw(DataBaseException);
 		bool deleteBook(unsigned int id) throw(DataBaseException);
-		bool updateBook(Book b) throw(DataBaseException);
+		void updateBook(Book b) throw(DataBaseException);
 		QList<Book> searchBooks(book_field field, string name) throw(DataBaseException);
 
 	private:
 		DataBase *db;
 
-		template <class T>
-		void updateThemesReference(string table, T data) throw(DataBaseException);
+		void updateThemesReference(Book b) throw(DataBaseException);
 		void updateAuthorsReference(Book b) throw(DataBaseException);
 		void updatePublishersReference(Book b) throw(DataBaseException);
-		template <class T>
 		void insertThemesReference(Book b) throw(DataBaseException);
 		void insertAuthorsReference(Book b) throw(DataBaseException);
 		void insertPublishersReference(Book b) throw(DataBaseException);

@@ -7,6 +7,17 @@
 
 #include "BookCollection.h"
 
+#include "DataBase.h"
+#include "ResultSet.h"
+#include "PreparedStatement.h"
+#include "DataBaseException.h"
+
+#include "GenericSQL.h"
+#include "Book.h"
+#include "Author.h"
+#include "Publisher.h"
+#include "Theme.h"
+
 /**
  * @brief Initializes member variables.
  *
@@ -22,21 +33,15 @@ BookCollection::BookCollection(DataBase *db)
  *
  * @param b Book to be added.
  *
- * @return Whether the operation was successful.
- *
  * @exception DataBaseException Forwarding possible database error.
  *
- * @warning If the collection was opened as read only does nothing and returns false.
  * @warning Make sure you DON'T SET the books id before calling this method.
  *
  * The function creates a SQL insert statement based on the given book, executes
- * the statement then sets the id given by the database in the book and returns
- * success.
+ * the statement then sets the id given by the database in the book.
  */
-bool BookCollection::insertBook(Book &b) throw(DataBaseException)
+void BookCollection::insertBook(Book &b) throw(DataBaseException)
 {
-	if(readOnly)
-		return false;
 	PreparedStatement prepStmt("INSERT INTO books (isbn, title, edition, "
 		"critique, description, rating, cover, ebook, publishingyear, "
 		"udc, translator) VALUES ('%1', '%2', '%3', '%4', '%5', '%6', "
@@ -55,11 +60,9 @@ bool BookCollection::insertBook(Book &b) throw(DataBaseException)
 
 	b.setId(db->insert(prepStmt));
 
-	insertThemesReference("book", b);
+	insertThemesReference(b);
 	insertAuthorsReference(b);
 	insertPublishersReference(b);
-
-	return true;
 }
 
 /**
@@ -67,14 +70,17 @@ bool BookCollection::insertBook(Book &b) throw(DataBaseException)
  *
  * @param id ID of book to be deleted.
  *
- * @return Whether operation was successful.
+ * @return Whether operation was successful. May fail if the no book has this \a
+ * id.
  *
  * Note that this method actually does very little, it just calls genericDelete()
  * with the appropriate arguments.
  */
 bool BookCollection::deleteBook(unsigned int id) throw(DataBaseException)
 {
-	return genericDelete(id, "book");
+	if(genericDelete(id, "book", *db) == 1)
+		return true;
+	return false;
 }
 
 /**
@@ -82,15 +88,10 @@ bool BookCollection::deleteBook(unsigned int id) throw(DataBaseException)
  *
  * @param b Book to be updated.
  *
- * @return Whether the operation was successful.
- *
- * This method constructs an SQL statement that updates every field of the book
- * except the id to match the object.
+ * This method updates every field of the book, except the id, to match \a b.
  */
-bool BookCollection::updateBook(Book b) throw(DataBaseException)
+void BookCollection::updateBook(Book b) throw(DataBaseException)
 {
-	if(readOnly)
-		return false;
 	PreparedStatement updBook("UPDATE books SET isbn = '%1', title = '%2',"
 		" edition = '%3', description = '%4', critique = '%5', rating ="
 		" '%6', cover = '%7', ebook = '%8', publishingyear = '%9', udc ="
@@ -108,15 +109,30 @@ bool BookCollection::updateBook(Book b) throw(DataBaseException)
 	updBook.arg(b.getTranslator()->getId());
 	updBook.arg(b.getId());
 
-	updateThemesReference("book", b);
+	updateThemesReference(b);
 	updateAuthorsReference(b);
 	updatePublishersReference(b);
 
-	if(db->exec(updBook) == 0)
-		return false;
-	return true;
+	db->exec(updBook);
 }
 
+/**
+ * @brief Search for books.
+ *
+ * @param field What field of the book you would like to search for.
+ * @param name Value which should be searched for.
+ *
+ * @return List of books matching the criteria.
+ *
+ * This search returns all books that match the search criteria. The search
+ * is not done by exact match but rather by checking if the field contains the
+ * value, that means that searching for "ball" in title will include titles such
+ * as "goofball".
+ * If the search is done in authors it will be considered a match if either the
+ * first or last name of the author matches the searched value. In searches be
+ * publisher and theme it will be considered a match if the name matches the
+ * searched value.
+ */
 QList<Book> BookCollection::searchBooks(book_field field, string name) throw(DataBaseException)
 {
 	PreparedStatement query("SELECT * FROM books WHERE %1 %2 (%3)", db->getType());
@@ -195,40 +211,25 @@ QList<Book> BookCollection::searchBooks(book_field field, string name) throw(Dat
 /**
  * @brief Updates the themes references to match that of \a data.
  *
- * @param type Type of object being handled.
- * @param data Object whose theme references need to be updated.
- *
- * @warning type MUST be one of "book", "author", "publisher"!
- * @warning data must be a Book, Author or Publisher object!
+ * @param b Book whose theme references need to be updated.
  */
-template <class T>
-void BookCollection::updateThemesReference(string type, T data) throw(DataBaseException)
+void BookCollection::updateThemesReference(Book b) throw(DataBaseException)
 {
-	PreparedStatement delThemes("DELETE FROM %1themes WHERE %2ID = '%3'", db->getType());
-	delThemes.arg(type); //set table name
-	delThemes.arg(type); //set id field name
-	delThemes.arg(data.getId());
-
-	db->exec(delThemes);
-
-	insertThemesReference(type, data);
+	deleteReference("book", b.getId(), "theme", *db);
+	insertThemesReference(b);
 }
 
 /**
- * @brief Creates theme references to match that of \a data.
+ * @brief Creates theme references to match that of \a b.
  *
- * @param type Type of object being handled.
- * @param data Object whose theme references need to be added.
- *
- * @warning type MUST be one of "book", "author", "publisher"!
- * @warning data must be a Book, Author or Publisher object!
+ * @param b Books whose themes need to be referenced.
  */
 void BookCollection::insertThemesReference(Book b) throw(DataBaseException)
 {
-	QList<Theme*> themes = data.getThemes();
+	QList<Theme*> themes = b.getThemes();
 	PreparedStatement insThemeTemplate("INSERT INTO booktheme (bookID, themeID)"
 		" VALUES ('%1', '%2')", db->getType());
-	insThemeTemplate.arg(data.getId()); //id never changes
+	insThemeTemplate.arg(b.getId()); //id never changes
 	for(QList<Theme*>::iterator it = themes.begin(); it != themes.end(); it++)
 	{
 		PreparedStatement insTheme = insThemeTemplate;
