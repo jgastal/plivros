@@ -56,7 +56,10 @@ void BookCollection::insertBook(Book &b) throw(DataBaseException)
 	prepStmt.arg(b.getEbook());
 	prepStmt.arg(b.getPubDate().toString("yyyy-MM-dd").toStdString());
 	prepStmt.arg(b.getUDC());
-	prepStmt.arg(b.getTranslator()->getId());
+	if(b.getTranslator())
+		prepStmt.arg(b.getTranslator()->getId());
+	else
+		prepStmt.arg(-1);
 
 	b.setId(db->insert(prepStmt));
 
@@ -78,7 +81,7 @@ void BookCollection::insertBook(Book &b) throw(DataBaseException)
  */
 bool BookCollection::deleteBook(unsigned int id) throw(DataBaseException)
 {
-	if(genericDelete(id, "book", *db) == 1)
+	if(genericDelete(id, "book", db) == 1)
 		return true;
 	return false;
 }
@@ -209,60 +212,76 @@ QList<Book> BookCollection::searchBooks(book_field field, string name) throw(Dat
 }
 
 /**
- * @brief Updates the themes references to match that of \a data.
- *
- * @param b Book whose theme references need to be updated.
- */
-void BookCollection::updateThemesReference(Book b) throw(DataBaseException)
-{
-	deleteReference("book", b.getId(), "theme", *db);
-	insertThemesReference(b);
-}
-
-/**
  * @brief Creates theme references to match that of \a b.
  *
  * @param b Books whose themes need to be referenced.
  */
 void BookCollection::insertThemesReference(Book b) throw(DataBaseException)
 {
-	QList<Theme*> themes = b.getThemes();
-	PreparedStatement insThemeTemplate("INSERT INTO booktheme (bookID, themeID)"
-		" VALUES ('%1', '%2')", db->getType());
-	insThemeTemplate.arg(b.getId()); //id never changes
-	for(QList<Theme*>::iterator it = themes.begin(); it != themes.end(); it++)
-	{
-		PreparedStatement insTheme = insThemeTemplate;
-		insTheme.arg((*it)->getId());
-		db->insert(insTheme);
-	}
+	insertReferenceBook(b, "theme", db);
 }
 
+/**
+ * @brief Creates author references to match that of \a b.
+ *
+ * @param b Books whose authors need to be referenced.
+ */
 void BookCollection::insertAuthorsReference(Book b) throw(DataBaseException)
 {
-	QList<Author*> authors = b.getAuthors();
-	PreparedStatement insAuthorTemplate("INSERT INTO bookauthor (bookID, authorID)"
-		" VALUES ('%1', '%2')", db->getType());
-	insAuthorTemplate.arg(b.getId());
-	for(QList<Author*>::iterator it = authors.begin(); it != authors.end(); it++)
-	{
-		PreparedStatement insAuthor = insAuthorTemplate;
-		insAuthor.arg((*it)->getId());
-		db->insert(insAuthor);
-	}
+	insertReferenceBook(b, "author", db);
 }
 
+/**
+ * @brief Creates publisher references to match that of \a b.
+ *
+ * @param b Books whose publishers need to be referenced.
+ */
 void BookCollection::insertPublishersReference(Book b) throw(DataBaseException)
 {
-	QList<Publisher*> pubs = b.getPublishers();
-	PreparedStatement insPubTemplate("INSERT INTO bookpublisher (bookID, publisherID)"
-		" VALUES ('%1', '%2')", db->getType());
-	insPubTemplate.arg(b.getId());
-	for(QList<Publisher*>::iterator it = pubs.begin(); it != pubs.end(); it++)
-	{
-		PreparedStatement insPub = insPubTemplate;
-		insPub.arg((*it)->getId());
-		db->insert(insPub);
-	}
+	insertReferenceBook(b, "publisher", db);
 }
 
+/**
+ * @brief Updates the themes references to match that of \a b.
+ *
+ * @param b Book whose theme references need to be updated.
+ */
+void BookCollection::updateThemesReference(Book b) throw(DataBaseException)
+{
+	deleteReference("book", b.getId(), "theme", db);
+	insertThemesReference(b);
+}
+
+/**
+ * @brief Updates the author references to match that of \a b.
+ *
+ * @param b Book whose authors references need to be updated.
+ */
+void BookCollection::updateAuthorsReference(Book b) throw(DataBaseException)
+{
+	deleteReference("book", b.getId(), "author", db);
+	insertAuthorsReference(b);
+	return;
+}
+
+/**
+ * @brief Updates the publisher references to match that of \a b.
+ *
+ * @param b Book whose publishers references need to be updated.
+ */
+void BookCollection::updatePublishersReference(Book b) throw(DataBaseException)
+{
+	deleteReference("book", b.getId(), "publisher", db);
+	insertPublishersReference(b);
+	return;
+}
+
+QList<Book> BookCollection::parseBookResultSet(ResultSet rs)
+{
+	bookList.clear();
+	while(rs.nextRow())
+	{
+		//TODO implement
+	}
+	return bookList;
+}

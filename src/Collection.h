@@ -18,6 +18,7 @@
 #include "Publisher.h"
 
 class DataBase;
+class BookCollection;
 
 /**
  * @class Collection Collection.h
@@ -34,8 +35,7 @@ class Collection
 {
 	public:
 		//TODO Add constructor for collection with a MySQL backend.
-		Collection(QString user, bool ro, QString customDbName = "") throw(bad_alloc);
-		Collection(QString user, QString customDbName = "") throw(bad_alloc);
+		Collection(QString u, QString customDbName = "", bool ro = false) throw(bad_alloc);
 		virtual ~Collection() throw();
 
 		bool insertBook(Book &b) throw(DataBaseException);
@@ -60,6 +60,7 @@ class Collection
 
 	private:
 		DataBase *db;
+		BookCollection *bc;
 		QString user;
 		QString dbName;
 		bool readOnly;

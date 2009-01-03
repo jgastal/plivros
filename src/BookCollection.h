@@ -26,6 +26,7 @@ class BookCollection
 
 	private:
 		DataBase *db;
+		QList<Book> bookList; //Last search result
 
 		void updateThemesReference(Book b) throw(DataBaseException);
 		void updateAuthorsReference(Book b) throw(DataBaseException);

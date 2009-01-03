@@ -29,11 +29,13 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/DataBaseWrapper/src}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/IniParser/src}&quot;"/>
 </option>
+<option id="gnu.cpp.compiler.option.warnings.pedantic.1094237568" name="Pedantic (-pedantic)" superClass="gnu.cpp.compiler.option.warnings.pedantic" value="false" valueType="boolean"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1084141183" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.1472157882" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug">
 <option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.exe.debug.option.optimization.level.2036329458" name="Optimization Level" superClass="gnu.c.compiler.exe.debug.option.optimization.level" valueType="enumerated"/>
 <option id="gnu.c.compiler.exe.debug.option.debugging.level.661835326" name="Debug Level" superClass="gnu.c.compiler.exe.debug.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
+<option id="gnu.c.compiler.option.warnings.pedantic.903191464" name="Pedantic (-pedantic)" superClass="gnu.c.compiler.option.warnings.pedantic" value="false" valueType="boolean"/>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1271929542" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.1942166377" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug"/>
@@ -48,7 +50,7 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/IniParser/Debug}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/DataBaseWrapper/Debug}&quot;"/>
 </option>
-<option id="gnu.cpp.link.option.flags.281655575" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-Wl,-rpath,&quot;${workspace_loc:/sqlitewrapper/Debug}&quot;" valueType="string"/>
+<option id="gnu.cpp.link.option.flags.281655575" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-Wl,-rpath,&quot;${workspace_loc:/DataBaseWrapper/Debug}&quot; -Wl,-rpath,&quot;${workspace_loc:/IniParser/Debug}&quot;" valueType="string"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.533887754" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 <additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -340,11 +342,13 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/IniParser/src}&quot;"/>
 <listOptionValue builtIn="false" value="/usr/include/qt4"/>
 </option>
+<option id="gnu.cpp.compiler.option.warnings.pedantic.651403853" name="Pedantic (-pedantic)" superClass="gnu.cpp.compiler.option.warnings.pedantic" value="true" valueType="boolean"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.651799585" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.release.896213057" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.release">
 <option defaultValue="gnu.c.optimization.level.most" id="gnu.c.compiler.exe.release.option.optimization.level.644772011" name="Optimization Level" superClass="gnu.c.compiler.exe.release.option.optimization.level" valueType="enumerated"/>
 <option id="gnu.c.compiler.exe.release.option.debugging.level.1252492877" name="Debug Level" superClass="gnu.c.compiler.exe.release.option.debugging.level" value="gnu.c.debugging.level.none" valueType="enumerated"/>
+<option id="gnu.c.compiler.option.warnings.pedantic.2122768766" name="Pedantic (-pedantic)" superClass="gnu.c.compiler.option.warnings.pedantic" value="true" valueType="boolean"/>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.841843322" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.release.123930031" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.release"/>
@@ -359,7 +363,7 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/IniParser/Release}&quot;"/>
 <listOptionValue builtIn="false" value="/usr/lib/qt4"/>
 </option>
-<option id="gnu.cpp.link.option.flags.970187110" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-Wl,-rpath,&quot;${workspace_loc:/sqlitewrapper/Release}&quot;" valueType="string"/>
+<option id="gnu.cpp.link.option.flags.970187110" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-Wl,-rpath,&quot;${workspace_loc:/DataBaseWrapper/Release}&quot;" valueType="string"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1900864317" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 <additionalInput kind="additionalinput" paths="$(LIBS)"/>

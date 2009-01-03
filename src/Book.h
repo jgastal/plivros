@@ -77,7 +77,7 @@ class Book
 
 	private:
 		unsigned int id;
-		char isbn[13]; //International Standard Book Number
+		char isbn[14]; //International Standard Book Number + '/0'
 		string title;
 		unsigned short int edition;
 		string critique;

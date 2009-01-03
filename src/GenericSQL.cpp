@@ -9,39 +9,70 @@
 
 #include "GenericSQL.h"
 
+#include "Book.h"
+#include "Theme.h"
+#include "Author.h"
+#include "Publisher.h"
+
 /**
- * @brief Adds entries in a table that represent a n:n relationship.
+ * @brief Insert entries in a table that represent a n:n relationship between book
+ * and \a refType.
+ *
+ * @param b Books whose references need to be inserted.
+ * @param refType Type of obejct whose reference will be included. Valid values
+ * are: "theme", "author", "publisher".
+ * @param db DataBase in which operation will be executed.
+ */
+void insertReferenceBook(Book b, string refType, DataBase *db) throw(DataBaseException)
+{
+	PreparedStatement insTpl = buildInsTemplate("book", b, refType, db);
+	if(refType == "theme")
+		insertReferenceLoop(b.getThemes(), insTpl, db);
+	else if(refType == "author")
+		insertReferenceLoop(b.getAuthors(), insTpl, db);
+	else if(refType == "publisher")
+		insertReferenceLoop(b.getPublishers(), insTpl, db);
+}
+
+/**
+ * @brief Insert the theme/author references in the database.
+ *
+ * @param a Author whose theme references need to be included.
+ * @param db DataBase in which to include references.
+ */
+void insertReferenceAuthor(Author a, DataBase *db) throw(DataBaseException)
+{
+	PreparedStatement insTpl = buildInsTemplate("author", a, "theme", db);
+	insertReferenceLoop(a.getThemes(), insTpl, db);
+}
+
+/**
+ * @brief Insert the theme/publisher references in the database.
+ *
+ * @param p Publisher whose theme references need to be included.
+ * @param db DataBase in which to include references.
+ */
+void insertReferencePublisher(Publisher p, DataBase *db) throw(DataBaseException)
+{
+	PreparedStatement insTpl = buildInsTemplate("publisher", p, "theme", db);
+	insertReferenceLoop(p.getThemes(), insTpl, db);
+}
+
+/**
+ * @brief Creates a template of a INSERT command.
  *
  * @param type Type of element which is referencing others.
  * @param data Element which is referencing others.
  * @param refType Type of element being referenced.
  * @param db Database in which to perform operation.
  *
- * @warning If \a refType is not one of: "theme", "author", "publisher" or \a type
- * is not one of: "book", "publisher", "author" behavior is UNDEFINED. Obviously
- * if the type of \a data is not \a type behavior is also UNDEFINED. DON'T DO THIS!
- *
- * @warning HAS NOT BEEN PROPERLY TESTED! MAY BLOW UP YOUR COMPUTER!
+ * Creates a PreparedStatement which is a template of a INSERT command into a
+ * table with name: type+refType. This PreparedStatement has to receive the id
+ * of the referenced object(probably a theme).
  */
-template <class Type, class Reference>
-void insertReference(string type, Type data, string refType, DataBase *db) throw(DataBaseException)
+template <class Type>
+PreparedStatement buildInsTemplate(string type, Type data, string refType, DataBase *db) throw(DataBaseException)
 {
-	QList<Reference*> ref;
-	/*
-	 * Because of the use of templates ::iterator can be understood as a
-	 * nested class or a public name, thus requiring typename to make sure
-	 * the parser knows it is a nested class and is being used as a type.
-	 * For a full explanation see:
-	 * http://pages.cs.wisc.edu/~driscoll/typename.html
-	 */
-	typename QList<Reference*>::iterator it;
-	if(refType == "theme")
-		ref = data.getThemes();
-	else if(refType == "author")
-		ref = data.getAuthors();
-	else if(refType == "publisher")
-		ref = data.getPublihsers();
-
 	PreparedStatement insTemplate("INSERT INTO %1%2 (%3ID, %4ID)"
 		" VALUES ('%5', '%6')", db->getType());
 	//table name is type+refType(i.e. booktheme, bookauthor, ...)
@@ -53,12 +84,66 @@ void insertReference(string type, Type data, string refType, DataBase *db) throw
 	insTemplate.arg(refType);
 	//id of type never changes
 	insTemplate.arg(data.getId());
+
+	return insTemplate;
+}
+
+/**
+ * @brief Iterates through \a ref substituting elements id in \a tpl and executing it.
+ *
+ * @param ref List of pointer to objects to be iterated through.
+ * @param tpl Template of SQL command.
+ * @param db DataBase in which the command should be executed.
+ *
+ * Iterates though the \a ref list and for each element substitutes its id in the
+ * \a tpl PreparedStatement, after substitution \a tpl is executed. Note that
+ * only one substitution will be done in \a tpl.
+ */
+template <class Type>
+void insertReferenceLoop(QList<Type> ref, PreparedStatement tpl, DataBase *db) throw(DataBaseException)
+{
+	/*
+	 * Because of the use of templates ::iterator can be understood as a
+	 * nested class or a public name, thus requiring typename to make sure
+	 * the parser knows it is a nested class and is being used as a type.
+	 * For a full explanation see:
+	 * http://pages.cs.wisc.edu/~driscoll/typename.html
+	 */
+	typename QList<Type>::iterator it;
 	for(it = ref.begin(); it != ref.end(); it++)
 	{
-		PreparedStatement ins = insTemplate;
-		ins.arg((*it)->getId());
-		db->insert(ins);
+		PreparedStatement sql = tpl;
+		sql.arg((*it)->getId());
+		db->exec(sql);
 	}
+}
+
+/**
+ * @brief Removes all references of \a refType referenced by object with id \a id.
+ *
+ * @param type Type of element that referenced. Must be one of: "book", "author",
+ * "publisher".
+ * @param id ID of element that referenced.
+ * @param refType Type of element being referenced. Must be one of: "author",
+ * "publisher", "theme".
+ * @param db DataBase in which to execute operation.
+ */
+void deleteReference(string type, unsigned int id, string refType, DataBase *db) throw(DataBaseException)
+{
+	PreparedStatement del("DELETE FROM %1%2 WHERE %3ID = '%4'", db->getType());
+
+	//Table has name type+refType (e.g. booktheme, bookauthor, ...).
+	del.arg(type);
+	del.arg(refType);
+
+	/*
+	 * Delete all that was referenced by element with typeID = id.
+	 * For example "DELETE FROM bookauthor WHERE bookID = '123'"
+	 */
+	del.arg(type);
+	del.arg(id);
+
+	db->exec(del);
 }
 
 /**

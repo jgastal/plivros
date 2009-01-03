@@ -59,6 +59,7 @@ const char* Book::getIsbn() const
 void Book::setIsbn(char isbn[13])
 {
 	memcpy(this->isbn, isbn, 13 * sizeof(char));
+	this->isbn[13] = '\0';
 }
 
 string Book::getTitle() const

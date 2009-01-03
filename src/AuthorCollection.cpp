@@ -67,7 +67,7 @@ bool AuthorsCollection::insertAuthor(Author &a) throw(DataBaseException)
  */
 bool AuthorsCollection::deleteAuthor(unsigned int id) throw(DataBaseException)
 {
-	genericDelete(id, "author", *db);
+	genericDelete(id, "author", db);
 	return true;
 }
 

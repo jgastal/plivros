@@ -10,19 +10,12 @@
 #include "DataBase.h"
 #include "ResultSet.h"
 #include "DataBaseException.h"
-
-#include "Collection.h"
 #include "PreparedStatement.h"
 
-using namespace std;
+#include "Collection.h"
+#include "BookCollection.h"
 
-/**
- * @brief Stub constructor calls real constructor with read/write argument.
- */
-Collection::Collection(QString u, QString customDbName) throw(bad_alloc)
-{
-	Collection(u, false, customDbName);
-}
+using namespace std;
 
 /**
  * @brief Opens the database associated with this collection. Creating a new
@@ -33,22 +26,24 @@ Collection::Collection(QString u, QString customDbName) throw(bad_alloc)
  * @param customDbName Name to be used for the database file, if empty user name
  * will be used.
  */
-Collection::Collection(QString u, bool ro, QString customDbName) throw(bad_alloc)
+Collection::Collection(QString u, QString customDbName, bool ro) throw(bad_alloc)
 {
 	readOnly = ro;
 	user = u;
-	if(customDbName.compare("") == 0) //this obviously means empty names are not valid
-		dbName = u.append(".db");
-	else
+	if(customDbName != "") //this obviously means empty names are not valid
 		dbName = customDbName;
+	else
+		dbName = u.append(".db");
 
 	db = new DataBase(dbName.toStdString());
+	bc = new BookCollection(db);
 }
 
 ///@brief Closes database.
 Collection::~Collection() throw()
 {
 	delete db;
+	delete bc;
 }
 
 /**
@@ -71,27 +66,7 @@ bool Collection::insertBook(Book &b) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement prepStmt("INSERT INTO books (isbn, title, edition, "
-		"critique, description, rating, cover, ebook, publishingyear, "
-		"udc, translator) VALUES ('%1', '%2', '%3', '%4', '%5', '%6', "
-		"'%7', '%8', '%9', '%10', '%11')", db->getType());
-	prepStmt.arg(b.getIsbn());
-	prepStmt.arg(b.getTitle());
-	prepStmt.arg(b.getEdition());
-	prepStmt.arg(b.getCritique());
-	prepStmt.arg(b.getDescription());
-	prepStmt.arg(b.getRating());
-	prepStmt.arg(b.getCover());
-	prepStmt.arg(b.getEbook());
-	prepStmt.arg(b.getPubDate().toString("yyyy-MM-dd").toStdString());
-	prepStmt.arg(b.getUDC());
-	prepStmt.arg(b.getTranslator()->getId());
-
-	b.setId(db->insert(prepStmt));
-
-	insertThemesReference("book", b);
-	insertAuthorsReference(b);
-	insertPublishersReference(b);
+	bc->insertBook(b);
 
 	return true;
 }
@@ -108,7 +83,7 @@ bool Collection::insertBook(Book &b) throw(DataBaseException)
  */
 bool Collection::deleteBook(unsigned int id) throw(DataBaseException)
 {
-	return genericDelete(id, "book");
+	return bc->deleteBook(id);
 }
 
 /**
@@ -125,105 +100,14 @@ bool Collection::updateBook(Book b) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement updBook("UPDATE books SET isbn = '%1', title = '%2',"
-		" edition = '%3', description = '%4', critique = '%5', rating ="
-		" '%6', cover = '%7', ebook = '%8', publishingyear = '%9', udc ="
-		" '%10', translator = '%11' WHERE id = '%12'", db->getType());
-	updBook.arg(b.getIsbn());
-	updBook.arg(b.getTitle());
-	updBook.arg(b.getEdition());
-	updBook.arg(b.getDescription());
-	updBook.arg(b.getCritique());
-	updBook.arg(b.getRating());
-	updBook.arg(b.getCover());
-	updBook.arg(b.getEbook());
-	updBook.arg(b.getPubDate().toString("yyyy-MM-dd").toStdString());
-	updBook.arg(b.getUDC());
-	updBook.arg(b.getTranslator()->getId());
-	updBook.arg(b.getId());
+	bc->updateBook(b);
 
-	updateThemesReference("book", b);
-	updateAuthorsReference(b);
-	updatePublishersReference(b);
-
-	if(db->exec(updBook) == 0)
-		return false;
 	return true;
 }
 
 QList<Book> Collection::searchBooks(book_field field, string name) throw(DataBaseException)
 {
-	PreparedStatement query("SELECT * FROM books WHERE %1 %2 (%3)", db->getType());
-	if(field == b_authors)
-	{
-		query.arg("id"); //search for book id
-		query.arg("IN"); //using subquery
-		string refQuery("SELECT bookID FROM bookauthors WHERE authorID IN (%1)");
-		string authorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
-		query.arg(refQuery); //select from reference table
-		query.arg(authorQuery); //select from authors table
-		query.arg(name); //search in first name
-		query.arg(name); //search in last name
-	}
-	else if(field == b_publishers)
-	{
-		query.arg("id"); //search for book id
-		query.arg("IN"); //using subquery
-		string refQuery("SELECT bookID FROM bookpublishers WHERE publisherID IN (%1)");
-		string authorQuery("SELECT id FROM publishers WHERE name LIKE '%%1%'");
-		query.arg(refQuery); //select from reference table
-		query.arg(authorQuery); //select from publishers table
-		query.arg(name); //search in name
-	}
-	else if(field == b_themes)
-	{
-		query.arg("id"); //search for book id
-		query.arg("IN"); //using subquery
-		string refQuery("SELECT bookID FROM bookthemes WHERE themeID IN (%1)");
-		string authorQuery("SELECT id FROM themes WHERE name LIKE '%%1%'");
-		query.arg(refQuery); //select from reference table
-		query.arg(authorQuery); //select from themes table
-		query.arg(name); //search in name
-	}
-	else if(field == b_translator)
-	{
-		query.arg("translator");
-		query.arg("IN");
-		string translatorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
-		query.arg(translatorQuery);
-		query.arg(name);
-	}
-	else
-	{
-		//what field to search for
-		if(field == b_isbn)
-			query.arg("isbn");
-		else if(field == b_title)
-			query.arg("title");
-		else if(field == b_edition)
-			query.arg("edition");
-		else if(field == b_critique)
-			query.arg("critique");
-		else if(field == b_description)
-			query.arg("description");
-		else if(field == b_rating)
-			query.arg("rating");
-		else if(field == b_cover)
-			query.arg("cover");
-		else if(field == b_ebook)
-			query.arg("ebook");
-		else if(field == b_pubdate)
-			query.arg("pubdate");
-		else if(field == b_UDC)
-			query.arg("UDC");
-
-		query.arg("LIKE"); //doesn't have to be exact match
-		name.insert(0, "'%").append("%'"); //SQLs LIKE requires a preceding '%' and a ending '%'
-		query.arg(name); //search term
-	}
-
-	ResultSet bookRS = db->query(query);
-	return parseBookResultSet(bookRS);
+	return bc->searchBooks(field, name);
 }
 
 /**
@@ -547,11 +431,11 @@ void Collection::insertReference(string type, Type data, string refType) throw(D
 	 * http://pages.cs.wisc.edu/~driscoll/typename.html
 	 */
 	typename QList<Reference*>::iterator it;
-	if(!refType.compare("theme"))
+	if(refType == "theme")
 		ref = data.getThemes();
-	else if(!refType.compare("author"))
+	else if(refType == "author")
 		ref = data.getAuthors();
-	else if(!refType.compare("publisher"))
+	else if(refType == "publisher")
 		ref = data.getPublihsers();
 
 	PreparedStatement insTemplate("INSERT INTO %1%2s (%3ID, %4ID)"
