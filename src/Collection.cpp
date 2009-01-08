@@ -438,9 +438,9 @@ void Collection::insertReference(string type, Type data, string refType) throw(D
 	else if(refType == "publisher")
 		ref = data.getPublihsers();
 
-	PreparedStatement insTemplate("INSERT INTO %1%2s (%3ID, %4ID)"
+	PreparedStatement insTemplate("INSERT INTO %1s%2s (%3ID, %4ID)"
 		" VALUES ('%5', '%6')", db->getType());
-	//table name is type+refType(i.e. booktheme, bookauthor, ...)
+	//table name is type+refType(i.e. booksthemes, booksauthors, ...)
 	insTemplate.arg(type);
 	insTemplate.arg(refType);
 	//first id is of type

@@ -15,7 +15,7 @@ Theme::Theme(string nm, string desc, unsigned int id)
 {
 	setName(nm);
 	setDescription(desc);
-	setId(id);
+	this->id = id;
 }
 
 unsigned int Theme::getId() const

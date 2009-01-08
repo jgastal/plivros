@@ -13,18 +13,21 @@ int main(int argc, char **argv)
 	Collection *c;
 	try
 	{
-		c = new Collection("DefaultUser");
+		c = new Collection("User");
 
-		QList<Theme*> emptyThemeList;
-		QList<Author*> emptyAuthorList;
-		QList<Publisher*> emptyPublisherList;
+		QList<Theme*> themeList;
+		QList<Author*> authorList;
+		QList<Publisher*> publisherList;
 
 		Theme t("theme1", "desc1");
-		Publisher p("pub1", "desc", "", emptyThemeList);
-		Author a("fn", "ln", "desc", "cri", 5, "", emptyThemeList);
+		themeList.append(&t);
+		Publisher p("pub1", "desc", "", themeList);
+		publisherList.append(&p);
+		Author a("fn", "ln", "desc", "cri", 5, "", themeList);
+		authorList.append(&a);
 
 		Book b("0123456789123", "title", 0, "", "", 5, "", "", QDate(),
-			"UDC", emptyAuthorList, NULL, emptyPublisherList, emptyThemeList);
+			"UDC", authorList, &a, publisherList, themeList);
 
 		c->insertBook(b);
 
@@ -38,6 +41,7 @@ int main(int argc, char **argv)
 	{
 		std::cout << "DataBase error: " << dbe.what() << std::endl;
 		std::cout << "Cause: " << dbe.where() << std::endl;
+		std::cout << "Error code: " << dbe.getCode() << std::endl;
 	}
 
 	delete c;

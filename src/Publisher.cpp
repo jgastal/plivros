@@ -20,7 +20,7 @@ Publisher::Publisher(string nm, string desc, string logo, QList<Theme*> t, unsig
 	setDescription(desc);
 	setLogo(logo);
 	setThemes(t);
-	setId(id);
+	this->id = id;
 }
 
 unsigned int Publisher::getId() const

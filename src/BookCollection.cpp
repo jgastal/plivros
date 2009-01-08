@@ -143,7 +143,7 @@ QList<Book> BookCollection::searchBooks(book_field field, string name) throw(Dat
 	{
 		query.arg("id"); //search for book id
 		query.arg("IN"); //using subquery
-		string refQuery("SELECT bookID FROM bookauthors WHERE authorID IN (%1)");
+		string refQuery("SELECT bookID FROM booksauthors WHERE authorsid IN (%1)");
 		string authorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
 		query.arg(refQuery); //select from reference table
 		query.arg(authorQuery); //select from authors table
@@ -154,7 +154,7 @@ QList<Book> BookCollection::searchBooks(book_field field, string name) throw(Dat
 	{
 		query.arg("id"); //search for book id
 		query.arg("IN"); //using subquery
-		string refQuery("SELECT bookID FROM bookpublishers WHERE publisherID IN (%1)");
+		string refQuery("SELECT bookID FROM bookspublishers WHERE publishersid IN (%1)");
 		string authorQuery("SELECT id FROM publishers WHERE name LIKE '%%1%'");
 		query.arg(refQuery); //select from reference table
 		query.arg(authorQuery); //select from publishers table
@@ -164,7 +164,7 @@ QList<Book> BookCollection::searchBooks(book_field field, string name) throw(Dat
 	{
 		query.arg("id"); //search for book id
 		query.arg("IN"); //using subquery
-		string refQuery("SELECT bookID FROM bookthemes WHERE themeID IN (%1)");
+		string refQuery("SELECT bookID FROM booksthemes WHERE themesid IN (%1)");
 		string authorQuery("SELECT id FROM themes WHERE name LIKE '%%1%'");
 		query.arg(refQuery); //select from reference table
 		query.arg(authorQuery); //select from themes table

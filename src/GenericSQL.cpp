@@ -73,9 +73,9 @@ void insertReferencePublisher(Publisher p, DataBase *db) throw(DataBaseException
 template <class Type>
 PreparedStatement buildInsTemplate(string type, Type data, string refType, DataBase *db) throw(DataBaseException)
 {
-	PreparedStatement insTemplate("INSERT INTO %1%2 (%3ID, %4ID)"
+	PreparedStatement insTemplate("INSERT INTO %1s%2s (%3sid, %4sid)"
 		" VALUES ('%5', '%6')", db->getType());
-	//table name is type+refType(i.e. booktheme, bookauthor, ...)
+	//table name is type+refType(i.e. booksthemes, booksauthors, ...)
 	insTemplate.arg(type);
 	insTemplate.arg(refType);
 	//first id is of type
@@ -130,9 +130,9 @@ void insertReferenceLoop(QList<Type> ref, PreparedStatement tpl, DataBase *db) t
  */
 void deleteReference(string type, unsigned int id, string refType, DataBase *db) throw(DataBaseException)
 {
-	PreparedStatement del("DELETE FROM %1%2 WHERE %3ID = '%4'", db->getType());
+	PreparedStatement del("DELETE FROM %1s%2s WHERE %3sid = '%4'", db->getType());
 
-	//Table has name type+refType (e.g. booktheme, bookauthor, ...).
+	//Table has name type+refType (e.g. booksthemes, booksauthors, ...).
 	del.arg(type);
 	del.arg(refType);
 
@@ -169,7 +169,7 @@ unsigned int genericDelete(unsigned int id, string type, DataBase *db) throw(Dat
 
 	if(type != "theme")
 	{
-		PreparedStatement delThemes("DELETE FROM %1theme WHERE %2ID = '%3'", db->getType());
+		PreparedStatement delThemes("DELETE FROM %1theme WHERE %2sid = '%3'", db->getType());
 
 		delThemes.arg(type);
 		delThemes.arg(type);

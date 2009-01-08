@@ -23,7 +23,7 @@ Author::Author(string fn, string ln, string desc, string cri,
 	setRating(rat);
 	setPicture(pic);
 	setThemes(t);
-	setId(id);
+	this->id = id;
 }
 
 unsigned int Author::getId() const

@@ -37,7 +37,7 @@ Book::Book(char isbn[13], string title, unsigned short int ed, string cri,
 	setTranslator(tr);
 	setPublishers(p);
 	setThemes(t);
-	setId(id);
+	this->id = id;
 }
 
 unsigned int Book::getId() const

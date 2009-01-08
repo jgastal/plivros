@@ -71,6 +71,7 @@ CREATE  TABLE IF NOT EXISTS `books` (
   `ebook` VARCHAR(256) NULL ,
   `publishingyear` YEAR NULL ,
   `udc` VARCHAR(20) NULL ,
+  `translator` INTEGER NULL ,
   CONSTRAINT `translator`
     FOREIGN KEY (`id` )
     REFERENCES `authors` (`id` ) ) ;
