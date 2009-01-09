@@ -29,6 +29,11 @@ class ThemeCollection;
  * @brief Class represents a collection of books, authors, publishers and themes
  * stored in a database.
  *
+ * @warning No relational integrity check is performed on add, therefore it is
+ * possible to add book referencing a non existing theme, be carefull!
+ *
+ * @todo Add relational integrity checking.
+ *
  * This class is used as a high level abstraction of a database containing books,
  * authors, publishers and themes. All it does is convert the objects into SQL
  * statements and send them to a database for storage or retrieval. This database

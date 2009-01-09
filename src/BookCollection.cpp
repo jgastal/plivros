@@ -15,6 +15,8 @@
 #include "GenericSQL.h"
 #include "Book.h"
 #include "Author.h"
+#include "Publisher.h"
+#include "Theme.h"
 
 /**
  * @brief Initializes member variables.
@@ -35,8 +37,8 @@ BookCollection::BookCollection(DataBase *db) throw()
  *
  * @warning Make sure you DON'T SET the books id before calling this method.
  *
- * The function creates a SQL insert statement based on the given book, executes
- * the statement then sets the id given by the database in the book.
+ * The method adds the book to the database representing this collection,
+ * afterwards the id of the book is set.
  */
 void BookCollection::insertBook(Book &b) throw(DataBaseException)
 {
@@ -71,8 +73,7 @@ void BookCollection::insertBook(Book &b) throw(DataBaseException)
  *
  * @param id ID of book to be deleted.
  *
- * @return Whether operation was successful. May fail if the no book has this \a
- * id.
+ * @return Whether operation was successful. May fail if no book has this \a id.
  *
  * Note that this method actually does very little, it just calls genericDelete()
  * with the appropriate arguments.
@@ -136,48 +137,12 @@ void BookCollection::updateBook(Book b) throw(DataBaseException)
  */
 QList<Book> BookCollection::searchBooks(book_field field, string name) throw(DataBaseException)
 {
-	PreparedStatement query("SELECT * FROM books WHERE %1 %2 (%3)", db->getType());
-	if(field == b_authors)
-	{
-		query.arg("id"); //search for book id
-		query.arg("IN"); //using subquery
-		string refQuery("SELECT bookID FROM booksauthors WHERE authorsid IN (%1)");
-		string authorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
-		query.arg(refQuery); //select from reference table
-		query.arg(authorQuery); //select from authors table
-		query.arg(name); //search in first name
-		query.arg(name); //search in last name
-	}
-	else if(field == b_publishers)
-	{
-		query.arg("id"); //search for book id
-		query.arg("IN"); //using subquery
-		string refQuery("SELECT bookID FROM bookspublishers WHERE publishersid IN (%1)");
-		string authorQuery("SELECT id FROM publishers WHERE name LIKE '%%1%'");
-		query.arg(refQuery); //select from reference table
-		query.arg(authorQuery); //select from publishers table
-		query.arg(name); //search in name
-	}
-	else if(field == b_themes)
-	{
-		query.arg("id"); //search for book id
-		query.arg("IN"); //using subquery
-		string refQuery("SELECT bookID FROM booksthemes WHERE themesid IN (%1)");
-		string authorQuery("SELECT id FROM themes WHERE name LIKE '%%1%'");
-		query.arg(refQuery); //select from reference table
-		query.arg(authorQuery); //select from themes table
-		query.arg(name); //search in name
-	}
-	else if(field == b_translator)
-	{
-		query.arg("translator");
-		query.arg("IN");
-		string translatorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
-		query.arg(translatorQuery);
-		query.arg(name);
-	}
+	PreparedStatement query("", db->getType());
+	if(field == b_authors || field == b_publishers || field == b_themes || field == b_translator)
+		query = compositeSearchBooks(field, name);
 	else
 	{
+		query = PreparedStatement("SELECT * FROM books WHERE %1 LIKE %2", db->getType());
 		//what field to search for
 		if(field == b_isbn)
 			query.arg("isbn");
@@ -200,13 +165,54 @@ QList<Book> BookCollection::searchBooks(book_field field, string name) throw(Dat
 		else if(field == b_UDC)
 			query.arg("UDC");
 
-		query.arg("LIKE"); //doesn't have to be exact match
 		name.insert(0, "'%").append("%'"); //SQLs LIKE requires a preceding '%' and a ending '%'
 		query.arg(name); //search term
 	}
 
 	ResultSet bookRS = db->query(query);
 	return parseBookResultSet(bookRS);
+}
+
+PreparedStatement BookCollection::compositeSearchBooks(book_field field, string name) throw(DataBaseException)
+{
+	/*
+	 * You should be extremely carefull in changing the order in which the
+	 * PreparedStatements are composed. Composing them in the wrong order
+	 * may cause characters to be escaped incorrectly.
+	 */
+	PreparedStatement query("SELECT * FROM books WHERE id IN (%1)", db->getType());
+	if(field == b_authors)
+	{
+		string refQuery("SELECT bookID FROM booksauthors WHERE authorsid IN (%1)");
+		string authorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
+		query.arg(refQuery); //select from reference table
+		query.arg(authorQuery); //select from authors table
+		query.arg(name); //search in first name
+		query.arg(name); //search in last name
+	}
+	else if(field == b_publishers)
+	{
+		string refQuery("SELECT bookID FROM bookspublishers WHERE publishersid IN (%1)");
+		string authorQuery("SELECT id FROM publishers WHERE name LIKE '%%1%'");
+		query.arg(refQuery); //select from reference table
+		query.arg(authorQuery); //select from publishers table
+		query.arg(name); //search in name
+	}
+	else if(field == b_themes)
+	{
+		string refQuery("SELECT bookID FROM booksthemes WHERE themesid IN (%1)");
+		string authorQuery("SELECT id FROM themes WHERE name LIKE '%%1%'");
+		query.arg(refQuery); //select from reference table
+		query.arg(authorQuery); //select from themes table
+		query.arg(name); //search in name
+	}
+	else if(field == b_translator)
+	{
+		string translatorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
+		query.arg(translatorQuery);
+		query.arg(name);
+	}
+	return query;
 }
 
 /**

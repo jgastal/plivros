@@ -14,6 +14,12 @@
 #include "Author.h"
 #include "Publisher.h"
 
+//These templates are here because this functions shouldn't be used outside this file.
+template <class Type>
+PreparedStatement buildInsTemplate(string type, Type data, string refType, DataBase *db) throw(DataBaseException);
+template <class Type>
+void insertReferenceLoop(QList<Type> ref, PreparedStatement tpl, DataBase *db) throw(DataBaseException);
+
 /**
  * @brief Insert entries in a table that represent a n:n relationship between book
  * and \a refType.
@@ -104,8 +110,8 @@ void insertReferenceLoop(QList<Type> ref, PreparedStatement tpl, DataBase *db) t
 {
 	/*
 	 * Because of the use of templates ::iterator can be understood as a
-	 * nested class or a public name, thus requiring typename to make sure
-	 * the parser knows it is a nested class and is being used as a type.
+	 * nested class or a public member name, thus requiring typename to make
+	 * sure the parser knows it is a nested class and is being used as a type.
 	 * For a full explanation see:
 	 * http://pages.cs.wisc.edu/~driscoll/typename.html
 	 */

@@ -13,6 +13,7 @@ class ResultSet;
 
 #include <QtCore/QList>
 
+#include "PreparedStatement.h"
 #include "DataBaseException.h"
 #include "Book.h"
 
@@ -36,6 +37,7 @@ class BookCollection
 		void insertThemesReference(Book b) throw(DataBaseException);
 		void insertAuthorsReference(Book b) throw(DataBaseException);
 		void insertPublishersReference(Book b) throw(DataBaseException);
+		PreparedStatement compositeSearchBooks(book_field field, string name) throw(DataBaseException);
 		QList<Book> parseBookResultSet(ResultSet rs);
 };
 
