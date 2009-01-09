@@ -167,9 +167,19 @@ unsigned int genericDelete(unsigned int id, string type, DataBase *db) throw(Dat
 	del.arg(type);
 	del.arg(id);
 
+	if(type == "book")
+	{
+		PreparedStatement delAuthors("DELETE FROM booksauthors WHERE booksid = '%1'", db->getType());
+		PreparedStatement delPublishers("DELETE FROM bookspublishers WHERE booksid = '%1'", db->getType());
+		delAuthors.arg(id);
+		delPublishers.arg(id);
+
+		db->exec(delAuthors);
+		db->exec(delPublishers);
+	}
 	if(type != "theme")
 	{
-		PreparedStatement delThemes("DELETE FROM %1theme WHERE %2sid = '%3'", db->getType());
+		PreparedStatement delThemes("DELETE FROM %1sthemes WHERE %2sid = '%3'", db->getType());
 
 		delThemes.arg(type);
 		delThemes.arg(type);

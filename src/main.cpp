@@ -30,6 +30,7 @@ int main(int argc, char **argv)
 		Book b("0123456789123", "title", 0, "", "", 5, "", "", QDate(2009,1,9),
 			"UDC", authorList, &a, publisherList, themeList);
 
+		c.insertTheme(t);
 		c.insertPublisher(p);
 		c.insertAuthor(a);
 		c.insertBook(b);

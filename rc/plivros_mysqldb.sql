@@ -26,7 +26,7 @@ CREATE  TABLE IF NOT EXISTS `publishers` (
   `name` VARCHAR(45) NULL ,
   `description` TEXT NULL ,
   `critique` TEXT NULL ,
-  `picture` VARCHAR(256) NULL ,
+  `logo` VARCHAR(256) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
