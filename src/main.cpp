@@ -10,10 +10,9 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-	Collection *c;
 	try
 	{
-		c = new Collection("User");
+		Collection c("User");
 
 		QList<Theme*> themeList;
 		QList<Author*> authorList;
@@ -21,15 +20,19 @@ int main(int argc, char **argv)
 
 		Theme t("theme1", "desc1");
 		themeList.append(&t);
+
 		Publisher p("pub1", "desc", "", themeList);
 		publisherList.append(&p);
+
 		Author a("fn", "ln", "desc", "cri", 5, "", themeList);
 		authorList.append(&a);
 
-		Book b("0123456789123", "title", 0, "", "", 5, "", "", QDate(),
+		Book b("0123456789123", "title", 0, "", "", 5, "", "", QDate(2009,1,9),
 			"UDC", authorList, &a, publisherList, themeList);
 
-		c->insertBook(b);
+		c.insertPublisher(p);
+		c.insertAuthor(a);
+		c.insertBook(b);
 
 		std::cout << "Good times." << std::endl;
 	}
@@ -43,6 +46,4 @@ int main(int argc, char **argv)
 		std::cout << "Cause: " << dbe.where() << std::endl;
 		std::cout << "Error code: " << dbe.getCode() << std::endl;
 	}
-
-	delete c;
 }

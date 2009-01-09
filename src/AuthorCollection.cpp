@@ -12,10 +12,9 @@
 #include "PreparedStatement.h"
 
 #include "Author.h"
-#include "Theme.h"
 #include "GenericSQL.h"
 
-AuthorsCollection::AuthorsCollection(DataBase *db)
+AuthorCollection::AuthorCollection(DataBase *db)
 {
 	this->db = db;
 }
@@ -36,7 +35,7 @@ AuthorsCollection::AuthorsCollection(DataBase *db)
  * the statement then sets the id given by the database in the author and returns
  * success.
  */
-bool AuthorsCollection::insertAuthor(Author &a) throw(DataBaseException)
+void AuthorCollection::insertAuthor(Author &a) throw(DataBaseException)
 {
 	PreparedStatement insAuthor("INSERT INTO authors (firstname, lastname, "
 		"description, critique, rating, picture) VALUES ('%1', '%2', "
@@ -50,9 +49,7 @@ bool AuthorsCollection::insertAuthor(Author &a) throw(DataBaseException)
 
 	a.setId(db->insert(insAuthor));
 
-	insertThemesReference("author", a);
-
-	return true;
+	insertThemesReference(a);
 }
 
 /**
@@ -65,10 +62,11 @@ bool AuthorsCollection::insertAuthor(Author &a) throw(DataBaseException)
  * Note that this method actually does very little, it just calls genericDelete()
  * with the appropriate arguments.
  */
-bool AuthorsCollection::deleteAuthor(unsigned int id) throw(DataBaseException)
+bool AuthorCollection::deleteAuthor(unsigned int id) throw(DataBaseException)
 {
-	genericDelete(id, "author", db);
-	return true;
+	if(genericDelete(id, "author", db) == 1)
+		return true;
+	return false;
 }
 
 /**
@@ -81,7 +79,7 @@ bool AuthorsCollection::deleteAuthor(unsigned int id) throw(DataBaseException)
  * This method constructs an SQL statement that updates every field of the author
  * except the id to match the object.
  */
-bool AuthorsCollection::updateAuthor(Author a) throw(DataBaseException)
+void AuthorCollection::updateAuthor(Author a) throw(DataBaseException)
 {
 	PreparedStatement updAuthor("UPDATE authors SET firstname = '%1', "
 		"lastname = '%2', description = '%3', critique = '%4', rating = "
@@ -92,57 +90,28 @@ bool AuthorsCollection::updateAuthor(Author a) throw(DataBaseException)
 	updAuthor.arg(a.getRating());
 	updAuthor.arg(a.getPicture());
 
-	updateThemesReference("author", a);
+	updateThemesReference(a);
 
-	if(db->exec(updAuthor) == 0)
-		return false;
-	return true;
+	db->exec(updAuthor);
 }
 
 /**
- * @brief Updates the themes references to match that of \a data.
+ * @brief Updates the themes references to match that of \a a.
  *
- * @param type Type of object being handled.
- * @param data Object whose theme references need to be updated.
- *
- * @warning type MUST be one of "book", "author", "publisher"!
- * @warning data must be a Book, Author or Publisher object!
+ * @param a Author whose theme references need to be updated.
  */
-template <class T>
-void AuthorsCollection::updateThemesReference(string type, T data) throw(DataBaseException)
+void AuthorCollection::updateThemesReference(Author a) throw(DataBaseException)
 {
-	PreparedStatement delThemes("DELETE FROM %1themes WHERE %2ID = '%3'", db->getType());
-	delThemes.arg(type); //set table name
-	delThemes.arg(type); //set id field name
-	delThemes.arg(data.getId());
-
-	db->exec(delThemes);
-
-	insertThemesReference(type, data);
+	deleteReference("author", a.getId(), "theme", db);
+	insertThemesReference(a);
 }
 
 /**
- * @brief Creates theme references to match that of \a data.
+ * @brief Creates theme references to match that of \a a.
  *
- * @param type Type of object being handled.
- * @param data Object whose theme references need to be added.
- *
- * @warning type MUST be one of "book", "author", "publisher"!
- * @warning data must be a Book, Author or Publisher object!
+ * @param a Author whose themes need to be referenced.
  */
-template <class T>
-void AuthorsCollection::insertThemesReference(string type, T data) throw(DataBaseException)
+void AuthorCollection::insertThemesReference(Author a) throw(DataBaseException)
 {
-	QList<Theme*> themes = data.getThemes();
-	PreparedStatement insThemeTemplate("INSERT INTO %1themes (%2ID, themeID)"
-		" VALUES ('%3', '%4')", db->getType());
-	insThemeTemplate.arg(type); //set table name
-	insThemeTemplate.arg(type); //set id field name
-	insThemeTemplate.arg(data.getId()); //id never changes
-	for(QList<Theme*>::iterator it = themes.begin(); it != themes.end(); it++)
-	{
-		PreparedStatement insTheme = insThemeTemplate;
-		insTheme.arg((*it)->getId());
-		db->insert(insTheme);
-	}
+	insertReferenceAuthor(a, db);
 }

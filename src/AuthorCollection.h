@@ -13,23 +13,21 @@ class DataBase;
 #include "DataBaseException.h"
 #include "Author.h"
 
-class AuthorsCollection
+class AuthorCollection
 {
 	public:
-		AuthorsCollection(DataBase *db);
+		AuthorCollection(DataBase *db);
 
-		bool insertAuthor(Author &a) throw(DataBaseException);
+		void insertAuthor(Author &a) throw(DataBaseException);
 		bool deleteAuthor(unsigned int id) throw(DataBaseException);
-		bool updateAuthor(Author a) throw(DataBaseException);
+		void updateAuthor(Author a) throw(DataBaseException);
 		QList<Author> searchAuthors(author_field field, string name);
 
 	private:
 		DataBase *db;
 
-		template <class T>
-		void updateThemesReference(string table, T data) throw(DataBaseException);
-		template <class T>
-		void insertThemesReference(string table, T data) throw(DataBaseException);
+		void updateThemesReference(Author a) throw(DataBaseException);
+		void insertThemesReference(Author a) throw(DataBaseException);
 };
 
 #endif /* AUTHORSCOLLECTION_H_ */

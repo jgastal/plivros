@@ -14,6 +14,8 @@
 
 #include "Collection.h"
 #include "BookCollection.h"
+#include "AuthorCollection.h"
+#include "PublisherCollection.h"
 
 using namespace std;
 
@@ -37,6 +39,8 @@ Collection::Collection(QString u, QString customDbName, bool ro) throw(bad_alloc
 
 	db = new DataBase(dbName.toStdString());
 	bc = new BookCollection(db);
+	ac = new AuthorCollection(db);
+	pc = new PublisherCollection(db);
 }
 
 ///@brief Closes database.
@@ -130,19 +134,7 @@ bool Collection::insertAuthor(Author &a) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement insAuthor("INSERT INTO authors (firstname, lastname, "
-		"description, critique, rating, picture) VALUES ('%1', '%2', "
-		"'%3', '%4', '%5', '%6')", db->getType());
-	insAuthor.arg(a.getFirstName());
-	insAuthor.arg(a.getLastName());
-	insAuthor.arg(a.getDescription());
-	insAuthor.arg(a.getCritique());
-	insAuthor.arg(a.getRating());
-	insAuthor.arg(a.getPicture());
-
-	a.setId(db->insert(insAuthor));
-
-	insertThemesReference("author", a);
+	ac->insertAuthor(a);
 
 	return true;
 }
@@ -159,7 +151,7 @@ bool Collection::insertAuthor(Author &a) throw(DataBaseException)
  */
 bool Collection::deleteAuthor(unsigned int id) throw(DataBaseException)
 {
-	return genericDelete(id, "author");
+	return ac->deleteAuthor(id);
 }
 
 /**
@@ -176,19 +168,8 @@ bool Collection::updateAuthor(Author a) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement updAuthor("UPDATE authors SET firstname = '%1', "
-		"lastname = '%2', description = '%3', critique = '%4', rating = "
-		"'%5', picture = '%6' WHERE id = '%7'", db->getType());
-	updAuthor.arg(a.getFirstName());
-	updAuthor.arg(a.getDescription());
-	updAuthor.arg(a.getCritique());
-	updAuthor.arg(a.getRating());
-	updAuthor.arg(a.getPicture());
+	ac->updateAuthor(a);
 
-	updateThemesReference("author", a);
-
-	if(db->exec(updAuthor) == 0)
-		return false;
 	return true;
 }
 
@@ -208,16 +189,7 @@ bool Collection::insertPublisher(Publisher &p) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement insPub("INSERT INTO publishers (name, description, critique,"
-		"logo) VALUES ('%1', '%2', '%3', '%4')", db->getType());
-	insPub.arg(p.getName());
-	insPub.arg(p.getDescription());
-	insPub.arg(p.getCritique());
-	insPub.arg(p.getLogo());
-
-	p.setId(db->insert(insPub));
-
-	insertThemesReference("publisher", p);
+	pc->insertPublisher(p);
 
 	return true;
 }
@@ -234,7 +206,7 @@ bool Collection::insertPublisher(Publisher &p) throw(DataBaseException)
  */
 bool Collection::deletePublisher(unsigned int id) throw(DataBaseException)
 {
-	return genericDelete(id, "publisher");
+	return pc->deletePublisher(id);
 }
 
 /**
@@ -251,17 +223,8 @@ bool Collection::updatePublisher(Publisher p) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement updPub("UPDATE publishers SET name = '%1', description"
-		" = '%2', critique = '%3', logo = '%4' WHERE id = '%5'", db->getType());
-	updPub.arg(p.getName());
-	updPub.arg(p.getDescription());
-	updPub.arg(p.getCritique());
-	updPub.arg(p.getLogo());
+	pc->updatePublisher(p);
 
-	updateThemesReference("publisher", p);
-
-	if(db->exec(updPub) == 0)
-		return false;
 	return true;
 }
 

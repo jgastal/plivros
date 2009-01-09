@@ -15,8 +15,6 @@
 #include "GenericSQL.h"
 #include "Book.h"
 #include "Author.h"
-#include "Publisher.h"
-#include "Theme.h"
 
 /**
  * @brief Initializes member variables.
@@ -214,7 +212,7 @@ QList<Book> BookCollection::searchBooks(book_field field, string name) throw(Dat
 /**
  * @brief Creates theme references to match that of \a b.
  *
- * @param b Books whose themes need to be referenced.
+ * @param b Book whose themes need to be referenced.
  */
 void BookCollection::insertThemesReference(Book b) throw(DataBaseException)
 {
@@ -261,7 +259,6 @@ void BookCollection::updateAuthorsReference(Book b) throw(DataBaseException)
 {
 	deleteReference("book", b.getId(), "author", db);
 	insertAuthorsReference(b);
-	return;
 }
 
 /**
@@ -273,7 +270,6 @@ void BookCollection::updatePublishersReference(Book b) throw(DataBaseException)
 {
 	deleteReference("book", b.getId(), "publisher", db);
 	insertPublishersReference(b);
-	return;
 }
 
 QList<Book> BookCollection::parseBookResultSet(ResultSet rs)

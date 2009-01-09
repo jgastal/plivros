@@ -19,6 +19,8 @@
 
 class DataBase;
 class BookCollection;
+class AuthorCollection;
+class PublisherCollection;
 
 /**
  * @class Collection Collection.h
@@ -61,6 +63,8 @@ class Collection
 	private:
 		DataBase *db;
 		BookCollection *bc;
+		AuthorCollection *ac;
+		PublisherCollection *pc;
 		QString user;
 		QString dbName;
 		bool readOnly;
