@@ -14,7 +14,7 @@
 #include "Author.h"
 #include "GenericSQL.h"
 
-AuthorCollection::AuthorCollection(DataBase *db)
+AuthorCollection::AuthorCollection(DataBase *db) throw()
 {
 	this->db = db;
 }

@@ -16,6 +16,7 @@
 #include "BookCollection.h"
 #include "AuthorCollection.h"
 #include "PublisherCollection.h"
+#include "ThemeCollection.h"
 
 using namespace std;
 
@@ -41,6 +42,7 @@ Collection::Collection(QString u, QString customDbName, bool ro) throw(bad_alloc
 	bc = new BookCollection(db);
 	ac = new AuthorCollection(db);
 	pc = new PublisherCollection(db);
+	tc = new ThemeCollection(db);
 }
 
 ///@brief Closes database.
@@ -87,6 +89,8 @@ bool Collection::insertBook(Book &b) throw(DataBaseException)
  */
 bool Collection::deleteBook(unsigned int id) throw(DataBaseException)
 {
+	if(readOnly)
+		return false;
 	return bc->deleteBook(id);
 }
 
@@ -151,6 +155,8 @@ bool Collection::insertAuthor(Author &a) throw(DataBaseException)
  */
 bool Collection::deleteAuthor(unsigned int id) throw(DataBaseException)
 {
+	if(readOnly)
+		return false;
 	return ac->deleteAuthor(id);
 }
 
@@ -206,6 +212,8 @@ bool Collection::insertPublisher(Publisher &p) throw(DataBaseException)
  */
 bool Collection::deletePublisher(unsigned int id) throw(DataBaseException)
 {
+	if(readOnly)
+		return false;
 	return pc->deletePublisher(id);
 }
 
@@ -248,12 +256,7 @@ bool Collection::insertTheme(Theme &t) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement prepStmt("INSERT INTO themes (name, description) "
-		"VALUES ('%1', '%2')", db->getType());
-	prepStmt.arg(t.getName());
-	prepStmt.arg(t.getDescription());
-
-	t.setId(db->insert(prepStmt));
+	tc->insertTheme(t);
 
 	return true;
 }
@@ -273,12 +276,7 @@ bool Collection::deleteTheme(unsigned int id) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement prepStmt("DELETE FROM themes WHERE id = '%1'", db->getType());
-	prepStmt.arg(id);
-
-	db->exec(prepStmt);
-
-	return true;
+	return tc->deleteTheme(id);
 }
 
 /**
@@ -295,161 +293,7 @@ bool Collection::updateTheme(Theme t) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	PreparedStatement prepStmt("UPDATE Themes SET name = '%1', description"
-		" = '%2' WHERE id = '%3'", db->getType());
-	prepStmt.arg(t.getName());
-	prepStmt.arg(t.getDescription());
-	prepStmt.arg(t.getId());
-
-	if(db->exec(prepStmt) == 0)
-		return false;
-	return true;
-}
-
-/**
- * @brief Updates the themes references to match that of \a data.
- *
- * @param type Type of object being handled.
- * @param data Object whose theme references need to be updated.
- *
- * @warning type MUST be one of "book", "author", "publisher"!
- * @warning data must be a Book, Author or Publisher object!
- */
-template <class T>
-void Collection::updateThemesReference(string type, T data) throw(DataBaseException)
-{
-	PreparedStatement delThemes("DELETE FROM %1themes WHERE %2ID = '%3'", db->getType());
-	delThemes.arg(type); //set table name
-	delThemes.arg(type); //set id field name
-	delThemes.arg(data.getId());
-
-	db->exec(delThemes);
-
-	insertThemesReference(type, data);
-}
-
-/**
- * @brief Creates theme references to match that of \a data.
- *
- * @param type Type of object being handled.
- * @param data Object whose theme references need to be added.
- *
- * @warning type MUST be one of "book", "author", "publisher"!
- * @warning data must be a Book, Author or Publisher object!
- */
-template <class T>
-void Collection::insertThemesReference(string type, T data) throw(DataBaseException)
-{
-	QList<Theme*> themes = data.getThemes();
-	PreparedStatement insThemeTemplate("INSERT INTO %1themes (%2ID, themeID)"
-		" VALUES ('%3', '%4')", db->getType());
-	insThemeTemplate.arg(type); //set table name
-	insThemeTemplate.arg(type); //set id field name
-	insThemeTemplate.arg(data.getId()); //id never changes
-	for(QList<Theme*>::iterator it = themes.begin(); it != themes.end(); it++)
-	{
-		PreparedStatement insTheme = insThemeTemplate;
-		insTheme.arg((*it)->getId());
-		db->insert(insTheme);
-	}
-}
-
-void Collection::insertAuthorsReference(Book b) throw(DataBaseException)
-{
-	QList<Author*> authors = b.getAuthors();
-	PreparedStatement insAuthorTemplate("INSERT INTO bookauthor (bookID, authorID)"
-		" VALUES ('%1', '%2')", db->getType());
-	insAuthorTemplate.arg(b.getId());
-	for(QList<Author*>::iterator it = authors.begin(); it != authors.end(); it++)
-	{
-		PreparedStatement insAuthor = insAuthorTemplate;
-		insAuthor.arg((*it)->getId());
-		db->insert(insAuthor);
-	}
-}
-
-void Collection::insertPublishersReference(Book b) throw(DataBaseException)
-{
-	QList<Publisher*> pubs = b.getPublishers();
-	PreparedStatement insPubTemplate("INSERT INTO bookpublisher (bookID, publisherID)"
-		" VALUES ('%1', '%2')", db->getType());
-	insPubTemplate.arg(b.getId());
-	for(QList<Publisher*>::iterator it = pubs.begin(); it != pubs.end(); it++)
-	{
-		PreparedStatement insPub = insPubTemplate;
-		insPub.arg((*it)->getId());
-		db->insert(insPub);
-	}
-}
-
-template <class Type, class Reference>
-void Collection::insertReference(string type, Type data, string refType) throw(DataBaseException)
-{
-	QList<Reference*> ref;
-	/*
-	 * Because of the use of templates ::iterator can be understood as a
-	 * nested class or a public name, thus requiring typename to make sure
-	 * the parser knows it is a nested class and is being used as a type.
-	 * For a full explanation see:
-	 * http://pages.cs.wisc.edu/~driscoll/typename.html
-	 */
-	typename QList<Reference*>::iterator it;
-	if(refType == "theme")
-		ref = data.getThemes();
-	else if(refType == "author")
-		ref = data.getAuthors();
-	else if(refType == "publisher")
-		ref = data.getPublihsers();
-
-	PreparedStatement insTemplate("INSERT INTO %1s%2s (%3ID, %4ID)"
-		" VALUES ('%5', '%6')", db->getType());
-	//table name is type+refType(i.e. booksthemes, booksauthors, ...)
-	insTemplate.arg(type);
-	insTemplate.arg(refType);
-	//first id is of type
-	insTemplate.arg(type);
-	//second id is of referenced type
-	insTemplate.arg(refType);
-	//id of type never changes
-	insTemplate.arg(data.getId());
-	for(it = ref.begin(); it != ref.end(); it++)
-	{
-		PreparedStatement ins = insTemplate;
-		ins.arg((*it)->getId());
-		db->insert(ins);
-	}
-}
-
-/**
- * @brief Remove an object from the collection.
- *
- * @param id ID of object to removed from collection.
- * @param type Type of object to be removed from collection.
- *
- * @return Whether operation was successful.
- *
- * @warning type MUST be one of "book", "author", "publisher"!
- * @warning Under no circumstance use this method to delete a theme.
- *
- * This method first removes any theme references to the object being removed to
- * only then remove the actual object. The order in which this is done is
- * important to preserve data consistency in the database.
- */
-bool Collection::genericDelete(unsigned int id, string type) throw(DataBaseException)
-{
-	if(readOnly)
-		return false;
-	PreparedStatement del("DELETE FROM %1s WHERE id = '%2'", db->getType());
-	PreparedStatement delThemes("DELETE FROM %1themes WHERE %2ID = '%3'", db->getType());
-	del.arg(type);
-	del.arg(id);
-
-	delThemes.arg(type);
-	delThemes.arg(type);
-	delThemes.arg(id);
-
-	db->exec(delThemes);
-	db->exec(del);
+	tc->updateTheme(t);
 
 	return true;
 }

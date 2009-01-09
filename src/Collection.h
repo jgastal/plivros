@@ -21,6 +21,7 @@ class DataBase;
 class BookCollection;
 class AuthorCollection;
 class PublisherCollection;
+class ThemeCollection;
 
 /**
  * @class Collection Collection.h
@@ -65,22 +66,10 @@ class Collection
 		BookCollection *bc;
 		AuthorCollection *ac;
 		PublisherCollection *pc;
+		ThemeCollection *tc;
 		QString user;
 		QString dbName;
 		bool readOnly;
-
-		template <class T>
-		void updateThemesReference(string table, T data) throw(DataBaseException);
-		void updateAuthorsReference(Book b) throw(DataBaseException);
-		void updatePublishersReference(Book b) throw(DataBaseException);
-		template <class T>
-		void insertThemesReference(string table, T data) throw(DataBaseException);
-		void insertAuthorsReference(Book b) throw(DataBaseException);
-		void insertPublishersReference(Book b) throw(DataBaseException);
-		template <class Type, class Reference>
-		void insertReference(string type, Type data, string refType) throw(DataBaseException);
-		bool genericDelete(unsigned int id, string type) throw(DataBaseException);
-		QList<Book> parseBookResultSet(ResultSet rs);
 };
 
 #endif /* COLLECTION_H_ */

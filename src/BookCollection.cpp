@@ -21,7 +21,7 @@
  *
  * @param db Database in which operations will be executed.
  */
-BookCollection::BookCollection(DataBase *db)
+BookCollection::BookCollection(DataBase *db) throw()
 {
 	this->db = db;
 }

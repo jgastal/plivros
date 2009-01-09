@@ -11,13 +11,15 @@
 class DataBase;
 class ResultSet;
 
+#include <QtCore/QList>
+
 #include "DataBaseException.h"
 #include "Book.h"
 
 class BookCollection
 {
 	public:
-		BookCollection(DataBase *db);
+		BookCollection(DataBase *db) throw();
 
 		void insertBook(Book &b) throw(DataBaseException);
 		bool deleteBook(unsigned int id) throw(DataBaseException);

@@ -10,13 +10,15 @@
 
 class DataBase;
 
+#include <QtCore/QList>
+
 #include "DataBaseException.h"
 #include "Author.h"
 
 class AuthorCollection
 {
 	public:
-		AuthorCollection(DataBase *db);
+		AuthorCollection(DataBase *db) throw();
 
 		void insertAuthor(Author &a) throw(DataBaseException);
 		bool deleteAuthor(unsigned int id) throw(DataBaseException);

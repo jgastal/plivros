@@ -9,11 +9,12 @@
 
 #include "DataBase.h"
 #include "DataBaseException.h"
+#include "PreparedStatement.h"
 
 #include "GenericSQL.h"
 #include "Publisher.h"
 
-PublisherCollection::PublisherCollection(DataBase *db)
+PublisherCollection::PublisherCollection(DataBase *db) throw()
 {
 	this->db = db;
 }
