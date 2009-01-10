@@ -1,6 +1,5 @@
-include_directories( . ${DBWRAPPER_INC_DIR} ${QT4_INC_DIR} )
-link_directories( ${DBWRAPPER_LINK_DIR} ${QT4_LINK_DIR} )
-link_libraries( DataBaseWrapper QtCore sqlite3 )
+include_directories( . ${DBWRAPPER_INC_DIR} )
+link_directories( ${DBWRAPPER_LINK_DIR} )
 
 set( headers
 	Collection.h
@@ -27,3 +26,4 @@ set( sources
 	GenericSQL.cpp )
 
 add_executable( plivros ${headers} ${sources} )
+target_link_libraries( plivros DataBaseWrapper ${QT_LIBRARIES} )
