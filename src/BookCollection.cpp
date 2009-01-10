@@ -56,10 +56,7 @@ void BookCollection::insertBook(Book &b) throw(DataBaseException)
 	prepStmt.arg(b.getEbook());
 	prepStmt.arg(b.getPubDate().toString("yyyy-MM-dd").toStdString());
 	prepStmt.arg(b.getUDC());
-	if(b.getTranslator())
-		prepStmt.arg(b.getTranslator()->getId());
-	else
-		prepStmt.arg(-1);
+	prepStmt.arg(b.getTranslator().getId());
 
 	b.setId(db->insert(prepStmt));
 
@@ -108,7 +105,7 @@ void BookCollection::updateBook(Book b) throw(DataBaseException)
 	updBook.arg(b.getEbook());
 	updBook.arg(b.getPubDate().toString("yyyy-MM-dd").toStdString());
 	updBook.arg(b.getUDC());
-	updBook.arg(b.getTranslator()->getId());
+	updBook.arg(b.getTranslator().getId());
 	updBook.arg(b.getId());
 
 	updateThemesReference(b);

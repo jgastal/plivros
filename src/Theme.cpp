@@ -11,6 +11,13 @@ using namespace std;
 
 #include "Theme.h"
 
+Theme::Theme()
+{
+	setName("");
+	setDescription("");
+	this->id = 0;
+}
+
 Theme::Theme(string nm, string desc, unsigned int id)
 {
 	setName(nm);

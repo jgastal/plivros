@@ -21,6 +21,7 @@ enum theme_field
 class Theme
 {
 	public:
+		Theme();
 		Theme(string nm, string desc, unsigned int id = 0);
 		unsigned int getId() const;
 		void setId(unsigned int id);

@@ -8,11 +8,11 @@
 #ifndef AUTHOR_H_
 #define AUTHOR_H_
 
-class Theme;
-
 #include <string>
 
 #include <QtCore/QList>
+
+#include "Theme.h"
 
 using namespace std;
 
@@ -30,8 +30,9 @@ enum author_field
 class Author
 {
 	public:
+		Author();
 		Author(string fn, string ln, string desc, string cri,
-			unsigned short int rat, string pic, QList<Theme*> t,
+			unsigned short int rat, string pic, QList<Theme> t,
 			unsigned int id = 0);
 		unsigned int getId() const;
 		void setId(unsigned int id);
@@ -47,8 +48,8 @@ class Author
 		void setRating(unsigned short int);
 		string getPicture() const;
 		void setPicture(string);
-		QList<Theme*> getThemes() const;
-		void setThemes(QList<Theme*> themes);
+		QList<Theme> getThemes() const;
+		void setThemes(QList<Theme> themes);
 
 	private:
 		unsigned int id;
@@ -58,7 +59,7 @@ class Author
 		string Critique;
 		unsigned short int rating;
 		string picture; //path to picture of author
-		QList<Theme*> themes; //List of pointers to themes
+		QList<Theme> themes; //List of themes
 };
 
 #endif /* AUTHOR_H_ */

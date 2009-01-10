@@ -14,7 +14,16 @@
 
 using namespace std;
 
-Publisher::Publisher(string nm, string desc, string logo, QList<Theme*> t, unsigned int id)
+Publisher::Publisher()
+{
+	setName("");
+	setDescription("");
+	setLogo("");
+	setThemes(QList<Theme>());
+	this->id = 0;
+}
+
+Publisher::Publisher(string nm, string desc, string logo, QList<Theme> t, unsigned int id)
 {
 	setName(nm);
 	setDescription(desc);
@@ -74,12 +83,12 @@ void Publisher::setLogo(string logo)
 	this->logo = logo;
 }
 
-QList<Theme*> Publisher::getThemes()
+QList<Theme> Publisher::getThemes()
 {
 	return themes;
 }
 
-void Publisher::setThemes(QList<Theme*> themes)
+void Publisher::setThemes(QList<Theme> themes)
 {
 	this->themes = themes;
 }

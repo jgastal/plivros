@@ -13,9 +13,9 @@
 #include <QtCore/QList>
 #include <QtCore/QDate>
 
-class Author;
-class Publisher;
-class Theme;
+#include "Author.h"
+#include "Publisher.h"
+#include "Theme.h"
 
 using namespace std;
 
@@ -40,10 +40,11 @@ enum book_field
 class Book
 {
 	public:
+		Book();
 		Book(char isbn[13], string title, unsigned short int ed, string cri,
 			string desc, unsigned short int rat, string cov, string eb, QDate d,
-			string UDC, QList<Author*> a, Author* tr, QList<Publisher*> p,
-			QList<Theme*> t, unsigned int id = 0);
+			string UDC, QList<Author> a, Author tr, QList<Publisher> p,
+			QList<Theme> t, unsigned int id = 0);
 		unsigned int getId() const;
 		void setId(unsigned int id);
 		const char* getIsbn() const;
@@ -66,14 +67,14 @@ class Book
 		void setPubDate(QDate pubDate);
 		string getUDC() const;
 		void setUDC(string UDC);
-		QList<Author*> getAuthors() const;
-		void setAuthors(QList<Author*> authors);
-		Author *getTranslator() const;
-		void setTranslator(Author *translator);
-		QList<Publisher*> getPublishers() const;
-		void setPublishers(QList<Publisher*> publishers);
-		QList<Theme*> getThemes() const;
-		void setThemes(QList<Theme*> themes);
+		QList<Author> getAuthors() const;
+		void setAuthors(QList<Author> authors);
+		Author getTranslator() const;
+		void setTranslator(Author translator);
+		QList<Publisher> getPublishers() const;
+		void setPublishers(QList<Publisher> publishers);
+		QList<Theme> getThemes() const;
+		void setThemes(QList<Theme> themes);
 
 	private:
 		unsigned int id;
@@ -87,10 +88,10 @@ class Book
 		string ebook; //path to file of ebook copy of this book
 		QDate pubDate;
 		string UDC; //Universal Decimal Classification
-		QList<Author*> authors; //list of pointers to authors
-		Author *translator;
-		QList<Publisher*> publishers;
-		QList<Theme*> themes;
+		QList<Author> authors; //list of authors
+		Author translator;
+		QList<Publisher> publishers;
+		QList<Theme> themes;
 };
 
 #endif /* BOOK_H_ */

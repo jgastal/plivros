@@ -11,17 +11,35 @@
 #include <QtCore/QList>
 
 #include "Book.h"
-
-class Author;
-class Publisher;
-class Theme;
+#include "Author.h"
+#include "Publisher.h"
+#include "Theme.h"
 
 using namespace std;
 
+Book::Book()
+{
+	setIsbn("\0");
+	setTitle("");
+	setEdition(0);
+	setCritique("");
+	setDescription("");
+	setRating(0);
+	setCover("");
+	setEbook("");
+	setPubDate(QDate());
+	setUDC("");
+	setAuthors(QList<Author>());
+	setTranslator(Author());
+	setPublishers(QList<Publisher>());
+	setThemes(QList<Theme>());
+	this->id = 0;
+}
+
 Book::Book(char isbn[13], string title, unsigned short int ed, string cri,
 	string desc, unsigned short int rat, string cov, string eb, QDate d,
-	string UDC, QList<Author*> a, Author* tr, QList<Publisher*> p,
-	QList<Theme*> t, unsigned int id)
+	string UDC, QList<Author> a, Author tr, QList<Publisher> p,
+	QList<Theme> t, unsigned int id)
 {
 	setIsbn(isbn);
 	setTitle(title);
@@ -152,42 +170,42 @@ void Book::setUDC(string UDC)
 	this->UDC = UDC;
 }
 
-QList<Author*> Book::getAuthors() const
+QList<Author> Book::getAuthors() const
 {
 	return authors;
 }
 
-void Book::setAuthors(QList<Author*> authors)
+void Book::setAuthors(QList<Author> authors)
 {
 	this->authors = authors;
 }
 
-Author* Book::getTranslator() const
+Author Book::getTranslator() const
 {
     return translator;
 }
 
-void Book::setTranslator(Author *translator)
+void Book::setTranslator(Author translator)
 {
     this->translator = translator;
 }
 
-QList<Publisher*> Book::getPublishers() const
+QList<Publisher> Book::getPublishers() const
 {
 	return publishers;
 }
 
-void Book::setPublishers(QList<Publisher*> publishers)
+void Book::setPublishers(QList<Publisher> publishers)
 {
 	this->publishers = publishers;
 }
 
-QList<Theme*> Book::getThemes() const
+QList<Theme> Book::getThemes() const
 {
 	return themes;
 }
 
-void Book::setThemes(QList<Theme*> themes)
+void Book::setThemes(QList<Theme> themes)
 
 {
 	this->themes = themes;

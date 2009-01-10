@@ -119,7 +119,7 @@ void insertReferenceLoop(QList<Type> ref, PreparedStatement tpl, DataBase *db) t
 	for(it = ref.begin(); it != ref.end(); it++)
 	{
 		PreparedStatement sql = tpl;
-		sql.arg((*it)->getId());
+		sql.arg((*it).getId());
 		db->exec(sql);
 	}
 }

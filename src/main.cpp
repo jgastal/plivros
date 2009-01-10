@@ -14,25 +14,25 @@ int main(int argc, char **argv)
 	{
 		Collection c("User");
 
-		QList<Theme*> themeList;
-		QList<Author*> authorList;
-		QList<Publisher*> publisherList;
+		QList<Theme> themeList;
+		QList<Author> authorList;
+		QList<Publisher> publisherList;
 
 		Theme t("theme1", "desc1");
-		themeList.append(&t);
+		c.insertTheme(t);
+		themeList.append(t);
 
 		Publisher p("pub1", "desc", "", themeList);
-		publisherList.append(&p);
+		c.insertPublisher(p);
+		publisherList.append(p);
 
 		Author a("fn", "ln", "desc", "cri", 5, "", themeList);
-		authorList.append(&a);
+		c.insertAuthor(a);
+		authorList.append(a);
 
 		Book b("0123456789123", "title", 0, "", "", 5, "", "", QDate(2009,1,9),
-			"UDC", authorList, &a, publisherList, themeList);
+			"UDC", authorList, a, publisherList, themeList);
 
-		c.insertTheme(t);
-		c.insertPublisher(p);
-		c.insertAuthor(a);
 		c.insertBook(b);
 
 		std::cout << "Good times." << std::endl;

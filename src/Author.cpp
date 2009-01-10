@@ -10,11 +10,24 @@
 #include <QtCore/QList>
 
 #include "Author.h"
+#include "Theme.h"
 
 using namespace std;
 
+Author::Author()
+{
+	setFirstName("");
+	setLastName("");
+	setDescription("");
+	setCritique("");
+	setRating(0);
+	setPicture("");
+	setThemes(QList<Theme>());
+	this->id = 0;
+}
+
 Author::Author(string fn, string ln, string desc, string cri,
-	unsigned short int rat, string pic, QList<Theme*> t, unsigned int id)
+	unsigned short int rat, string pic, QList<Theme> t, unsigned int id)
 {
 	setFirstName(fn);
 	setLastName(ln);
@@ -97,12 +110,12 @@ void Author::setPicture(string picture)
 	this->picture = picture;
 }
 
-QList<Theme*> Author::getThemes() const
+QList<Theme> Author::getThemes() const
 {
 	return themes;
 }
 
-void Author::setThemes(QList<Theme*> themes)
+void Author::setThemes(QList<Theme> themes)
 {
 	this->themes = themes;
 }
