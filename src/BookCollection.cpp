@@ -37,8 +37,8 @@ BookCollection::BookCollection(DataBase *db) throw()
  *
  * @warning Make sure you DON'T SET the books id before calling this method.
  *
- * The method adds the book to the database representing this collection,
- * afterwards the id of the book is set.
+ * Adds \a b to the DataBase and sets its id. Nothing is done with the referenced
+ * authors, publishers and themes.
  */
 void BookCollection::insertBook(Book &b) throw(DataBaseException)
 {
@@ -59,10 +59,6 @@ void BookCollection::insertBook(Book &b) throw(DataBaseException)
 	prepStmt.arg(b.getTranslator().getId());
 
 	b.setId(db->insert(prepStmt));
-
-	insertThemesReference(b);
-	insertAuthorsReference(b);
-	insertPublishersReference(b);
 }
 
 /**
@@ -72,8 +68,7 @@ void BookCollection::insertBook(Book &b) throw(DataBaseException)
  *
  * @return Whether operation was successful. May fail if no book has this \a id.
  *
- * Note that this method actually does very little, it just calls genericDelete()
- * with the appropriate arguments.
+ * Deletes the book with no regard to possible references to it.
  */
 bool BookCollection::deleteBook(unsigned int id) throw(DataBaseException)
 {
@@ -87,7 +82,8 @@ bool BookCollection::deleteBook(unsigned int id) throw(DataBaseException)
  *
  * @param b Book to be updated.
  *
- * This method updates every field of the book, except the id, to match \a b.
+ * This method updates every field of the book, except the id and the referenced
+ * authors, publishers and themes.
  */
 void BookCollection::updateBook(Book b) throw(DataBaseException)
 {
@@ -107,10 +103,6 @@ void BookCollection::updateBook(Book b) throw(DataBaseException)
 	updBook.arg(b.getUDC());
 	updBook.arg(b.getTranslator().getId());
 	updBook.arg(b.getId());
-
-	updateThemesReference(b);
-	updateAuthorsReference(b);
-	updatePublishersReference(b);
 
 	db->exec(updBook);
 }
@@ -210,69 +202,6 @@ PreparedStatement BookCollection::compositeSearchBooks(Book::book_field field, s
 		query.arg(name);
 	}
 	return query;
-}
-
-/**
- * @brief Creates theme references to match that of \a b.
- *
- * @param b Book whose themes need to be referenced.
- */
-void BookCollection::insertThemesReference(Book b) throw(DataBaseException)
-{
-	insertReferenceBook(b, "theme", db);
-}
-
-/**
- * @brief Creates author references to match that of \a b.
- *
- * @param b Books whose authors need to be referenced.
- */
-void BookCollection::insertAuthorsReference(Book b) throw(DataBaseException)
-{
-	insertReferenceBook(b, "author", db);
-}
-
-/**
- * @brief Creates publisher references to match that of \a b.
- *
- * @param b Books whose publishers need to be referenced.
- */
-void BookCollection::insertPublishersReference(Book b) throw(DataBaseException)
-{
-	insertReferenceBook(b, "publisher", db);
-}
-
-/**
- * @brief Updates the themes references to match that of \a b.
- *
- * @param b Book whose theme references need to be updated.
- */
-void BookCollection::updateThemesReference(Book b) throw(DataBaseException)
-{
-	deleteReference("book", b.getId(), "theme", db);
-	insertThemesReference(b);
-}
-
-/**
- * @brief Updates the author references to match that of \a b.
- *
- * @param b Book whose authors references need to be updated.
- */
-void BookCollection::updateAuthorsReference(Book b) throw(DataBaseException)
-{
-	deleteReference("book", b.getId(), "author", db);
-	insertAuthorsReference(b);
-}
-
-/**
- * @brief Updates the publisher references to match that of \a b.
- *
- * @param b Book whose publishers references need to be updated.
- */
-void BookCollection::updatePublishersReference(Book b) throw(DataBaseException)
-{
-	deleteReference("book", b.getId(), "publisher", db);
-	insertPublishersReference(b);
 }
 
 QList<Book> BookCollection::parseBookResultSet(ResultSet &rs) throw(DataBaseException)

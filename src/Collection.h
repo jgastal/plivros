@@ -76,8 +76,13 @@ class Collection
 		QString dbName;
 		bool readOnly;
 
+		void updateThemeReference(Book b, string type);
+		void updateThemeReference(Author a, string type);
+		void updateThemeReference(Publisher p, string type);
 		template <class t>
-		void updateThemeReference(t data, string type);
+		void updateAuthorReference(t data, string type);
+		template <class t>
+		void updatePublisherReference(t data, string type);
 };
 
 #endif /* COLLECTION_H_ */

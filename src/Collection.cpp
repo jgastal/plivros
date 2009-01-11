@@ -65,15 +65,17 @@ Collection::~Collection() throw()
  * @warning If the collection was opened as read only does nothing and returns false.
  * @warning Make sure you DON'T SET the books id before calling this method.
  *
- * The function creates a SQL insert statement based on the given book, executes
- * the statement then sets the id given by the database in the book and returns
- * success.
+ * This methods adds \a b to the database sets its id and insert the references
+ * made to authors, publishers and themes.
  */
 bool Collection::insertBook(Book &b) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
 	bc->insertBook(b);
+	insertReferenceBook(b, "theme", db);
+	insertReferenceBook(b, "author", db);
+	insertReferenceBook(b, "publisher", db);
 
 	return true;
 }
@@ -85,13 +87,16 @@ bool Collection::insertBook(Book &b) throw(DataBaseException)
  *
  * @return Whether operation was successful.
  *
- * Note that this method actually does very little, it just calls genericDelete()
- * with the appropriate arguments.
+ * Deletes every author, publisher and theme reference to the book and the book
+ * itself.
  */
 bool Collection::deleteBook(unsigned int id) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
+	deleteReference("book", id, "theme", db);
+	deleteReference("book", id, "author", db);
+	deleteReference("book", id, "publisher", db);
 	return bc->deleteBook(id);
 }
 
@@ -102,14 +107,17 @@ bool Collection::deleteBook(unsigned int id) throw(DataBaseException)
  *
  * @return Whether the operation was successful.
  *
- * This method constructs an SQL statement that updates every field of the book
- * except the id to match the object.
+ * Update every field of the book except the id but including the referenced
+ * author, publishers and authors.
  */
 bool Collection::updateBook(Book b) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
 	bc->updateBook(b);
+	updateAuthorReference(b, "book");
+	updatePublisherReference(b, "book");
+	updateThemeReference(b, "book");
 
 	return true;
 }
@@ -168,7 +176,8 @@ bool Collection::deleteAuthor(unsigned int id) throw(DataBaseException)
  *
  * @return Whether the operation was successful.
  *
- * This method updates all fields of the author including the themes references.
+ * This method updates all fields of the author except the id bu including the
+ * themes references.
  */
 bool Collection::updateAuthor(Author a) throw(DataBaseException)
 {
@@ -300,13 +309,48 @@ bool Collection::updateTheme(Theme t) throw(DataBaseException)
 }
 
 /**
-* @brief Updates the themes references to match that of \a data.
+* @brief Updates the themes references to match that of \a b.
 *
-* @param a Element whose theme references need to be updated.
+* @param b Element whose theme references need to be updated.
 */
-template <class t>
-void Collection::updateThemeReference(t data, string type)
+void Collection::updateThemeReference(Book b, string type)
 {
-	deleteReference(type, data.getId(), "theme", db);
-	insertReferenceAuthor(data, db);
+	deleteReference(type, b.getId(), "theme", db);
+	insertReferenceBook(b, "theme", db);
+}
+
+/**
+ * @brief Updates the themes references to match that of \a a.
+ *
+ * @param a Element whose theme references need to be updated.
+ */
+void Collection::updateThemeReference(Author a, string type)
+{
+	deleteReference(type, a.getId(), "theme", db);
+	insertReferenceAuthor(a, db);
+}
+
+/**
+ * @brief Updates the themes references to match that of \a p.
+ *
+ * @param p Element whose theme references need to be updated.
+ */
+void Collection::updateThemeReference(Publisher p, string type)
+{
+	deleteReference(type, p.getId(), "theme", db);
+	insertReferencePublisher(p, db);
+}
+
+template <class t>
+void Collection::updateAuthorReference(t data, string type)
+{
+	deleteReference(type, data.getId(), "author", db);
+	insertReferenceBook(data, "author", db);
+}
+
+template <class t>
+void Collection::updatePublisherReference(t data, string type)
+{
+	deleteReference(type, data.getId(), "publisher", db);
+	insertReferenceBook(data, "publisher", db);
 }

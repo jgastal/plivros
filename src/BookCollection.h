@@ -31,12 +31,6 @@ class BookCollection
 		DataBase *db;
 		QList<Book> bookList; //Last search result
 
-		void updateThemesReference(Book b) throw(DataBaseException);
-		void updateAuthorsReference(Book b) throw(DataBaseException);
-		void updatePublishersReference(Book b) throw(DataBaseException);
-		void insertThemesReference(Book b) throw(DataBaseException);
-		void insertAuthorsReference(Book b) throw(DataBaseException);
-		void insertPublishersReference(Book b) throw(DataBaseException);
 		PreparedStatement compositeSearchBooks(Book::book_field field, string name) throw(DataBaseException);
 		QList<Book> parseBookResultSet(ResultSet &rs) throw(DataBaseException);
 

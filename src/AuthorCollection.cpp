@@ -28,7 +28,6 @@ AuthorCollection::AuthorCollection(DataBase *db) throw()
  *
  * @exception DataBaseException Forwarding possible database error.
  *
- * @warning If the collection was opened as read only does nothing and returns false.
  * @warning Make sure you DON'T SET the authors id before calling this method.
  *
  * This method adds the author to the collection and sets its id. Nothing is done
@@ -73,7 +72,7 @@ bool AuthorCollection::deleteAuthor(unsigned int id) throw(DataBaseException)
  *
  * @return Whether the operation was successful.
  *
- * All fields except the themes referenced are updated.
+ * All fields except the themes referenced and the id are updated.
  */
 void AuthorCollection::updateAuthor(Author a) throw(DataBaseException)
 {
