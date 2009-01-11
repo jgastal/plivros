@@ -73,9 +73,9 @@ bool Collection::insertBook(Book &b) throw(DataBaseException)
 	if(readOnly)
 		return false;
 	bc->insertBook(b);
-	insertReferenceBook(b, "theme", db);
-	insertReferenceBook(b, "author", db);
-	insertReferenceBook(b, "publisher", db);
+	insertReference(b, "theme", db);
+	insertReference(b, "author", db);
+	insertReference(b, "publisher", db);
 
 	return true;
 }
@@ -147,7 +147,7 @@ bool Collection::insertAuthor(Author &a) throw(DataBaseException)
 	if(readOnly)
 		return false;
 	ac->insertAuthor(a); //inserts author
-	insertReferenceAuthor(a, db); //insert author/theme references
+	insertReference(a, db); //insert author/theme references
 
 	return true;
 }
@@ -204,7 +204,7 @@ bool Collection::insertPublisher(Publisher &p) throw(DataBaseException)
 	if(readOnly)
 		return false;
 	pc->insertPublisher(p);
-	insertReferencePublisher(p, db);
+	insertReference(p, db);
 
 	return true;
 }
@@ -317,7 +317,7 @@ bool Collection::updateTheme(Theme t) throw(DataBaseException)
 void Collection::updateThemeReference(Book b)
 {
 	deleteReference("book", b.getId(), "theme", db);
-	insertReferenceBook(b, "theme", db);
+	insertReference(b, "theme", db);
 }
 
 /**
@@ -328,7 +328,7 @@ void Collection::updateThemeReference(Book b)
 void Collection::updateThemeReference(Author a)
 {
 	deleteReference("author", a.getId(), "theme", db);
-	insertReferenceAuthor(a, db);
+	insertReference(a, db);
 }
 
 /**
@@ -339,19 +339,19 @@ void Collection::updateThemeReference(Author a)
 void Collection::updateThemeReference(Publisher p)
 {
 	deleteReference("publisher", p.getId(), "theme", db);
-	insertReferencePublisher(p, db);
+	insertReference(p, db);
 }
 
 template <class t>
 void Collection::updateAuthorReference(t data, string type)
 {
 	deleteReference(type, data.getId(), "author", db);
-	insertReferenceBook(data, "author", db);
+	insertReference(data, "author", db);
 }
 
 template <class t>
 void Collection::updatePublisherReference(t data, string type)
 {
 	deleteReference(type, data.getId(), "publisher", db);
-	insertReferenceBook(data, "publisher", db);
+	insertReference(data, "publisher", db);
 }
