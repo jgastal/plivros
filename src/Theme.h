@@ -12,12 +12,6 @@
 
 using namespace std;
 
-enum theme_field
-{
-	name,
-	description
-};
-
 class Theme
 {
 	public:
@@ -29,6 +23,12 @@ class Theme
 		void setName(string name);
 		string getDescription() const;
 		void setDescription(string description);
+
+		enum theme_field
+		{
+			t_name,
+			t_description
+		};
 
 	private:
 		unsigned int id;

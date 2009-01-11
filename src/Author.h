@@ -16,17 +16,6 @@
 
 using namespace std;
 
-enum author_field
-{
-	a_firstname,
-	a_lastname,
-	a_description,
-	a_critique,
-	a_rating,
-	a_picture,
-	a_themes
-};
-
 class Author
 {
 	public:
@@ -50,6 +39,17 @@ class Author
 		void setPicture(string);
 		QList<Theme> getThemes() const;
 		void setThemes(QList<Theme> themes);
+
+		enum author_field
+		{
+			a_firstname,
+			a_lastname,
+			a_description,
+			a_critique,
+			a_rating,
+			a_picture,
+			a_themes
+		};
 
 	private:
 		unsigned int id;

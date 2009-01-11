@@ -23,13 +23,9 @@ class AuthorCollection
 		void insertAuthor(Author &a) throw(DataBaseException);
 		bool deleteAuthor(unsigned int id) throw(DataBaseException);
 		void updateAuthor(Author a) throw(DataBaseException);
-		QList<Author> searchAuthors(author_field field, string name);
 
 	private:
 		DataBase *db;
-
-		void updateThemesReference(Author a) throw(DataBaseException);
-		void insertThemesReference(Author a) throw(DataBaseException);
 };
 
 #endif /* AUTHORSCOLLECTION_H_ */

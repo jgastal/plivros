@@ -35,6 +35,8 @@ int main(int argc, char **argv)
 
 		c.insertBook(b);
 
+		QList<Book> bookList = c.searchBooks(Book::b_title, "title");
+
 		std::cout << "Good times." << std::endl;
 	}
 	catch(bad_alloc b)

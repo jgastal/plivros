@@ -49,22 +49,22 @@ class Collection
 		bool insertBook(Book &b) throw(DataBaseException);
 		bool deleteBook(unsigned int id) throw(DataBaseException);
 		bool updateBook(Book b) throw(DataBaseException);
-		QList<Book> searchBooks(book_field field, string name) throw(DataBaseException);
+		QList<Book> searchBooks(Book::book_field field, string name) throw(DataBaseException);
 
 		bool insertAuthor(Author &a) throw(DataBaseException);
 		bool deleteAuthor(unsigned int id) throw(DataBaseException);
 		bool updateAuthor(Author a) throw(DataBaseException);
-		QList<Author> searchAuthors(author_field field, string name);
+		QList<Author> searchAuthors(Author::author_field field, string name);
 
 		bool insertPublisher(Publisher &p) throw(DataBaseException);
 		bool deletePublisher(unsigned int id) throw(DataBaseException);
 		bool updatePublisher(Publisher p) throw(DataBaseException);
-		QList<Publisher> searchPublishers(publisher_field field, string name);
+		QList<Publisher> searchPublishers(Publisher::publisher_field field, string name);
 
 		bool insertTheme(Theme &t) throw(DataBaseException);
 		bool deleteTheme(unsigned int id) throw(DataBaseException);
 		bool updateTheme(Theme t) throw(DataBaseException);
-		QList<Theme> searchThemes(theme_field field, string name);
+		QList<Theme> searchThemes(Theme::theme_field field, string name);
 
 	private:
 		DataBase *db;
@@ -75,6 +75,9 @@ class Collection
 		QString user;
 		QString dbName;
 		bool readOnly;
+
+		template <class t>
+		void updateThemeReference(t data, string type);
 };
 
 #endif /* COLLECTION_H_ */

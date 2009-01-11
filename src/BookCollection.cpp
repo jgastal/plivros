@@ -132,34 +132,34 @@ void BookCollection::updateBook(Book b) throw(DataBaseException)
  * publisher and theme it will be considered a match if the name matches the
  * searched value.
  */
-QList<Book> BookCollection::searchBooks(book_field field, string name) throw(DataBaseException)
+QList<Book> BookCollection::searchBooks(Book::book_field field, string name) throw(DataBaseException)
 {
 	PreparedStatement query("", db->getType());
-	if(field == b_authors || field == b_publishers || field == b_themes || field == b_translator)
+	if(field == Book::b_authors || field == Book::b_publishers || field == Book::b_themes || field == Book::b_translator)
 		query = compositeSearchBooks(field, name);
 	else
 	{
 		query = PreparedStatement("SELECT * FROM books WHERE %1 LIKE %2", db->getType());
 		//what field to search for
-		if(field == b_isbn)
+		if(field == Book::b_isbn)
 			query.arg("isbn");
-		else if(field == b_title)
+		else if(field == Book::b_title)
 			query.arg("title");
-		else if(field == b_edition)
+		else if(field == Book::b_edition)
 			query.arg("edition");
-		else if(field == b_critique)
+		else if(field == Book::b_critique)
 			query.arg("critique");
-		else if(field == b_description)
+		else if(field == Book::b_description)
 			query.arg("description");
-		else if(field == b_rating)
+		else if(field == Book::b_rating)
 			query.arg("rating");
-		else if(field == b_cover)
+		else if(field == Book::b_cover)
 			query.arg("cover");
-		else if(field == b_ebook)
+		else if(field == Book::b_ebook)
 			query.arg("ebook");
-		else if(field == b_pubdate)
+		else if(field == Book::b_pubdate)
 			query.arg("pubdate");
-		else if(field == b_UDC)
+		else if(field == Book::b_UDC)
 			query.arg("UDC");
 
 		name.insert(0, "'%").append("%'"); //SQLs LIKE requires a preceding '%' and a ending '%'
@@ -170,7 +170,7 @@ QList<Book> BookCollection::searchBooks(book_field field, string name) throw(Dat
 	return parseBookResultSet(bookRS);
 }
 
-PreparedStatement BookCollection::compositeSearchBooks(book_field field, string name) throw(DataBaseException)
+PreparedStatement BookCollection::compositeSearchBooks(Book::book_field field, string name) throw(DataBaseException)
 {
 	/*
 	 * You should be extremely carefull in changing the order in which the
@@ -178,7 +178,7 @@ PreparedStatement BookCollection::compositeSearchBooks(book_field field, string 
 	 * may cause characters to be escaped incorrectly.
 	 */
 	PreparedStatement query("SELECT * FROM books WHERE id IN (%1)", db->getType());
-	if(field == b_authors)
+	if(field == Book::b_authors)
 	{
 		string refQuery("SELECT bookID FROM booksauthors WHERE authorsid IN (%1)");
 		string authorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
@@ -187,7 +187,7 @@ PreparedStatement BookCollection::compositeSearchBooks(book_field field, string 
 		query.arg(name); //search in first name
 		query.arg(name); //search in last name
 	}
-	else if(field == b_publishers)
+	else if(field == Book::b_publishers)
 	{
 		string refQuery("SELECT bookID FROM bookspublishers WHERE publishersid IN (%1)");
 		string authorQuery("SELECT id FROM publishers WHERE name LIKE '%%1%'");
@@ -195,7 +195,7 @@ PreparedStatement BookCollection::compositeSearchBooks(book_field field, string 
 		query.arg(authorQuery); //select from publishers table
 		query.arg(name); //search in name
 	}
-	else if(field == b_themes)
+	else if(field == Book::b_themes)
 	{
 		string refQuery("SELECT bookID FROM booksthemes WHERE themesid IN (%1)");
 		string authorQuery("SELECT id FROM themes WHERE name LIKE '%%1%'");
@@ -203,7 +203,7 @@ PreparedStatement BookCollection::compositeSearchBooks(book_field field, string 
 		query.arg(authorQuery); //select from themes table
 		query.arg(name); //search in name
 	}
-	else if(field == b_translator)
+	else if(field == Book::b_translator)
 	{
 		string translatorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
 		query.arg(translatorQuery);
@@ -275,12 +275,49 @@ void BookCollection::updatePublishersReference(Book b) throw(DataBaseException)
 	insertPublishersReference(b);
 }
 
-QList<Book> BookCollection::parseBookResultSet(ResultSet rs)
+QList<Book> BookCollection::parseBookResultSet(ResultSet &rs) throw(DataBaseException)
 {
 	bookList.clear();
 	while(rs.nextRow())
 	{
-		//TODO implement
+		Book b;
+		b.setIsbn(rs.getString("isbn").c_str());
+		b.setTitle(rs.getString("title"));
+		b.setEdition(rs.getInt("edition"));
+		b.setCritique(rs.getString("critique"));
+		b.setDescription(rs.getString("description"));
+		b.setRating(rs.getInt("rating"));
+		b.setCover(rs.getString("cover"));
+		b.setEbook(rs.getString("ebook"));
+		b.setPubDate(QDate::fromString(rs.getString("date").c_str(), Qt::ISODate));
+		b.setUDC(rs.getString("udc"));
+		b.setId(rs.getInt("id"));
+		b.setAuthors(getBooksAuthors(rs.getInt("id")));
+		b.setTranslator(getBooksTranslator(rs.getInt("id")));
+		b.setPublishers(getBooksPublishers(rs.getInt("id")));
+		b.setThemes(getBooksThemes(rs.getInt("id")));
+
+		bookList.append(b);
 	}
 	return bookList;
+}
+
+QList<Author> BookCollection::getBooksAuthors(int id) throw(DataBaseException)
+{
+	return QList<Author>();
+}
+
+QList<Publisher> BookCollection::getBooksPublishers(int id) throw(DataBaseException)
+{
+	return QList<Publisher>();
+}
+
+QList<Theme> BookCollection::getBooksThemes(int id) throw(DataBaseException)
+{
+	return QList<Theme>();
+}
+
+Author BookCollection::getBooksTranslator(int id) throw(DataBaseException)
+{
+	return Author();
 }

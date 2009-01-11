@@ -143,8 +143,8 @@ void deleteReference(string type, unsigned int id, string refType, DataBase *db)
 	del.arg(refType);
 
 	/*
-	 * Delete all that was referenced by element with typeID = id.
-	 * For example "DELETE FROM bookauthor WHERE bookID = '123'"
+	 * Delete all that was referenced by element with typesID = id.
+	 * For example "DELETE FROM bookauthor WHERE booksID = '123'"
 	 */
 	del.arg(type);
 	del.arg(id);
@@ -172,27 +172,6 @@ unsigned int genericDelete(unsigned int id, string type, DataBase *db) throw(Dat
 	PreparedStatement del("DELETE FROM %1s WHERE id = '%2'", db->getType());
 	del.arg(type);
 	del.arg(id);
-
-	if(type == "book")
-	{
-		PreparedStatement delAuthors("DELETE FROM booksauthors WHERE booksid = '%1'", db->getType());
-		PreparedStatement delPublishers("DELETE FROM bookspublishers WHERE booksid = '%1'", db->getType());
-		delAuthors.arg(id);
-		delPublishers.arg(id);
-
-		db->exec(delAuthors);
-		db->exec(delPublishers);
-	}
-	if(type != "theme")
-	{
-		PreparedStatement delThemes("DELETE FROM %1sthemes WHERE %2sid = '%3'", db->getType());
-
-		delThemes.arg(type);
-		delThemes.arg(type);
-		delThemes.arg(id);
-
-		db->exec(delThemes);
-	}
 
 	return db->exec(del);
 }

@@ -16,15 +16,6 @@
 
 using namespace std;
 
-enum publisher_field
-{
-	p_name,
-	p_description,
-	p_critique,
-	p_logo,
-	p_themes
-};
-
 class Publisher
 {
 	public:
@@ -43,6 +34,15 @@ class Publisher
 		void setLogo(string logo);
 		QList<Theme> getThemes();
 		void setThemes(QList<Theme> themes);
+
+		enum publisher_field
+		{
+			p_name,
+			p_description,
+			p_critique,
+			p_logo,
+			p_themes
+		};
 
 	private:
 		unsigned int id;

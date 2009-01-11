@@ -74,7 +74,7 @@ const char* Book::getIsbn() const
 	return isbn;
 }
 
-void Book::setIsbn(char isbn[13])
+void Book::setIsbn(const char isbn[13])
 {
 	memcpy(this->isbn, isbn, 13 * sizeof(char));
 	this->isbn[13] = '\0';

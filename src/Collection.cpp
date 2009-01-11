@@ -17,6 +17,7 @@
 #include "AuthorCollection.h"
 #include "PublisherCollection.h"
 #include "ThemeCollection.h"
+#include "GenericSQL.h"
 
 using namespace std;
 
@@ -113,7 +114,7 @@ bool Collection::updateBook(Book b) throw(DataBaseException)
 	return true;
 }
 
-QList<Book> Collection::searchBooks(book_field field, string name) throw(DataBaseException)
+QList<Book> Collection::searchBooks(Book::book_field field, string name) throw(DataBaseException)
 {
 	return bc->searchBooks(field, name);
 }
@@ -130,15 +131,15 @@ QList<Book> Collection::searchBooks(book_field field, string name) throw(DataBas
  * @warning If the collection was opened as read only does nothing and returns false.
  * @warning Make sure you DON'T SET the authors id before calling this method.
  *
- * The function creates a SQL insert statement based on the given author, executes
- * the statement then sets the id given by the database in the author and returns
- * success.
+ * This method adds both the author and the theme references it makes to the
+ * database. The id of the author is set.
  */
 bool Collection::insertAuthor(Author &a) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	ac->insertAuthor(a);
+	ac->insertAuthor(a); //inserts author
+	insertReferenceAuthor(a, db); //insert author/theme references
 
 	return true;
 }
@@ -150,31 +151,31 @@ bool Collection::insertAuthor(Author &a) throw(DataBaseException)
  *
  * @return Whether operation was successful.
  *
- * Note that this method actually does very little, it just calls genericDelete()
- * with the appropriate arguments.
+ * Deletes both the referenced themes and the author.
  */
 bool Collection::deleteAuthor(unsigned int id) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
+	deleteReference("author", id, "theme", db);
 	return ac->deleteAuthor(id);
 }
 
 /**
  * @brief Updates author.
  *
- * @param a Book to be updated.
+ * @param a Author to be updated.
  *
  * @return Whether the operation was successful.
  *
- * This method constructs an SQL statement that updates every field of the author
- * except the id to match the object.
+ * This method updates all fields of the author including the themes references.
  */
 bool Collection::updateAuthor(Author a) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
 	ac->updateAuthor(a);
+	updateThemeReference(a, "author");
 
 	return true;
 }
@@ -296,4 +297,16 @@ bool Collection::updateTheme(Theme t) throw(DataBaseException)
 	tc->updateTheme(t);
 
 	return true;
+}
+
+/**
+* @brief Updates the themes references to match that of \a data.
+*
+* @param a Element whose theme references need to be updated.
+*/
+template <class t>
+void Collection::updateThemeReference(t data, string type)
+{
+	deleteReference(type, data.getId(), "theme", db);
+	insertReferenceAuthor(data, db);
 }

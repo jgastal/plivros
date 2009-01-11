@@ -31,9 +31,8 @@ AuthorCollection::AuthorCollection(DataBase *db) throw()
  * @warning If the collection was opened as read only does nothing and returns false.
  * @warning Make sure you DON'T SET the authors id before calling this method.
  *
- * The function creates a SQL insert statement based on the given author, executes
- * the statement then sets the id given by the database in the author and returns
- * success.
+ * This method adds the author to the collection and sets its id. Nothing is done
+ * with the methods referenced by the author.
  */
 void AuthorCollection::insertAuthor(Author &a) throw(DataBaseException)
 {
@@ -48,8 +47,6 @@ void AuthorCollection::insertAuthor(Author &a) throw(DataBaseException)
 	insAuthor.arg(a.getPicture());
 
 	a.setId(db->insert(insAuthor));
-
-	insertThemesReference(a);
 }
 
 /**
@@ -59,8 +56,8 @@ void AuthorCollection::insertAuthor(Author &a) throw(DataBaseException)
  *
  * @return Whether operation was successful.
  *
- * Note that this method actually does very little, it just calls genericDelete()
- * with the appropriate arguments.
+ * This method deletes only the author, no checking of references to the author
+ * is made.
  */
 bool AuthorCollection::deleteAuthor(unsigned int id) throw(DataBaseException)
 {
@@ -76,8 +73,7 @@ bool AuthorCollection::deleteAuthor(unsigned int id) throw(DataBaseException)
  *
  * @return Whether the operation was successful.
  *
- * This method constructs an SQL statement that updates every field of the author
- * except the id to match the object.
+ * All fields except the themes referenced are updated.
  */
 void AuthorCollection::updateAuthor(Author a) throw(DataBaseException)
 {
@@ -90,28 +86,5 @@ void AuthorCollection::updateAuthor(Author a) throw(DataBaseException)
 	updAuthor.arg(a.getRating());
 	updAuthor.arg(a.getPicture());
 
-	updateThemesReference(a);
-
 	db->exec(updAuthor);
-}
-
-/**
- * @brief Updates the themes references to match that of \a a.
- *
- * @param a Author whose theme references need to be updated.
- */
-void AuthorCollection::updateThemesReference(Author a) throw(DataBaseException)
-{
-	deleteReference("author", a.getId(), "theme", db);
-	insertThemesReference(a);
-}
-
-/**
- * @brief Creates theme references to match that of \a a.
- *
- * @param a Author whose themes need to be referenced.
- */
-void AuthorCollection::insertThemesReference(Author a) throw(DataBaseException)
-{
-	insertReferenceAuthor(a, db);
 }

@@ -25,7 +25,7 @@ class BookCollection
 		void insertBook(Book &b) throw(DataBaseException);
 		bool deleteBook(unsigned int id) throw(DataBaseException);
 		void updateBook(Book b) throw(DataBaseException);
-		QList<Book> searchBooks(book_field field, string name) throw(DataBaseException);
+		QList<Book> searchBooks(Book::book_field field, string name) throw(DataBaseException);
 
 	private:
 		DataBase *db;
@@ -37,8 +37,13 @@ class BookCollection
 		void insertThemesReference(Book b) throw(DataBaseException);
 		void insertAuthorsReference(Book b) throw(DataBaseException);
 		void insertPublishersReference(Book b) throw(DataBaseException);
-		PreparedStatement compositeSearchBooks(book_field field, string name) throw(DataBaseException);
-		QList<Book> parseBookResultSet(ResultSet rs);
+		PreparedStatement compositeSearchBooks(Book::book_field field, string name) throw(DataBaseException);
+		QList<Book> parseBookResultSet(ResultSet &rs) throw(DataBaseException);
+
+		QList<Author> getBooksAuthors(int id) throw(DataBaseException);
+		Author getBooksTranslator(int id) throw(DataBaseException);
+		QList<Publisher> getBooksPublishers(int id) throw(DataBaseException);
+		QList<Theme> getBooksThemes(int id) throw(DataBaseException);
 };
 
 #endif /* BOOKCOLLECTION_H_ */

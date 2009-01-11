@@ -19,24 +19,6 @@
 
 using namespace std;
 
-enum book_field
-{
-	b_isbn,
-	b_title,
-	b_edition,
-	b_critique,
-	b_description,
-	b_rating,
-	b_cover,
-	b_ebook,
-	b_pubdate,
-	b_UDC,
-	b_authors,
-	b_translator,
-	b_publishers,
-	b_themes
-};
-
 class Book
 {
 	public:
@@ -48,7 +30,7 @@ class Book
 		unsigned int getId() const;
 		void setId(unsigned int id);
 		const char* getIsbn() const;
-		void setIsbn(char ISBN[13]);
+		void setIsbn(const char ISBN[13]);
 		string getTitle() const;
 		void setTitle(string title);
 		unsigned short int getEdition() const;
@@ -75,6 +57,24 @@ class Book
 		void setPublishers(QList<Publisher> publishers);
 		QList<Theme> getThemes() const;
 		void setThemes(QList<Theme> themes);
+
+		enum book_field
+		{
+			b_isbn,
+			b_title,
+			b_edition,
+			b_critique,
+			b_description,
+			b_rating,
+			b_cover,
+			b_ebook,
+			b_pubdate,
+			b_UDC,
+			b_authors,
+			b_translator,
+			b_publishers,
+			b_themes
+		};
 
 	private:
 		unsigned int id;
