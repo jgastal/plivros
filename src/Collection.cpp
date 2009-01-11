@@ -117,7 +117,7 @@ bool Collection::updateBook(Book b) throw(DataBaseException)
 	bc->updateBook(b);
 	updateAuthorReference(b, "book");
 	updatePublisherReference(b, "book");
-	updateThemeReference(b, "book");
+	updateThemeReference(b);
 
 	return true;
 }
@@ -184,7 +184,7 @@ bool Collection::updateAuthor(Author a) throw(DataBaseException)
 	if(readOnly)
 		return false;
 	ac->updateAuthor(a);
-	updateThemeReference(a, "author");
+	updateThemeReference(a);
 
 	return true;
 }
@@ -196,16 +196,15 @@ bool Collection::updateAuthor(Author a) throw(DataBaseException)
  *
  * @return Whether the operation was successful.
  *
- * This method creates two SQL commands, one to add the actual publisher and the
- * other one to add the themes associated with it, since internally they are kept
- * in separate tables. After the publisher is inserted in the database its ID is
- * set.
+ * This method adds the publisher and all associated references to the DataBase
+ * and then sets the publishers id.
  */
 bool Collection::insertPublisher(Publisher &p) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
 	pc->insertPublisher(p);
+	insertReferencePublisher(p, db);
 
 	return true;
 }
@@ -217,13 +216,14 @@ bool Collection::insertPublisher(Publisher &p) throw(DataBaseException)
  *
  * @return Whether operation was successful.
  *
- * This method actually does very little, it just calls generic delete which does
- * all the heavy lifting.
+ * Deletes any theme references to this publisher and the publisher itself.
  */
 bool Collection::deletePublisher(unsigned int id) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
+
+	deleteReference("publisher", id, "theme", db);
 	return pc->deletePublisher(id);
 }
 
@@ -234,14 +234,15 @@ bool Collection::deletePublisher(unsigned int id) throw(DataBaseException)
  *
  * @return Whether the operation was successful.
  *
- * This method constructs an SQL statement that updates every field of the publisher
- * except the id to match the object.
+ * This method update every field of the publisher except the id but including
+ * referenced mehtods.
  */
 bool Collection::updatePublisher(Publisher p) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
 	pc->updatePublisher(p);
+	updateThemeReference(p);
 
 	return true;
 }
@@ -313,9 +314,9 @@ bool Collection::updateTheme(Theme t) throw(DataBaseException)
 *
 * @param b Element whose theme references need to be updated.
 */
-void Collection::updateThemeReference(Book b, string type)
+void Collection::updateThemeReference(Book b)
 {
-	deleteReference(type, b.getId(), "theme", db);
+	deleteReference("book", b.getId(), "theme", db);
 	insertReferenceBook(b, "theme", db);
 }
 
@@ -324,9 +325,9 @@ void Collection::updateThemeReference(Book b, string type)
  *
  * @param a Element whose theme references need to be updated.
  */
-void Collection::updateThemeReference(Author a, string type)
+void Collection::updateThemeReference(Author a)
 {
-	deleteReference(type, a.getId(), "theme", db);
+	deleteReference("author", a.getId(), "theme", db);
 	insertReferenceAuthor(a, db);
 }
 
@@ -335,9 +336,9 @@ void Collection::updateThemeReference(Author a, string type)
  *
  * @param p Element whose theme references need to be updated.
  */
-void Collection::updateThemeReference(Publisher p, string type)
+void Collection::updateThemeReference(Publisher p)
 {
-	deleteReference(type, p.getId(), "theme", db);
+	deleteReference("publisher", p.getId(), "theme", db);
 	insertReferencePublisher(p, db);
 }
 

@@ -76,9 +76,9 @@ class Collection
 		QString dbName;
 		bool readOnly;
 
-		void updateThemeReference(Book b, string type);
-		void updateThemeReference(Author a, string type);
-		void updateThemeReference(Publisher p, string type);
+		void updateThemeReference(Book b);
+		void updateThemeReference(Author a);
+		void updateThemeReference(Publisher p);
 		template <class t>
 		void updateAuthorReference(t data, string type);
 		template <class t>

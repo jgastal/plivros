@@ -27,9 +27,6 @@ class PublisherCollection
 
 	private:
 		DataBase *db;
-
-		void updateThemesReference(Publisher p) throw(DataBaseException);
-		void insertThemesReference(Publisher p) throw(DataBaseException);
 };
 
 #endif /* PUBLISHERCOLLECTION_H_ */

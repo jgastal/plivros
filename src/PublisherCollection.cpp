@@ -27,10 +27,8 @@ PublisherCollection::PublisherCollection(DataBase *db) throw()
  *
  * @return Whether the operation was successful.
  *
- * This method creates two SQL commands, one to add the actual publisher and the
- * other one to add the themes associated with it, since internally they are kept
- * in separate tables. After the publisher is inserted in the database its ID is
- * set.
+ * This method adds the publisher to the database it however does not add the
+ * references to the themes.
  */
 void PublisherCollection::insertPublisher(Publisher &p) throw(DataBaseException)
 {
@@ -42,8 +40,6 @@ void PublisherCollection::insertPublisher(Publisher &p) throw(DataBaseException)
 	insPub.arg(p.getLogo());
 
 	p.setId(db->insert(insPub));
-
-	insertThemesReference(p);
 }
 
 /**
@@ -53,8 +49,8 @@ void PublisherCollection::insertPublisher(Publisher &p) throw(DataBaseException)
  *
  * @return Whether operation was successful.
  *
- * This method actually does very little, it just calls generic delete which does
- * all the heavy lifting.
+ * This method deletes the publisher from the DataBase with no consideration for
+ * posible references.
  */
 bool PublisherCollection::deletePublisher(unsigned int id) throw(DataBaseException)
 {
@@ -70,8 +66,8 @@ bool PublisherCollection::deletePublisher(unsigned int id) throw(DataBaseExcepti
  *
  * @return Whether the operation was successful.
  *
- * This method constructs an SQL statement that updates every field of the publisher
- * except the id to match the object.
+ * This method updates every field of the publisher except referenced themes and
+ * the id.
  */
 void PublisherCollection::updatePublisher(Publisher p) throw(DataBaseException)
 {
@@ -82,28 +78,5 @@ void PublisherCollection::updatePublisher(Publisher p) throw(DataBaseException)
 	updPub.arg(p.getCritique());
 	updPub.arg(p.getLogo());
 
-	updateThemesReference(p);
-
 	db->exec(updPub);
-}
-
-/**
- * @brief Updates the themes references to match that of \a p.
- *
- * @param p Publisher whose theme references need to be updated.
- */
-void PublisherCollection::updateThemesReference(Publisher p) throw(DataBaseException)
-{
-	deleteReference("publisher", p.getId(), "theme", db);
-	insertThemesReference(p);
-}
-
-/**
- * @brief Creates theme references to match that of \a p.
- *
- * @param p Publisher whose themes need to be referenced.
- */
-void PublisherCollection::insertThemesReference(Publisher p) throw(DataBaseException)
-{
-	insertReferencePublisher(p, db);
 }
