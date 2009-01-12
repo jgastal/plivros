@@ -83,6 +83,12 @@ class Collection
 		void updateAuthorReference(t data, string type);
 		template <class t>
 		void updatePublisherReference(t data, string type);
+		PreparedStatement compositeSearchBooks(Book::book_field field, string name) throw(DataBaseException);
+		QList<Book> parseBookResultSet(ResultSet &rs) throw(DataBaseException);
+		QList<Author> getBooksAuthors(int id) throw(DataBaseException);
+		QList<Publisher> getBooksPublishers(int id) throw(DataBaseException);
+		QList<Theme> getBooksThemes(int id) throw(DataBaseException);
+		Author getBooksTranslator(int id) throw(DataBaseException);
 };
 
 #endif /* COLLECTION_H_ */
