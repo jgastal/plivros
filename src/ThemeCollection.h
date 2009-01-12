@@ -23,7 +23,6 @@ class ThemeCollection
 		void insertTheme(Theme &t) throw(DataBaseException);
 		bool deleteTheme(unsigned int id) throw(DataBaseException);
 		void updateTheme(Theme t) throw(DataBaseException);
-		QList<Theme> searchThemes(Theme::theme_field field, string name);
 
 	private:
 		DataBase *db;

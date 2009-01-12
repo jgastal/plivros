@@ -23,7 +23,6 @@ class PublisherCollection
 		void insertPublisher(Publisher &p) throw(DataBaseException);
 		bool deletePublisher(unsigned int id) throw(DataBaseException);
 		void updatePublisher(Publisher p) throw(DataBaseException);
-		QList<Publisher> searchPublishers(Publisher::publisher_field field, string name);
 
 	private:
 		DataBase *db;
