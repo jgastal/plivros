@@ -18,9 +18,9 @@
 template <class Type>
 void updateReference(string type, Type data, string refType, DataBase db) throw(DataBaseException);
 
-void insertReference(Book data, string refType, DataBase *db) throw(DataBaseException);
-void insertReference(Author data, DataBase *db) throw(DataBaseException);
-void insertReference(Publisher data, DataBase *db) throw(DataBaseException);
+void insertReference(Book &b, string refType, DataBase *db) throw(DataBaseException);
+void insertReference(Author &a, DataBase *db) throw(DataBaseException);
+void insertReference(Publisher &p, DataBase *db) throw(DataBaseException);
 
 void deleteReference(string type, unsigned int id, string refType, DataBase *db) throw(DataBaseException);
 unsigned int genericDelete(unsigned int id, string type, DataBase *db) throw(DataBaseException);

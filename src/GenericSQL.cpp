@@ -29,7 +29,7 @@ void insertReferenceLoop(QList<Type> ref, PreparedStatement tpl, DataBase *db) t
  * are: "theme", "author", "publisher".
  * @param db DataBase in which operation will be executed.
  */
-void insertReference(Book b, string refType, DataBase *db) throw(DataBaseException)
+void insertReference(Book &b, string refType, DataBase *db) throw(DataBaseException)
 {
 	PreparedStatement insTpl = buildInsTemplate("book", b, refType, db);
 	if(refType == "theme")
@@ -46,7 +46,7 @@ void insertReference(Book b, string refType, DataBase *db) throw(DataBaseExcepti
  * @param a Author whose theme references need to be included.
  * @param db DataBase in which to include references.
  */
-void insertReference(Author a, DataBase *db) throw(DataBaseException)
+void insertReference(Author &a, DataBase *db) throw(DataBaseException)
 {
 	PreparedStatement insTpl = buildInsTemplate("author", a, "theme", db);
 	insertReferenceLoop(a.getThemes(), insTpl, db);
@@ -58,7 +58,7 @@ void insertReference(Author a, DataBase *db) throw(DataBaseException)
  * @param p Publisher whose theme references need to be included.
  * @param db DataBase in which to include references.
  */
-void insertReference(Publisher p, DataBase *db) throw(DataBaseException)
+void insertReference(Publisher &p, DataBase *db) throw(DataBaseException)
 {
 	PreparedStatement insTpl = buildInsTemplate("publisher", p, "theme", db);
 	insertReferenceLoop(p.getThemes(), insTpl, db);

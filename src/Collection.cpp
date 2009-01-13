@@ -50,7 +50,15 @@ Collection::Collection(QString u, QString customDbName, bool ro) throw(bad_alloc
 Collection::~Collection() throw()
 {
 	delete db;
+	db = 0;
 	delete bc;
+	bc = 0;
+	delete ac;
+	ac = 0;
+	delete pc;
+	pc =  0;
+	delete tc;
+	tc = 0;
 }
 
 /**
@@ -146,7 +154,7 @@ QList<Book> Collection::searchBooks(Book::book_field field, string name) throw(D
 		query = compositeSearchBooks(field, name);
 	else
 	{
-		query = PreparedStatement("SELECT * FROM books WHERE %1 LIKE %2", db->getType());
+		query = PreparedStatement("SELECT * FROM books WHERE %1 LIKE '%2'", db->getType());
 		//what field to search for
 		if(field == Book::b_isbn)
 			query.arg("isbn");
@@ -169,7 +177,7 @@ QList<Book> Collection::searchBooks(Book::book_field field, string name) throw(D
 		else if(field == Book::b_UDC)
 			query.arg("UDC");
 		
-		name.insert(0, "'%").append("%'"); //SQLs LIKE requires a preceding '%' and a ending '%'
+		name.insert(0, "%").append("%"); //SQLs LIKE requires a preceding '%' and a ending '%'
 		query.arg(name); //search term
 	}
 	
@@ -462,11 +470,11 @@ QList<Book> Collection::parseBookResultSet(ResultSet &rs) throw(DataBaseExceptio
 		b.setRating(rs.getInt("rating"));
 		b.setCover(rs.getString("cover"));
 		b.setEbook(rs.getString("ebook"));
-		b.setPubDate(QDate::fromString(rs.getString("date").c_str(), Qt::ISODate));
+		b.setPubDate(QDate::fromString(rs.getString("publishingyear").c_str(), Qt::ISODate));
 		b.setUDC(rs.getString("udc"));
 		b.setId(rs.getInt("id"));
 		b.setAuthors(getBooksAuthors(rs.getInt("id")));
-		b.setTranslator(getBooksTranslator(rs.getInt("id")));
+		b.setTranslator(getBooksTranslator(rs.getInt("translator")));
 		b.setPublishers(getBooksPublishers(rs.getInt("id")));
 		b.setThemes(getBooksThemes(rs.getInt("id")));
 		
@@ -477,20 +485,57 @@ QList<Book> Collection::parseBookResultSet(ResultSet &rs) throw(DataBaseExceptio
 
 QList<Author> Collection::getBooksAuthors(int id) throw(DataBaseException)
 {
-	return QList<Author>();
+	PreparedStatement authors("SELECT * FROM authors WHERE authorid IN (%1)", db->getType());
+	string authorsbooks("SELECT authorsid FROM booksauthors WHERE booksid = '%1'");
+	authors.arg(authorsbooks);
+	authors.arg(id);
+
+	ResultSet rs = db->query(authors);
+	return parseAuthorsResultSet(rs);
 }
 
 QList<Publisher> Collection::getBooksPublishers(int id) throw(DataBaseException)
 {
-	return QList<Publisher>();
+	PreparedStatement publishers("SELECT * FROM publisher WHERE publisherid IN (%1)", db->getType());
+	string publishersbooks("SELECT publishersid FROM bookspublishers WHERE booksid = '%1'");
+	publishers.arg(publishersbooks);
+	publishers.arg(id);
+	
+	ResultSet rs = db->query(publishers);
+	return parsePublishersResultSet(rs);
 }
 
 QList<Theme> Collection::getBooksThemes(int id) throw(DataBaseException)
 {
-	return QList<Theme>();
+	PreparedStatement themes("SELECT * FROM theme WHERE themeid IN (%1)", db->getType());
+	string themesbooks("SELECT themesid FROM booksthemes WHERE booksid = '%1'");
+	themes.arg(themesbooks);
+	themes.arg(id);
+	
+	ResultSet rs = db->query(themes);
+	return parseThemesResultSet(rs);
 }
 
 Author Collection::getBooksTranslator(int id) throw(DataBaseException)
 {
-	return Author();
+	PreparedStatement translator("SELECT * FROM authors WHERE authorsid = '%1'", db->getType());
+	translator.arg(id);
+
+	ResultSet rs = db->query(translator);
+	return parseAuthorsResultSet(rs).first();
+}
+
+QList<Author> Collection::parseAuthorsResultSet(ResultSet &rs) throw(DataBaseException)
+{
+	return QList<Author>();
+}
+
+QList<Publisher> Collection::parsePublishersResultSet(ResultSet &rs) throw(DataBaseException)
+{
+	return QList<Publisher>();
+}
+
+QList<Theme> Collection::parseThemesResultSet(ResultSet &rs) throw(DataBaseException)
+{
+	return QList<Theme>();
 }

@@ -8,9 +8,6 @@ find_package( Qt4 REQUIRED QtCore )
 set( QT_DONT_USE_QTGUI TRUE )
 include( ${QT_USE_FILE} )
 
-set( INC_PATH /usr/include/ )
-set( LINK_PATH /usr/lib/ )
-
 # Path to DataBaseWrapper project
 set( DBWRAPPER_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../DataBaseWrapper/ )
 # Path to DataBaseWrapper headers

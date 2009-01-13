@@ -76,6 +76,7 @@ class Collection
 		QString dbName;
 		bool readOnly;
 
+		//private methods to deal with references
 		void updateThemeReference(Book b);
 		void updateThemeReference(Author a);
 		void updateThemeReference(Publisher p);
@@ -83,12 +84,23 @@ class Collection
 		void updateAuthorReference(t data, string type);
 		template <class t>
 		void updatePublisherReference(t data, string type);
+
+		//private methods to deal with book search
 		PreparedStatement compositeSearchBooks(Book::book_field field, string name) throw(DataBaseException);
 		QList<Book> parseBookResultSet(ResultSet &rs) throw(DataBaseException);
 		QList<Author> getBooksAuthors(int id) throw(DataBaseException);
 		QList<Publisher> getBooksPublishers(int id) throw(DataBaseException);
 		QList<Theme> getBooksThemes(int id) throw(DataBaseException);
 		Author getBooksTranslator(int id) throw(DataBaseException);
+
+		//private methods to deal with author search
+		QList<Author> parseAuthorsResultSet(ResultSet &rs) throw(DataBaseException);
+
+		//private methods to deal with author search
+		QList<Publisher> parsePublishersResultSet(ResultSet &rs) throw(DataBaseException);
+
+		//private methods to deal with author search
+		QList<Theme> parseThemesResultSet(ResultSet &rs) throw(DataBaseException);
 };
 
 #endif /* COLLECTION_H_ */
