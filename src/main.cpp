@@ -42,9 +42,9 @@ int main(int argc, char **argv)
 		Book b("0123456789123", "title", 1, "cri", "desc", 5, "cover", "ebook", QDate(2009,1,9),
 			"UDC", authorList, a, publisherList, themeList);
 
-		c.insertBook(b);
+		//c.insertBook(b);
 
-		QList<Book> bookList = c.searchBooks(Book::b_title, "title");
+		QList<Book> bookList = c.searchBooks(Book::b_translator, "ln");
 		displayBooks(bookList);
 	}
 	catch(bad_alloc e)

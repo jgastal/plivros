@@ -417,43 +417,44 @@ void Collection::updatePublisherReference(t data, string type)
 PreparedStatement Collection::compositeSearchBooks(Book::book_field field, string name) throw(DataBaseException)
 {
 	/*
-	* You should be extremely carefull in changing the order in which the
-	* PreparedStatements are composed. Composing them in the wrong order
-	* may cause characters to be escaped incorrectly(escaping, escaped character).
-	*/
-	PreparedStatement query("SELECT * FROM books WHERE id IN (%1)", db->getType());
+	 * The composing of the query is first done using QString(and not PreparedStatements) because
+	 * otherwise ' in '%1' would be escaped and that is obviously unwanted. There might be a more
+	 * elagant solution(one that doesn't depend on QString) but this one works and is readable.
+	 */
+	QString query("SELECT * FROM books WHERE id IN (%1)");
+
 	if(field == Book::b_authors)
 	{
-		string refQuery("SELECT booksid FROM booksauthors WHERE authorsid IN (%1)");
-		string authorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
-		query.arg(refQuery); //select from reference table
-		query.arg(authorQuery); //select from authors table
-		query.arg(name); //search in first name
-		query.arg(name); //search in last name
+		QString refQuery("SELECT booksid FROM booksauthors WHERE authorsid IN (%1)");
+		query = query.arg(refQuery); //select from reference table
+		QString authorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' OR lastname LIKE '%%2%')");
+		query = query.arg(authorQuery); //select from authors table
 	}
 	else if(field == Book::b_publishers)
 	{
-		string refQuery("SELECT booksid FROM bookspublishers WHERE publishersid IN (%1)");
-		string authorQuery("SELECT id FROM publishers WHERE name LIKE '%%1%'");
-		query.arg(refQuery); //select from reference table
-		query.arg(authorQuery); //select from publishers table
-		query.arg(name); //search in name
+		QString refQuery("SELECT booksid FROM bookspublishers WHERE publishersid IN (%1)");
+		query = query.arg(refQuery); //select from reference table
+		QString pubQuery("SELECT id FROM publishers WHERE name LIKE '%%1%'");
+		query = query.arg(pubQuery); //select from publishers table
 	}
 	else if(field == Book::b_themes)
 	{
-		string refQuery("SELECT booksid FROM booksthemes WHERE themesid IN (%1)");
-		string authorQuery("SELECT id FROM themes WHERE name LIKE '%%1%'");
-		query.arg(refQuery); //select from reference table
-		query.arg(authorQuery); //select from themes table
-		query.arg(name); //search in name
+		QString refQuery("SELECT booksid FROM booksthemes WHERE themesid IN (%1)");
+		query = query.arg(refQuery); //select from reference table
+		QString themeQuery("SELECT id FROM themes WHERE name LIKE '%%1%'");
+		query = query.arg(themeQuery); //select from themes table
 	}
 	else if(field == Book::b_translator)
 	{
-		string translatorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
-		query.arg(translatorQuery);
-		query.arg(name);
+		QString translatorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' OR lastname LIKE '%%2%')");
+		query = query.arg(translatorQuery);
 	}
-	return query;
+
+	PreparedStatement ret(query.toStdString(), db->getType());
+	ret.arg(name);
+	ret.arg(name);
+
+	return ret;
 }
 
 QList<Book> Collection::parseBookResultSet(ResultSet &rs) throw(DataBaseException)
