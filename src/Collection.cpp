@@ -247,6 +247,17 @@ bool Collection::updateAuthor(Author a) throw(DataBaseException)
 	return true;
 }
 
+QList<Author> Collection::searchAuthors(Author::author_field field, string name)
+{
+	PreparedStatement query("", db->getType());
+	if(field == Author::a_themes)
+		query = compositeSearchAuthors(field, name);
+	else
+		query = simpleSearchAuthors(field, name);
+	    
+	return QList<Author>();
+}
+
 /**
  * @brief Adds publisher \a p to the collection.
  *
@@ -369,8 +380,16 @@ bool Collection::updateTheme(Theme t) throw(DataBaseException)
 
 /**
  * @brief Searches for themes.
+ *
+ * @param field In what field should the search be performed.
+ * @param name What should be searched for.
+ *
+ * Creates a list(QList) of themes that match the given criteria. The search is
+ * not by exact match but rather by "contains", meaning if there is a theme whose
+ * name is "theme1" and \a field is t_name and \a name is "the" the search result
+ * will include said theme.
  */
-QList<Theme> Collection::searchThemes(Theme::theme_field field, string name)
+QList<Theme> Collection::searchThemes(Theme::theme_field field, string name) throw(DataBaseException)
 {
 	PreparedStatement query("SELECT * FROM themes WHERE %1 LIKE '%%2%'", db->getType());
 	if(field == Theme::t_name)
@@ -389,7 +408,7 @@ QList<Theme> Collection::searchThemes(Theme::theme_field field, string name)
  *
  * @param b Element whose theme references need to be updated.
  */
-void Collection::updateThemeReference(Book b)
+void Collection::updateThemeReference(Book b) throw(DataBaseException)
 {
 	deleteReference("book", b.getId(), "theme", db);
 	insertReference(b, "theme", db);
@@ -400,7 +419,7 @@ void Collection::updateThemeReference(Book b)
  *
  * @param a Element whose theme references need to be updated.
  */
-void Collection::updateThemeReference(Author a)
+void Collection::updateThemeReference(Author a) throw(DataBaseException)
 {
 	deleteReference("author", a.getId(), "theme", db);
 	insertReference(a, db);
@@ -411,26 +430,54 @@ void Collection::updateThemeReference(Author a)
  *
  * @param p Element whose theme references need to be updated.
  */
-void Collection::updateThemeReference(Publisher p)
+void Collection::updateThemeReference(Publisher p) throw(DataBaseException)
 {
 	deleteReference("publisher", p.getId(), "theme", db);
 	insertReference(p, db);
 }
 
+/**
+ * @brief Updates the authors references to match that of \a data.
+ *
+ * @param data Element whose author references need to be updated.
+ * @param type The type of element referencing the authors.
+ */
 template <class t>
-void Collection::updateAuthorReference(t data, string type)
+void Collection::updateAuthorReference(t data, string type) throw(DataBaseException)
 {
 	deleteReference(type, data.getId(), "author", db);
 	insertReference(data, "author", db);
 }
 
+/**
+ * @brief Updates the publishers references to match that of \a data.
+ *
+ * @param data Element whose publishers references need to be updated.
+ * @param type The type of element referencing the publishers.
+ */
 template <class t>
-void Collection::updatePublisherReference(t data, string type)
+void Collection::updatePublisherReference(t data, string type) throw(DataBaseException)
 {
 	deleteReference(type, data.getId(), "publisher", db);
 	insertReference(data, "publisher", db);
 }
 
+/**
+ * @brief Creates a PreparedStatement to search for books searching by author,
+ * translator, publishers or theme.
+ *
+ * @param field Where to search: author, translator, publishers or themes.
+ * @param name What to search for.
+ *
+ * @exception DataBaseException In case there is some PreparedStatement error.
+ *
+ * @return A PreparedStatement that contains a composite select statement.
+ *
+ * This method creates a PreparedStatement that searches for a given keyword
+ * contained in the first or last name of authors or translator, name of publisher
+ * or theme. As mentioned the search is not done by exact match but rather by
+ * "contains". 
+ */
 PreparedStatement Collection::compositeSearchBooks(Book::book_field field, string name) throw(DataBaseException)
 {
 	/*
@@ -474,6 +521,16 @@ PreparedStatement Collection::compositeSearchBooks(Book::book_field field, strin
 	return ret;
 }
 
+/**
+ * @brief Transform a result set into a QList.
+ *
+ * @param rs ResultSet to be parsed.
+ *
+ * @return Returns a QList of books containing all books in the result set(possibly 0).
+ *
+ * @warning The query that originated \a rs must contain ALL fields in the book
+ * table.
+ */
 QList<Book> Collection::parseBookResultSet(ResultSet &rs) throw(DataBaseException)
 {
 	QList<Book> bookList;
@@ -501,6 +558,11 @@ QList<Book> Collection::parseBookResultSet(ResultSet &rs) throw(DataBaseExceptio
 	return bookList;
 }
 
+/**
+ * @brief
+ *
+ * @param id
+ */
 QList<Author> Collection::getBooksAuthors(int id) throw(DataBaseException)
 {
 	PreparedStatement authors("SELECT * FROM authors WHERE id IN (%1)", db->getType());
@@ -512,6 +574,11 @@ QList<Author> Collection::getBooksAuthors(int id) throw(DataBaseException)
 	return parseAuthorResultSet(rs);
 }
 
+/**
+ * @brief
+ *
+ * @param id
+ */
 QList<Publisher> Collection::getBooksPublishers(int id) throw(DataBaseException)
 {
 	PreparedStatement publishers("SELECT * FROM publishers WHERE id IN (%1)", db->getType());
@@ -523,6 +590,11 @@ QList<Publisher> Collection::getBooksPublishers(int id) throw(DataBaseException)
 	return parsePublisherResultSet(rs);
 }
 
+/**
+ * @brief
+ *
+ * @param id
+ */
 QList<Theme> Collection::getBooksThemes(int id) throw(DataBaseException)
 {
 	PreparedStatement themes("SELECT * FROM themes WHERE id IN (%1)", db->getType());
@@ -534,6 +606,11 @@ QList<Theme> Collection::getBooksThemes(int id) throw(DataBaseException)
 	return parseThemeResultSet(rs);
 }
 
+/**
+ * @brief
+ *
+ * @param id
+ */
 Author Collection::getBooksTranslator(int id) throw(DataBaseException)
 {
 	PreparedStatement translator("SELECT * FROM authors WHERE id = '%1'", db->getType());
@@ -545,6 +622,29 @@ Author Collection::getBooksTranslator(int id) throw(DataBaseException)
 		return Author();
 	else
 		aList.first();
+}
+
+PreparedStatement Collection::simpleSearchAuthors(Author::author_field field, string name) throw(DataBaseException)
+{
+	if(field == Author::a_firstname)
+		;
+	else if(field == Author::a_lastname)
+		;
+	else if(field == Author::a_description)
+		;
+	else if(field == Author::a_critique)
+		;
+	else if(field == Author::a_rating)
+		;
+	else if(field == Author::a_picture)
+		;
+
+	return PreparedStatement("", db->getType());
+}
+
+PreparedStatement Collection::compositeSearchAuthors(Author::author_field field, string name) throw(DataBaseException)
+{
+	return PreparedStatement("", db->getType());
 }
 
 QList<Author> Collection::parseAuthorResultSet(ResultSet &rs) throw(DataBaseException)

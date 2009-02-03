@@ -64,7 +64,7 @@ class Collection
 		bool insertTheme(Theme &t) throw(DataBaseException);
 		bool deleteTheme(unsigned int id) throw(DataBaseException);
 		bool updateTheme(Theme t) throw(DataBaseException);
-		QList<Theme> searchThemes(Theme::theme_field field, string name);
+		QList<Theme> searchThemes(Theme::theme_field field, string name) throw(DataBaseException);
 
 	private:
 		DataBase *db;
@@ -77,13 +77,13 @@ class Collection
 		bool readOnly;
 
 		//private methods to deal with references
-		void updateThemeReference(Book b);
-		void updateThemeReference(Author a);
-		void updateThemeReference(Publisher p);
+		void updateThemeReference(Book b) throw(DataBaseException);
+		void updateThemeReference(Author a) throw(DataBaseException);
+		void updateThemeReference(Publisher p) throw(DataBaseException);
 		template <class t>
-		void updateAuthorReference(t data, string type);
+		void updateAuthorReference(t data, string type) throw(DataBaseException);
 		template <class t>
-		void updatePublisherReference(t data, string type);
+		void updatePublisherReference(t data, string type) throw(DataBaseException);
 
 		//private methods to deal with book search
 		PreparedStatement compositeSearchBooks(Book::book_field field, string name) throw(DataBaseException);
@@ -94,6 +94,8 @@ class Collection
 		Author getBooksTranslator(int id) throw(DataBaseException);
 
 		//private methods to deal with author search
+		PreparedStatement simpleSearchAuthors(Author::author_field field, string name) throw(DataBaseException);
+		PreparedStatement compositeSearchAuthors(Author::author_field field, string name) throw(DataBaseException);
 		QList<Author> parseAuthorResultSet(ResultSet &rs) throw(DataBaseException);
 
 		//private methods to deal with author search
