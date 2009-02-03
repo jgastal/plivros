@@ -559,9 +559,11 @@ QList<Book> Collection::parseBookResultSet(ResultSet &rs) throw(DataBaseExceptio
 }
 
 /**
- * @brief
+ * @brief Gets all authors associated with a given book.
  *
- * @param id
+ * @param id id of book whose authors are desired.
+ *
+ * @return QList of authors associated with book.
  */
 QList<Author> Collection::getBooksAuthors(int id) throw(DataBaseException)
 {
@@ -575,9 +577,11 @@ QList<Author> Collection::getBooksAuthors(int id) throw(DataBaseException)
 }
 
 /**
- * @brief
+ * @brief Gets all publishers associated with a given book.
  *
- * @param id
+ * @param id id of book whose publishers are desired.
+ *
+ * @return QList of publishers associated with book.
  */
 QList<Publisher> Collection::getBooksPublishers(int id) throw(DataBaseException)
 {
@@ -591,9 +595,11 @@ QList<Publisher> Collection::getBooksPublishers(int id) throw(DataBaseException)
 }
 
 /**
- * @brief
+ * @brief Gets all themes associated with a given book.
  *
- * @param id
+ * @param id id of book whose themes are desired.
+ *
+ * @return QList of themes associated with book.
  */
 QList<Theme> Collection::getBooksThemes(int id) throw(DataBaseException)
 {
@@ -607,10 +613,12 @@ QList<Theme> Collection::getBooksThemes(int id) throw(DataBaseException)
 }
 
 /**
- * @brief
- *
- * @param id
- */
+* @brief Gets the translator of a given book.
+*
+* @param id id of book whose translator is desired.
+*
+* @return Author associated with this book as translator.
+*/
 Author Collection::getBooksTranslator(int id) throw(DataBaseException)
 {
 	PreparedStatement translator("SELECT * FROM authors WHERE id = '%1'", db->getType());
