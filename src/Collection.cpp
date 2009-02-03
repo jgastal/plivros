@@ -424,7 +424,7 @@ PreparedStatement Collection::compositeSearchBooks(Book::book_field field, strin
 	PreparedStatement query("SELECT * FROM books WHERE id IN (%1)", db->getType());
 	if(field == Book::b_authors)
 	{
-		string refQuery("SELECT bookID FROM booksauthors WHERE authorsid IN (%1)");
+		string refQuery("SELECT booksid FROM booksauthors WHERE authorsid IN (%1)");
 		string authorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' || lastname LIKE '%%2%')");
 		query.arg(refQuery); //select from reference table
 		query.arg(authorQuery); //select from authors table
@@ -433,7 +433,7 @@ PreparedStatement Collection::compositeSearchBooks(Book::book_field field, strin
 	}
 	else if(field == Book::b_publishers)
 	{
-		string refQuery("SELECT bookID FROM bookspublishers WHERE publishersid IN (%1)");
+		string refQuery("SELECT booksid FROM bookspublishers WHERE publishersid IN (%1)");
 		string authorQuery("SELECT id FROM publishers WHERE name LIKE '%%1%'");
 		query.arg(refQuery); //select from reference table
 		query.arg(authorQuery); //select from publishers table
@@ -441,7 +441,7 @@ PreparedStatement Collection::compositeSearchBooks(Book::book_field field, strin
 	}
 	else if(field == Book::b_themes)
 	{
-		string refQuery("SELECT bookID FROM booksthemes WHERE themesid IN (%1)");
+		string refQuery("SELECT booksid FROM booksthemes WHERE themesid IN (%1)");
 		string authorQuery("SELECT id FROM themes WHERE name LIKE '%%1%'");
 		query.arg(refQuery); //select from reference table
 		query.arg(authorQuery); //select from themes table
@@ -485,8 +485,8 @@ QList<Book> Collection::parseBookResultSet(ResultSet &rs) throw(DataBaseExceptio
 
 QList<Author> Collection::getBooksAuthors(int id) throw(DataBaseException)
 {
-	PreparedStatement authors("SELECT * FROM authors WHERE authorid IN (%1)", db->getType());
-	string authorsbooks("SELECT authorsid FROM booksauthors WHERE booksid = '%1'");
+	PreparedStatement authors("SELECT * FROM authors WHERE id IN (%1)", db->getType());
+	string authorsbooks("SELECT authorsid FROM booksauthors WHERE booksid = %1");
 	authors.arg(authorsbooks);
 	authors.arg(id);
 
@@ -496,8 +496,8 @@ QList<Author> Collection::getBooksAuthors(int id) throw(DataBaseException)
 
 QList<Publisher> Collection::getBooksPublishers(int id) throw(DataBaseException)
 {
-	PreparedStatement publishers("SELECT * FROM publisher WHERE publisherid IN (%1)", db->getType());
-	string publishersbooks("SELECT publishersid FROM bookspublishers WHERE booksid = '%1'");
+	PreparedStatement publishers("SELECT * FROM publishers WHERE id IN (%1)", db->getType());
+	string publishersbooks("SELECT publishersid FROM bookspublishers WHERE booksid = %1");
 	publishers.arg(publishersbooks);
 	publishers.arg(id);
 	
@@ -507,8 +507,8 @@ QList<Publisher> Collection::getBooksPublishers(int id) throw(DataBaseException)
 
 QList<Theme> Collection::getBooksThemes(int id) throw(DataBaseException)
 {
-	PreparedStatement themes("SELECT * FROM theme WHERE themeid IN (%1)", db->getType());
-	string themesbooks("SELECT themesid FROM booksthemes WHERE booksid = '%1'");
+	PreparedStatement themes("SELECT * FROM themes WHERE id IN (%1)", db->getType());
+	string themesbooks("SELECT themesid FROM booksthemes WHERE booksid = %1");
 	themes.arg(themesbooks);
 	themes.arg(id);
 	
@@ -518,11 +518,15 @@ QList<Theme> Collection::getBooksThemes(int id) throw(DataBaseException)
 
 Author Collection::getBooksTranslator(int id) throw(DataBaseException)
 {
-	PreparedStatement translator("SELECT * FROM authors WHERE authorsid = '%1'", db->getType());
+	PreparedStatement translator("SELECT * FROM authors WHERE id = '%1'", db->getType());
 	translator.arg(id);
 
 	ResultSet rs = db->query(translator);
-	return parseAuthorsResultSet(rs).first();
+	QList<Author> aList = parseAuthorsResultSet(rs);
+	if(aList.empty()) 
+		return Author();
+	else
+		aList.first();
 }
 
 QList<Author> Collection::parseAuthorsResultSet(ResultSet &rs) throw(DataBaseException)

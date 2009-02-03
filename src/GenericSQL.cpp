@@ -7,6 +7,9 @@
 
 #include <QtCore/QList>
 
+#include "DataBase.h"
+#include "PreparedStatement.h"
+
 #include "GenericSQL.h"
 
 #include "Book.h"
