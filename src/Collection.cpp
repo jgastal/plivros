@@ -528,7 +528,7 @@ PreparedStatement Collection::compositeSearchBooks(Book::book_field field, strin
  *
  * @return Returns a QList of books containing all books in the result set(possibly 0).
  *
- * @warning The query that originated \a rs must contain ALL fields in the book
+ * @warning The query that originated \a rs must contain ALL fields in the books
  * table.
  */
 QList<Book> Collection::parseBookResultSet(ResultSet &rs) throw(DataBaseException)
@@ -665,6 +665,16 @@ QList<Publisher> Collection::parsePublisherResultSet(ResultSet &rs) throw(DataBa
 	return QList<Publisher>();
 }
 
+/**
+ * @brief Transform a result set into a QList.
+ *
+ * @param rs ResultSet to be parsed.
+ *
+ * @return Returns a QList of themes containing all themes in the result set(possibly 0).
+ *
+ * @warning The query that originated \a rs must contain ALL fields in the themes
+ * table.
+ */
 QList<Theme> Collection::parseThemeResultSet(ResultSet &rs) throw(DataBaseException)
 {
 	QList<Theme> themeList;
