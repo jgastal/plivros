@@ -368,6 +368,23 @@ bool Collection::updateTheme(Theme t) throw(DataBaseException)
 }
 
 /**
+ * @brief Searches for themes.
+ */
+QList<Theme> Collection::searchThemes(Theme::theme_field field, string name)
+{
+	PreparedStatement query("SELECT * FROM themes WHERE %1 LIKE '%%2%'", db->getType());
+	if(field == Theme::t_name)
+		query.arg("name");
+	else if(field == Theme::t_description)
+		query.arg("description");
+
+	query.arg(name);
+
+	ResultSet themers = db->query(query);
+	return parseThemeResultSet(themers);
+}
+
+/**
  * @brief Updates the themes references to match that of \a b.
  *
  * @param b Element whose theme references need to be updated.
@@ -492,7 +509,7 @@ QList<Author> Collection::getBooksAuthors(int id) throw(DataBaseException)
 	authors.arg(id);
 
 	ResultSet rs = db->query(authors);
-	return parseAuthorsResultSet(rs);
+	return parseAuthorResultSet(rs);
 }
 
 QList<Publisher> Collection::getBooksPublishers(int id) throw(DataBaseException)
@@ -503,7 +520,7 @@ QList<Publisher> Collection::getBooksPublishers(int id) throw(DataBaseException)
 	publishers.arg(id);
 	
 	ResultSet rs = db->query(publishers);
-	return parsePublishersResultSet(rs);
+	return parsePublisherResultSet(rs);
 }
 
 QList<Theme> Collection::getBooksThemes(int id) throw(DataBaseException)
@@ -514,7 +531,7 @@ QList<Theme> Collection::getBooksThemes(int id) throw(DataBaseException)
 	themes.arg(id);
 	
 	ResultSet rs = db->query(themes);
-	return parseThemesResultSet(rs);
+	return parseThemeResultSet(rs);
 }
 
 Author Collection::getBooksTranslator(int id) throw(DataBaseException)
@@ -523,24 +540,33 @@ Author Collection::getBooksTranslator(int id) throw(DataBaseException)
 	translator.arg(id);
 
 	ResultSet rs = db->query(translator);
-	QList<Author> aList = parseAuthorsResultSet(rs);
+	QList<Author> aList = parseAuthorResultSet(rs);
 	if(aList.empty()) 
 		return Author();
 	else
 		aList.first();
 }
 
-QList<Author> Collection::parseAuthorsResultSet(ResultSet &rs) throw(DataBaseException)
+QList<Author> Collection::parseAuthorResultSet(ResultSet &rs) throw(DataBaseException)
 {
 	return QList<Author>();
 }
 
-QList<Publisher> Collection::parsePublishersResultSet(ResultSet &rs) throw(DataBaseException)
+QList<Publisher> Collection::parsePublisherResultSet(ResultSet &rs) throw(DataBaseException)
 {
 	return QList<Publisher>();
 }
 
-QList<Theme> Collection::parseThemesResultSet(ResultSet &rs) throw(DataBaseException)
+QList<Theme> Collection::parseThemeResultSet(ResultSet &rs) throw(DataBaseException)
 {
-	return QList<Theme>();
+	QList<Theme> themeList;
+	while(rs.nextRow())
+	{
+		Theme t;
+		t.setId(rs.getInt("id"));
+		t.setName(rs.getString("name"));
+		t.setDescription(rs.getString("description"));
+		themeList.append(t);
+	}
+	return themeList;
 }

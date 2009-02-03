@@ -94,13 +94,13 @@ class Collection
 		Author getBooksTranslator(int id) throw(DataBaseException);
 
 		//private methods to deal with author search
-		QList<Author> parseAuthorsResultSet(ResultSet &rs) throw(DataBaseException);
+		QList<Author> parseAuthorResultSet(ResultSet &rs) throw(DataBaseException);
 
 		//private methods to deal with author search
-		QList<Publisher> parsePublishersResultSet(ResultSet &rs) throw(DataBaseException);
+		QList<Publisher> parsePublisherResultSet(ResultSet &rs) throw(DataBaseException);
 
 		//private methods to deal with author search
-		QList<Theme> parseThemesResultSet(ResultSet &rs) throw(DataBaseException);
+		QList<Theme> parseThemeResultSet(ResultSet &rs) throw(DataBaseException);
 };
 
 #endif /* COLLECTION_H_ */
