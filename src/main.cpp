@@ -94,7 +94,7 @@ void displayThemes(QList<Theme> &tlist)
 
 void displayBook(Book &b)
 {
-	cout << "---Book---" << endl;
+	cout << "--- Begin Book ---" << endl;
 	cout << "Title: " << b.getTitle() << endl;
 	cout << "ISBN: " << b.getIsbn() << endl;
 	cout << "Edition: " << b.getEdition() << endl;
@@ -117,12 +117,12 @@ void displayBook(Book &b)
 	cout << "Themes: " << endl;
 	QList<Theme> tList = b.getThemes();
 	displayThemes(tList);
-	cout << "---Book---" << endl;
+	cout << "--- End Book ---" << endl;
 }
 
 void displayAuthor(Author &a)
 {
-	cout << "---Author---" << endl;
+	cout << "--- Begin Author ---" << endl;
 	cout << "First name: " << a.getFirstName() << endl;
 	cout << "Last name: " << a.getLastName() << endl;
 	cout << "Description: " << a.getDescription() << endl;
@@ -132,12 +132,12 @@ void displayAuthor(Author &a)
 	cout << "Themes: " << endl;
 	QList<Theme> tList = a.getThemes();
 	displayThemes(tList);
-	cout << "---Author---" << endl;
+	cout << "--- End Author ---" << endl;
 }
 
 void displayPublisher(Publisher &p)
 {
-	cout << "---Publisher---" << endl;
+	cout << "--- Begin Publisher ---" << endl;
 	cout << "Name: " << p.getName() << endl;
 	cout << "Description: " << p.getDescription() << endl;
 	cout << "Critique: " << p.getCritique() << endl;
@@ -145,13 +145,13 @@ void displayPublisher(Publisher &p)
 	cout << "Themes: " << endl;
 	QList<Theme> tList = p.getThemes();
 	displayThemes(tList);
-	cout << "---Publisher---" << endl;
+	cout << "--- End Publisher ---" << endl;
 }
 
 void displayTheme(Theme &t)
 {
-	cout << "---Theme---" << endl;
+	cout << "--- Begin Theme ---" << endl;
 	cout << "Name: " << t.getName() << endl;
 	cout << "Description: " << t.getDescription() << endl;
-	cout << "---Theme---" << endl;
+	cout << "--- End Theme ---" << endl;
 }
