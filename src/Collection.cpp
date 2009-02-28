@@ -656,7 +656,17 @@ PreparedStatement Collection::simpleSearchAuthors(Author::author_field field, st
 
 PreparedStatement Collection::compositeSearchAuthors(Author::author_field field, string name) throw(DataBaseException)
 {
-	return PreparedStatement("", db->getType());
+	PreparedStatement query("SELECT * FROM authors WHERE id IN (SELECT authorsid FROM authors%1 WHERE %2id IN (SELECT id FROM %3 WHERE %4 LIKE '%%5%'))", db->getType());
+	if(field == Author::a_themes)
+	{
+		query.arg("themes");
+		query.arg("themes");
+		query.arg("themes");
+		query.arg("name");
+		query.arg(name);
+	}
+	
+	return query;
 }
 
 QList<Author> Collection::parseAuthorResultSet(ResultSet &rs) throw(DataBaseException)
