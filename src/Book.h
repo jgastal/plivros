@@ -25,7 +25,7 @@ class Book
 		Book();
 		Book(char isbn[13], string title, unsigned short int ed, string cri,
 			string desc, unsigned short int rat, string cov, string eb, QDate d,
-			string UDC, QList<Author> a, Author tr, QList<Publisher> p,
+			string UDC, QList<Author> a, const Author &tr, QList<Publisher> p,
 			QList<Theme> t, unsigned int id = 0);
 		unsigned int getId() const;
 		void setId(unsigned int id);
@@ -52,7 +52,7 @@ class Book
 		QList<Author> getAuthors() const;
 		void setAuthors(QList<Author> authors);
 		Author getTranslator() const;
-		void setTranslator(Author translator);
+		void setTranslator(const Author &tr);
 		QList<Publisher> getPublishers() const;
 		void setPublishers(QList<Publisher> publishers);
 		QList<Theme> getThemes() const;

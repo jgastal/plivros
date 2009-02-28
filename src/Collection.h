@@ -97,6 +97,7 @@ class Collection
 		PreparedStatement simpleSearchAuthors(Author::author_field field, string name) throw(DataBaseException);
 		PreparedStatement compositeSearchAuthors(Author::author_field field, string name) throw(DataBaseException);
 		QList<Author> parseAuthorResultSet(ResultSet &rs) throw(DataBaseException);
+		QList<Theme> getAuthorsThemes(int id) throw(DataBaseException);
 
 		//private methods to deal with author search
 		QList<Publisher> parsePublisherResultSet(ResultSet &rs) throw(DataBaseException);

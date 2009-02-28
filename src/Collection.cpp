@@ -254,8 +254,9 @@ QList<Author> Collection::searchAuthors(Author::author_field field, string name)
 		query = compositeSearchAuthors(field, name);
 	else
 		query = simpleSearchAuthors(field, name);
-	    
-	return QList<Author>();
+
+	ResultSet authorrs = db->query(query);
+	return parseAuthorResultSet(authorrs);
 }
 
 /**
@@ -326,7 +327,7 @@ bool Collection::updatePublisher(Publisher p) throw(DataBaseException)
  * @exception DataBaseException Forwarding possible database error.
  *
  * @warning If the collection was opened as read only does nothing and returns false.
- * @warning Make sure you DON'T SET the books id before calling this method.
+ * @warning Make sure you DON'T SET the themes id before calling this method.
  *
  * The function creates a SQL insert statement based on the given theme, executes
  * the statement then sets the id given by the database in the theme and returns
@@ -552,7 +553,7 @@ QList<Book> Collection::parseBookResultSet(ResultSet &rs) throw(DataBaseExceptio
 		b.setTranslator(getBooksTranslator(rs.getInt("translator")));
 		b.setPublishers(getBooksPublishers(rs.getInt("id")));
 		b.setThemes(getBooksThemes(rs.getInt("id")));
-		
+
 		bookList.append(b);
 	}
 	return bookList;
@@ -626,28 +627,31 @@ Author Collection::getBooksTranslator(int id) throw(DataBaseException)
 
 	ResultSet rs = db->query(translator);
 	QList<Author> aList = parseAuthorResultSet(rs);
-	if(aList.empty()) 
+
+	if(aList.empty())
 		return Author();
 	else
-		aList.first();
+		return aList.first();
 }
 
 PreparedStatement Collection::simpleSearchAuthors(Author::author_field field, string name) throw(DataBaseException)
 {
+	PreparedStatement query("SELECT * FROM authors WHERE %1 LIKE '%%2%'", db->getType());
 	if(field == Author::a_firstname)
-		;
+		query.arg("firstname");
 	else if(field == Author::a_lastname)
-		;
+		query.arg("lastname");
 	else if(field == Author::a_description)
-		;
+		query.arg("description");
 	else if(field == Author::a_critique)
-		;
+		query.arg("critique");
 	else if(field == Author::a_rating)
-		;
+		query.arg("rating");
 	else if(field == Author::a_picture)
-		;
+		query.arg("picture");
 
-	return PreparedStatement("", db->getType());
+	query.arg(name);
+	return query;
 }
 
 PreparedStatement Collection::compositeSearchAuthors(Author::author_field field, string name) throw(DataBaseException)
@@ -657,7 +661,32 @@ PreparedStatement Collection::compositeSearchAuthors(Author::author_field field,
 
 QList<Author> Collection::parseAuthorResultSet(ResultSet &rs) throw(DataBaseException)
 {
-	return QList<Author>();
+	QList<Author> authorList;
+	while(rs.nextRow())
+	{
+		Author a;
+		a.setId(rs.getInt("id"));
+		a.setFirstName(rs.getString("firstname"));
+		a.setLastName(rs.getString("lastname"));
+		a.setDescription(rs.getString("description"));
+		a.setCritique(rs.getString("critique"));
+		a.setRating(rs.getInt("rating"));
+		a.setPicture(rs.getString("picture"));
+		a.setThemes(getAuthorsThemes(rs.getInt("id")));
+		authorList.append(a);
+	}
+	return authorList;
+}
+
+QList<Theme> Collection::getAuthorsThemes(int id) throw(DataBaseException)
+{
+	PreparedStatement themes("SELECT * FROM themes WHERE id IN (%1)", db->getType());
+	string themesauthors("SELECT themesid FROM authorsthemes WHERE authorsid = %1");
+	themes.arg(themesauthors);
+	themes.arg(id);
+	
+	ResultSet rs = db->query(themes);
+	return parseThemeResultSet(rs);
 }
 
 QList<Publisher> Collection::parsePublisherResultSet(ResultSet &rs) throw(DataBaseException)

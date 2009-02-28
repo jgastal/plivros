@@ -38,7 +38,7 @@ Book::Book()
 
 Book::Book(char isbn[13], string title, unsigned short int ed, string cri,
 	string desc, unsigned short int rat, string cov, string eb, QDate d,
-	string UDC, QList<Author> a, Author tr, QList<Publisher> p,
+	string UDC, QList<Author> a, const Author &tr, QList<Publisher> p,
 	QList<Theme> t, unsigned int id)
 {
 	setIsbn(isbn);
@@ -182,12 +182,12 @@ void Book::setAuthors(QList<Author> authors)
 
 Author Book::getTranslator() const
 {
-    return translator;
+	return translator;
 }
 
-void Book::setTranslator(Author translator)
+void Book::setTranslator(const Author &tr)
 {
-    this->translator = translator;
+	this->translator = tr;
 }
 
 QList<Publisher> Book::getPublishers() const
