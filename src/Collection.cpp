@@ -792,7 +792,19 @@ PreparedStatement Collection::compositeSearchPublishers(Publisher::publisher_fie
 
 QList<Publisher> Collection::parsePublisherResultSet(ResultSet &rs) throw(DataBaseException)
 {
-	return QList<Publisher>();
+	QList<Publisher> pubList;
+	while(rs.nextRow())
+	{
+		Publisher p;
+		p.setId(rs.getInt("id"));
+		p.setName(rs.getString("name"));
+		p.setDescription(rs.getString("description"));
+		p.setCritique(rs.getString("critique"));
+		p.setLogo(rs.getString("logo"));
+		p.setThemes(getPublishersThemes(rs.getInt("id")));
+		pubList.append(p);
+	}
+	return pubList;
 }
 
 /**
