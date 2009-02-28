@@ -131,9 +131,9 @@ bool Collection::updateBook(Book b) throw(DataBaseException)
 }
 
 /**
- * @brief Search for books.
+ * @brief Searches for books.
  *
- * @param field What field of the book you would like to search for.
+ * @param field What field of the book you would like to search in.
  * @param name Value which should be searched for.
  *
  * @return List of books matching the criteria.
@@ -247,6 +247,22 @@ bool Collection::updateAuthor(Author a) throw(DataBaseException)
 	return true;
 }
 
+
+/**
+ * @brief Searches for authors.
+ *
+ * @param field What field of the author you would like to search in.
+ * @param name Value which should be searched for.
+ *
+ * @return List of books matching the criteria.
+ *
+ * This search returns all authors that match the search criteria. The search
+ * is not done by exact match but rather by checking if the field contains the
+ * value, that means that searching for "ball" in name will include authors such
+ * as "goofball".
+ * If the search is done theme it will be considered a match if the name matches the
+ * searched value.
+ */
 QList<Author> Collection::searchAuthors(Author::author_field field, string name)
 {
 	PreparedStatement query("", db->getType());
@@ -626,12 +642,12 @@ QList<Theme> Collection::getBooksThemes(int id) throw(DataBaseException)
 }
 
 /**
-* @brief Gets the translator of a given book.
-*
-* @param id id of book whose translator is desired.
-*
-* @return Author associated with this book as translator.
-*/
+ * @brief Gets the translator of a given book.
+ *
+ * @param id id of book whose translator is desired.
+ *
+ * @return Author associated with this book as translator.
+ */
 Author Collection::getBooksTranslator(int id) throw(DataBaseException)
 {
 	PreparedStatement translator("SELECT * FROM authors WHERE id = '%1'", db->getType());
@@ -646,6 +662,21 @@ Author Collection::getBooksTranslator(int id) throw(DataBaseException)
 		return aList.first();
 }
 
+/**
+ * @brief Creates a query to search for author.
+ *
+ * @param field In what field the search should be done
+ * @param name What should be searched for.
+ *
+ * @return Returns a PreparedStatement containing a query ready to be executed.
+ *
+ * @exception DataBaseException Possible error when creating PreparedStatement.
+ *
+ * Creates a PreparedStatement containing a query that selects all field from the
+ * authors table. The query searches for \a name in \a field by aproximation.
+ * The supported fields are first name, last name, description, critique, rating,
+ * picture. If you want to search by theme see \a compositeSearchAuthors().
+ */
 PreparedStatement Collection::simpleSearchAuthors(Author::author_field field, string name) throw(DataBaseException)
 {
 	PreparedStatement query("SELECT * FROM authors WHERE %1 LIKE '%%2%'", db->getType());
@@ -666,6 +697,20 @@ PreparedStatement Collection::simpleSearchAuthors(Author::author_field field, st
 	return query;
 }
 
+/**
+ * @brief Creates a query to search for author.
+ *
+ * @param field In what field the search should be done
+ * @param name What should be searched for.
+ *
+ * @return Returns a PreparedStatement containing a query ready to be executed.
+ *
+ * @exception DataBaseException Possible error when creating PreparedStatement.
+ *
+ * Creates a PreparedStatement containing a query that will select every field of
+ * the authors table. Currently the only supported field is themes, the result of
+ * this query will be all authors associated with themes whose name contain \a name.
+ */
 PreparedStatement Collection::compositeSearchAuthors(Author::author_field field, string name) throw(DataBaseException)
 {
 	PreparedStatement query("SELECT * FROM authors WHERE id IN (SELECT authorsid FROM authors%1 WHERE %2id IN (SELECT id FROM %3 WHERE %4 LIKE '%%5%'))", db->getType());
@@ -681,6 +726,17 @@ PreparedStatement Collection::compositeSearchAuthors(Author::author_field field,
 	return query;
 }
 
+/**
+ * @brief Transforms the result set in to a QList.
+ *
+ * @param rs ResultSet to be processed.
+ *
+ * @return QList of authors described in \a rs.
+ *
+ * @exception DataBaseException Possible error when steping through ResultSet.
+ *
+ * @warning The ResultSet MUST contain every field in the authors table.
+ */
 QList<Author> Collection::parseAuthorResultSet(ResultSet &rs) throw(DataBaseException)
 {
 	QList<Author> authorList;
@@ -700,6 +756,16 @@ QList<Author> Collection::parseAuthorResultSet(ResultSet &rs) throw(DataBaseExce
 	return authorList;
 }
 
+/**
+ * @brief Returns all themes associated with a given author.
+ *
+ * @param id id of the author whose themes are desired.
+ *
+ * @return QList of all themes referenced by given author id.
+ *
+ * @exception DataBaseException Possible error when creating PreparedStatement,
+ * executing query or parsing results.
+ */
 QList<Theme> Collection::getAuthorsThemes(int id) throw(DataBaseException)
 {
 	PreparedStatement themes("SELECT * FROM themes WHERE id IN (%1)", db->getType());
