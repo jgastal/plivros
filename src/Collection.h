@@ -59,7 +59,7 @@ class Collection
 		bool insertPublisher(Publisher &p) throw(DataBaseException);
 		bool deletePublisher(unsigned int id) throw(DataBaseException);
 		bool updatePublisher(Publisher p) throw(DataBaseException);
-		QList<Publisher> searchPublishers(Publisher::publisher_field field, string name);
+		QList<Publisher> searchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException);
 
 		bool insertTheme(Theme &t) throw(DataBaseException);
 		bool deleteTheme(unsigned int id) throw(DataBaseException);
@@ -100,6 +100,8 @@ class Collection
 		QList<Theme> getAuthorsThemes(int id) throw(DataBaseException);
 
 		//private methods to deal with author search
+		PreparedStatement simpleSearchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException);
+		PreparedStatement compositeSearchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException);
 		QList<Publisher> parsePublisherResultSet(ResultSet &rs) throw(DataBaseException);
 
 		//private methods to deal with author search

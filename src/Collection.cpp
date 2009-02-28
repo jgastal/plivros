@@ -317,6 +317,18 @@ bool Collection::updatePublisher(Publisher p) throw(DataBaseException)
 	return true;
 }
 
+QList<Publisher> Collection::searchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException)
+{
+	PreparedStatement query("", db->getType());
+	if(field == Publisher::p_themes)
+		query = compositeSearchPublishers(field, name);
+	else
+		query = simpleSearchPublishers(field, name);
+
+	ResultSet pubrs = db->query(query);
+	return parsePublisherResultSet(pubrs);
+}
+
 /**
  * @brief Adds theme \a t to the collection.
  *
@@ -697,6 +709,16 @@ QList<Theme> Collection::getAuthorsThemes(int id) throw(DataBaseException)
 	
 	ResultSet rs = db->query(themes);
 	return parseThemeResultSet(rs);
+}
+
+PreparedStatement Collection::simpleSearchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException)
+{
+	return PreparedStatement("", db->getType());
+}
+
+PreparedStatement Collection::compositeSearchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException)
+{
+	return PreparedStatement("", db->getType());
 }
 
 QList<Publisher> Collection::parsePublisherResultSet(ResultSet &rs) throw(DataBaseException)
