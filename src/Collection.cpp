@@ -153,33 +153,7 @@ QList<Book> Collection::searchBooks(Book::book_field field, string name) throw(D
 	if(field == Book::b_authors || field == Book::b_publishers || field == Book::b_themes || field == Book::b_translator)
 		query = compositeSearchBooks(field, name);
 	else
-	{
-		query = PreparedStatement("SELECT * FROM books WHERE %1 LIKE '%2'", db->getType());
-		//what field to search for
-		if(field == Book::b_isbn)
-			query.arg("isbn");
-		else if(field == Book::b_title)
-			query.arg("title");
-		else if(field == Book::b_edition)
-			query.arg("edition");
-		else if(field == Book::b_critique)
-			query.arg("critique");
-		else if(field == Book::b_description)
-			query.arg("description");
-		else if(field == Book::b_rating)
-			query.arg("rating");
-		else if(field == Book::b_cover)
-			query.arg("cover");
-		else if(field == Book::b_ebook)
-			query.arg("ebook");
-		else if(field == Book::b_pubdate)
-			query.arg("pubdate");
-		else if(field == Book::b_UDC)
-			query.arg("UDC");
-		
-		name.insert(0, "%").append("%"); //SQLs LIKE requires a preceding '%' and a ending '%'
-		query.arg(name); //search term
-	}
+		query = simpleSearchBooks(field, name);
 	
 	ResultSet bookRS = db->query(query);
 	return parseBookResultSet(bookRS);
@@ -489,6 +463,35 @@ void Collection::updatePublisherReference(t data, string type) throw(DataBaseExc
 {
 	deleteReference(type, data.getId(), "publisher", db);
 	insertReference(data, "publisher", db);
+}
+
+PreparedStatement Collection::simpleSearchBooks(Book::book_field field, string name) throw(DataBaseException)
+{
+	PreparedStatement query("SELECT * FROM books WHERE %1 LIKE '%%2%'", db->getType());
+	//what field to search for
+	if(field == Book::b_isbn)
+		query.arg("isbn");
+	else if(field == Book::b_title)
+		query.arg("title");
+	else if(field == Book::b_edition)
+		query.arg("edition");
+	else if(field == Book::b_critique)
+		query.arg("critique");
+	else if(field == Book::b_description)
+		query.arg("description");
+	else if(field == Book::b_rating)
+		query.arg("rating");
+	else if(field == Book::b_cover)
+		query.arg("cover");
+	else if(field == Book::b_ebook)
+		query.arg("ebook");
+	else if(field == Book::b_pubdate)
+		query.arg("pubdate");
+	else if(field == Book::b_UDC)
+		query.arg("UDC");
+	
+	query.arg(name); //search term
+	return query;
 }
 
 /**

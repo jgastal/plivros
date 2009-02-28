@@ -44,9 +44,14 @@ int main(int argc, char **argv)
 
 		c.insertBook(b);
 
+		cout << endl << "Searching books by description: " << endl << endl;
+		
+		QList<Book> bookList = c.searchBooks(Book::b_description, "sc");
+		displayBooks(bookList);
+
 		cout << endl << "Searching books by translator: " << endl << endl;
 
-		QList<Book> bookList = c.searchBooks(Book::b_translator, "ln");
+		bookList = c.searchBooks(Book::b_translator, "ln");
 		displayBooks(bookList);
 
 		cout << endl << "Searching authors by theme: " << endl << endl;

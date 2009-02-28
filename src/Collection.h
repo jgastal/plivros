@@ -86,6 +86,7 @@ class Collection
 		void updatePublisherReference(t data, string type) throw(DataBaseException);
 
 		//private methods to deal with book search
+		PreparedStatement simpleSearchBooks(Book::book_field field, string name) throw(DataBaseException);
 		PreparedStatement compositeSearchBooks(Book::book_field field, string name) throw(DataBaseException);
 		QList<Book> parseBookResultSet(ResultSet &rs) throw(DataBaseException);
 		QList<Author> getBooksAuthors(int id) throw(DataBaseException);
