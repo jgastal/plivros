@@ -790,6 +790,17 @@ PreparedStatement Collection::compositeSearchPublishers(Publisher::publisher_fie
 	return PreparedStatement("", db->getType());
 }
 
+/**
+ * @brief Transforms the result set in to a QList.
+ *
+ * @param rs ResultSet to be processed.
+ *
+ * @return QList of publishers described in \a rs.
+ *
+ * @exception DataBaseException Possible error when steping through ResultSet.
+ *
+ * @warning The ResultSet MUST contain every field in the publishers table.
+ */
 QList<Publisher> Collection::parsePublisherResultSet(ResultSet &rs) throw(DataBaseException)
 {
 	QList<Publisher> pubList;
