@@ -18,15 +18,17 @@ Publisher::Publisher()
 {
 	setName("");
 	setDescription("");
+	setCritique("");
 	setLogo("");
 	setThemes(QList<Theme>());
 	this->id = 0;
 }
 
-Publisher::Publisher(string nm, string desc, string logo, QList<Theme> t, unsigned int id)
+Publisher::Publisher(string nm, string desc, string cri, string logo, QList<Theme> t, unsigned int id)
 {
 	setName(nm);
 	setDescription(desc);
+	setCritique(cri);
 	setLogo(logo);
 	setThemes(t);
 	this->id = id;

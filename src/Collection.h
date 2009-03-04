@@ -100,10 +100,11 @@ class Collection
 		QList<Author> parseAuthorResultSet(ResultSet &rs) throw(DataBaseException);
 		QList<Theme> getAuthorsThemes(int id) throw(DataBaseException);
 
-		//private methods to deal with author search
+		//private methods to deal with publisher search
 		PreparedStatement simpleSearchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException);
 		PreparedStatement compositeSearchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException);
 		QList<Publisher> parsePublisherResultSet(ResultSet &rs) throw(DataBaseException);
+		QList<Theme> getPublishersThemes(int id) throw(DataBaseException);
 
 		//private methods to deal with author search
 		QList<Theme> parseThemeResultSet(ResultSet &rs) throw(DataBaseException);

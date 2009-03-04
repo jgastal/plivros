@@ -780,14 +780,66 @@ QList<Theme> Collection::getAuthorsThemes(int id) throw(DataBaseException)
 	return parseThemeResultSet(rs);
 }
 
+/**
+ * @brief Creates a query to search for publisher.
+ *
+ * @param field In what field the search should be done
+ * @param name What should be searched for.
+ *
+ * @return Returns a PreparedStatement containing a query ready to be executed.
+ *
+ * @exception DataBaseException Possible error when creating PreparedStatement.
+ *
+ * Creates a PreparedStatement containing a query that selects all field from the
+ * publishers table. The query searches for \a name in \a field by aproximation.
+ * The supported fields are name, description, critique, rating, logo. If you
+ * want to search by theme see \a compositeSearchPublishers().
+ */
 PreparedStatement Collection::simpleSearchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException)
 {
-	return PreparedStatement("", db->getType());
+	PreparedStatement query("SELECT * FROM publishers WHERE %1 LIKE '%%2%'", db->getType());
+
+	if(field == Publisher::p_name)
+		query.arg("name");
+	else if(field == Publisher::p_description)
+		query.arg("description");
+	else if(field == Publisher::p_critique)
+		query.arg("critique");
+	else if(field == Publisher::p_logo)
+		query.arg("logo");
+	query.arg(name);
+
+	return query;
 }
 
+/**
+ * @brief Creates a query to search for publisher.
+ *
+ * @param field In what field the search should be done
+ * @param name What should be searched for.
+ *
+ * @return Returns a PreparedStatement containing a query ready to be executed.
+ *
+ * @exception DataBaseException Possible error when creating PreparedStatement.
+ *
+ * Creates a PreparedStatement containing a query that will select every field of
+ * the publishers table. Currently the only supported field is themes, the result
+ * of this query will be all publishers associated with themes whose name contain
+ * \a name.
+ */
 PreparedStatement Collection::compositeSearchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException)
 {
-	return PreparedStatement("", db->getType());
+	PreparedStatement query("SELECT * FROM publishers WHERE id IN (SELECT publishersid FROM publishers%1 WHERE %2id IN (SELECT id FROM %3 WHERE %4 LIKE '%%5%'))", db->getType());
+	if(field == Publisher::p_themes)
+	{
+		query.arg("themes");
+		query.arg("themes");
+		query.arg("themes");
+		query.arg("name");
+		query.arg(name);
+	}
+	
+	return query;
 }
 
 /**
@@ -816,6 +868,27 @@ QList<Publisher> Collection::parsePublisherResultSet(ResultSet &rs) throw(DataBa
 		pubList.append(p);
 	}
 	return pubList;
+}
+
+/**
+ * @brief Gets all themes from a publisher.
+ *
+ * @param id id of publisher whose themes are wanted.
+ *
+ * @return QList of themes associated with publisher.
+ *
+ * This method selects and parses into a QList all the themes that are associated
+ * with a given publisher.
+ */
+QList<Theme> Collection::getPublishersThemes(int id) throw(DataBaseException)
+{
+	PreparedStatement themes("SELECT * FROM themes WHERE id IN (%1)", db->getType());
+	string themespublishers("SELECT themesid FROM publishersthemes WHERE publishersid = %1");
+	themes.arg(themespublishers);
+	themes.arg(id);
+	
+	ResultSet rs = db->query(themes);
+	return parseThemeResultSet(rs);
 }
 
 /**

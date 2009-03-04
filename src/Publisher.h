@@ -20,7 +20,7 @@ class Publisher
 {
 	public:
 		Publisher();
-		Publisher(string nm, string desc, string logo, QList<Theme> t,
+		Publisher(string nm, string desc, string cri, string logo, QList<Theme> t,
 			unsigned int id = 0);
 		unsigned int getId() const;
 		void setId(unsigned int id);

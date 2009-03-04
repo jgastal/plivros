@@ -31,11 +31,11 @@ int main(int argc, char **argv)
 		c.insertTheme(t);
 		themeList.append(t);
 
-		Publisher p("pub1", "desc", "", themeList);
+		Publisher p("pub1", "desc", "cri", "lg", themeList);
 		c.insertPublisher(p);
 		publisherList.append(p);
 
-		Author a("fn", "ln", "desc", "cri", 5, "", themeList);
+		Author a("fn", "ln", "desc", "cri", 5, "pic", themeList);
 		c.insertAuthor(a);
 		authorList.append(a);
 
