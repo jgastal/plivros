@@ -57,11 +57,13 @@ int main(int argc, char **argv)
 		cout << endl << "Searching authors by theme: " << endl << endl;
 
 		authorList = c.searchAuthors(Author::a_themes, "theme");
+		c.searchAuthors(Author::a_themes, "theme");
 		displayAuthors(authorList);
 
 		cout << endl << "Searching publishers by theme: " << endl << endl;
 
 		publisherList = c.searchPublishers(Publisher::p_themes, "theme");
+		c.searchPublishers(Publisher::p_themes, "theme");
 		displayPublishers(publisherList);
 	}
 	catch(bad_alloc e)
