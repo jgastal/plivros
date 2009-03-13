@@ -1,5 +1,6 @@
-#include <QMainWindow>
+#include <QApplication>
 #include <QTranslator>
+#include <QLocale>
 
 #include "Collection.h"
 #include "Book.h"
@@ -7,18 +8,7 @@
 #include "Publisher.h"
 #include "Theme.h"
 
-#include "ui_MainWindow.h"
-
-class Window : public QMainWindow, private Ui::MainWindow
-{
-	public:
-		Window(QMainWindow *parent = 0);
-} ;
-
-Window::Window(QMainWindow *parent) : QMainWindow(parent)
-{
-	setupUi(this);
-}
+#include "Window.h"
 
 int main(int argc, char **argv)
 {
