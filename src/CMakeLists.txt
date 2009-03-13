@@ -1,4 +1,4 @@
-include_directories( . ${DBWRAPPER_INC_DIR} )
+include_directories( . ../UI/ ${DBWRAPPER_INC_DIR} )
 link_directories( ${DBWRAPPER_LINK_DIR} )
 
 set( headers

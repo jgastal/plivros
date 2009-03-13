@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QToolBox" name="toolBox">
+      <property name="minimumSize">
+       <size>
+        <width>155</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>155</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="booksPage">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>145</width>
+         <height>454</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Books</string>
+       </attribute>
+       <widget class="QWidget" name="booksOps" native="true">
+        <property name="geometry">
+         <rect>
+          <x>-10</x>
+          <y>0</y>
+          <width>151</width>
+          <height>401</height>
+         </rect>
+        </property>
+        <widget class="QPushButton" name="bookAdd">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Add</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="bookSearch">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>40</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Search</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="bookEdit">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>70</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Edit</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="bookRemove">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Remove</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="authorsPage">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>145</width>
+         <height>454</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Authors</string>
+       </attribute>
+       <widget class="QWidget" name="authorsOps" native="true">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>151</width>
+          <height>401</height>
+         </rect>
+        </property>
+        <widget class="QPushButton" name="authorAdd">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Add</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="authorSearch">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>40</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Search</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="authorEdit">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>70</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Edit</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="authorRemove">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Remove</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="publishersPage">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>145</width>
+         <height>454</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Publishers</string>
+       </attribute>
+       <widget class="QWidget" name="publihsersOps" native="true">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>151</width>
+          <height>401</height>
+         </rect>
+        </property>
+        <widget class="QPushButton" name="publisherAdd">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Add</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="publisherSearch">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>40</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Search</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="publisherEdit">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>70</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Edit</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="publisherRemove">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Remove</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="themesPage">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>145</width>
+         <height>454</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Themes</string>
+       </attribute>
+       <widget class="QWidget" name="themesOps" native="true">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>151</width>
+          <height>401</height>
+         </rect>
+        </property>
+        <widget class="QPushButton" name="themesAdd">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Add</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="themesSearch">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>40</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Search</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="themesEdit">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>70</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Edit</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="themesRemove">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>131</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Remove</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Tab 1</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
