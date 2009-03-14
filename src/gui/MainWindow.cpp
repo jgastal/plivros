@@ -1,3 +1,5 @@
+#include "AddTheme.h"
+
 #include "MainWindow.h"
 
 MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
@@ -9,6 +11,7 @@ MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
 
 void MainWindow::createAddThemeForm()
 {
+	tabWidget->addTab(new AddTheme(tabWidget), tr("Add Theme"));
 }
 
 void MainWindow::createAddPublisherForm()

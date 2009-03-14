@@ -3,13 +3,17 @@ include_directories( . )
 set( LIBRARY_OUTPUT_PATH "${EXECUTABLE_OUTPUT_PATH}/gui" )
 
 set( headers
-	MainWindow.h )
+	MainWindow.h
+	AddTheme.h )
 set( sources
-	MainWindow.cpp )
+	MainWindow.cpp
+	AddTheme.cpp )
 
 #Target for uic generated headers
 set( UI_FILES
-	"UI/MainWindow.ui" )
+	"UI/MainWindow.ui"
+	"UI/AddTheme.ui"
+	"UI/AddPublisher.ui" )
 qt4_wrap_ui( ui_out ${UI_FILES} )
 #The gui headers include uic generated files
 MACRO_ADD_FILE_DEPENDENCIES( ${headers} ${ui_out} )
