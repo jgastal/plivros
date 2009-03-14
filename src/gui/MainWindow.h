@@ -13,6 +13,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 	private slots:
 		void createAddThemeForm();
 		void createAddPublisherForm();
+		void closeTab(int);
 } ;
 
 #endif //MAINWINDOW_H

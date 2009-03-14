@@ -5,10 +5,6 @@ link_directories( ${EXECUTABLE_OUTPUT_PATH}/gui/ )
 #DataBaseWrapper library dir
 link_directories( ${DBWRAPPER_LINK_DIR} )
 
-add_subdirectory( gui )
-add_subdirectory( core )
-add_subdirectory( data )
-
 #includes from this project
 include_directories( "${CMAKE_CURRENT_SOURCE_DIR}/data" )
 include_directories( "${CMAKE_CURRENT_SOURCE_DIR}/core" )
@@ -18,6 +14,10 @@ include_directories( "${CMAKE_CURRENT_BINARY_DIR}/gui" )
 
 #include for DataBaseWrapper
 include_directories( ${DBWRAPPER_INC_DIR} )
+
+add_subdirectory( gui )
+add_subdirectory( core )
+add_subdirectory( data )
 
 add_executable( plivros main.cpp )
 target_link_libraries( plivros collection data gui ${QT_LIBRARIES} )

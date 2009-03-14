@@ -4,10 +4,12 @@ set( LIBRARY_OUTPUT_PATH "${EXECUTABLE_OUTPUT_PATH}/gui" )
 
 set( headers
 	MainWindow.h
-	AddTheme.h )
+	AddTheme.h
+	AddPublisher.h )
 set( sources
 	MainWindow.cpp
-	AddTheme.cpp )
+	AddTheme.cpp
+	AddPublisher.cpp )
 
 #Target for uic generated headers
 set( UI_FILES
