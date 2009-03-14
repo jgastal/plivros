@@ -1,16 +1,16 @@
-#include "Window.h"
+#include "MainWindow.h"
 
-Window::Window(QMainWindow *parent) : QMainWindow(parent)
+MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
 {
 	setupUi(this);
 	connect(themesAdd, SIGNAL(released()), this, SLOT(createAddThemeForm()));
 	connect(publisherAdd, SIGNAL(released()), this, SLOT(createAddPublisherForm()));
 }
 
-void Window::createAddThemeForm()
+void MainWindow::createAddThemeForm()
 {
 }
 
-void Window::createAddPublisherForm()
+void MainWindow::createAddPublisherForm()
 {
 }

@@ -2,7 +2,7 @@
 #include <QTranslator>
 #include <QLocale>
 
-#include "Window.h"
+#include "MainWindow.h"
 
 int main(int argc, char **argv)
 {
@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	translator.load(QString("plivros_") + locale);
 	app.installTranslator(&translator);
 
-	Window w;
-	w.show();
+	MainWindow mw;
+	mw.show();
 	return app.exec();
 }

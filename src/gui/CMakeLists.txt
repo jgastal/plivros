@@ -3,9 +3,9 @@ include_directories( . )
 set( LIBRARY_OUTPUT_PATH "${EXECUTABLE_OUTPUT_PATH}/gui" )
 
 set( headers
-	Window.h )
+	MainWindow.h )
 set( sources
-	Window.cpp )
+	MainWindow.cpp )
 
 #Target for uic generated headers
 set( UI_FILES
