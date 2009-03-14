@@ -2,12 +2,6 @@
 #include <QTranslator>
 #include <QLocale>
 
-#include "Collection.h"
-#include "Book.h"
-#include "Author.h"
-#include "Publisher.h"
-#include "Theme.h"
-
 #include "Window.h"
 
 int main(int argc, char **argv)

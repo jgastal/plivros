@@ -1,17 +1,22 @@
+#This project libraries' are located here
 link_directories( ${EXECUTABLE_OUTPUT_PATH}/core/ )
 link_directories( ${EXECUTABLE_OUTPUT_PATH}/data/ )
 link_directories( ${EXECUTABLE_OUTPUT_PATH}/gui/ )
+#DataBaseWrapper library dir
 link_directories( ${DBWRAPPER_LINK_DIR} )
-
 
 add_subdirectory( gui )
 add_subdirectory( core )
 add_subdirectory( data )
 
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/data )
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/core )
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/gui )
-include_directories( ${CMAKE_SOURCE_DIR}/UI )
+#includes from this project
+include_directories( "${CMAKE_CURRENT_SOURCE_DIR}/data" )
+include_directories( "${CMAKE_CURRENT_SOURCE_DIR}/core" )
+include_directories( "${CMAKE_CURRENT_SOURCE_DIR}/gui" )
+#include of uic generated headers(they are generated in the build tree, not the source tree)
+include_directories( "${CMAKE_CURRENT_BINARY_DIR}/gui" )
+
+#include for DataBaseWrapper
 include_directories( ${DBWRAPPER_INC_DIR} )
 
 add_executable( plivros main.cpp )
