@@ -60,7 +60,15 @@ void AddPublisher::add()
 
 bool AddPublisher::validateInput()
 {
-	return true;
+	if(!nameLineEdit->text().isEmpty())
+		return true;
+	QMessageBox q(this);
+	q.setIcon(QMessageBox::Warning);
+	q.setText(tr("You must enter the publisher name."));
+	q.setDefaultButton(QMessageBox::Retry);
+	q.exec();
+	nameLineEdit->setFocus();
+	return false;
 }
 
 QList<Theme> AddPublisher::getSelectedThemes()
