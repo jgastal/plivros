@@ -3,6 +3,8 @@
 
 #include "ui_MainWindow.h"
 
+class Collection;
+
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
 	Q_OBJECT
@@ -14,6 +16,9 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 		void createAddThemeForm();
 		void createAddPublisherForm();
 		void closeTab(int);
+
+	private:
+		Collection *c;
 } ;
 
 #endif //MAINWINDOW_H

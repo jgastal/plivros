@@ -3,8 +3,11 @@
 
 #include "MainWindow.h"
 
+#include "Collection.h"
+
 MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
 {
+	c = new Collection("User");
 	setupUi(this);
 	tabWidget->clear();
 	connect(themesAdd, SIGNAL(clicked()), this, SLOT(createAddThemeForm()));
@@ -15,7 +18,7 @@ MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
 void MainWindow::createAddThemeForm()
 {
 	tabWidget->setUpdatesEnabled(false);
-	int pos = tabWidget->addTab(new AddTheme(tabWidget), tr("Add Theme"));
+	int pos = tabWidget->addTab(new AddTheme(c, tabWidget), tr("Add Theme"));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }

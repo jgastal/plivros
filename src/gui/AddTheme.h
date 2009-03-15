@@ -3,12 +3,14 @@
 
 #include "ui_AddTheme.h"
 
+class Collection;
+
 class AddTheme : public QWidget, private Ui::AddTheme
 {
 	Q_OBJECT
 
 	public:
-		AddTheme(QWidget *parent = 0);
+		AddTheme(Collection *c, QWidget *parent = 0);
 
 	private slots:
 		void add();
@@ -17,6 +19,7 @@ class AddTheme : public QWidget, private Ui::AddTheme
 	private:
 		bool validateInput();
 		QWidget *parent;
+		Collection *c;
 } ;
 
 #endif //ADDTHEME_H
