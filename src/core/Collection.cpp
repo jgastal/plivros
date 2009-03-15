@@ -6,6 +6,7 @@
  */
 
 #include <QtCore/QString>
+#include <QObject>
 
 #include "DataBase.h"
 #include "ResultSet.h"
@@ -84,6 +85,7 @@ bool Collection::insertBook(Book &b) throw(DataBaseException)
 	insertReference(b, "theme", db);
 	insertReference(b, "author", db);
 	insertReference(b, "publisher", db);
+	emit bookInserted();
 
 	return true;
 }
@@ -180,6 +182,7 @@ bool Collection::insertAuthor(Author &a) throw(DataBaseException)
 		return false;
 	ac->insertAuthor(a); //inserts author
 	insertReference(a, db); //insert author/theme references
+	emit authorInserted();
 
 	return true;
 }
@@ -265,6 +268,7 @@ bool Collection::insertPublisher(Publisher &p) throw(DataBaseException)
 		return false;
 	pc->insertPublisher(p);
 	insertReference(p, db);
+	emit publisherInserted();
 
 	return true;
 }
@@ -340,6 +344,7 @@ bool Collection::insertTheme(Theme &t) throw(DataBaseException)
 	if(readOnly)
 		return false;
 	tc->insertTheme(t);
+	emit themeInserted();
 
 	return true;
 }

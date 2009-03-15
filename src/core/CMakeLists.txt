@@ -18,7 +18,12 @@ set( sources
 	ThemeCollection.cpp
 	GenericSQL.cpp )
 
+set( moc_in
+	Collection.h )
+
+qt4_wrap_cpp( moc_out ${moc_in} )
+
 add_definitions( -fpic )
 
-add_library( collection SHARED ${headers} ${sources} )
+add_library( collection SHARED ${headers} ${sources} ${moc_out} )
 target_link_libraries( collection DataBaseWrapper )

@@ -9,6 +9,7 @@
 #define COLLECTION_H_
 
 #include <QtCore/QList>
+#include <QObject>
 
 #include "ResultSet.h"
 
@@ -39,8 +40,10 @@ class ThemeCollection;
  * statements and send them to a database for storage or retrieval. This database
  * must have a very specific format, as table names and fields are hardcoded.
  */
-class Collection
+class Collection : public QObject
 {
+	Q_OBJECT
+
 	public:
 		//TODO Add constructor for collection with a MySQL backend.
 		Collection(QString u, QString customDbName = "", bool ro = false) throw(bad_alloc);
@@ -65,6 +68,12 @@ class Collection
 		bool deleteTheme(unsigned int id) throw(DataBaseException);
 		bool updateTheme(Theme t) throw(DataBaseException);
 		QList<Theme> searchThemes(Theme::theme_field field, string name) throw(DataBaseException);
+
+	signals:
+		void bookInserted();
+		void authorInserted();
+		void publisherInserted();
+		void themeInserted();
 
 	private:
 		DataBase *db;
