@@ -1,5 +1,5 @@
 /**
- * @file AuthorsCollection.cpp
+ * @file AuthorCollection.cpp
  *
  * @date 26/12/2008
  * @author Jonas M. Gastal

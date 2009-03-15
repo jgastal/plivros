@@ -1,5 +1,5 @@
 /**
- * @file AuthorsCollection.h
+ * @file AuthorCollection.h
  *
  * @date 26/12/2008
  * @author Jonas M. Gastal
