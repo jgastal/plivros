@@ -30,15 +30,8 @@ void AddTheme::add()
 	}
 	catch(DataBaseException dbe)
 	{
-		QMessageBox q(this);
-		q.setIcon(QMessageBox::Critical);
-		q.setText(tr("A very serious and unexpected error ocurred.\nYour theme has not been added."));
-		q.setDefaultButton(QMessageBox::Close);
-		QString str(tr("What: %1\nCaused by: %2\nError code: %3"));
-		str = str.arg(dbe.what());
-		str = str.arg(dbe.where().c_str());
-		str = str.arg(dbe.getCode());
-		q.setDetailedText(str);
+		MessageBoxDataBaseException q(this);
+		q.appendText(tr("Your theme has not been added."));
 		q.exec();
 	}
 	close();
