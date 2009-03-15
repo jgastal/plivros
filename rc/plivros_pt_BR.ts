@@ -2,51 +2,82 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="pt_BR">
 <context>
-    <name>Form</name>
+    <name>AddPublisher</name>
     <message>
-        <location filename="../src/gui/UI/AddPublihser.ui" line="14"/>
+        <location filename="../src/gui/UI/AddPublisher.ui" line="14"/>
+        <source>Form</source>
+        <translation>Formulario</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/UI/AddPublisher.ui" line="20"/>
+        <source>Name:</source>
+        <translation>Nome:</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/UI/AddPublisher.ui" line="30"/>
+        <source>Description:</source>
+        <translation>Descrição:</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/UI/AddPublisher.ui" line="40"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/UI/AddPublisher.ui" line="50"/>
+        <source>Add</source>
+        <translation>Adicionar</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/UI/AddPublisher.ui" line="57"/>
+        <source>Critique:</source>
+        <translatorcomment>Não tenho certeza que seja a tradução adequada.</translatorcomment>
+        <translation>Critica:</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/UI/AddPublisher.ui" line="67"/>
+        <source>Logo:</source>
+        <translation>Logotipo:</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/UI/AddPublisher.ui" line="77"/>
+        <source>Themes:</source>
+        <translation>Temas:</translation>
+    </message>
+</context>
+<context>
+    <name>AddTheme</name>
+    <message>
         <location filename="../src/gui/UI/AddTheme.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulario</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/AddPublihser.ui" line="20"/>
         <location filename="../src/gui/UI/AddTheme.ui" line="23"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome:</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/AddPublihser.ui" line="30"/>
         <location filename="../src/gui/UI/AddTheme.ui" line="33"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrição:</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/AddPublihser.ui" line="40"/>
         <location filename="../src/gui/UI/AddTheme.ui" line="43"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/AddPublihser.ui" line="50"/>
         <location filename="../src/gui/UI/AddTheme.ui" line="53"/>
         <source>Add</source>
-        <translation type="unfinished">Adicionar</translation>
+        <translation>Adicionar</translation>
     </message>
+</context>
+<context>
+    <name>Form</name>
     <message>
-        <location filename="../src/gui/UI/AddPublihser.ui" line="57"/>
-        <source>Critique:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gui/UI/AddPublihser.ui" line="67"/>
-        <source>Logo:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gui/UI/AddPublihser.ui" line="77"/>
-        <source>Themes:</source>
-        <translation type="unfinished"></translation>
+        <source>Add</source>
+        <translation type="obsolete">Adicionar</translation>
     </message>
 </context>
 <context>
@@ -109,9 +140,19 @@
         <translation>Temas</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="344"/>
+        <location filename="../src/gui/UI/MainWindow.ui" line="347"/>
         <source>Tab 1</source>
         <translation>Aba 1</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="18"/>
+        <source>Add Theme</source>
+        <translation>Adicionar Tema</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="26"/>
+        <source>Add Publisher</source>
+        <translation>Adicionar Editora</translation>
     </message>
 </context>
 </TS>

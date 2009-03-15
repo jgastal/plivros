@@ -7,8 +7,8 @@ MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
 {
 	setupUi(this);
 	tabWidget->clear();
-	connect(themesAdd, SIGNAL(released()), this, SLOT(createAddThemeForm()));
-	connect(publisherAdd, SIGNAL(released()), this, SLOT(createAddPublisherForm()));
+	connect(themesAdd, SIGNAL(clicked()), this, SLOT(createAddThemeForm()));
+	connect(publisherAdd, SIGNAL(clicked()), this, SLOT(createAddPublisherForm()));
 	connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 }
 
