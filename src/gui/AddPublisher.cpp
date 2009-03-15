@@ -82,6 +82,7 @@ void AddPublisher::populateThemesListWidget()
 		QStringList strList;
 		for(QList<Theme>::iterator it = themeList.begin(); it != themeList.end(); it++)
 			strList.append(it->getName().c_str());
+		themesListWidget->clear();
 		themesListWidget->insertItems(0, strList);
 	}
 	catch(DataBaseException dbe)

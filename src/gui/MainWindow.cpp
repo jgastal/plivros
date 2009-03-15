@@ -37,7 +37,9 @@ void MainWindow::createAddThemeForm()
 void MainWindow::createAddPublisherForm()
 {
 	tabWidget->setUpdatesEnabled(false);
-	int pos = tabWidget->addTab(new AddPublisher(c, tabWidget), tr("Add Publisher"));
+	AddPublisher *ap = new AddPublisher(c, tabWidget);
+	int pos = tabWidget->addTab(ap, tr("Add Publisher"));
+	connect(c, SIGNAL(themeInserted()), ap, SLOT(populateThemesListWidget()));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }
