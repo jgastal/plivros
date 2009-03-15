@@ -1,3 +1,11 @@
+/**
+ * @file MainWindow.h
+ *
+ * @date 13/03/2009
+ * @author Jonas M. Gastal
+ * @brief Provides the class definition.
+ */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

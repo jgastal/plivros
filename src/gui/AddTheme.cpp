@@ -1,3 +1,11 @@
+/**
+ * @file AddTheme.cpp
+ *
+ * @date 14/03/2009
+ * @author Jonas M. Gastal
+ * @brief Provides the class implementation.
+ */
+
 #include <QMessageBox>
 
 #include "AddTheme.h"

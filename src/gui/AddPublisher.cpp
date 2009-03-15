@@ -1,3 +1,11 @@
+/**
+ * @file AddPublisher.cpp
+ *
+ * @date 14/03/2009
+ * @author Jonas M. Gastal
+ * @brief Provides the class implementation.
+ */
+
 #include <QList>
 
 #include "AddPublisher.h"

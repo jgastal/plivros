@@ -1,3 +1,11 @@
+/**
+ * @file AddTheme.h
+ *
+ * @date 14/03/2009
+ * @author Jonas M. Gastal
+ * @brief Provides the class definition.
+ */
+
 #ifndef ADDTHEME_H
 #define ADDTHEME_H
 

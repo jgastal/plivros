@@ -1,3 +1,11 @@
+/**
+ * @file AddPublisher.h
+ *
+ * @date 14/03/2009
+ * @author Jonas M. Gastal
+ * @brief Provides the class definition.
+ */
+
 #ifndef ADDPUBLISHER_H
 #define ADDPUBLISHER_H
 

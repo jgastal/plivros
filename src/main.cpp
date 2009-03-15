@@ -1,3 +1,11 @@
+/**
+ * @file main.cpp
+ *
+ * @date 09/11/2008
+ * @author Jonas M. Gastal
+ * @brief Just serves as an entry point
+ */
+
 #include <QApplication>
 #include <QTranslator>
 #include <QLocale>

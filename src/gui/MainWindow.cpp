@@ -1,3 +1,11 @@
+/**
+ * @file MainWindow.cpp
+ *
+ * @date 13/03/2009
+ * @author Jonas M. Gastal
+ * @brief Provides the class implementation.
+ */
+
 #include "AddTheme.h"
 #include "AddPublisher.h"
 
