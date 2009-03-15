@@ -26,7 +26,7 @@ void MainWindow::createAddThemeForm()
 void MainWindow::createAddPublisherForm()
 {
 	tabWidget->setUpdatesEnabled(false);
-	int pos = tabWidget->addTab(new AddPublisher(tabWidget), tr("Add Publisher"));
+	int pos = tabWidget->addTab(new AddPublisher(c, tabWidget), tr("Add Publisher"));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }
