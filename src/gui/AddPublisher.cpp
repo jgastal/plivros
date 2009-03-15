@@ -35,6 +35,7 @@ AddPublisher::AddPublisher(Collection *c, QWidget *parent) : QWidget(parent)
 	connect(cancelPushButton, SIGNAL(clicked(bool)), this, SLOT(close()));
 }
 
+///@brief Closes the tab that owns this form.
 void AddPublisher::close()
 {
 	QTabWidget *w = (QTabWidget*)parent;

@@ -13,6 +13,7 @@
 
 #include "Collection.h"
 
+///@brief Constructor. Creates a collection, setups the gui and connects slots and signals.
 MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
 {
 	c = new Collection("User");
@@ -23,6 +24,7 @@ MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
 	connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 }
 
+///@brief Adds a tab and creates a form to add a theme in it.
 void MainWindow::createAddThemeForm()
 {
 	tabWidget->setUpdatesEnabled(false);
@@ -31,6 +33,7 @@ void MainWindow::createAddThemeForm()
 	tabWidget->setUpdatesEnabled(true);
 }
 
+///@brief Adds a tab and creates a form to add a publisher in it.
 void MainWindow::createAddPublisherForm()
 {
 	tabWidget->setUpdatesEnabled(false);
@@ -39,6 +42,7 @@ void MainWindow::createAddPublisherForm()
 	tabWidget->setUpdatesEnabled(true);
 }
 
+///@brief Closes any given tab.
 void MainWindow::closeTab(int index)
 {
 	tabWidget->removeTab(index);

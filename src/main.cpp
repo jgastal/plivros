@@ -3,7 +3,7 @@
  *
  * @date 09/11/2008
  * @author Jonas M. Gastal
- * @brief Just serves as an entry point
+ * @brief Just serves as an entry point.
  */
 
 #include <QApplication>

@@ -25,6 +25,7 @@ AddTheme::AddTheme(Collection *c, QWidget *parent) : QWidget(parent)
 	connect(cancelPushButton, SIGNAL(clicked(bool)), this, SLOT(close()));
 }
 
+///@brief Adds the theme described in the form(if validated).
 void AddTheme::add()
 {
 	if(!validateInput())
@@ -45,12 +46,14 @@ void AddTheme::add()
 	close();
 }
 
+///@brief Closes the tab that owns this form.
 void AddTheme::close()
 {
 	QTabWidget *w = (QTabWidget*)parent;
 	w->removeTab(w->currentIndex());
 }
 
+///@brief Makes sure the name has been filed out.
 bool AddTheme::validateInput()
 {
 	if(!nameLineEdit->text().isEmpty())

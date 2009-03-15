@@ -13,6 +13,11 @@
 
 class Collection;
 
+/**
+ * @class AddTheme AddTheme.h
+ *
+ * @brief This widget is a form to add a theme.
+ */
 class AddTheme : public QWidget, private Ui::AddTheme
 {
 	Q_OBJECT

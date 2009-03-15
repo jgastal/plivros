@@ -13,6 +13,11 @@
 
 class Collection;
 
+/**
+ * @class MainWindow MainWindow.h
+ *
+ * @brief This is the main window of the program offering a start point to the user interface.
+ */
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
 	Q_OBJECT

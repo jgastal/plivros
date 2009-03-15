@@ -15,6 +15,11 @@
 
 class Collection;
 
+/**
+ * @class AddPublisher AddPublisher.h
+ *
+ * @brief This widget is a form to add a publisher.
+ */
 class AddPublisher : public QWidget, private Ui::AddPublisher
 {
 	Q_OBJECT
