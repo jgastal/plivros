@@ -11,6 +11,8 @@
 
 #include <QMessageBox>
 
+class DataBaseException;
+
 /**
  * @class MessageBoxDataBaseException MessageBoxDataBaseException.h
  *
@@ -25,8 +27,8 @@
 class MessageBoxDataBaseException : public QMessageBox
 {
 	public:
-		MessageBoxDataBaseException(QWidget *parent = 0);
+		MessageBoxDataBaseException(DataBaseException *dbe, QWidget *parent = 0);
 		void appendText(QString str);
-}
+} ;
 
 #endif //MESSAGEBOXDATABASEEXCEPTION_H

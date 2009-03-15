@@ -11,6 +11,7 @@
 #include "AddTheme.h"
 
 #include "MainWindow.h"
+#include "MessageBoxDataBaseException.h"
 
 #include "Collection.h"
 #include "DataBaseException.h"
@@ -39,7 +40,7 @@ void AddTheme::add()
 	}
 	catch(DataBaseException dbe)
 	{
-		MessageBoxDataBaseException q(this);
+		MessageBoxDataBaseException q(&dbe, this);
 		q.appendText(tr("Your theme has not been added."));
 		q.exec();
 	}

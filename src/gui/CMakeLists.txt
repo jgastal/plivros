@@ -5,11 +5,13 @@ set( LIBRARY_OUTPUT_PATH "${EXECUTABLE_OUTPUT_PATH}/gui" )
 set( headers
 	MainWindow.h
 	AddTheme.h
-	AddPublisher.h )
+	AddPublisher.h
+	MessageBoxDataBaseException.h )
 set( sources
 	MainWindow.cpp
 	AddTheme.cpp
-	AddPublisher.cpp )
+	AddPublisher.cpp
+	MessageBoxDataBaseException.cpp )
 
 #Target for uic generated headers
 set( UI_FILES

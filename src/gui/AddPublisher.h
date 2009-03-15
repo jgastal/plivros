@@ -27,12 +27,16 @@ class AddPublisher : public QWidget, private Ui::AddPublisher
 	public:
 		AddPublisher(Collection *c, QWidget *parent = 0);
 
+	public slots:
+		void populateThemesListWidget();
+
 	private slots:
-		//void add();
+		void add();
 		void close();
-		
+
 	private:
 		bool validateInput();
+		QList<Theme> getSelectedThemes();
 		QWidget *parent;
 		Collection *c;
 		QList<Theme> themeList;
