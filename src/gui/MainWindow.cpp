@@ -7,6 +7,7 @@
  */
 
 #include "AddTheme.h"
+#include "EditTheme.h"
 #include "AddPublisher.h"
 
 #include "MainWindow.h"
@@ -39,7 +40,7 @@ void MainWindow::createAddPublisherForm()
 	tabWidget->setUpdatesEnabled(false);
 	AddPublisher *ap = new AddPublisher(c, tabWidget);
 	int pos = tabWidget->addTab(ap, tr("Add Publisher"));
-	connect(c, SIGNAL(themeInserted()), ap, SLOT(populateThemesListWidget()));
+	connect(c, SIGNAL(themesChanged()), ap, SLOT(populateThemesListWidget()));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }
