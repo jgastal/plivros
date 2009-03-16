@@ -35,6 +35,7 @@ void AddPublisher::close()
 	w->removeTab(w->currentIndex());
 }
 
+///@brief Adds publisher described in the form.
 void AddPublisher::add()
 {
 	if(!validateInput())
@@ -84,6 +85,7 @@ QList<Theme> AddPublisher::getSelectedThemes()
 	return list;
 }
 
+///@brief Filles themesListWidget with all existing themes.
 void AddPublisher::populateThemesListWidget()
 {
 	try
@@ -103,6 +105,7 @@ void AddPublisher::populateThemesListWidget()
 	}
 }
 
+///@brief Shows file chooser and puts chosen file in logoLineEdit.
 void AddPublisher::logoFileChooser()
 {
 	QFileDialog d(this);
