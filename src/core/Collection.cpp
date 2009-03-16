@@ -45,6 +45,23 @@ Collection::Collection(QString u, QString customDbName, bool ro) throw(bad_alloc
 	ac = new AuthorCollection(db);
 	pc = new PublisherCollection(db);
 	tc = new ThemeCollection(db);
+
+	//reflects any change in the books table
+	connect(this, SIGNAL(bookInserted()), this, SIGNAL(booksChanged()));
+	connect(this, SIGNAL(bookDeleted()), this, SIGNAL(booksChanged()));
+	connect(this, SIGNAL(bookUpdated()), this, SIGNAL(booksChanged()));
+	//reflects any change in the authors table
+	connect(this, SIGNAL(authorInserted()), this, SIGNAL(authorsChanged()));
+	connect(this, SIGNAL(authorDeleted()), this, SIGNAL(authorsChanged()));
+	connect(this, SIGNAL(authorUpdated()), this, SIGNAL(authorsChanged()));
+	//reflects any change in the publishers table
+	connect(this, SIGNAL(publisherInserted()), this, SIGNAL(publishersChanged()));
+	connect(this, SIGNAL(publisherDeleted()), this, SIGNAL(publishersChanged()));
+	connect(this, SIGNAL(publisherUpdated()), this, SIGNAL(publishersChanged()));
+	//reflects any change in the themes table
+	connect(this, SIGNAL(themeInserted()), this, SIGNAL(themesChanged()));
+	connect(this, SIGNAL(themeDeleted()), this, SIGNAL(themesChanged()));
+	connect(this, SIGNAL(themeUpdated()), this, SIGNAL(themesChanged()));
 }
 
 ///@brief Closes database.
@@ -107,7 +124,11 @@ bool Collection::deleteBook(unsigned int id) throw(DataBaseException)
 	deleteReference("book", id, "theme", db);
 	deleteReference("book", id, "author", db);
 	deleteReference("book", id, "publisher", db);
-	return bc->deleteBook(id);
+	bool retVal = bc->deleteBook(id);
+	if(retVal)
+		emit bookDeleted();
+
+	return retVal;
 }
 
 /**
@@ -128,6 +149,7 @@ bool Collection::updateBook(Book b) throw(DataBaseException)
 	updateAuthorReference(b, "book");
 	updatePublisherReference(b, "book");
 	updateThemeReference(b);
+	emit bookUpdated();
 
 	return true;
 }
@@ -201,7 +223,11 @@ bool Collection::deleteAuthor(unsigned int id) throw(DataBaseException)
 	if(readOnly)
 		return false;
 	deleteReference("author", id, "theme", db);
-	return ac->deleteAuthor(id);
+	bool retVal = ac->deleteAuthor(id);
+	if(retVal)
+		emit authorDeleted();
+
+	return retVal;
 }
 
 /**
@@ -220,6 +246,7 @@ bool Collection::updateAuthor(Author a) throw(DataBaseException)
 		return false;
 	ac->updateAuthor(a);
 	updateThemeReference(a);
+	emit authorUpdated();
 
 	return true;
 }
@@ -288,7 +315,11 @@ bool Collection::deletePublisher(unsigned int id) throw(DataBaseException)
 		return false;
 
 	deleteReference("publisher", id, "theme", db);
-	return pc->deletePublisher(id);
+	bool retVal = pc->deletePublisher(id);
+	if(retVal)
+		emit publisherDeleted();
+
+	return retVal;
 }
 
 /**
@@ -307,6 +338,7 @@ bool Collection::updatePublisher(Publisher p) throw(DataBaseException)
 		return false;
 	pc->updatePublisher(p);
 	updateThemeReference(p);
+	emit publisherUpdated();
 
 	return true;
 }
@@ -364,7 +396,11 @@ bool Collection::deleteTheme(unsigned int id) throw(DataBaseException)
 {
 	if(readOnly)
 		return false;
-	return tc->deleteTheme(id);
+	int retVal = tc->deleteTheme(id);
+	if(retVal)
+		emit themeDeleted();
+
+	return retVal;
 }
 
 /**
@@ -382,6 +418,7 @@ bool Collection::updateTheme(Theme t) throw(DataBaseException)
 	if(readOnly)
 		return false;
 	tc->updateTheme(t);
+	emit themeUpdated();
 
 	return true;
 }

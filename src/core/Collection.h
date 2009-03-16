@@ -70,10 +70,38 @@ class Collection : public QObject
 		QList<Theme> searchThemes(Theme::theme_field field, string name) throw(DataBaseException);
 
 	signals:
+		///@brief Emited when a book is inserted in this collection.
 		void bookInserted();
+		///@brief Emited when a book is deleted in this collection.
+		void bookDeleted();
+		///@brief Emited when a book is updated in this collection.
+		void bookUpdated();
+		///@brief Emited when any change in the books table of this collection occurs.
+		void booksChanged();
+		///@brief Emited when an author is inserted in this collection.
 		void authorInserted();
+		///@brief Emited when an author is deleted in this collection.
+		void authorDeleted();
+		///@brief Emited when an author is updated in this collection.
+		void authorUpdated();
+		///@brief Emited when any change in the authors table of this collection occurs.
+		void authorsChanged();
+		///@brief Emited when a publisher is inserted in this collection.
 		void publisherInserted();
+		///@brief Emited when a publisher is delete in this collection.
+		void publisherDeleted();
+		///@brief Emited when a publisher is updated in this collection.
+		void publisherUpdated();
+		///@brief Emited when any change in the publishers table of this collection occurs.
+		void publishersChanged();
+		///@brief Emited when a theme is inserted in this collection.
 		void themeInserted();
+		///@brief Emited when a theme is deleted in this collection.
+		void themeDeleted();
+		///@brief Emited when a theme is updated in this collection.
+		void themeUpdated();
+		///@brief Emited when any change in the themes table of this collection occurs.
+		void themesChanged();
 
 	private:
 		DataBase *db;
