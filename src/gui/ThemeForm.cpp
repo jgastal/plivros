@@ -23,6 +23,7 @@ ThemeForm::ThemeForm(Collection *c, QWidget *parent) : QWidget(parent)
 	this->c = c;
 	setupUi(this);
 	connect(cancelPushButton, SIGNAL(clicked(bool)), this, SLOT(close()));
+	connect(savePushButton, SIGNAL(clicked(bool)), this, SLOT(save()));
 }
 
 ///@brief Closes the tab that owns this form.

@@ -20,12 +20,11 @@
 
 AddTheme::AddTheme(Collection *c, QWidget *parent) : ThemeForm(c, parent)
 {
-	pushButton2->setText(tr("Add"));
-	connect(pushButton2, SIGNAL(clicked(bool)), this, SLOT(add()));
+	//just calling parent constructor suffices
 }
 
 ///@brief Adds the theme described in the form(if validated).
-void AddTheme::add()
+void AddTheme::save()
 {
 	if(!validateInput())
 		return;

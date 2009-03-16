@@ -27,6 +27,7 @@ class ThemeForm : public QWidget, protected Ui::ThemeForm
 
 	protected slots:
 		void close();
+		virtual void save() = 0;
 
 	protected:
 		bool validateInput();

@@ -26,7 +26,7 @@ class AddTheme : public ThemeForm
 		AddTheme(Collection *c, QWidget *parent = 0);
 
 	private slots:
-		void add();
+		void save();
 } ;
 
 #endif //ADDTHEME_H
