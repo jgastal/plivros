@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddPublisher</class>
- <widget class="QWidget" name="AddPublisher">
+ <class>PublisherForm</class>
+ <widget class="QWidget" name="PublisherForm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -92,12 +92,12 @@
     </widget>
    </item>
    <item row="5" column="1">
-    <widget class="QPushButton" name="addPushButton">
+    <widget class="QPushButton" name="savePushButton">
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="text">
-      <string>Add</string>
+      <string>Save</string>
      </property>
     </widget>
    </item>
@@ -107,9 +107,11 @@
   <tabstop>nameLineEdit</tabstop>
   <tabstop>descriptionLineEdit</tabstop>
   <tabstop>critiqueLineEdit</tabstop>
+  <tabstop>logoLineEdit</tabstop>
+  <tabstop>logoPushButton</tabstop>
   <tabstop>themesListWidget</tabstop>
   <tabstop>cancelPushButton</tabstop>
-  <tabstop>addPushButton</tabstop>
+  <tabstop>savePushButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

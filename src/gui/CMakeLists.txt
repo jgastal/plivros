@@ -6,12 +6,14 @@ set( headers
 	MainWindow.h
 	ThemeForm.h
 	AddTheme.h
+	PublisherForm.h
 	AddPublisher.h
 	MessageBoxDataBaseException.h )
 set( sources
 	MainWindow.cpp
 	ThemeForm.cpp
 	AddTheme.cpp
+	PublisherForm.cpp
 	AddPublisher.cpp
 	MessageBoxDataBaseException.cpp )
 
@@ -19,7 +21,7 @@ set( sources
 set( UI_FILES
 	"UI/MainWindow.ui"
 	"UI/ThemeForm.ui"
-	"UI/AddPublisher.ui" )
+	"UI/PublisherForm.ui" )
 qt4_wrap_ui( ui_out ${UI_FILES} )
 #The gui headers include uic generated files
 MACRO_ADD_FILE_DEPENDENCIES( ${headers} ${ui_out} )

@@ -9,7 +9,7 @@
 #ifndef ADDPUBLISHER_H
 #define ADDPUBLISHER_H
 
-#include "ui_AddPublisher.h"
+#include "PublisherForm.h"
 
 #include "Theme.h"
 
@@ -20,27 +20,15 @@ class Collection;
  *
  * @brief This widget is a form to add a publisher.
  */
-class AddPublisher : public QWidget, private Ui::AddPublisher
+class AddPublisher : public PublisherForm
 {
 	Q_OBJECT
 
 	public:
 		AddPublisher(Collection *c, QWidget *parent = 0);
 
-	public slots:
-		void populateThemesListWidget();
-
 	private slots:
-		void add();
-		void close();
-		void logoFileChooser();
-
-	private:
-		bool validateInput();
-		QList<Theme> getSelectedThemes();
-		QWidget *parent;
-		Collection *c;
-		QList<Theme> themeList;
+		void save();
 } ;
 
 #endif //ADDPUBLISHER_H
