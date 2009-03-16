@@ -1,7 +1,7 @@
 /**
- * @file AddPublisher.cpp
+ * @file PublisherForm.cpp
  *
- * @date 14/03/2009
+ * @date 17/03/2009
  * @author Jonas M. Gastal
  * @brief Provides the class implementation.
  */

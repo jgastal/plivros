@@ -1,7 +1,7 @@
 /**
- * @file AddPublisher.h
+ * @file PublisherForm.h
  *
- * @date 14/03/2009
+ * @date 17/03/2009
  * @author Jonas M. Gastal
  * @brief Provides the class definition.
  */
