@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddTheme</class>
- <widget class="QWidget" name="AddTheme">
+ <class>ThemeForm</class>
+ <widget class="QWidget" name="ThemeForm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -45,12 +45,12 @@
     </widget>
    </item>
    <item row="3" column="1">
-    <widget class="QPushButton" name="addPushButton">
+    <widget class="QPushButton" name="pushButton2">
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="text">
-      <string>Add</string>
+      <string>Button2</string>
      </property>
     </widget>
    </item>

@@ -4,11 +4,13 @@ set( LIBRARY_OUTPUT_PATH "${EXECUTABLE_OUTPUT_PATH}/gui" )
 
 set( headers
 	MainWindow.h
+	ThemeForm.h
 	AddTheme.h
 	AddPublisher.h
 	MessageBoxDataBaseException.h )
 set( sources
 	MainWindow.cpp
+	ThemeForm.cpp
 	AddTheme.cpp
 	AddPublisher.cpp
 	MessageBoxDataBaseException.cpp )
@@ -16,7 +18,7 @@ set( sources
 #Target for uic generated headers
 set( UI_FILES
 	"UI/MainWindow.ui"
-	"UI/AddTheme.ui"
+	"UI/ThemeForm.ui"
 	"UI/AddPublisher.ui" )
 qt4_wrap_ui( ui_out ${UI_FILES} )
 #The gui headers include uic generated files

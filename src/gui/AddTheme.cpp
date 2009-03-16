@@ -8,6 +8,7 @@
 
 #include <QMessageBox>
 
+#include "ThemeForm.h"
 #include "AddTheme.h"
 
 #include "MainWindow.h"
@@ -17,13 +18,10 @@
 #include "DataBaseException.h"
 #include "Theme.h"
 
-AddTheme::AddTheme(Collection *c, QWidget *parent) : QWidget(parent)
+AddTheme::AddTheme(Collection *c, QWidget *parent) : ThemeForm(c, parent)
 {
-	this->parent = parent;
-	this->c = c;
-	setupUi(this);
-	connect(addPushButton, SIGNAL(clicked(bool)), this, SLOT(add()));
-	connect(cancelPushButton, SIGNAL(clicked(bool)), this, SLOT(close()));
+	pushButton2->setText(tr("Add"));
+	connect(pushButton2, SIGNAL(clicked(bool)), this, SLOT(add()));
 }
 
 ///@brief Adds the theme described in the form(if validated).
@@ -45,25 +43,4 @@ void AddTheme::add()
 		q.exec();
 	}
 	close();
-}
-
-///@brief Closes the tab that owns this form.
-void AddTheme::close()
-{
-	QTabWidget *w = (QTabWidget*)parent;
-	w->removeTab(w->currentIndex());
-}
-
-///@brief Makes sure the name has been filed out.
-bool AddTheme::validateInput()
-{
-	if(!nameLineEdit->text().isEmpty())
-		return true;
-	QMessageBox q(this);
-	q.setIcon(QMessageBox::Warning);
-	q.setText(tr("You must enter the theme name."));
-	q.setDefaultButton(QMessageBox::Retry);
-	q.exec();
-	nameLineEdit->setFocus();
-	return false;
 }

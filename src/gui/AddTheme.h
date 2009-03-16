@@ -9,7 +9,7 @@
 #ifndef ADDTHEME_H
 #define ADDTHEME_H
 
-#include "ui_AddTheme.h"
+#include "ThemeForm.h"
 
 class Collection;
 
@@ -18,7 +18,7 @@ class Collection;
  *
  * @brief This widget is a form to add a theme.
  */
-class AddTheme : public QWidget, private Ui::AddTheme
+class AddTheme : public ThemeForm
 {
 	Q_OBJECT
 
@@ -27,12 +27,6 @@ class AddTheme : public QWidget, private Ui::AddTheme
 
 	private slots:
 		void add();
-		void close();
-
-	private:
-		bool validateInput();
-		QWidget *parent;
-		Collection *c;
 } ;
 
 #endif //ADDTHEME_H
