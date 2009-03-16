@@ -33,6 +33,7 @@ class AddPublisher : public QWidget, private Ui::AddPublisher
 	private slots:
 		void add();
 		void close();
+		void logoFileChooser();
 
 	private:
 		bool validateInput();

@@ -34,23 +34,6 @@
    <item row="1" column="1">
     <widget class="QLineEdit" name="descriptionLineEdit"/>
    </item>
-   <item row="5" column="0">
-    <widget class="QPushButton" name="cancelPushButton">
-     <property name="text">
-      <string>Cancel</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QPushButton" name="addPushButton">
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
-     <property name="text">
-      <string>Add</string>
-     </property>
-    </widget>
-   </item>
    <item row="2" column="0">
     <widget class="QLabel" name="critiqueLabel">
      <property name="text">
@@ -69,7 +52,23 @@
     </widget>
    </item>
    <item row="3" column="1">
-    <widget class="QLineEdit" name="logoLineEdit"/>
+    <widget class="QWidget" name="logoWidget" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLineEdit" name="logoLineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="logoPushButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item row="4" column="0">
     <widget class="QLabel" name="themesLabel">
@@ -85,8 +84,33 @@
      </property>
     </widget>
    </item>
+   <item row="5" column="0">
+    <widget class="QPushButton" name="cancelPushButton">
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QPushButton" name="addPushButton">
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>nameLineEdit</tabstop>
+  <tabstop>descriptionLineEdit</tabstop>
+  <tabstop>critiqueLineEdit</tabstop>
+  <tabstop>themesListWidget</tabstop>
+  <tabstop>cancelPushButton</tabstop>
+  <tabstop>addPushButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

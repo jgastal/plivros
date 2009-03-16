@@ -7,6 +7,7 @@
  */
 
 #include <QList>
+#include <QFileDialog>
 
 #include "AddPublisher.h"
 #include "MessageBoxDataBaseException.h"
@@ -24,6 +25,7 @@ AddPublisher::AddPublisher(Collection *c, QWidget *parent) : QWidget(parent)
 	populateThemesListWidget();
 	connect(addPushButton, SIGNAL(clicked(bool)), this, SLOT(add()));
 	connect(cancelPushButton, SIGNAL(clicked(bool)), this, SLOT(close()));
+	connect(logoPushButton, SIGNAL(clicked(bool)), this, SLOT(logoFileChooser()));
 }
 
 ///@brief Closes the tab that owns this form.
@@ -99,4 +101,15 @@ void AddPublisher::populateThemesListWidget()
 		q.appendText(tr("Couldn't populate list of themes.\nClosing this tab."));
 		q.exec();
 	}
+}
+
+void AddPublisher::logoFileChooser()
+{
+	QFileDialog d(this);
+	d.setFileMode(QFileDialog::ExistingFile);
+	d.setViewMode(QFileDialog::Detail);
+	d.exec();
+	QStringList strList = d.selectedFiles();
+	if(strList.count())
+		logoLineEdit->setText(strList.first());
 }
