@@ -14,6 +14,7 @@
  * @brief Constructor
  *
  * @param parent Parent of this widget passed on to QMessageBox constructor.
+ * @param dbe DataBaseException from which to get messages.
  *
  * This constructor in addition to constructing the object sets its icon,
  * text, default button and detailed text.

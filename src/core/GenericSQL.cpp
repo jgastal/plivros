@@ -160,6 +160,7 @@ void deleteReference(string type, unsigned int id, string refType, DataBase *db)
  *
  * @param id ID of object to removed from collection.
  * @param type Type of object to be removed from collection.
+ * @param db Database from which to delete this object.
  *
  * @return Whether operation was successful.
  *
