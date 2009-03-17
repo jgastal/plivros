@@ -33,6 +33,7 @@ Book::Book() : DataObject("", 0)
 	setTranslator(Author());
 	setPublishers(QList<Publisher>());
 	setThemes(QList<Theme>());
+	initHeaders();
 }
 
 Book::Book(char isbn[13], string title, unsigned short int ed, string cri,
@@ -53,6 +54,17 @@ Book::Book(char isbn[13], string title, unsigned short int ed, string cri,
 	setTranslator(tr);
 	setPublishers(p);
 	setThemes(t);
+	initHeaders();
+}
+
+void Book::initHeaders()
+{
+	headers << QT_TR_NOOP("ISBN") << QT_TR_NOOP("Title") << QT_TR_NOOP("Edition");
+	headers << QT_TR_NOOP("Critique") << QT_TR_NOOP("Description");
+	headers << QT_TR_NOOP("Cover") << QT_TR_NOOP("E-Book");
+	headers << QT_TR_NOOP("Publishing Date") << QT_TR_NOOP("U.D.C.");
+	headers << QT_TR_NOOP("Authors") << QT_TR_NOOP("Translator");
+	headers << QT_TR_NOOP("Publishers") << QT_TR_NOOP("Themes");
 }
 
 const char* Book::getIsbn() const
@@ -187,6 +199,13 @@ void Book::setThemes(QList<Theme> themes)
 	this->themes = themes;
 }
 
+QString Book::getThemesNames() const
+{
+	QString str("");
+	for(QList<Theme>::const_iterator it = themes.begin(); it != themes.end(); it++)
+		str.append(it->getName().c_str()).append("; ");
+}
+
 bool Book::operator==(const Book b) const
 {
 	if(getIsbn() == b.getIsbn() && getTitle() == b.getTitle() && getEdition() == b.getEdition()
@@ -198,4 +217,14 @@ bool Book::operator==(const Book b) const
 		&& getThemes() == b.getThemes() && getId() == b.getId())
 		return true;
 	return false;
+}
+
+QStringList Book::getProperties() const
+{
+	QStringList prop;
+// 	prop << getIsbn() << getTitle().c_str() << getEdition() << getCritique().c_str();
+// 	prop << getDescription().c_str() << getRating() << getCover().c_str() << getEbook().c_str();
+// 	prop << getPubDate().toString() << getUDC().c_str() << getAuthorsNames();
+// 	prop << getTranslatorName() << getPublishersNames() << getThemesNames();
+	return prop;
 }

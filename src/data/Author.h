@@ -10,7 +10,8 @@
 
 #include <string>
 
-#include <QtCore/QList>
+#include <QList>
+#include <QStringList>
 
 #include "Theme.h"
 #include "DataObject.h"
@@ -35,7 +36,9 @@ class Author : public DataObject
 		string getPicture() const;
 		void setPicture(string);
 		QList<Theme> getThemes() const;
+		QString getThemesNames() const;
 		void setThemes(QList<Theme> themes);
+		QStringList getProperties() const;
 		bool operator==(const Author a) const;
 
 		enum author_field
@@ -50,6 +53,7 @@ class Author : public DataObject
 		};
 
 	private:
+		void initHeaders();
 		string firstName;
 		string lastName;
 		string critique;

@@ -7,7 +7,7 @@
 
 #include <string>
 
-#include <QtCore/QList>
+#include <QList>
 
 #include "Author.h"
 #include "Theme.h"
@@ -23,6 +23,7 @@ Author::Author() : DataObject("", 0)
 	setRating(0);
 	setPicture("");
 	setThemes(QList<Theme>());
+	initHeaders();
 }
 
 Author::Author(string fn, string ln, string desc, string cri,
@@ -34,6 +35,15 @@ Author::Author(string fn, string ln, string desc, string cri,
 	setRating(rat);
 	setPicture(pic);
 	setThemes(t);
+	initHeaders();
+}
+
+void Author::initHeaders()
+{
+	headers << QT_TR_NOOP("First Name") << QT_TR_NOOP("Last Name");
+	headers << QT_TR_NOOP("Description") << QT_TR_NOOP("Critique");
+	headers << QT_TR_NOOP("Rating") << QT_TR_NOOP("Picture");
+	headers << QT_TR_NOOP("Themes");
 }
 
 string Author::getFirstName() const
@@ -90,6 +100,13 @@ QList<Theme> Author::getThemes() const
 	return themes;
 }
 
+QString Author::getThemesNames() const
+{
+	QString str("");
+	for(QList<Theme>::const_iterator it = themes.begin(); it != themes.end(); it++)
+		str.append(it->getName().c_str()).append("; ");
+}
+
 void Author::setThemes(QList<Theme> themes)
 {
 	this->themes = themes;
@@ -103,4 +120,12 @@ bool Author::operator==(const Author a) const
 		getThemes() == a.getThemes() && getId() == a.getId())
 		return true;
 	return false;
+}
+
+QStringList Author::getProperties() const
+{
+	QStringList prop;
+	//prop << getFirstName() << getLastName() << getDescription() << getCritique();
+	//prop << getRating() << getPicture() << getThemesNames();
+	return prop;
 }

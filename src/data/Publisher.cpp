@@ -21,6 +21,7 @@ Publisher::Publisher() : DataObject("", 0)
 	setCritique("");
 	setLogo("");
 	setThemes(QList<Theme>());
+	initHeaders();
 }
 
 Publisher::Publisher(string nm, string desc, string cri, string logo, QList<Theme> t, unsigned int id) : DataObject(desc, id)
@@ -29,6 +30,13 @@ Publisher::Publisher(string nm, string desc, string cri, string logo, QList<Them
 	setCritique(cri);
 	setLogo(logo);
 	setThemes(t);
+	initHeaders();
+}
+
+void Publisher::initHeaders()
+{
+	headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
+	headers << QT_TR_NOOP("Critique") << QT_TR_NOOP("Logo") << QT_TR_NOOP("Themes");
 }
 
 string Publisher::getName() const
@@ -66,6 +74,13 @@ QList<Theme> Publisher::getThemes() const
 	return themes;
 }
 
+QString Publisher::getThemesNames() const
+{
+	QString str("");
+	for(QList<Theme>::const_iterator it = themes.begin(); it != themes.end(); it++)
+		str.append(it->getName().c_str()).append("; ");
+}
+
 void Publisher::setThemes(QList<Theme> themes)
 {
 	this->themes = themes;
@@ -78,4 +93,10 @@ bool Publisher::operator==(const Publisher p) const
 		getThemes() == p.getThemes() && getId() == p.getId())
 		return true;
 	return false;
+}
+
+QStringList Publisher::getProperties() const
+{
+	QStringList prop;
+	return prop;
 }

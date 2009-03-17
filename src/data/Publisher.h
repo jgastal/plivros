@@ -10,7 +10,8 @@
 
 #include <string>
 
-#include <QtCore/QList>
+#include <QList>
+#include <QStringList>
 
 #include "Theme.h"
 #include "DataObject.h"
@@ -30,8 +31,10 @@ class Publisher : public DataObject
 		string getLogo() const;
 		void setLogo(string logo);
 		QList<Theme> getThemes() const;
+		QString getThemesNames() const;
 		void setThemes(QList<Theme> themes);
 		bool operator==(const Publisher p) const;
+		QStringList getProperties() const;
 
 		enum publisher_field
 		{
@@ -43,6 +46,7 @@ class Publisher : public DataObject
 		};
 
 	private:
+		void initHeaders();
 		string name;
 		string critique;
 		string logo;

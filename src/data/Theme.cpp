@@ -15,11 +15,18 @@ using namespace std;
 Theme::Theme() : DataObject("", 0)
 {
 	setName("");
+	initHeaders();
 }
 
 Theme::Theme(string nm, string desc, unsigned int id) : DataObject(desc, id)
 {
 	setName(nm);
+	initHeaders();
+}
+
+void Theme::initHeaders()
+{
+	headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
 }
 
 string Theme::getName() const
@@ -37,4 +44,11 @@ bool Theme::operator==(const Theme &t) const
 	if(getName() == t.getName() && getDescription() == t.getDescription() && getId() == t.getId())
 		return true;
 	return false;
+}
+
+QStringList Theme::getProperties() const
+{
+	QStringList prop;
+	//prop << getName() << getDescription();
+	return prop;
 }

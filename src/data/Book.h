@@ -10,8 +10,9 @@
 
 #include <string>
 
-#include <QtCore/QList>
-#include <QtCore/QDate>
+#include <QList>
+#include <QDate>
+#include <QStringList>
 
 #include "Author.h"
 #include "Publisher.h"
@@ -48,12 +49,17 @@ class Book : public DataObject
 		void setUDC(string UDC);
 		QList<Author> getAuthors() const;
 		void setAuthors(QList<Author> authors);
+		QString getAuthorsNames() const;
 		Author getTranslator() const;
+		QString getTranslatorName() const;
 		void setTranslator(const Author &tr);
 		QList<Publisher> getPublishers() const;
+		QString getPublishersNames() const;
 		void setPublishers(QList<Publisher> publishers);
 		QList<Theme> getThemes() const;
+		QString getThemesNames() const;
 		void setThemes(QList<Theme> themes);
+		QStringList getProperties() const;
 		bool operator==(const Book b) const;
 
 		enum book_field
@@ -75,6 +81,7 @@ class Book : public DataObject
 		};
 
 	private:
+		void initHeaders();
 		char isbn[14]; //International Standard Book Number + '/0'
 		string title;
 		unsigned short int edition;

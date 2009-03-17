@@ -30,3 +30,18 @@ void DataObject::setDescription(const string description)
 {
 	this->description = description;
 }
+
+unsigned short int DataObject::getPropertiesCount() const
+{
+	return propertiesCount;
+}
+
+void DataObject::setPropertiesCount(unsigned short int c)
+{
+	this->propertiesCount = c;
+}
+
+QStringList DataObject::getHeaders() const
+{
+	return headers;
+}

@@ -11,6 +11,7 @@
 #include "DataObject.h"
 
 #include <string>
+#include <QStringList>
 
 using namespace std;
 
@@ -22,6 +23,7 @@ class Theme : public DataObject
 		string getName() const;
 		void setName(const string name);
 		bool operator==(const Theme &t) const;
+		QStringList getProperties() const;
 
 		enum theme_field
 		{
@@ -30,6 +32,7 @@ class Theme : public DataObject
 		};
 
 	private:
+		void initHeaders();
 		string name;
 } ;
 
