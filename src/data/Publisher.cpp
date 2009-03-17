@@ -11,38 +11,24 @@
 
 #include "Publisher.h"
 #include "Theme.h"
+#include "DataObject.h"
 
 using namespace std;
 
-Publisher::Publisher()
+Publisher::Publisher() : DataObject("", 0)
 {
 	setName("");
-	setDescription("");
 	setCritique("");
 	setLogo("");
 	setThemes(QList<Theme>());
-	this->id = 0;
 }
 
-Publisher::Publisher(string nm, string desc, string cri, string logo, QList<Theme> t, unsigned int id)
+Publisher::Publisher(string nm, string desc, string cri, string logo, QList<Theme> t, unsigned int id) : DataObject(desc, id)
 {
 	setName(nm);
-	setDescription(desc);
 	setCritique(cri);
 	setLogo(logo);
 	setThemes(t);
-	this->id = id;
-}
-
-unsigned int Publisher::getId() const
-{
-	return id;
-}
-
-void Publisher::setId(unsigned int id)
-{
-	if(this->id == 0) //If id has never been set.
-		this->id = id;
 }
 
 string Publisher::getName() const
@@ -53,16 +39,6 @@ string Publisher::getName() const
 void Publisher::setName(string name)
 {
 	this->name = name;
-}
-
-string Publisher::getDescription() const
-{
-	return description;
-}
-
-void Publisher::setDescription(string description)
-{
-	this->description = description;
 }
 
 string Publisher::getCritique() const
@@ -97,8 +73,9 @@ void Publisher::setThemes(QList<Theme> themes)
 
 bool Publisher::operator==(const Publisher p) const
 {
-	if(name == p.getName() && description == p.getDescription() && critique == p.getCritique()
-		&& logo == p.getLogo() && themes == p.getThemes())
+	if(getName() == p.getName() && getDescription() == p.getDescription() &&
+		getCritique() == p.getCritique() && getLogo() == p.getLogo() &&
+		getThemes() == p.getThemes() && getId() == p.getId())
 		return true;
 	return false;
 }

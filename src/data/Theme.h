@@ -8,22 +8,20 @@
 #ifndef THEME_H_
 #define THEME_H_
 
+#include "DataObject.h"
+
 #include <string>
 
 using namespace std;
 
-class Theme
+class Theme : public DataObject
 {
 	public:
 		Theme();
 		Theme(string nm, string desc, unsigned int id = 0);
-		unsigned int getId() const;
-		void setId(unsigned int id);
 		string getName() const;
-		void setName(string name);
-		string getDescription() const;
-		void setDescription(string description);
-		bool operator==(const Theme t) const;
+		void setName(const string name);
+		bool operator==(const Theme &t) const;
 
 		enum theme_field
 		{
@@ -32,9 +30,7 @@ class Theme
 		};
 
 	private:
-		unsigned int id;
 		string name;
-		string description;
 } ;
 
 #endif /* THEME_H_ */

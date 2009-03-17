@@ -11,43 +11,29 @@
 
 #include "Author.h"
 #include "Theme.h"
+#include "DataObject.h"
 
 using namespace std;
 
-Author::Author()
+Author::Author() : DataObject("", 0)
 {
 	setFirstName("");
 	setLastName("");
-	setDescription("");
 	setCritique("");
 	setRating(0);
 	setPicture("");
 	setThemes(QList<Theme>());
-	this->id = 0;
 }
 
 Author::Author(string fn, string ln, string desc, string cri,
-	unsigned short int rat, string pic, QList<Theme> t, unsigned int id)
+	unsigned short int rat, string pic, QList<Theme> t, unsigned int id) : DataObject(desc, id)
 {
 	setFirstName(fn);
 	setLastName(ln);
-	setDescription(desc);
 	setCritique(cri);
 	setRating(rat);
 	setPicture(pic);
 	setThemes(t);
-	this->id = id;
-}
-
-unsigned int Author::getId() const
-{
-	return id;
-}
-
-void Author::setId(unsigned int id)
-{
-	if(this->id == 0) //If id has never been set.
-		this->id = id;
 }
 
 string Author::getFirstName() const
@@ -69,17 +55,6 @@ void Author::setLastName(string lastName)
 {
 	this->lastName = lastName;
 }
-
-string Author::getDescription() const
-{
-	return description;
-}
-
-void Author::setDescription(string Description)
-{
-	this->description = description;
-}
-
 string Author::getCritique() const
 {
 	return critique;
@@ -122,10 +97,10 @@ void Author::setThemes(QList<Theme> themes)
 
 bool Author::operator==(const Author a) const
 {
-	if(firstName == a.getFirstName() && lastName == a.getLastName() && 
-		description == a.getDescription() && critique == a.getCritique()
-		&& rating == a.getRating() && picture == a.getPicture() &&
-		themes == a.getThemes())
+	if(firstName == a.getFirstName() && getLastName() == a.getLastName() &&
+		getDescription() == a.getDescription() && getCritique() == a.getCritique()
+		&& getRating() == a.getRating() && getPicture() == a.getPicture() &&
+		getThemes() == a.getThemes() && getId() == a.getId())
 		return true;
 	return false;
 }

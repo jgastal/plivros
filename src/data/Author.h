@@ -13,24 +13,21 @@
 #include <QtCore/QList>
 
 #include "Theme.h"
+#include "DataObject.h"
 
 using namespace std;
 
-class Author
+class Author : public DataObject
 {
 	public:
 		Author();
 		Author(string fn, string ln, string desc, string cri,
 			unsigned short int rat, string pic, QList<Theme> t,
 			unsigned int id = 0);
-		unsigned int getId() const;
-		void setId(unsigned int id);
 		string getFirstName() const;
 		void setFirstName(string);
 		string getLastName() const;
 		void setLastName(string);
-		string getDescription() const;
-		void setDescription(string);
 		string getCritique() const;
 		void setCritique(string);
 		unsigned short int getRating() const;
@@ -53,10 +50,8 @@ class Author
 		};
 
 	private:
-		unsigned int id;
 		string firstName;
 		string lastName;
-		string description;
 		string critique;
 		unsigned short int rating;
 		string picture; //path to picture of author

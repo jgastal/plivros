@@ -16,10 +16,11 @@
 #include "Author.h"
 #include "Publisher.h"
 #include "Theme.h"
+#include "DataObject.h"
 
 using namespace std;
 
-class Book
+class Book : public DataObject
 {
 	public:
 		Book();
@@ -27,8 +28,6 @@ class Book
 			string desc, unsigned short int rat, string cov, string eb, QDate d,
 			string UDC, QList<Author> a, const Author &tr, QList<Publisher> p,
 			QList<Theme> t, unsigned int id = 0);
-		unsigned int getId() const;
-		void setId(unsigned int id);
 		const char* getIsbn() const;
 		void setIsbn(const char ISBN[13]);
 		string getTitle() const;
@@ -37,8 +36,6 @@ class Book
 		void setEdition(unsigned short int edition);
 		string getCritique() const;
 		void setCritique(string critique);
-		string getDescription() const;
-		void setDescription(string description);
 		unsigned short int getRating() const;
 		void setRating(unsigned short int rating);
 		string getCover() const;
@@ -78,12 +75,10 @@ class Book
 		};
 
 	private:
-		unsigned int id;
 		char isbn[14]; //International Standard Book Number + '/0'
 		string title;
 		unsigned short int edition;
 		string critique;
-		string description;
 		unsigned short int rating;
 		string cover; //path to file of cover picture
 		string ebook; //path to file of ebook copy of this book

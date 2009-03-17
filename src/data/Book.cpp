@@ -14,16 +14,16 @@
 #include "Author.h"
 #include "Publisher.h"
 #include "Theme.h"
+#include "DataObject.h"
 
 using namespace std;
 
-Book::Book()
+Book::Book() : DataObject("", 0)
 {
 	setIsbn("\0");
 	setTitle("");
 	setEdition(0);
 	setCritique("");
-	setDescription("");
 	setRating(0);
 	setCover("");
 	setEbook("");
@@ -33,19 +33,17 @@ Book::Book()
 	setTranslator(Author());
 	setPublishers(QList<Publisher>());
 	setThemes(QList<Theme>());
-	this->id = 0;
 }
 
 Book::Book(char isbn[13], string title, unsigned short int ed, string cri,
 	string desc, unsigned short int rat, string cov, string eb, QDate d,
 	string UDC, QList<Author> a, const Author &tr, QList<Publisher> p,
-	QList<Theme> t, unsigned int id)
+	QList<Theme> t, unsigned int id) : DataObject(desc, id)
 {
 	setIsbn(isbn);
 	setTitle(title);
 	setEdition(ed);
 	setCritique(cri);
-	setDescription(desc);
 	setRating(rat);
 	setCover(cov);
 	setEbook(eb);
@@ -55,18 +53,6 @@ Book::Book(char isbn[13], string title, unsigned short int ed, string cri,
 	setTranslator(tr);
 	setPublishers(p);
 	setThemes(t);
-	this->id = id;
-}
-
-unsigned int Book::getId() const
-{
-	return id;
-}
-
-void Book::setId(unsigned int id)
-{
-	if(this->id == 0) //If id has never been set.
-		this->id = id;
 }
 
 const char* Book::getIsbn() const
@@ -108,16 +94,6 @@ string Book::getCritique() const
 void Book::setCritique(string critique)
 {
 	this->critique = critique;
-}
-
-string Book::getDescription() const
-{
-	return description;
-}
-
-void Book::setDescription(string description)
-{
-	this->description = description;
 }
 
 unsigned short int Book::getRating() const
@@ -213,12 +189,13 @@ void Book::setThemes(QList<Theme> themes)
 
 bool Book::operator==(const Book b) const
 {
-	if(isbn == b.getIsbn() && title == b.getTitle() && edition == b.getEdition()
-		&& critique == b.getCritique() && description == b.getDescription()
-		&& rating == b.getRating() && cover == b.getCover() &&
-		ebook == b.getEbook() && pubDate == b.getPubDate() && UDC == b.getUDC()
-		&& authors == b.getAuthors() && translator == b.getTranslator()
-		&& publishers == b.getPublishers() && themes == b.getThemes())
+	if(getIsbn() == b.getIsbn() && getTitle() == b.getTitle() && getEdition() == b.getEdition()
+		&& getCritique() == b.getCritique() && getDescription() == b.getDescription()
+		&& getRating() == b.getRating() && getCover() == b.getCover() &&
+		getEbook() == b.getEbook() && getPubDate() == b.getPubDate() &&
+		getUDC() == b.getUDC() && getAuthors() == b.getAuthors() &&
+		getTranslator() == b.getTranslator() && getPublishers() == b.getPublishers()
+		&& getThemes() == b.getThemes() && getId() == b.getId())
 		return true;
 	return false;
 }

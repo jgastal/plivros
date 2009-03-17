@@ -13,21 +13,18 @@
 #include <QtCore/QList>
 
 #include "Theme.h"
+#include "DataObject.h"
 
 using namespace std;
 
-class Publisher
+class Publisher : public DataObject
 {
 	public:
 		Publisher();
 		Publisher(string nm, string desc, string cri, string logo, QList<Theme> t,
 			unsigned int id = 0);
-		unsigned int getId() const;
-		void setId(unsigned int id);
 		string getName() const;
 		void setName(string name);
-		string getDescription() const;
-		void setDescription(string description);
 		string getCritique() const;
 		void setCritique(string critique);
 		string getLogo() const;
@@ -46,9 +43,7 @@ class Publisher
 		};
 
 	private:
-		unsigned int id;
 		string name;
-		string description;
 		string critique;
 		string logo;
 		QList<Theme> themes;

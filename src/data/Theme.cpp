@@ -10,30 +10,16 @@
 using namespace std;
 
 #include "Theme.h"
+#include "DataObject.h"
 
-Theme::Theme()
+Theme::Theme() : DataObject("", 0)
 {
 	setName("");
-	setDescription("");
-	this->id = 0;
 }
 
-Theme::Theme(string nm, string desc, unsigned int id)
+Theme::Theme(string nm, string desc, unsigned int id) : DataObject(desc, id)
 {
 	setName(nm);
-	setDescription(desc);
-	this->id = id;
-}
-
-unsigned int Theme::getId() const
-{
-	return id;
-}
-
-void Theme::setId(unsigned int id)
-{
-	if(this->id == 0) //If id has never been set.
-		this->id = id;
 }
 
 string Theme::getName() const
@@ -41,24 +27,14 @@ string Theme::getName() const
 	return name;
 }
 
-void Theme::setName(string name)
+void Theme::setName(const string name)
 {
 	this->name = name;
 }
 
-string Theme::getDescription() const
+bool Theme::operator==(const Theme &t) const
 {
-	return description;
-}
-
-void Theme::setDescription(string description)
-{
-	this->description = description;
-}
-
-bool Theme::operator==(const Theme t) const
-{
-	if(name == t.getName() && description == t.getDescription() && id == t.getId())
+	if(getName() == t.getName() && getDescription() == t.getDescription() && getId() == t.getId())
 		return true;
 	return false;
 }
