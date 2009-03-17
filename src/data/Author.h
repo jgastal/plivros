@@ -39,6 +39,7 @@ class Author
 		void setPicture(string);
 		QList<Theme> getThemes() const;
 		void setThemes(QList<Theme> themes);
+		bool operator==(const Author a) const;
 
 		enum author_field
 		{
@@ -53,10 +54,10 @@ class Author
 
 	private:
 		unsigned int id;
-		string FirstName;
-		string LastName;
-		string Description;
-		string Critique;
+		string firstName;
+		string lastName;
+		string description;
+		string critique;
 		unsigned short int rating;
 		string picture; //path to picture of author
 		QList<Theme> themes; //List of themes

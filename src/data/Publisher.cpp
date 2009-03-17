@@ -85,7 +85,7 @@ void Publisher::setLogo(string logo)
 	this->logo = logo;
 }
 
-QList<Theme> Publisher::getThemes()
+QList<Theme> Publisher::getThemes() const
 {
 	return themes;
 }
@@ -93,4 +93,12 @@ QList<Theme> Publisher::getThemes()
 void Publisher::setThemes(QList<Theme> themes)
 {
 	this->themes = themes;
+}
+
+bool Publisher::operator==(const Publisher p) const
+{
+	if(name == p.getName() && description == p.getDescription() && critique == p.getCritique()
+		&& logo == p.getLogo() && themes == p.getThemes())
+		return true;
+	return false;
 }

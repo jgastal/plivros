@@ -23,6 +23,7 @@ class Theme
 		void setName(string name);
 		string getDescription() const;
 		void setDescription(string description);
+		bool operator==(const Theme t) const;
 
 		enum theme_field
 		{

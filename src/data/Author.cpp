@@ -52,42 +52,42 @@ void Author::setId(unsigned int id)
 
 string Author::getFirstName() const
 {
-	return FirstName;
+	return firstName;
 }
 
 void Author::setFirstName(string FirstName)
 {
-	this->FirstName = FirstName;
+	this->firstName = firstName;
 }
 
 string Author::getLastName() const
 {
-	return LastName;
+	return lastName;
 }
 
-void Author::setLastName(string LastName)
+void Author::setLastName(string lastName)
 {
-	this->LastName = LastName;
+	this->lastName = lastName;
 }
 
 string Author::getDescription() const
 {
-	return Description;
+	return description;
 }
 
 void Author::setDescription(string Description)
 {
-	this->Description = Description;
+	this->description = description;
 }
 
 string Author::getCritique() const
 {
-	return Critique;
+	return critique;
 }
 
-void Author::setCritique(string Critique)
+void Author::setCritique(string critique)
 {
-	this->Critique = Critique;
+	this->critique = critique;
 }
 
 unsigned short int Author::getRating() const
@@ -118,4 +118,14 @@ QList<Theme> Author::getThemes() const
 void Author::setThemes(QList<Theme> themes)
 {
 	this->themes = themes;
+}
+
+bool Author::operator==(const Author a) const
+{
+	if(firstName == a.getFirstName() && lastName == a.getLastName() && 
+		description == a.getDescription() && critique == a.getCritique()
+		&& rating == a.getRating() && picture == a.getPicture() &&
+		themes == a.getThemes())
+		return true;
+	return false;
 }

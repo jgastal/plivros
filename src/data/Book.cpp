@@ -210,3 +210,15 @@ void Book::setThemes(QList<Theme> themes)
 {
 	this->themes = themes;
 }
+
+bool Book::operator==(const Book b) const
+{
+	if(isbn == b.getIsbn() && title == b.getTitle() && edition == b.getEdition()
+		&& critique == b.getCritique() && description == b.getDescription()
+		&& rating == b.getRating() && cover == b.getCover() &&
+		ebook == b.getEbook() && pubDate == b.getPubDate() && UDC == b.getUDC()
+		&& authors == b.getAuthors() && translator == b.getTranslator()
+		&& publishers == b.getPublishers() && themes == b.getThemes())
+		return true;
+	return false;
+}

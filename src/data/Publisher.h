@@ -32,8 +32,9 @@ class Publisher
 		void setCritique(string critique);
 		string getLogo() const;
 		void setLogo(string logo);
-		QList<Theme> getThemes();
+		QList<Theme> getThemes() const;
 		void setThemes(QList<Theme> themes);
+		bool operator==(const Publisher p) const;
 
 		enum publisher_field
 		{

@@ -57,6 +57,7 @@ class Book
 		void setPublishers(QList<Publisher> publishers);
 		QList<Theme> getThemes() const;
 		void setThemes(QList<Theme> themes);
+		bool operator==(const Book b) const;
 
 		enum book_field
 		{

@@ -55,3 +55,10 @@ void Theme::setDescription(string description)
 {
 	this->description = description;
 }
+
+bool Theme::operator==(const Theme t) const
+{
+	if(name == t.getName() && description == t.getDescription() && id == t.getId())
+		return true;
+	return false;
+}
