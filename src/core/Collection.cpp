@@ -5,7 +5,7 @@
  * @author Jonas M. Gastal
  */
 
-#include <QtCore/QString>
+#include <QString>
 #include <QObject>
 
 #include "DataBase.h"

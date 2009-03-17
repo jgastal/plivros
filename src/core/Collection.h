@@ -8,7 +8,7 @@
 #ifndef COLLECTION_H_
 #define COLLECTION_H_
 
-#include <QtCore/QList>
+#include <QList>
 #include <QObject>
 
 #include "ResultSet.h"
