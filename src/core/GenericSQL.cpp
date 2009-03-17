@@ -17,9 +17,8 @@
 #include "Author.h"
 #include "Publisher.h"
 
-//These templates are here because this functions shouldn't be used outside this file.
-template <class Type>
-PreparedStatement buildInsTemplate(string type, Type data, string refType, DataBase *db) throw(DataBaseException);
+//These prototypes are here because this functions shouldn't be used outside this file.
+PreparedStatement buildInsTemplate(string type, DataObject *data, string refType, DataBase *db) throw(DataBaseException);
 template <class Type>
 void insertReferenceLoop(QList<Type> ref, PreparedStatement tpl, DataBase *db) throw(DataBaseException);
 
@@ -34,7 +33,7 @@ void insertReferenceLoop(QList<Type> ref, PreparedStatement tpl, DataBase *db) t
  */
 void insertReference(Book &b, string refType, DataBase *db) throw(DataBaseException)
 {
-	PreparedStatement insTpl = buildInsTemplate("book", b, refType, db);
+	PreparedStatement insTpl = buildInsTemplate("book", &b, refType, db);
 	if(refType == "theme")
 		insertReferenceLoop(b.getThemes(), insTpl, db);
 	else if(refType == "author")
@@ -51,7 +50,7 @@ void insertReference(Book &b, string refType, DataBase *db) throw(DataBaseExcept
  */
 void insertReference(Author &a, DataBase *db) throw(DataBaseException)
 {
-	PreparedStatement insTpl = buildInsTemplate("author", a, "theme", db);
+	PreparedStatement insTpl = buildInsTemplate("author", &a, "theme", db);
 	insertReferenceLoop(a.getThemes(), insTpl, db);
 }
 
@@ -63,7 +62,7 @@ void insertReference(Author &a, DataBase *db) throw(DataBaseException)
  */
 void insertReference(Publisher &p, DataBase *db) throw(DataBaseException)
 {
-	PreparedStatement insTpl = buildInsTemplate("publisher", p, "theme", db);
+	PreparedStatement insTpl = buildInsTemplate("publisher", &p, "theme", db);
 	insertReferenceLoop(p.getThemes(), insTpl, db);
 }
 
@@ -79,8 +78,7 @@ void insertReference(Publisher &p, DataBase *db) throw(DataBaseException)
  * table with name: type+refType. This PreparedStatement has to receive the id
  * of the referenced object(probably a theme).
  */
-template <class Type>
-PreparedStatement buildInsTemplate(string type, Type data, string refType, DataBase *db) throw(DataBaseException)
+PreparedStatement buildInsTemplate(string type, DataObject *data, string refType, DataBase *db) throw(DataBaseException)
 {
 	PreparedStatement insTemplate("INSERT INTO %1s%2s (%3sid, %4sid)"
 		" VALUES ('%5', '%6')", db->getType());
@@ -92,7 +90,7 @@ PreparedStatement buildInsTemplate(string type, Type data, string refType, DataB
 	//second id is of referenced type
 	insTemplate.arg(refType);
 	//id of type never changes
-	insTemplate.arg(data.getId());
+	insTemplate.arg(data->getId());
 
 	return insTemplate;
 }

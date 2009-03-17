@@ -13,10 +13,10 @@
 #include "DataBase.h"
 #include "DataBaseException.h"
 
+#include "DataObject.h"
 #include "Book.h"
 
-template <class Type>
-void updateReference(string type, Type data, string refType, DataBase db) throw(DataBaseException);
+void updateReference(string type, DataObject *data, string refType, DataBase db) throw(DataBaseException);
 
 void insertReference(Book &b, string refType, DataBase *db) throw(DataBaseException);
 void insertReference(Author &a, DataBase *db) throw(DataBaseException);
