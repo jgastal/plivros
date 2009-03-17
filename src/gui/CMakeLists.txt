@@ -6,15 +6,19 @@ set( headers
 	MainWindow.h
 	ThemeForm.h
 	AddTheme.h
+	EditTheme.h
 	PublisherForm.h
 	AddPublisher.h
+	EditPublisher.h
 	MessageBoxDataBaseException.h )
 set( sources
 	MainWindow.cpp
 	ThemeForm.cpp
 	AddTheme.cpp
+	EditTheme.cpp
 	PublisherForm.cpp
 	AddPublisher.cpp
+	EditPublisher.cpp
 	MessageBoxDataBaseException.cpp )
 
 #Target for uic generated headers
