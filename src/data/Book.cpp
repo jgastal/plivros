@@ -5,10 +5,10 @@
  * @author Jonas M. Gastal
  */
 
-#include <string>
-
-#include <QtCore/QDate>
-#include <QtCore/QList>
+#include <QDate>
+#include <QString>
+#include <QList>
+#include <QStringList>
 
 #include "Book.h"
 #include "Author.h"
@@ -36,9 +36,9 @@ Book::Book() : DataObject("", 0)
 	initHeaders();
 }
 
-Book::Book(char isbn[13], string title, unsigned short int ed, string cri,
-	string desc, unsigned short int rat, string cov, string eb, QDate d,
-	string UDC, QList<Author> a, const Author &tr, QList<Publisher> p,
+Book::Book(char isbn[13], QString title, unsigned short int ed, QString cri,
+	QString desc, unsigned short int rat, QString cov, QString eb, QDate d,
+	QString UDC, QList<Author> a, const Author &tr, QList<Publisher> p,
 	QList<Theme> t, unsigned int id) : DataObject(desc, id)
 {
 	setIsbn(isbn);
@@ -78,12 +78,12 @@ void Book::setIsbn(const char isbn[13])
 	this->isbn[13] = '\0';
 }
 
-string Book::getTitle() const
+QString Book::getTitle() const
 {
 	return title;
 }
 
-void Book::setTitle(string title)
+void Book::setTitle(QString title)
 {
 	this->title = title;
 }
@@ -98,12 +98,12 @@ void Book::setEdition(unsigned short int edition)
 	this->edition = edition;
 }
 
-string Book::getCritique() const
+QString Book::getCritique() const
 {
 	return critique;
 }
 
-void Book::setCritique(string critique)
+void Book::setCritique(QString critique)
 {
 	this->critique = critique;
 }
@@ -118,22 +118,22 @@ void Book::setRating(unsigned short int rating)
 	this->rating = rating;
 }
 
-string Book::getCover() const
+QString Book::getCover() const
 {
 	return cover;
 }
 
-void Book::setCover(string cover)
+void Book::setCover(QString cover)
 {
 	this->cover = cover;
 }
 
-string Book::getEbook() const
+QString Book::getEbook() const
 {
 	return ebook;
 }
 
-void Book::setEbook(string ebook)
+void Book::setEbook(QString ebook)
 {
 	this->ebook = ebook;
 }
@@ -148,12 +148,12 @@ void Book::setPubDate(QDate pubDate)
 	this->pubDate = pubDate;
 }
 
-string Book::getUDC() const
+QString Book::getUDC() const
 {
 	return UDC;
 }
 
-void Book::setUDC(string UDC)
+void Book::setUDC(QString UDC)
 {
 	this->UDC = UDC;
 }
@@ -161,6 +161,18 @@ void Book::setUDC(string UDC)
 QList<Author> Book::getAuthors() const
 {
 	return authors;
+}
+
+QString Book::getAuthorsNames() const
+{
+	QString str("");
+	for(QList<Author>::const_iterator it = authors.begin(); it != authors.end(); it++)
+	{
+		QString name("");
+		name.append(translator.getLastName()).append(", ");
+		name.append(translator.getFirstName());
+		str.append(name).append("; ");
+	}
 }
 
 void Book::setAuthors(QList<Author> authors)
@@ -173,6 +185,14 @@ Author Book::getTranslator() const
 	return translator;
 }
 
+QString Book::getTranslatorName() const
+{
+	QString ret("");
+	ret.append(translator.getLastName()).append(", ");
+	ret.append(translator.getFirstName());
+	return ret;
+}
+
 void Book::setTranslator(const Author &tr)
 {
 	this->translator = tr;
@@ -181,6 +201,13 @@ void Book::setTranslator(const Author &tr)
 QList<Publisher> Book::getPublishers() const
 {
 	return publishers;
+}
+
+QString Book::getPublishersNames() const
+{
+	QString str("");
+	for(QList<Publisher>::const_iterator it = publishers.begin(); it != publishers.end(); it++)
+		str.append(it->getName()).append("; ");
 }
 
 void Book::setPublishers(QList<Publisher> publishers)
@@ -193,17 +220,17 @@ QList<Theme> Book::getThemes() const
 	return themes;
 }
 
-void Book::setThemes(QList<Theme> themes)
-
-{
-	this->themes = themes;
-}
-
 QString Book::getThemesNames() const
 {
 	QString str("");
 	for(QList<Theme>::const_iterator it = themes.begin(); it != themes.end(); it++)
-		str.append(it->getName().c_str()).append("; ");
+		str.append(it->getName()).append("; ");
+}
+
+void Book::setThemes(QList<Theme> themes)
+
+{
+	this->themes = themes;
 }
 
 bool Book::operator==(const Book b) const
@@ -222,9 +249,9 @@ bool Book::operator==(const Book b) const
 QStringList Book::getProperties() const
 {
 	QStringList prop;
-// 	prop << getIsbn() << getTitle().c_str() << getEdition() << getCritique().c_str();
-// 	prop << getDescription().c_str() << getRating() << getCover().c_str() << getEbook().c_str();
-// 	prop << getPubDate().toString() << getUDC().c_str() << getAuthorsNames();
-// 	prop << getTranslatorName() << getPublishersNames() << getThemesNames();
+	prop << getIsbn() << getTitle() << QString::number(getEdition()) << getCritique();
+	prop << getDescription() << QString::number(getRating()) << getCover() << getEbook();
+	prop << getPubDate().toString() << getUDC() << getAuthorsNames();
+	prop << getTranslatorName() << getPublishersNames() << getThemesNames();
 	return prop;
 }

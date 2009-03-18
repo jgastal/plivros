@@ -21,8 +21,8 @@
 EditTheme::EditTheme(Collection *c, Theme t, QWidget *parent) : ThemeForm(c, parent)
 {
 	this->t = t;
-	nameLineEdit->setText(t.getName().c_str());
-	descriptionLineEdit->setText(t.getDescription().c_str());
+	nameLineEdit->setText(t.getName());
+	descriptionLineEdit->setText(t.getDescription());
 }
 
 ///@brief Updates the theme described in the form(if validated).
@@ -30,8 +30,8 @@ void EditTheme::save()
 {
 	if(!validateInput())
 		return;
-	t.setName(nameLineEdit->text().toStdString());
-	t.setDescription(descriptionLineEdit->text().toStdString());
+	t.setName(nameLineEdit->text());
+	t.setDescription(descriptionLineEdit->text());
 	try
 	{
 		c->updateTheme(t);

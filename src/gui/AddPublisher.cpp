@@ -28,10 +28,10 @@ void AddPublisher::save()
 	if(!validateInput())
 		return;
 	Publisher p;
-	p.setName(nameLineEdit->text().toStdString());
-	p.setDescription(descriptionLineEdit->text().toStdString());
-	p.setCritique(critiqueLineEdit->text().toStdString());
-	p.setLogo(logoLineEdit->text().toStdString());
+	p.setName(nameLineEdit->text());
+	p.setDescription(descriptionLineEdit->text());
+	p.setCritique(critiqueLineEdit->text());
+	p.setLogo(logoLineEdit->text());
 
 	p.setThemes(getSelectedThemes());
 

@@ -5,9 +5,7 @@
  * @author Jonas M. Gastal
  */
 
-#include <string>
-
-using namespace std;
+#include <QString>
 
 #include "Theme.h"
 #include "DataObject.h"
@@ -18,7 +16,7 @@ Theme::Theme() : DataObject("", 0)
 	initHeaders();
 }
 
-Theme::Theme(string nm, string desc, unsigned int id) : DataObject(desc, id)
+Theme::Theme(QString nm, QString desc, unsigned int id) : DataObject(desc, id)
 {
 	setName(nm);
 	initHeaders();
@@ -27,14 +25,15 @@ Theme::Theme(string nm, string desc, unsigned int id) : DataObject(desc, id)
 void Theme::initHeaders()
 {
 	headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
+	setPropertiesCount(2);
 }
 
-string Theme::getName() const
+QString Theme::getName() const
 {
 	return name;
 }
 
-void Theme::setName(const string name)
+void Theme::setName(const QString name)
 {
 	this->name = name;
 }
@@ -49,6 +48,6 @@ bool Theme::operator==(const Theme &t) const
 QStringList Theme::getProperties() const
 {
 	QStringList prop;
-	//prop << getName() << getDescription();
+	prop << getName() << getDescription();
 	return prop;
 }

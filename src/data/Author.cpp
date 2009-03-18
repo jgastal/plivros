@@ -5,8 +5,7 @@
  * @author Jonas M. Gastal
  */
 
-#include <string>
-
+#include <QString>
 #include <QList>
 
 #include "Author.h"
@@ -26,8 +25,8 @@ Author::Author() : DataObject("", 0)
 	initHeaders();
 }
 
-Author::Author(string fn, string ln, string desc, string cri,
-	unsigned short int rat, string pic, QList<Theme> t, unsigned int id) : DataObject(desc, id)
+Author::Author(QString fn, QString ln, QString desc, QString cri,
+	unsigned short int rat, QString pic, QList<Theme> t, unsigned int id) : DataObject(desc, id)
 {
 	setFirstName(fn);
 	setLastName(ln);
@@ -46,31 +45,31 @@ void Author::initHeaders()
 	headers << QT_TR_NOOP("Themes");
 }
 
-string Author::getFirstName() const
+QString Author::getFirstName() const
 {
 	return firstName;
 }
 
-void Author::setFirstName(string FirstName)
+void Author::setFirstName(QString FirstName)
 {
 	this->firstName = firstName;
 }
 
-string Author::getLastName() const
+QString Author::getLastName() const
 {
 	return lastName;
 }
 
-void Author::setLastName(string lastName)
+void Author::setLastName(QString lastName)
 {
 	this->lastName = lastName;
 }
-string Author::getCritique() const
+QString Author::getCritique() const
 {
 	return critique;
 }
 
-void Author::setCritique(string critique)
+void Author::setCritique(QString critique)
 {
 	this->critique = critique;
 }
@@ -85,12 +84,12 @@ void Author::setRating(unsigned short int rating)
 	this->rating = rating;
 }
 
-string Author::getPicture() const
+QString Author::getPicture() const
 {
 	return picture;
 }
 
-void Author::setPicture(string picture)
+void Author::setPicture(QString picture)
 {
 	this->picture = picture;
 }
@@ -104,7 +103,7 @@ QString Author::getThemesNames() const
 {
 	QString str("");
 	for(QList<Theme>::const_iterator it = themes.begin(); it != themes.end(); it++)
-		str.append(it->getName().c_str()).append("; ");
+		str.append(it->getName()).append("; ");
 }
 
 void Author::setThemes(QList<Theme> themes)
@@ -125,7 +124,7 @@ bool Author::operator==(const Author a) const
 QStringList Author::getProperties() const
 {
 	QStringList prop;
-	//prop << getFirstName() << getLastName() << getDescription() << getCritique();
-	//prop << getRating() << getPicture() << getThemesNames();
+	prop << getFirstName() << getLastName() << getDescription() << getCritique();
+	prop << QString::number(getRating()) << getPicture() << getThemesNames();
 	return prop;
 }

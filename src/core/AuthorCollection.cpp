@@ -38,12 +38,12 @@ void AuthorCollection::insertAuthor(Author &a) throw(DataBaseException)
 	PreparedStatement insAuthor("INSERT INTO authors (firstname, lastname, "
 		"description, critique, rating, picture) VALUES ('%1', '%2', "
 		"'%3', '%4', '%5', '%6')", db->getType());
-	insAuthor.arg(a.getFirstName());
-	insAuthor.arg(a.getLastName());
-	insAuthor.arg(a.getDescription());
-	insAuthor.arg(a.getCritique());
+	insAuthor.arg(a.getFirstName().toStdString());
+	insAuthor.arg(a.getLastName().toStdString());
+	insAuthor.arg(a.getDescription().toStdString());
+	insAuthor.arg(a.getCritique().toStdString());
 	insAuthor.arg(a.getRating());
-	insAuthor.arg(a.getPicture());
+	insAuthor.arg(a.getPicture().toStdString());
 
 	a.setId(db->insert(insAuthor));
 }
@@ -79,11 +79,11 @@ void AuthorCollection::updateAuthor(Author a) throw(DataBaseException)
 	PreparedStatement updAuthor("UPDATE authors SET firstname = '%1', "
 		"lastname = '%2', description = '%3', critique = '%4', rating = "
 		"'%5', picture = '%6' WHERE id = '%7'", db->getType());
-	updAuthor.arg(a.getFirstName());
-	updAuthor.arg(a.getDescription());
-	updAuthor.arg(a.getCritique());
+	updAuthor.arg(a.getFirstName().toStdString());
+	updAuthor.arg(a.getDescription().toStdString());
+	updAuthor.arg(a.getCritique().toStdString());
 	updAuthor.arg(a.getRating());
-	updAuthor.arg(a.getPicture());
+	updAuthor.arg(a.getPicture().toStdString());
 
 	db->exec(updAuthor);
 }

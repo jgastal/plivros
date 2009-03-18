@@ -9,6 +9,7 @@
 #define COLLECTION_H_
 
 #include <QList>
+#include <QString>
 #include <QObject>
 
 #include "ResultSet.h"
@@ -52,22 +53,22 @@ class Collection : public QObject
 		bool insertBook(Book &b) throw(DataBaseException);
 		bool deleteBook(unsigned int id) throw(DataBaseException);
 		bool updateBook(Book b) throw(DataBaseException);
-		QList<Book> searchBooks(Book::book_field field, string name) throw(DataBaseException);
+		QList<Book> searchBooks(Book::book_field field, QString name) throw(DataBaseException);
 
 		bool insertAuthor(Author &a) throw(DataBaseException);
 		bool deleteAuthor(unsigned int id) throw(DataBaseException);
 		bool updateAuthor(Author a) throw(DataBaseException);
-		QList<Author> searchAuthors(Author::author_field field, string name);
+		QList<Author> searchAuthors(Author::author_field field, QString name);
 
 		bool insertPublisher(Publisher &p) throw(DataBaseException);
 		bool deletePublisher(unsigned int id) throw(DataBaseException);
 		bool updatePublisher(Publisher p) throw(DataBaseException);
-		QList<Publisher> searchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException);
+		QList<Publisher> searchPublishers(Publisher::publisher_field field, QString name) throw(DataBaseException);
 
 		bool insertTheme(Theme &t) throw(DataBaseException);
 		bool deleteTheme(unsigned int id) throw(DataBaseException);
 		bool updateTheme(Theme t) throw(DataBaseException);
-		QList<Theme> searchThemes(Theme::theme_field field, string name) throw(DataBaseException);
+		QList<Theme> searchThemes(Theme::theme_field field, QString name) throw(DataBaseException);
 
 	signals:
 		///@brief Emited when a book is inserted in this collection.
@@ -118,13 +119,13 @@ class Collection : public QObject
 		void updateThemeReference(Author a) throw(DataBaseException);
 		void updateThemeReference(Publisher p) throw(DataBaseException);
 		template <class t>
-		void updateAuthorReference(t data, string type) throw(DataBaseException);
+		void updateAuthorReference(t data, QString type) throw(DataBaseException);
 		template <class t>
-		void updatePublisherReference(t data, string type) throw(DataBaseException);
+		void updatePublisherReference(t data, QString type) throw(DataBaseException);
 
 		//private methods to deal with book search
-		PreparedStatement simpleSearchBooks(Book::book_field field, string name) throw(DataBaseException);
-		PreparedStatement compositeSearchBooks(Book::book_field field, string name) throw(DataBaseException);
+		PreparedStatement simpleSearchBooks(Book::book_field field, QString name) throw(DataBaseException);
+		PreparedStatement compositeSearchBooks(Book::book_field field, QString name) throw(DataBaseException);
 		QList<Book> parseBookResultSet(ResultSet &rs) throw(DataBaseException);
 		QList<Author> getBooksAuthors(int id) throw(DataBaseException);
 		QList<Publisher> getBooksPublishers(int id) throw(DataBaseException);
@@ -132,14 +133,14 @@ class Collection : public QObject
 		Author getBooksTranslator(int id) throw(DataBaseException);
 
 		//private methods to deal with author search
-		PreparedStatement simpleSearchAuthors(Author::author_field field, string name) throw(DataBaseException);
-		PreparedStatement compositeSearchAuthors(Author::author_field field, string name) throw(DataBaseException);
+		PreparedStatement simpleSearchAuthors(Author::author_field field, QString name) throw(DataBaseException);
+		PreparedStatement compositeSearchAuthors(Author::author_field field, QString name) throw(DataBaseException);
 		QList<Author> parseAuthorResultSet(ResultSet &rs) throw(DataBaseException);
 		QList<Theme> getAuthorsThemes(int id) throw(DataBaseException);
 
 		//private methods to deal with publisher search
-		PreparedStatement simpleSearchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException);
-		PreparedStatement compositeSearchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException);
+		PreparedStatement simpleSearchPublishers(Publisher::publisher_field field, QString name) throw(DataBaseException);
+		PreparedStatement compositeSearchPublishers(Publisher::publisher_field field, QString name) throw(DataBaseException);
 		QList<Publisher> parsePublisherResultSet(ResultSet &rs) throw(DataBaseException);
 		QList<Theme> getPublishersThemes(int id) throw(DataBaseException);
 

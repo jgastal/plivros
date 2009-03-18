@@ -67,7 +67,7 @@ void PublisherForm::populateThemesListWidget()
 		themeList = c->searchThemes(Theme::t_name, "");
 		QStringList strList;
 		for(QList<Theme>::iterator it = themeList.begin(); it != themeList.end(); it++)
-			strList.append(it->getName().c_str());
+			strList.append(it->getName());
 		themesListWidget->clear();
 		themesListWidget->insertItems(0, strList);
 	}

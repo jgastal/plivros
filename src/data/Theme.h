@@ -10,18 +10,16 @@
 
 #include "DataObject.h"
 
-#include <string>
+#include <QString>
 #include <QStringList>
-
-using namespace std;
 
 class Theme : public DataObject
 {
 	public:
 		Theme();
-		Theme(string nm, string desc, unsigned int id = 0);
-		string getName() const;
-		void setName(const string name);
+		Theme(QString nm, QString desc, unsigned int id = 0);
+		QString getName() const;
+		void setName(const QString name);
 		bool operator==(const Theme &t) const;
 		QStringList getProperties() const;
 
@@ -33,7 +31,7 @@ class Theme : public DataObject
 
 	private:
 		void initHeaders();
-		string name;
+		QString name;
 } ;
 
 #endif /* THEME_H_ */

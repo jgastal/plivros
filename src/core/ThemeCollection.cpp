@@ -37,8 +37,8 @@ void ThemeCollection::insertTheme(Theme &t) throw(DataBaseException)
 {
 	PreparedStatement prepStmt("INSERT INTO themes (name, description) "
 		"VALUES ('%1', '%2')", db->getType());
-	prepStmt.arg(t.getName());
-	prepStmt.arg(t.getDescription());
+	prepStmt.arg(t.getName().toStdString());
+	prepStmt.arg(t.getDescription().toStdString());
 
 	t.setId(db->insert(prepStmt));
 }
@@ -78,8 +78,8 @@ void ThemeCollection::updateTheme(Theme t) throw(DataBaseException)
 {
 	PreparedStatement prepStmt("UPDATE Themes SET name = '%1', description"
 		" = '%2' WHERE id = '%3'", db->getType());
-	prepStmt.arg(t.getName());
-	prepStmt.arg(t.getDescription());
+	prepStmt.arg(t.getName().toStdString());
+	prepStmt.arg(t.getDescription().toStdString());
 	prepStmt.arg(t.getId());
 
 	db->exec(prepStmt);

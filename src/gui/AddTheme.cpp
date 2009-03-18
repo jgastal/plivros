@@ -29,8 +29,8 @@ void AddTheme::save()
 	if(!validateInput())
 		return;
 	Theme t;
-	t.setName(nameLineEdit->text().toStdString());
-	t.setDescription(descriptionLineEdit->text().toStdString());
+	t.setName(nameLineEdit->text());
+	t.setDescription(descriptionLineEdit->text());
 	try
 	{
 		c->insertTheme(t);

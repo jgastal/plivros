@@ -8,8 +8,7 @@
 #ifndef AUTHOR_H_
 #define AUTHOR_H_
 
-#include <string>
-
+#include <QString>
 #include <QList>
 #include <QStringList>
 
@@ -22,19 +21,19 @@ class Author : public DataObject
 {
 	public:
 		Author();
-		Author(string fn, string ln, string desc, string cri,
-			unsigned short int rat, string pic, QList<Theme> t,
+		Author(QString fn, QString ln, QString desc, QString cri,
+			unsigned short int rat, QString pic, QList<Theme> t,
 			unsigned int id = 0);
-		string getFirstName() const;
-		void setFirstName(string);
-		string getLastName() const;
-		void setLastName(string);
-		string getCritique() const;
-		void setCritique(string);
+		QString getFirstName() const;
+		void setFirstName(QString);
+		QString getLastName() const;
+		void setLastName(QString);
+		QString getCritique() const;
+		void setCritique(QString);
 		unsigned short int getRating() const;
 		void setRating(unsigned short int);
-		string getPicture() const;
-		void setPicture(string);
+		QString getPicture() const;
+		void setPicture(QString);
 		QList<Theme> getThemes() const;
 		QString getThemesNames() const;
 		void setThemes(QList<Theme> themes);
@@ -54,11 +53,11 @@ class Author : public DataObject
 
 	private:
 		void initHeaders();
-		string firstName;
-		string lastName;
-		string critique;
+		QString firstName;
+		QString lastName;
+		QString critique;
 		unsigned short int rating;
-		string picture; //path to picture of author
+		QString picture; //path to picture of author
 		QList<Theme> themes; //List of themes
 };
 

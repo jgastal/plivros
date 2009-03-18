@@ -47,15 +47,15 @@ void BookCollection::insertBook(Book &b) throw(DataBaseException)
 		"udc, translator) VALUES ('%1', '%2', '%3', '%4', '%5', '%6', "
 		"'%7', '%8', '%9', '%10', '%11')", db->getType());
 	prepStmt.arg(b.getIsbn());
-	prepStmt.arg(b.getTitle());
+	prepStmt.arg(b.getTitle().toStdString());
 	prepStmt.arg(b.getEdition());
-	prepStmt.arg(b.getCritique());
-	prepStmt.arg(b.getDescription());
+	prepStmt.arg(b.getCritique().toStdString());
+	prepStmt.arg(b.getDescription().toStdString());
 	prepStmt.arg(b.getRating());
-	prepStmt.arg(b.getCover());
-	prepStmt.arg(b.getEbook());
+	prepStmt.arg(b.getCover().toStdString());
+	prepStmt.arg(b.getEbook().toStdString());
 	prepStmt.arg(b.getPubDate().toString("yyyy-MM-dd").toStdString());
-	prepStmt.arg(b.getUDC());
+	prepStmt.arg(b.getUDC().toStdString());
 	prepStmt.arg(b.getTranslator().getId());
 
 	b.setId(db->insert(prepStmt));
@@ -92,15 +92,15 @@ void BookCollection::updateBook(Book b) throw(DataBaseException)
 		" '%6', cover = '%7', ebook = '%8', publishingyear = '%9', udc ="
 		" '%10', translator = '%11' WHERE id = '%12'", db->getType());
 	updBook.arg(b.getIsbn());
-	updBook.arg(b.getTitle());
+	updBook.arg(b.getTitle().toStdString());
 	updBook.arg(b.getEdition());
-	updBook.arg(b.getDescription());
-	updBook.arg(b.getCritique());
+	updBook.arg(b.getDescription().toStdString());
+	updBook.arg(b.getCritique().toStdString());
 	updBook.arg(b.getRating());
-	updBook.arg(b.getCover());
-	updBook.arg(b.getEbook());
+	updBook.arg(b.getCover().toStdString());
+	updBook.arg(b.getEbook().toStdString());
 	updBook.arg(b.getPubDate().toString("yyyy-MM-dd").toStdString());
-	updBook.arg(b.getUDC());
+	updBook.arg(b.getUDC().toStdString());
 	updBook.arg(b.getTranslator().getId());
 	updBook.arg(b.getId());
 

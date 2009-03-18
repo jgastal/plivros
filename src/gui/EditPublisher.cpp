@@ -20,10 +20,10 @@
 EditPublisher::EditPublisher(Collection *c, Publisher p, QWidget *parent) : PublisherForm(c, parent)
 {
 	this->p = p;
-	nameLineEdit->setText(p.getName().c_str());
-	descriptionLineEdit->setText(p.getDescription().c_str());
-	critiqueLineEdit->setText(p.getCritique().c_str());
-	logoLineEdit->setText(p.getLogo().c_str());
+	nameLineEdit->setText(p.getName());
+	descriptionLineEdit->setText(p.getDescription());
+	critiqueLineEdit->setText(p.getCritique());
+	logoLineEdit->setText(p.getLogo());
 	setSelectedThemes(p.getThemes());
 }
 
@@ -32,10 +32,10 @@ void EditPublisher::save()
 {
 	if(!validateInput())
 		return;
-	p.setName(nameLineEdit->text().toStdString());
-	p.setDescription(descriptionLineEdit->text().toStdString());
-	p.setCritique(critiqueLineEdit->text().toStdString());
-	p.setLogo(logoLineEdit->text().toStdString());
+	p.setName(nameLineEdit->text());
+	p.setDescription(descriptionLineEdit->text());
+	p.setCritique(critiqueLineEdit->text());
+	p.setLogo(logoLineEdit->text());
 
 	p.setThemes(getSelectedThemes());
 

@@ -8,10 +8,9 @@
 #ifndef BOOK_H_
 #define BOOK_H_
 
-#include <string>
-
-#include <QList>
 #include <QDate>
+#include <QString>
+#include <QList>
 #include <QStringList>
 
 #include "Author.h"
@@ -25,28 +24,28 @@ class Book : public DataObject
 {
 	public:
 		Book();
-		Book(char isbn[13], string title, unsigned short int ed, string cri,
-			string desc, unsigned short int rat, string cov, string eb, QDate d,
-			string UDC, QList<Author> a, const Author &tr, QList<Publisher> p,
+		Book(char isbn[13], QString title, unsigned short int ed, QString cri,
+			QString desc, unsigned short int rat, QString cov, QString eb, QDate d,
+			QString UDC, QList<Author> a, const Author &tr, QList<Publisher> p,
 			QList<Theme> t, unsigned int id = 0);
 		const char* getIsbn() const;
 		void setIsbn(const char ISBN[13]);
-		string getTitle() const;
-		void setTitle(string title);
+		QString getTitle() const;
+		void setTitle(QString title);
 		unsigned short int getEdition() const;
 		void setEdition(unsigned short int edition);
-		string getCritique() const;
-		void setCritique(string critique);
+		QString getCritique() const;
+		void setCritique(QString critique);
 		unsigned short int getRating() const;
 		void setRating(unsigned short int rating);
-		string getCover() const;
-		void setCover(string cover);
-		string getEbook() const;
-		void setEbook(string ebook);
+		QString getCover() const;
+		void setCover(QString cover);
+		QString getEbook() const;
+		void setEbook(QString ebook);
 		QDate getPubDate() const;
 		void setPubDate(QDate pubDate);
-		string getUDC() const;
-		void setUDC(string UDC);
+		QString getUDC() const;
+		void setUDC(QString UDC);
 		QList<Author> getAuthors() const;
 		void setAuthors(QList<Author> authors);
 		QString getAuthorsNames() const;
@@ -83,14 +82,14 @@ class Book : public DataObject
 	private:
 		void initHeaders();
 		char isbn[14]; //International Standard Book Number + '/0'
-		string title;
+		QString title;
 		unsigned short int edition;
-		string critique;
+		QString critique;
 		unsigned short int rating;
-		string cover; //path to file of cover picture
-		string ebook; //path to file of ebook copy of this book
+		QString cover; //path to file of cover picture
+		QString ebook; //path to file of ebook copy of this book
 		QDate pubDate;
-		string UDC; //Universal Decimal Classification
+		QString UDC; //Universal Decimal Classification
 		QList<Author> authors; //list of authors
 		Author translator;
 		QList<Publisher> publishers;

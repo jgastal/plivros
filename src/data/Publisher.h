@@ -8,8 +8,7 @@
 #ifndef PUBLISHER_H_
 #define PUBLISHER_H_
 
-#include <string>
-
+#include <QString>
 #include <QList>
 #include <QStringList>
 
@@ -22,14 +21,14 @@ class Publisher : public DataObject
 {
 	public:
 		Publisher();
-		Publisher(string nm, string desc, string cri, string logo, QList<Theme> t,
+		Publisher(QString nm, QString desc, QString cri, QString logo, QList<Theme> t,
 			unsigned int id = 0);
-		string getName() const;
-		void setName(string name);
-		string getCritique() const;
-		void setCritique(string critique);
-		string getLogo() const;
-		void setLogo(string logo);
+		QString getName() const;
+		void setName(QString name);
+		QString getCritique() const;
+		void setCritique(QString critique);
+		QString getLogo() const;
+		void setLogo(QString logo);
 		QList<Theme> getThemes() const;
 		QString getThemesNames() const;
 		void setThemes(QList<Theme> themes);
@@ -47,9 +46,9 @@ class Publisher : public DataObject
 
 	private:
 		void initHeaders();
-		string name;
-		string critique;
-		string logo;
+		QString name;
+		QString critique;
+		QString logo;
 		QList<Theme> themes;
 };
 

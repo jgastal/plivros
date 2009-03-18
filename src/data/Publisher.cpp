@@ -5,9 +5,8 @@
  * @author Jonas M. Gastal
  */
 
-#include <string>
-
-#include <QtCore/QList>
+#include <QString>
+#include <QList>
 
 #include "Publisher.h"
 #include "Theme.h"
@@ -24,7 +23,7 @@ Publisher::Publisher() : DataObject("", 0)
 	initHeaders();
 }
 
-Publisher::Publisher(string nm, string desc, string cri, string logo, QList<Theme> t, unsigned int id) : DataObject(desc, id)
+Publisher::Publisher(QString nm, QString desc, QString cri, QString logo, QList<Theme> t, unsigned int id) : DataObject(desc, id)
 {
 	setName(nm);
 	setCritique(cri);
@@ -37,34 +36,35 @@ void Publisher::initHeaders()
 {
 	headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
 	headers << QT_TR_NOOP("Critique") << QT_TR_NOOP("Logo") << QT_TR_NOOP("Themes");
+	setPropertiesCount(5);
 }
 
-string Publisher::getName() const
+QString Publisher::getName() const
 {
 	return name;
 }
 
-void Publisher::setName(string name)
+void Publisher::setName(QString name)
 {
 	this->name = name;
 }
 
-string Publisher::getCritique() const
+QString Publisher::getCritique() const
 {
 	return critique;
 }
 
-void Publisher::setCritique(string critique)
+void Publisher::setCritique(QString critique)
 {
 	this->critique = critique;
 }
 
-string Publisher::getLogo() const
+QString Publisher::getLogo() const
 {
 	return logo;
 }
 
-void Publisher::setLogo(string logo)
+void Publisher::setLogo(QString logo)
 {
 	this->logo = logo;
 }
@@ -78,7 +78,7 @@ QString Publisher::getThemesNames() const
 {
 	QString str("");
 	for(QList<Theme>::const_iterator it = themes.begin(); it != themes.end(); it++)
-		str.append(it->getName().c_str()).append("; ");
+		str.append(it->getName()).append("; ");
 }
 
 void Publisher::setThemes(QList<Theme> themes)
@@ -98,5 +98,7 @@ bool Publisher::operator==(const Publisher p) const
 QStringList Publisher::getProperties() const
 {
 	QStringList prop;
+	prop << getName() << getDescription() <<  getCritique() << getLogo();
+	prop << getThemesNames();
 	return prop;
 }

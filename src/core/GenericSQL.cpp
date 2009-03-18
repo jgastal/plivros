@@ -18,7 +18,7 @@
 #include "Publisher.h"
 
 //These prototypes are here because this functions shouldn't be used outside this file.
-PreparedStatement buildInsTemplate(string type, DataObject *data, string refType, DataBase *db) throw(DataBaseException);
+PreparedStatement buildInsTemplate(QString type, DataObject *data, QString refType, DataBase *db) throw(DataBaseException);
 template <class Type>
 void insertReferenceLoop(QList<Type> ref, PreparedStatement tpl, DataBase *db) throw(DataBaseException);
 
@@ -31,7 +31,7 @@ void insertReferenceLoop(QList<Type> ref, PreparedStatement tpl, DataBase *db) t
  * are: "theme", "author", "publisher".
  * @param db DataBase in which operation will be executed.
  */
-void insertReference(Book &b, string refType, DataBase *db) throw(DataBaseException)
+void insertReference(Book &b, QString refType, DataBase *db) throw(DataBaseException)
 {
 	PreparedStatement insTpl = buildInsTemplate("book", &b, refType, db);
 	if(refType == "theme")
@@ -78,17 +78,17 @@ void insertReference(Publisher &p, DataBase *db) throw(DataBaseException)
  * table with name: type+refType. This PreparedStatement has to receive the id
  * of the referenced object(probably a theme).
  */
-PreparedStatement buildInsTemplate(string type, DataObject *data, string refType, DataBase *db) throw(DataBaseException)
+PreparedStatement buildInsTemplate(QString type, DataObject *data, QString refType, DataBase *db) throw(DataBaseException)
 {
 	PreparedStatement insTemplate("INSERT INTO %1s%2s (%3sid, %4sid)"
 		" VALUES ('%5', '%6')", db->getType());
 	//table name is type+refType(i.e. booksthemes, booksauthors, ...)
-	insTemplate.arg(type);
-	insTemplate.arg(refType);
+	insTemplate.arg(type.toStdString());
+	insTemplate.arg(refType.toStdString());
 	//first id is of type
-	insTemplate.arg(type);
+	insTemplate.arg(type.toStdString());
 	//second id is of referenced type
-	insTemplate.arg(refType);
+	insTemplate.arg(refType.toStdString());
 	//id of type never changes
 	insTemplate.arg(data->getId());
 
@@ -135,19 +135,19 @@ void insertReferenceLoop(QList<Type> ref, PreparedStatement tpl, DataBase *db) t
  * "publisher", "theme".
  * @param db DataBase in which to execute operation.
  */
-void deleteReference(string type, unsigned int id, string refType, DataBase *db) throw(DataBaseException)
+void deleteReference(QString type, unsigned int id, QString refType, DataBase *db) throw(DataBaseException)
 {
 	PreparedStatement del("DELETE FROM %1s%2s WHERE %3sid = '%4'", db->getType());
 
 	//Table has name type+refType (e.g. booksthemes, booksauthors, ...).
-	del.arg(type);
-	del.arg(refType);
+	del.arg(type.toStdString());
+	del.arg(refType.toStdString());
 
 	/*
 	 * Delete all that was referenced by element with typesID = id.
 	 * For example "DELETE FROM bookauthor WHERE booksID = '123'"
 	 */
-	del.arg(type);
+	del.arg(type.toStdString());
 	del.arg(id);
 
 	db->exec(del);
@@ -169,10 +169,10 @@ void deleteReference(string type, unsigned int id, string refType, DataBase *db)
  * only then remove the actual object. The order in which this is done is
  * important to preserve data consistency in the database.
  */
-unsigned int genericDelete(unsigned int id, string type, DataBase *db) throw(DataBaseException)
+unsigned int genericDelete(unsigned int id, QString type, DataBase *db) throw(DataBaseException)
 {
 	PreparedStatement del("DELETE FROM %1s WHERE id = '%2'", db->getType());
-	del.arg(type);
+	del.arg(type.toStdString());
 	del.arg(id);
 
 	return db->exec(del);

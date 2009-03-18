@@ -171,7 +171,7 @@ bool Collection::updateBook(Book b) throw(DataBaseException)
  * publisher and theme it will be considered a match if the name matches the
  * searched value.
  */
-QList<Book> Collection::searchBooks(Book::book_field field, string name) throw(DataBaseException)
+QList<Book> Collection::searchBooks(Book::book_field field, QString name) throw(DataBaseException)
 {
 	PreparedStatement query("", db->getType());
 	if(field == Book::b_authors || field == Book::b_publishers || field == Book::b_themes || field == Book::b_translator)
@@ -267,7 +267,7 @@ bool Collection::updateAuthor(Author a) throw(DataBaseException)
  * If the search is done theme it will be considered a match if the name matches the
  * searched value.
  */
-QList<Author> Collection::searchAuthors(Author::author_field field, string name)
+QList<Author> Collection::searchAuthors(Author::author_field field, QString name)
 {
 	PreparedStatement query("", db->getType());
 	if(field == Author::a_themes)
@@ -343,7 +343,7 @@ bool Collection::updatePublisher(Publisher p) throw(DataBaseException)
 	return true;
 }
 
-QList<Publisher> Collection::searchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException)
+QList<Publisher> Collection::searchPublishers(Publisher::publisher_field field, QString name) throw(DataBaseException)
 {
 	PreparedStatement query("", db->getType());
 	if(field == Publisher::p_themes)
@@ -434,7 +434,7 @@ bool Collection::updateTheme(Theme t) throw(DataBaseException)
  * name is "theme1" and \a field is t_name and \a name is "the" the search result
  * will include said theme.
  */
-QList<Theme> Collection::searchThemes(Theme::theme_field field, string name) throw(DataBaseException)
+QList<Theme> Collection::searchThemes(Theme::theme_field field, QString name) throw(DataBaseException)
 {
 	PreparedStatement query("SELECT * FROM themes WHERE %1 LIKE '%%2%'", db->getType());
 	if(field == Theme::t_name)
@@ -442,7 +442,7 @@ QList<Theme> Collection::searchThemes(Theme::theme_field field, string name) thr
 	else if(field == Theme::t_description)
 		query.arg("description");
 
-	query.arg(name);
+	query.arg(name.toStdString());
 
 	ResultSet themers = db->query(query);
 	return parseThemeResultSet(themers);
@@ -488,7 +488,7 @@ void Collection::updateThemeReference(Publisher p) throw(DataBaseException)
  * @param type The type of element referencing the authors.
  */
 template <class t>
-void Collection::updateAuthorReference(t data, string type) throw(DataBaseException)
+void Collection::updateAuthorReference(t data, QString type) throw(DataBaseException)
 {
 	deleteReference(type, data.getId(), "author", db);
 	insertReference(data, "author", db);
@@ -501,13 +501,13 @@ void Collection::updateAuthorReference(t data, string type) throw(DataBaseExcept
  * @param type The type of element referencing the publishers.
  */
 template <class t>
-void Collection::updatePublisherReference(t data, string type) throw(DataBaseException)
+void Collection::updatePublisherReference(t data, QString type) throw(DataBaseException)
 {
 	deleteReference(type, data.getId(), "publisher", db);
 	insertReference(data, "publisher", db);
 }
 
-PreparedStatement Collection::simpleSearchBooks(Book::book_field field, string name) throw(DataBaseException)
+PreparedStatement Collection::simpleSearchBooks(Book::book_field field, QString name) throw(DataBaseException)
 {
 	PreparedStatement query("SELECT * FROM books WHERE %1 LIKE '%%2%'", db->getType());
 	//what field to search for
@@ -532,7 +532,7 @@ PreparedStatement Collection::simpleSearchBooks(Book::book_field field, string n
 	else if(field == Book::b_UDC)
 		query.arg("UDC");
 	
-	query.arg(name); //search term
+	query.arg(name.toStdString()); //search term
 	return query;
 }
 
@@ -552,7 +552,7 @@ PreparedStatement Collection::simpleSearchBooks(Book::book_field field, string n
  * or theme. As mentioned the search is not done by exact match but rather by
  * "contains". 
  */
-PreparedStatement Collection::compositeSearchBooks(Book::book_field field, string name) throw(DataBaseException)
+PreparedStatement Collection::compositeSearchBooks(Book::book_field field, QString name) throw(DataBaseException)
 {
 	/*
 	 * The composing of the query is first done using QString(and not PreparedStatements) because
@@ -589,8 +589,8 @@ PreparedStatement Collection::compositeSearchBooks(Book::book_field field, strin
 	}
 
 	PreparedStatement ret(query.toStdString(), db->getType());
-	ret.arg(name);
-	ret.arg(name);
+	ret.arg(name.toStdString());
+	ret.arg(name.toStdString());
 
 	return ret;
 }
@@ -612,15 +612,15 @@ QList<Book> Collection::parseBookResultSet(ResultSet &rs) throw(DataBaseExceptio
 	{
 		Book b;
 		b.setIsbn(rs.getString("isbn").c_str());
-		b.setTitle(rs.getString("title"));
+		b.setTitle(rs.getString("title").c_str());
 		b.setEdition(rs.getInt("edition"));
-		b.setCritique(rs.getString("critique"));
-		b.setDescription(rs.getString("description"));
+		b.setCritique(rs.getString("critique").c_str());
+		b.setDescription(rs.getString("description").c_str());
 		b.setRating(rs.getInt("rating"));
-		b.setCover(rs.getString("cover"));
-		b.setEbook(rs.getString("ebook"));
+		b.setCover(rs.getString("cover").c_str());
+		b.setEbook(rs.getString("ebook").c_str());
 		b.setPubDate(QDate::fromString(rs.getString("publishingyear").c_str(), Qt::ISODate));
-		b.setUDC(rs.getString("udc"));
+		b.setUDC(rs.getString("udc").c_str());
 		b.setId(rs.getInt("id"));
 		b.setAuthors(getBooksAuthors(rs.getInt("id")));
 		b.setTranslator(getBooksTranslator(rs.getInt("translator")));
@@ -722,7 +722,7 @@ Author Collection::getBooksTranslator(int id) throw(DataBaseException)
  * The supported fields are first name, last name, description, critique, rating,
  * picture. If you want to search by theme see \a compositeSearchAuthors().
  */
-PreparedStatement Collection::simpleSearchAuthors(Author::author_field field, string name) throw(DataBaseException)
+PreparedStatement Collection::simpleSearchAuthors(Author::author_field field, QString name) throw(DataBaseException)
 {
 	PreparedStatement query("SELECT * FROM authors WHERE %1 LIKE '%%2%'", db->getType());
 	if(field == Author::a_firstname)
@@ -738,7 +738,7 @@ PreparedStatement Collection::simpleSearchAuthors(Author::author_field field, st
 	else if(field == Author::a_picture)
 		query.arg("picture");
 
-	query.arg(name);
+	query.arg(name.toStdString());
 	return query;
 }
 
@@ -756,7 +756,7 @@ PreparedStatement Collection::simpleSearchAuthors(Author::author_field field, st
  * the authors table. Currently the only supported field is themes, the result of
  * this query will be all authors associated with themes whose name contain \a name.
  */
-PreparedStatement Collection::compositeSearchAuthors(Author::author_field field, string name) throw(DataBaseException)
+PreparedStatement Collection::compositeSearchAuthors(Author::author_field field, QString name) throw(DataBaseException)
 {
 	PreparedStatement query("SELECT * FROM authors WHERE id IN (SELECT authorsid FROM authors%1 WHERE %2id IN (SELECT id FROM %3 WHERE %4 LIKE '%%5%'))", db->getType());
 	if(field == Author::a_themes)
@@ -765,7 +765,7 @@ PreparedStatement Collection::compositeSearchAuthors(Author::author_field field,
 		query.arg("themes");
 		query.arg("themes");
 		query.arg("name");
-		query.arg(name);
+		query.arg(name.toStdString());
 	}
 	
 	return query;
@@ -789,12 +789,12 @@ QList<Author> Collection::parseAuthorResultSet(ResultSet &rs) throw(DataBaseExce
 	{
 		Author a;
 		a.setId(rs.getInt("id"));
-		a.setFirstName(rs.getString("firstname"));
-		a.setLastName(rs.getString("lastname"));
-		a.setDescription(rs.getString("description"));
-		a.setCritique(rs.getString("critique"));
+		a.setFirstName(rs.getString("firstname").c_str());
+		a.setLastName(rs.getString("lastname").c_str());
+		a.setDescription(rs.getString("description").c_str());
+		a.setCritique(rs.getString("critique").c_str());
 		a.setRating(rs.getInt("rating"));
-		a.setPicture(rs.getString("picture"));
+		a.setPicture(rs.getString("picture").c_str());
 		a.setThemes(getAuthorsThemes(rs.getInt("id")));
 		authorList.append(a);
 	}
@@ -837,7 +837,7 @@ QList<Theme> Collection::getAuthorsThemes(int id) throw(DataBaseException)
  * The supported fields are name, description, critique, rating, logo. If you
  * want to search by theme see \a compositeSearchPublishers().
  */
-PreparedStatement Collection::simpleSearchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException)
+PreparedStatement Collection::simpleSearchPublishers(Publisher::publisher_field field, QString name) throw(DataBaseException)
 {
 	PreparedStatement query("SELECT * FROM publishers WHERE %1 LIKE '%%2%'", db->getType());
 
@@ -849,7 +849,7 @@ PreparedStatement Collection::simpleSearchPublishers(Publisher::publisher_field 
 		query.arg("critique");
 	else if(field == Publisher::p_logo)
 		query.arg("logo");
-	query.arg(name);
+	query.arg(name.toStdString());
 
 	return query;
 }
@@ -869,7 +869,7 @@ PreparedStatement Collection::simpleSearchPublishers(Publisher::publisher_field 
  * of this query will be all publishers associated with themes whose name contain
  * \a name.
  */
-PreparedStatement Collection::compositeSearchPublishers(Publisher::publisher_field field, string name) throw(DataBaseException)
+PreparedStatement Collection::compositeSearchPublishers(Publisher::publisher_field field, QString name) throw(DataBaseException)
 {
 	PreparedStatement query("SELECT * FROM publishers WHERE id IN (SELECT publishersid FROM publishers%1 WHERE %2id IN (SELECT id FROM %3 WHERE %4 LIKE '%%5%'))", db->getType());
 	if(field == Publisher::p_themes)
@@ -878,7 +878,7 @@ PreparedStatement Collection::compositeSearchPublishers(Publisher::publisher_fie
 		query.arg("themes");
 		query.arg("themes");
 		query.arg("name");
-		query.arg(name);
+		query.arg(name.toStdString());
 	}
 	
 	return query;
@@ -902,10 +902,10 @@ QList<Publisher> Collection::parsePublisherResultSet(ResultSet &rs) throw(DataBa
 	{
 		Publisher p;
 		p.setId(rs.getInt("id"));
-		p.setName(rs.getString("name"));
-		p.setDescription(rs.getString("description"));
-		p.setCritique(rs.getString("critique"));
-		p.setLogo(rs.getString("logo"));
+		p.setName(rs.getString("name").c_str());
+		p.setDescription(rs.getString("description").c_str());
+		p.setCritique(rs.getString("critique").c_str());
+		p.setLogo(rs.getString("logo").c_str());
 		p.setThemes(getPublishersThemes(rs.getInt("id")));
 		pubList.append(p);
 	}
@@ -950,8 +950,8 @@ QList<Theme> Collection::parseThemeResultSet(ResultSet &rs) throw(DataBaseExcept
 	{
 		Theme t;
 		t.setId(rs.getInt("id"));
-		t.setName(rs.getString("name"));
-		t.setDescription(rs.getString("description"));
+		t.setName(rs.getString("name").c_str());
+		t.setDescription(rs.getString("description").c_str());
 		themeList.append(t);
 	}
 	return themeList;

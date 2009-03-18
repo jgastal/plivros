@@ -8,7 +8,7 @@
 #ifndef GENERICSQL_H_
 #define GENERICSQL_H_
 
-#include <string>
+#include <QString>
 
 #include "DataBase.h"
 #include "DataBaseException.h"
@@ -16,13 +16,13 @@
 #include "DataObject.h"
 #include "Book.h"
 
-void updateReference(string type, DataObject *data, string refType, DataBase db) throw(DataBaseException);
+void updateReference(QString type, DataObject *data, QString refType, DataBase db) throw(DataBaseException);
 
-void insertReference(Book &b, string refType, DataBase *db) throw(DataBaseException);
+void insertReference(Book &b, QString refType, DataBase *db) throw(DataBaseException);
 void insertReference(Author &a, DataBase *db) throw(DataBaseException);
 void insertReference(Publisher &p, DataBase *db) throw(DataBaseException);
 
-void deleteReference(string type, unsigned int id, string refType, DataBase *db) throw(DataBaseException);
-unsigned int genericDelete(unsigned int id, string type, DataBase *db) throw(DataBaseException);
+void deleteReference(QString type, unsigned int id, QString refType, DataBase *db) throw(DataBaseException);
+unsigned int genericDelete(unsigned int id, QString type, DataBase *db) throw(DataBaseException);
 
 #endif /* GENERICSQL_H_ */

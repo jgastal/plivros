@@ -1,10 +1,10 @@
 #include "DataObject.h"
 
-#include <string>
+#include <QString>
 
 using namespace std;
 
-DataObject::DataObject(const string desc, const unsigned int id)
+DataObject::DataObject(const QString desc, const unsigned int id)
 {
 	setDescription(desc);
 	this->id = id;
@@ -21,12 +21,12 @@ void DataObject::setId(const unsigned int id)
 		this->id = id;
 }
 
-string DataObject::getDescription() const
+QString DataObject::getDescription() const
 {
 	return description;
 }
 
-void DataObject::setDescription(const string description)
+void DataObject::setDescription(const QString description)
 {
 	this->description = description;
 }

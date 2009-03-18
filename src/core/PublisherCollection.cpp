@@ -34,10 +34,10 @@ void PublisherCollection::insertPublisher(Publisher &p) throw(DataBaseException)
 {
 	PreparedStatement insPub("INSERT INTO publishers (name, description, critique,"
 		"logo) VALUES ('%1', '%2', '%3', '%4')", db->getType());
-	insPub.arg(p.getName());
-	insPub.arg(p.getDescription());
-	insPub.arg(p.getCritique());
-	insPub.arg(p.getLogo());
+	insPub.arg(p.getName().toStdString());
+	insPub.arg(p.getDescription().toStdString());
+	insPub.arg(p.getCritique().toStdString());
+	insPub.arg(p.getLogo().toStdString());
 
 	p.setId(db->insert(insPub));
 }
@@ -73,10 +73,10 @@ void PublisherCollection::updatePublisher(Publisher p) throw(DataBaseException)
 {
 	PreparedStatement updPub("UPDATE publishers SET name = '%1', description"
 		" = '%2', critique = '%3', logo = '%4' WHERE id = '%5'", db->getType());
-	updPub.arg(p.getName());
-	updPub.arg(p.getDescription());
-	updPub.arg(p.getCritique());
-	updPub.arg(p.getLogo());
+	updPub.arg(p.getName().toStdString());
+	updPub.arg(p.getDescription().toStdString());
+	updPub.arg(p.getCritique().toStdString());
+	updPub.arg(p.getLogo().toStdString());
 
 	db->exec(updPub);
 }
