@@ -12,15 +12,14 @@
 #include "Theme.h"
 #include "DataObject.h"
 
-using namespace std;
-
 Publisher::Publisher() : DataObject("", 0)
 {
 	setName("");
 	setCritique("");
 	setLogo("");
 	setThemes(QList<Theme>());
-	initHeaders();
+	if(!propertiesCount)
+		Publisher::initHeaders();
 }
 
 Publisher::Publisher(QString nm, QString desc, QString cri, QString logo, QList<Theme> t, unsigned int id) : DataObject(desc, id)
@@ -29,14 +28,8 @@ Publisher::Publisher(QString nm, QString desc, QString cri, QString logo, QList<
 	setCritique(cri);
 	setLogo(logo);
 	setThemes(t);
-	initHeaders();
-}
-
-void Publisher::initHeaders()
-{
-	headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
-	headers << QT_TR_NOOP("Critique") << QT_TR_NOOP("Logo") << QT_TR_NOOP("Themes");
-	setPropertiesCount(5);
+	if(!propertiesCount)
+		Publisher::initHeaders();
 }
 
 QString Publisher::getName() const
@@ -101,4 +94,11 @@ QStringList Publisher::getProperties() const
 	prop << getName() << getDescription() <<  getCritique() << getLogo();
 	prop << getThemesNames();
 	return prop;
+}
+
+void Publisher::initHeaders()
+{
+	headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
+	headers << QT_TR_NOOP("Critique") << QT_TR_NOOP("Logo") << QT_TR_NOOP("Themes");
+	propertiesCount = 5;
 }

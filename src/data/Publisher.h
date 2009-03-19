@@ -15,8 +15,6 @@
 #include "Theme.h"
 #include "DataObject.h"
 
-using namespace std;
-
 class Publisher : public DataObject
 {
 	public:
@@ -45,7 +43,7 @@ class Publisher : public DataObject
 		};
 
 	private:
-		void initHeaders();
+		static void initHeaders();
 		QString name;
 		QString critique;
 		QString logo;

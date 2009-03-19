@@ -15,8 +15,6 @@
 #include "Theme.h"
 #include "DataObject.h"
 
-using namespace std;
-
 class Author : public DataObject
 {
 	public:
@@ -52,7 +50,7 @@ class Author : public DataObject
 		};
 
 	private:
-		void initHeaders();
+		static void initHeaders();
 		QString firstName;
 		QString lastName;
 		QString critique;

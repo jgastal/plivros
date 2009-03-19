@@ -18,8 +18,6 @@
 #include "Theme.h"
 #include "DataObject.h"
 
-using namespace std;
-
 class Book : public DataObject
 {
 	public:
@@ -80,7 +78,7 @@ class Book : public DataObject
 		};
 
 	private:
-		void initHeaders();
+		static void initHeaders();
 		char isbn[14]; //International Standard Book Number + '/0'
 		QString title;
 		unsigned short int edition;

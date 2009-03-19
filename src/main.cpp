@@ -12,6 +12,11 @@
 
 #include "MainWindow.h"
 
+#include "Book.h"
+#include "Author.h"
+#include "Publisher.h"
+#include "Theme.h"
+
 int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);

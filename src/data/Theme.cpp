@@ -13,19 +13,15 @@
 Theme::Theme() : DataObject("", 0)
 {
 	setName("");
-	initHeaders();
+	if(!propertiesCount)
+		Theme::initHeaders();
 }
 
 Theme::Theme(QString nm, QString desc, unsigned int id) : DataObject(desc, id)
 {
 	setName(nm);
-	initHeaders();
-}
-
-void Theme::initHeaders()
-{
-	headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
-	setPropertiesCount(2);
+	if(!propertiesCount)
+		Theme::initHeaders();
 }
 
 QString Theme::getName() const
@@ -50,4 +46,10 @@ QStringList Theme::getProperties() const
 	QStringList prop;
 	prop << getName() << getDescription();
 	return prop;
+}
+
+void Theme::initHeaders()
+{
+	headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
+	propertiesCount = 2;
 }

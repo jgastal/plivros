@@ -4,8 +4,6 @@
 #include <QString>
 #include <QStringList>
 
-using namespace std;
-
 class DataObject
 {
 	public:
@@ -14,18 +12,18 @@ class DataObject
 		void setId(const unsigned int id);
 		QString getDescription() const;
 		void setDescription(const QString description);
-		unsigned short int getPropertiesCount() const;
-		QStringList getHeaders() const;
 		virtual QStringList getProperties() const = 0;
-		
+
+		static unsigned short int getPropertiesCount();
+		static QStringList getHeaders();
 
 	protected:
-		virtual void initHeaders() = 0;
-		void setPropertiesCount(unsigned short int c);
 		unsigned int id;
-		unsigned short int propertiesCount;
 		QString description;
-		QStringList headers;
+
+		static void initHeaders();
+		static QStringList headers;
+		static unsigned short int propertiesCount;
 } ;
 
 #endif //DATAOBJECT_H

@@ -12,8 +12,6 @@
 #include "Theme.h"
 #include "DataObject.h"
 
-using namespace std;
-
 Author::Author() : DataObject("", 0)
 {
 	setFirstName("");
@@ -22,7 +20,8 @@ Author::Author() : DataObject("", 0)
 	setRating(0);
 	setPicture("");
 	setThemes(QList<Theme>());
-	initHeaders();
+	if(!propertiesCount)
+		Author::initHeaders();
 }
 
 Author::Author(QString fn, QString ln, QString desc, QString cri,
@@ -34,15 +33,8 @@ Author::Author(QString fn, QString ln, QString desc, QString cri,
 	setRating(rat);
 	setPicture(pic);
 	setThemes(t);
-	initHeaders();
-}
-
-void Author::initHeaders()
-{
-	headers << QT_TR_NOOP("First Name") << QT_TR_NOOP("Last Name");
-	headers << QT_TR_NOOP("Description") << QT_TR_NOOP("Critique");
-	headers << QT_TR_NOOP("Rating") << QT_TR_NOOP("Picture");
-	headers << QT_TR_NOOP("Themes");
+	if(!propertiesCount)
+		Author::initHeaders();
 }
 
 QString Author::getFirstName() const
@@ -127,4 +119,13 @@ QStringList Author::getProperties() const
 	prop << getFirstName() << getLastName() << getDescription() << getCritique();
 	prop << QString::number(getRating()) << getPicture() << getThemesNames();
 	return prop;
+}
+
+void Author::initHeaders()
+{
+	headers << QT_TR_NOOP("First Name") << QT_TR_NOOP("Last Name");
+	headers << QT_TR_NOOP("Description") << QT_TR_NOOP("Critique");
+	headers << QT_TR_NOOP("Rating") << QT_TR_NOOP("Picture");
+	headers << QT_TR_NOOP("Themes");
+	propertiesCount = 7;
 }

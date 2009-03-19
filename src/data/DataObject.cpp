@@ -2,7 +2,8 @@
 
 #include <QString>
 
-using namespace std;
+unsigned short int DataObject::propertiesCount = 0;
+QStringList DataObject::headers = QStringList();
 
 DataObject::DataObject(const QString desc, const unsigned int id)
 {
@@ -31,17 +32,12 @@ void DataObject::setDescription(const QString description)
 	this->description = description;
 }
 
-unsigned short int DataObject::getPropertiesCount() const
+unsigned short int DataObject::getPropertiesCount()
 {
 	return propertiesCount;
 }
 
-void DataObject::setPropertiesCount(unsigned short int c)
-{
-	this->propertiesCount = c;
-}
-
-QStringList DataObject::getHeaders() const
+QStringList DataObject::getHeaders()
 {
 	return headers;
 }

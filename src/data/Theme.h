@@ -30,7 +30,7 @@ class Theme : public DataObject
 		};
 
 	private:
-		void initHeaders();
+		static void initHeaders();
 		QString name;
 } ;
 

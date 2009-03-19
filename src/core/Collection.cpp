@@ -20,8 +20,6 @@
 #include "ThemeCollection.h"
 #include "GenericSQL.h"
 
-using namespace std;
-
 /**
  * @brief Opens the database associated with this collection. Creating a new
  * one if it didn't exist.

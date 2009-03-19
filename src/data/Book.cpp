@@ -16,8 +16,6 @@
 #include "Theme.h"
 #include "DataObject.h"
 
-using namespace std;
-
 Book::Book() : DataObject("", 0)
 {
 	setIsbn("\0");
@@ -33,7 +31,8 @@ Book::Book() : DataObject("", 0)
 	setTranslator(Author());
 	setPublishers(QList<Publisher>());
 	setThemes(QList<Theme>());
-	initHeaders();
+	if(!propertiesCount)
+		Book::initHeaders();
 }
 
 Book::Book(char isbn[13], QString title, unsigned short int ed, QString cri,
@@ -54,17 +53,8 @@ Book::Book(char isbn[13], QString title, unsigned short int ed, QString cri,
 	setTranslator(tr);
 	setPublishers(p);
 	setThemes(t);
-	initHeaders();
-}
-
-void Book::initHeaders()
-{
-	headers << QT_TR_NOOP("ISBN") << QT_TR_NOOP("Title") << QT_TR_NOOP("Edition");
-	headers << QT_TR_NOOP("Critique") << QT_TR_NOOP("Description");
-	headers << QT_TR_NOOP("Cover") << QT_TR_NOOP("E-Book");
-	headers << QT_TR_NOOP("Publishing Date") << QT_TR_NOOP("U.D.C.");
-	headers << QT_TR_NOOP("Authors") << QT_TR_NOOP("Translator");
-	headers << QT_TR_NOOP("Publishers") << QT_TR_NOOP("Themes");
+	if(!propertiesCount)
+		Book::initHeaders();
 }
 
 const char* Book::getIsbn() const
@@ -254,4 +244,15 @@ QStringList Book::getProperties() const
 	prop << getPubDate().toString() << getUDC() << getAuthorsNames();
 	prop << getTranslatorName() << getPublishersNames() << getThemesNames();
 	return prop;
+}
+
+void Book::initHeaders()
+{
+	headers << QT_TR_NOOP("ISBN") << QT_TR_NOOP("Title") << QT_TR_NOOP("Edition");
+	headers << QT_TR_NOOP("Critique") << QT_TR_NOOP("Description");
+	headers << QT_TR_NOOP("Cover") << QT_TR_NOOP("E-Book");
+	headers << QT_TR_NOOP("Publishing Date") << QT_TR_NOOP("U.D.C.");
+	headers << QT_TR_NOOP("Authors") << QT_TR_NOOP("Translator");
+	headers << QT_TR_NOOP("Publishers") << QT_TR_NOOP("Themes");
+	propertiesCount = 13;
 }
