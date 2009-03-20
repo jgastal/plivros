@@ -10,6 +10,7 @@ set( headers
 	PublisherForm.h
 	AddPublisher.h
 	EditPublisher.h
+	PropertiesGroupBox.h
 	DataTableWidget.h
 	MessageBoxDataBaseException.h )
 set( sources
@@ -20,6 +21,7 @@ set( sources
 	PublisherForm.cpp
 	AddPublisher.cpp
 	EditPublisher.cpp
+	PropertiesGroupBox.cpp
 	DataTableWidget.cpp
 	MessageBoxDataBaseException.cpp )
 
