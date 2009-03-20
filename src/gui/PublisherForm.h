@@ -32,7 +32,6 @@ class PublisherForm : public QWidget, protected Ui::PublisherForm
 
 	protected slots:
 		virtual void save() = 0;
-		void close();
 		void logoFileChooser();
 
 	protected:
@@ -41,6 +40,9 @@ class PublisherForm : public QWidget, protected Ui::PublisherForm
 		QWidget *parent;
 		Collection *c;
 		QList<Theme> themeList;
+
+	signals:
+		void closeRequested();
 } ;
 
 #endif //PUBLISHERFORM_H

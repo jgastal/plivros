@@ -45,5 +45,5 @@ void AddPublisher::save()
 		q.appendText(tr("Your publisher has not been added."));
 		q.exec();
 	}
-	close();
+	emit closeRequested();
 }

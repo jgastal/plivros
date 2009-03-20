@@ -10,6 +10,7 @@ set( headers
 	PublisherForm.h
 	AddPublisher.h
 	EditPublisher.h
+	DataTableWidget.h
 	MessageBoxDataBaseException.h )
 set( sources
 	MainWindow.cpp
@@ -19,6 +20,7 @@ set( sources
 	PublisherForm.cpp
 	AddPublisher.cpp
 	EditPublisher.cpp
+	DataTableWidget.cpp
 	MessageBoxDataBaseException.cpp )
 
 #Target for uic generated headers

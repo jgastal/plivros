@@ -10,7 +10,6 @@
 
 #include "ThemeForm.h"
 
-#include "MainWindow.h"
 #include "MessageBoxDataBaseException.h"
 
 #include "Collection.h"
@@ -22,15 +21,8 @@ ThemeForm::ThemeForm(Collection *c, QWidget *parent) : QWidget(parent)
 	this->parent = parent;
 	this->c = c;
 	setupUi(this);
-	connect(cancelPushButton, SIGNAL(clicked(bool)), this, SLOT(close()));
+	connect(cancelPushButton, SIGNAL(clicked(bool)), this, SIGNAL(closeRequested()));
 	connect(savePushButton, SIGNAL(clicked(bool)), this, SLOT(save()));
-}
-
-///@brief Closes the tab that owns this form.
-void ThemeForm::close()
-{
-	QTabWidget *w = (QTabWidget*)parent;
-	w->removeTab(w->currentIndex());
 }
 
 ///@brief Makes sure the name has been filed out.

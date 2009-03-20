@@ -24,15 +24,8 @@ PublisherForm::PublisherForm(Collection *c, QWidget *parent) : QWidget(parent)
 	setupUi(this);
 	populateThemesListWidget();
 	connect(savePushButton, SIGNAL(clicked(bool)), this, SLOT(save()));
-	connect(cancelPushButton, SIGNAL(clicked(bool)), this, SLOT(close()));
+	connect(cancelPushButton, SIGNAL(clicked(bool)), this, SIGNAL(closeRequested()));
 	connect(logoPushButton, SIGNAL(clicked(bool)), this, SLOT(logoFileChooser()));
-}
-
-///@brief Closes the tab that owns this form.
-void PublisherForm::close()
-{
-	QTabWidget *w = (QTabWidget*)parent;
-	w->removeTab(w->currentIndex());
 }
 
 bool PublisherForm::validateInput()

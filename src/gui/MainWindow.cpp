@@ -7,7 +7,6 @@
  */
 
 #include "AddTheme.h"
-#include "EditTheme.h"
 #include "AddPublisher.h"
 
 #include "MainWindow.h"
@@ -29,9 +28,16 @@ MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
 void MainWindow::createAddThemeForm()
 {
 	tabWidget->setUpdatesEnabled(false);
-	int pos = tabWidget->addTab(new AddTheme(c, tabWidget), tr("Add Theme"));
+	AddTheme *at = new AddTheme(c, tabWidget);
+	connect(at, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	int pos = tabWidget->addTab(at, tr("Add Theme"));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
+}
+
+MainWindow::~MainWindow()
+{
+	delete c;
 }
 
 ///@brief Adds a tab and creates a form to add a publisher in it.
@@ -39,14 +45,21 @@ void MainWindow::createAddPublisherForm()
 {
 	tabWidget->setUpdatesEnabled(false);
 	AddPublisher *ap = new AddPublisher(c, tabWidget);
-	int pos = tabWidget->addTab(ap, tr("Add Publisher"));
 	connect(c, SIGNAL(themesChanged()), ap, SLOT(populateThemesListWidget()));
+	connect(ap, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	int pos = tabWidget->addTab(ap, tr("Add Publisher"));	
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }
 
-///@brief Closes any given tab.
+///@brief Closes a tab by deleting widget on position \a index of tabWidget.
 void MainWindow::closeTab(int index)
 {
-	tabWidget->removeTab(index);
+	delete tabWidget->widget(index);
+}
+
+///@brief Closes a tab by deleting the sender.
+void MainWindow::closeTab()
+{
+	delete sender();
 }

@@ -11,7 +11,6 @@
 #include "ThemeForm.h"
 #include "EditTheme.h"
 
-#include "MainWindow.h"
 #include "MessageBoxDataBaseException.h"
 
 #include "Collection.h"
@@ -42,5 +41,5 @@ void EditTheme::save()
 		q.appendText(tr("Your theme has not been added."));
 		q.exec();
 	}
-	close();
+	emit closeRequested();
 }

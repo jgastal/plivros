@@ -24,11 +24,13 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
 	public:
 		MainWindow(QMainWindow *parent = 0);
+		~MainWindow();
 
 	private slots:
 		void createAddThemeForm();
 		void createAddPublisherForm();
 		void closeTab(int);
+		void closeTab();
 
 	private:
 		Collection *c;

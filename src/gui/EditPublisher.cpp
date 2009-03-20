@@ -49,7 +49,7 @@ void EditPublisher::save()
 		q.appendText(tr("Your publisher has not been added."));
 		q.exec();
 	}
-	close();
+	emit closeRequested();
 }
 
 void EditPublisher::setSelectedThemes(QList<Theme> tList)

@@ -26,13 +26,15 @@ class ThemeForm : public QWidget, protected Ui::ThemeForm
 		ThemeForm(Collection *c, QWidget *parent = 0);
 
 	protected slots:
-		void close();
 		virtual void save() = 0;
 
 	protected:
 		bool validateInput();
 		QWidget *parent;
 		Collection *c;
+
+	signals:
+		void closeRequested();
 } ;
 
 #endif //ADDTHEME_H
