@@ -163,6 +163,7 @@ QString Book::getAuthorsNames() const
 		name.append(translator.getFirstName());
 		str.append(name).append("; ");
 	}
+	return str;
 }
 
 void Book::setAuthors(QList<Author> authors)
@@ -198,6 +199,7 @@ QString Book::getPublishersNames() const
 	QString str("");
 	for(QList<Publisher>::const_iterator it = publishers.begin(); it != publishers.end(); it++)
 		str.append(it->getName()).append("; ");
+	return str;
 }
 
 void Book::setPublishers(QList<Publisher> publishers)
@@ -215,6 +217,7 @@ QString Book::getThemesNames() const
 	QString str("");
 	for(QList<Theme>::const_iterator it = themes.begin(); it != themes.end(); it++)
 		str.append(it->getName()).append("; ");
+	return str;
 }
 
 void Book::setThemes(QList<Theme> themes)

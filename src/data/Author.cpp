@@ -96,6 +96,7 @@ QString Author::getThemesNames() const
 	QString str("");
 	for(QList<Theme>::const_iterator it = themes.begin(); it != themes.end(); it++)
 		str.append(it->getName()).append("; ");
+	return str;
 }
 
 void Author::setThemes(QList<Theme> themes)
