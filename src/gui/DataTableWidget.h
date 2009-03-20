@@ -15,8 +15,7 @@ class DataTableWidget : public QTableWidget
 	Q_OBJECT
 
 	public:
-		DataTableWidget(QWidget *parent = 0) : QTableWidget(parent) { };
-		DataObject *getCurrentlySelectedItem();
+		DataTableWidget(QWidget *parent = 0);
 
 	public slots:
 		void populateTable(QList<Book> dataList);
@@ -24,9 +23,16 @@ class DataTableWidget : public QTableWidget
 		void populateTable(QList<Publisher> dataList);
 		void populateTable(QList<Theme> dataList);
 
+	private slots:
+		void setCurItem(QTableWidgetItem *oldItem, QTableWidgetItem *newItem);
+
 	private:
 		template <class Type>
 		void loop(QList<Type> dataList);
+		QList<DataObject*> curDataList;
+
+	signals:
+		void currentItemChanged(DataObject *curItem);
 } ;
 
 #endif //DATATABLEWIDGET_H

@@ -1,5 +1,11 @@
 #include "DataTableWidget.h"
 
+DataTableWidget::DataTableWidget(QWidget *parent) : QTableWidget(parent)
+{
+	connect(this, SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
+		 this, SLOT(setCurItem(QTableWidgetItem*, QTableWidgetItem*)));
+}
+
 void DataTableWidget::populateTable(QList<Book> dataList)
 {
 	setColumnCount(Book::getPropertiesCount());
@@ -29,6 +35,11 @@ void DataTableWidget::populateTable(QList<Theme> dataList)
 	loop(dataList);
 }
 
+void DataTableWidget::setCurItem(QTableWidgetItem *oldItem, QTableWidgetItem *newItem)
+{
+	emit currentItemChanged(curDataList.at(newItem->row()));
+}
+
 template <class Type>
 void DataTableWidget::loop(QList<Type> dataList)
 {
@@ -43,6 +54,7 @@ void DataTableWidget::loop(QList<Type> dataList)
 			QTableWidgetItem *qtwi = new QTableWidgetItem(*p_it);
 			setItem(row, col++, qtwi);
 		}
+		curDataList.append(&(*it));
 		row++;
 	}
 }
