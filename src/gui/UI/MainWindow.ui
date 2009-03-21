@@ -30,7 +30,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="booksPage">
        <property name="geometry">
@@ -262,8 +262,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>94</width>
-         <height>24</height>
+         <width>145</width>
+         <height>454</height>
         </rect>
        </property>
        <attribute name="label">
@@ -278,7 +278,7 @@
           <height>401</height>
          </rect>
         </property>
-        <widget class="QPushButton" name="themesAdd">
+        <widget class="QPushButton" name="themeAdd">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -291,7 +291,7 @@
           <string>Add</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="themesSearch">
+        <widget class="QPushButton" name="themeSearch">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -304,7 +304,7 @@
           <string>Search</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="themesEdit">
+        <widget class="QPushButton" name="themeEdit">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -317,7 +317,7 @@
           <string>Edit</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="themesRemove">
+        <widget class="QPushButton" name="themeRemove">
          <property name="geometry">
           <rect>
            <x>10</x>

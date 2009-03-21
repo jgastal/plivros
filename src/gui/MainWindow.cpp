@@ -20,7 +20,7 @@ MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
 	c = new Collection("User");
 	setupUi(this);
 	tabWidget->clear();
-	connect(themesAdd, SIGNAL(clicked()), this, SLOT(createAddThemeForm()));
+	connect(themeAdd, SIGNAL(clicked()), this, SLOT(createAddThemeForm()));
 	connect(publisherAdd, SIGNAL(clicked()), this, SLOT(createAddPublisherForm()));
 	connect(publisherSearch, SIGNAL(clicked()), this, SLOT(createSearchPublisherForm()));
 	connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
