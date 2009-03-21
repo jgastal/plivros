@@ -6,6 +6,7 @@
  * @brief Provides the class implementation.
  */
 
+#include "SearchForm.h"
 #include "AddTheme.h"
 #include "AddPublisher.h"
 
@@ -21,6 +22,7 @@ MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
 	tabWidget->clear();
 	connect(themesAdd, SIGNAL(clicked()), this, SLOT(createAddThemeForm()));
 	connect(publisherAdd, SIGNAL(clicked()), this, SLOT(createAddPublisherForm()));
+	connect(publisherSearch, SIGNAL(clicked()), this, SLOT(createSearchPublisherForm()));
 	connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 }
 
@@ -48,6 +50,16 @@ void MainWindow::createAddPublisherForm()
 	connect(c, SIGNAL(themesChanged()), ap, SLOT(populateThemesListWidget()));
 	connect(ap, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = tabWidget->addTab(ap, tr("Add Publisher"));	
+	tabWidget->setCurrentIndex(pos);
+	tabWidget->setUpdatesEnabled(true);
+}
+
+void MainWindow::createSearchPublisherForm()
+{
+	tabWidget->setUpdatesEnabled(false);
+	SearchForm *sf = new SearchForm(PropertiesGroupBox::publisher, c, tabWidget);
+	connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	int pos = tabWidget->addTab(sf, tr("Search Publisher"));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }

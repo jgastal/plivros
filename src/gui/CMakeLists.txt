@@ -4,6 +4,7 @@ set( LIBRARY_OUTPUT_PATH "${EXECUTABLE_OUTPUT_PATH}/gui" )
 
 set( headers
 	MainWindow.h
+	SearchForm.h
 	ThemeForm.h
 	AddTheme.h
 	EditTheme.h
@@ -15,6 +16,7 @@ set( headers
 	MessageBoxDataBaseException.h )
 set( sources
 	MainWindow.cpp
+	SearchForm.cpp
 	ThemeForm.cpp
 	AddTheme.cpp
 	EditTheme.cpp
@@ -29,7 +31,8 @@ set( sources
 set( UI_FILES
 	"UI/MainWindow.ui"
 	"UI/ThemeForm.ui"
-	"UI/PublisherForm.ui" )
+	"UI/PublisherForm.ui"
+	"UI/SearchForm.ui" )
 qt4_wrap_ui( ui_out ${UI_FILES} )
 #The gui headers include uic generated files
 MACRO_ADD_FILE_DEPENDENCIES( ${headers} ${ui_out} )

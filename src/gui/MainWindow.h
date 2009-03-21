@@ -29,6 +29,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 	private slots:
 		void createAddThemeForm();
 		void createAddPublisherForm();
+		void createSearchPublisherForm();
 		void closeTab(int);
 		void closeTab();
 
