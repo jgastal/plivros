@@ -15,10 +15,11 @@
 
 const QStringList Book::headers = QStringList() << QT_TR_NOOP("ISBN") <<
 QT_TR_NOOP("Title") << QT_TR_NOOP("Edition") << QT_TR_NOOP("Critique") <<
-QT_TR_NOOP("Description") << QT_TR_NOOP("Cover") << QT_TR_NOOP("E-Book") <<
-QT_TR_NOOP("Publishing Date") << QT_TR_NOOP("U.D.C.") << QT_TR_NOOP("Authors") <<
-QT_TR_NOOP("Translator") << QT_TR_NOOP("Publishers") << QT_TR_NOOP("Themes");
-const unsigned short int Book::propertiesCount = 13;
+QT_TR_NOOP("Description") << QT_TR_NOOP("Rating") << QT_TR_NOOP("Cover") <<
+QT_TR_NOOP("E-Book") << QT_TR_NOOP("Publishing Date") << QT_TR_NOOP("U.D.C.") <<
+QT_TR_NOOP("Authors") << QT_TR_NOOP("Translator") << QT_TR_NOOP("Publishers") <<
+QT_TR_NOOP("Themes");
+const unsigned short int Book::propertiesCount = 14;
 
 Book::Book() : DataObject("", 0)
 {
