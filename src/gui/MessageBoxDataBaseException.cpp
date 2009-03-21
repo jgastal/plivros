@@ -22,6 +22,7 @@
 MessageBoxDataBaseException::MessageBoxDataBaseException(DataBaseException *dbe, QWidget *parent) : QMessageBox(parent)
 {
 	setIcon(QMessageBox::Critical);
+	setWindowTitle(tr("Data Base Error"));
 	setText(tr("A very serious and unexpected error ocurred.\n"));
 	setDefaultButton(QMessageBox::Close);
 	QString str(tr("What: %1\nCaused by: %2\nError code: %3"));
