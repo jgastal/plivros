@@ -40,22 +40,22 @@ void PropertiesGroupBox::init(type t)
 	if(t == book)
 	{
 		setTitle("Book Properties");
-		props = Book::getHeaders();
+		props = Book::headers;
 	}
 	else if(t == author)
 	{
 		setTitle("Author Properties");
-		props = Author::getHeaders();
+		props = Author::headers;
 	}
 	else if(t == publisher)
 	{
 		setTitle("Publisher Properties");
-		props = Publisher::getHeaders();
+		props = Publisher::headers;
 	}
 	else if(t == theme)
 	{
 		setTitle("Theme Properties");
-		props = Theme::getHeaders();
+		props = Theme::headers;
 	}
 
 	//Creates radio buttons

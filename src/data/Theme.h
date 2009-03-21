@@ -29,7 +29,8 @@ class Theme : public DataObject
 			t_description
 		};
 		static theme_field getHeader(unsigned short int i);
-		static void initHeaders();
+		static const QStringList headers;
+		static const unsigned short int propertiesCount;
 
 	private:
 		QString name;

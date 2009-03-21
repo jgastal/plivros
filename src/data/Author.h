@@ -49,7 +49,8 @@ class Author : public DataObject
 			a_themes
 		};
 		static author_field getHeader(unsigned short int i);
-		static void initHeaders();
+		static const QStringList headers;
+		static const unsigned short int propertiesCount;
 
 	private:
 		QString firstName;

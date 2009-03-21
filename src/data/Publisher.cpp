@@ -12,6 +12,10 @@
 #include "Theme.h"
 #include "DataObject.h"
 
+const QStringList Publisher::headers = QStringList() << QT_TR_NOOP("Name") <<
+QT_TR_NOOP("Description") << QT_TR_NOOP("Critique") << QT_TR_NOOP("Logo") << QT_TR_NOOP("Themes");
+const unsigned short int Publisher::propertiesCount = 5;
+
 Publisher::Publisher() : DataObject("", 0)
 {
 	setName("");
@@ -110,9 +114,9 @@ Publisher::publisher_field Publisher::getHeader(unsigned short int i)
 	}
 }
 
-void Publisher::initHeaders()
+/*void Publisher::initHeaders()
 {
-	headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
-	headers << QT_TR_NOOP("Critique") << QT_TR_NOOP("Logo") << QT_TR_NOOP("Themes");
-	propertiesCount = 5;
-}
+	Publisher::headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
+	Publisher::headers << QT_TR_NOOP("Critique") << QT_TR_NOOP("Logo") << QT_TR_NOOP("Themes");
+	Publisher::propertiesCount = 5;
+}*/

@@ -13,6 +13,13 @@
 #include "Data.h"
 #include "DataObject.h"
 
+const QStringList Book::headers = QStringList() << QT_TR_NOOP("ISBN") <<
+QT_TR_NOOP("Title") << QT_TR_NOOP("Edition") << QT_TR_NOOP("Critique") <<
+QT_TR_NOOP("Description") << QT_TR_NOOP("Cover") << QT_TR_NOOP("E-Book") <<
+QT_TR_NOOP("Publishing Date") << QT_TR_NOOP("U.D.C.") << QT_TR_NOOP("Authors") <<
+QT_TR_NOOP("Translator") << QT_TR_NOOP("Publishers") << QT_TR_NOOP("Themes");
+const unsigned short int Book::propertiesCount = 13;
+
 Book::Book() : DataObject("", 0)
 {
 	setIsbn("\0");
@@ -275,15 +282,4 @@ Book::book_field Book::getHeader(unsigned short int i)
 		case b_themes:
 			return b_themes;
 	}
-}
-
-void Book::initHeaders()
-{
-	headers << QT_TR_NOOP("ISBN") << QT_TR_NOOP("Title") << QT_TR_NOOP("Edition");
-	headers << QT_TR_NOOP("Critique") << QT_TR_NOOP("Description");
-	headers << QT_TR_NOOP("Cover") << QT_TR_NOOP("E-Book");
-	headers << QT_TR_NOOP("Publishing Date") << QT_TR_NOOP("U.D.C.");
-	headers << QT_TR_NOOP("Authors") << QT_TR_NOOP("Translator");
-	headers << QT_TR_NOOP("Publishers") << QT_TR_NOOP("Themes");
-	propertiesCount = 13;
 }

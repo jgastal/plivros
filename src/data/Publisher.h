@@ -42,7 +42,8 @@ class Publisher : public DataObject
 			p_themes
 		};
 		static publisher_field getHeader(unsigned short int i);
-		static void initHeaders();
+		static const QStringList headers;
+		static const unsigned short int propertiesCount;
 
 	private:
 		QString name;

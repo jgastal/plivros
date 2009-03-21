@@ -31,13 +31,3 @@ void DataObject::setDescription(const QString description)
 {
 	this->description = description;
 }
-
-unsigned short int DataObject::getPropertiesCount()
-{
-	return propertiesCount;
-}
-
-QStringList DataObject::getHeaders()
-{
-	return headers;
-}

@@ -14,16 +14,12 @@ class DataObject
 		void setDescription(const QString description);
 		virtual QStringList getProperties() const = 0;
 
-		static unsigned short int getPropertiesCount();
-		static QStringList getHeaders();
-		static void initHeaders();
+		static QStringList headers;
+		static unsigned short int propertiesCount;
 
 	protected:
 		unsigned int id;
 		QString description;
-
-		static QStringList headers;
-		static unsigned short int propertiesCount;
 } ;
 
 #endif //DATAOBJECT_H

@@ -77,7 +77,8 @@ class Book : public DataObject
 			b_themes
 		};
 		static book_field getHeader(unsigned short int i);
-		static void initHeaders();
+		static const QStringList headers;
+		static const unsigned short int propertiesCount;
 
 	private:
 		char isbn[14]; //International Standard Book Number + '/0'

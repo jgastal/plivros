@@ -12,6 +12,11 @@
 #include "Theme.h"
 #include "DataObject.h"
 
+const QStringList Author::headers = QStringList() << QT_TR_NOOP("First Name") <<
+QT_TR_NOOP("Last Name") << QT_TR_NOOP("Description") << QT_TR_NOOP("Critique") <<
+QT_TR_NOOP("Rating") << QT_TR_NOOP("Picture") << QT_TR_NOOP("Themes");
+const unsigned short int Author::propertiesCount = 7;
+
 Author::Author() : DataObject("", 0)
 {
 	setFirstName("");
@@ -137,13 +142,4 @@ Author::author_field Author::getHeader(unsigned short int i)
 		case a_themes:
 			return a_themes;
 	}
-}
-
-void Author::initHeaders()
-{
-	headers << QT_TR_NOOP("First Name") << QT_TR_NOOP("Last Name");
-	headers << QT_TR_NOOP("Description") << QT_TR_NOOP("Critique");
-	headers << QT_TR_NOOP("Rating") << QT_TR_NOOP("Picture");
-	headers << QT_TR_NOOP("Themes");
-	propertiesCount = 7;
 }

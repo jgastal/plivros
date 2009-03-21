@@ -10,6 +10,9 @@
 #include "Theme.h"
 #include "DataObject.h"
 
+const QStringList Theme::headers = QStringList() << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
+const unsigned short int Theme::propertiesCount = 2;
+
 Theme::Theme() : DataObject("", 0)
 {
 	setName("");
@@ -53,10 +56,4 @@ Theme::theme_field Theme::getHeader(unsigned short int i)
 		case t_description:
 			return t_description;
 	}
-}
-
-void Theme::initHeaders()
-{
-	headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
-	propertiesCount = 2;
 }
