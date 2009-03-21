@@ -1,7 +1,7 @@
 /**
  * @file Book.cpp
  *
- * @date Nov 1, 2008
+ * @date 01/11/2008
  * @author Jonas M. Gastal
  */
 
@@ -247,6 +247,41 @@ QStringList Book::getProperties() const
 	prop << getPubDate().toString() << getUDC() << getAuthorsNames();
 	prop << getTranslatorName() << getPublishersNames() << getThemesNames();
 	return prop;
+}
+
+Book::book_field Book::getHeader(unsigned short int i)
+{
+	switch(i)
+	{
+		case b_isbn:
+			return b_isbn;
+		case b_title:
+			return b_title;
+		case b_edition:
+			return b_edition;
+		case b_critique:
+			return b_critique;
+		case b_description:
+			return b_description;
+		case b_rating:
+			return b_rating;
+		case b_cover:
+			return b_cover;
+		case b_ebook:
+			return b_ebook;
+		case b_pubdate:
+			return b_pubdate;
+		case b_UDC:
+			return b_UDC;
+		case b_authors:
+			return b_authors;
+		case b_translator:
+			return b_translator;
+		case b_publishers:
+			return b_publishers;
+		case b_themes:
+			return b_themes;
+	}
 }
 
 void Book::initHeaders()

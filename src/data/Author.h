@@ -48,6 +48,7 @@ class Author : public DataObject
 			a_picture,
 			a_themes
 		};
+		static author_field getHeader(unsigned short int i);
 
 	private:
 		static void initHeaders();

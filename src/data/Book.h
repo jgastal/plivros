@@ -1,7 +1,7 @@
 /**
  * @file Book.h
  *
- * @date Nov 1, 2008
+ * @date 01/11/2008
  * @author Jonas M. Gastal
  */
 
@@ -76,6 +76,7 @@ class Book : public DataObject
 			b_publishers,
 			b_themes
 		};
+		static book_field getHeader(unsigned short int i);
 
 	private:
 		static void initHeaders();

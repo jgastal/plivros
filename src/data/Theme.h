@@ -28,6 +28,7 @@ class Theme : public DataObject
 			t_name,
 			t_description
 		};
+		static theme_field getHeader(unsigned short int i);
 
 	private:
 		static void initHeaders();

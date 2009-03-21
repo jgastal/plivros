@@ -97,6 +97,23 @@ QStringList Publisher::getProperties() const
 	return prop;
 }
 
+Publisher::publisher_field Publisher::getHeader(unsigned short int i)
+{
+	switch(i)
+	{
+		case p_name:
+			return p_name;
+		case p_description:
+			return p_description;
+		case p_critique:
+			return p_critique;
+		case p_logo:
+			return p_logo;
+		case p_themes:
+			return p_themes;
+	}
+}
+
 void Publisher::initHeaders()
 {
 	headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");

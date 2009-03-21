@@ -41,6 +41,7 @@ class Publisher : public DataObject
 			p_logo,
 			p_themes
 		};
+		static publisher_field getHeader(unsigned short int i);
 
 	private:
 		static void initHeaders();

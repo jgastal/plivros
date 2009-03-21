@@ -48,6 +48,17 @@ QStringList Theme::getProperties() const
 	return prop;
 }
 
+Theme::theme_field Theme::getHeader(unsigned short int i)
+{
+	switch(i)
+	{
+		case t_name:
+			return t_name;
+		case t_description:
+			return t_description;
+	}
+}
+
 void Theme::initHeaders()
 {
 	headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");

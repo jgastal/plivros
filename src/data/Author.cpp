@@ -122,6 +122,27 @@ QStringList Author::getProperties() const
 	return prop;
 }
 
+Author::author_field Author::getHeader(unsigned short int i)
+{
+	switch(i)
+	{
+		case a_firstname:
+			return a_firstname;
+		case a_lastname:
+			return a_lastname;
+		case a_description:
+			return a_description;
+		case a_critique:
+			return a_critique;
+		case a_rating:
+			return a_rating;
+		case a_picture:
+			return a_picture;
+		case a_themes:
+			return a_themes;
+	}
+}
+
 void Author::initHeaders()
 {
 	headers << QT_TR_NOOP("First Name") << QT_TR_NOOP("Last Name");
