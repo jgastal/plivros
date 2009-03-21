@@ -60,10 +60,17 @@ void PropertiesGroupBox::init(type t)
 
 	//Creates radio buttons
 	radButtons.clear();
+	int row = 0, col = 0;
 	for(QStringList::iterator it = props.begin(); it != props.end(); it++)
 	{
 		QRadioButton *rad = new QRadioButton(*it, this);
 		radButtons.append(rad);
-		grid.addWidget(rad);
+		grid.addWidget(rad, row, col++);
+		if(col > 5)
+		{
+			col = 0;
+			row++;
+		}
+		
 	}
 }
