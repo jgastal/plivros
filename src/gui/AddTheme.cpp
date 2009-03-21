@@ -6,8 +6,6 @@
  * @brief Provides the class implementation.
  */
 
-#include <QMessageBox>
-
 #include "ThemeForm.h"
 #include "AddTheme.h"
 

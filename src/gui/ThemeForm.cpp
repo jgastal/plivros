@@ -31,6 +31,7 @@ bool ThemeForm::validateInput()
 	if(!nameLineEdit->text().isEmpty())
 		return true;
 	QMessageBox q(this);
+	q.setWindowTitle(tr("Invalid input"));
 	q.setIcon(QMessageBox::Warning);
 	q.setText(tr("You must enter the theme name."));
 	q.setDefaultButton(QMessageBox::Retry);
