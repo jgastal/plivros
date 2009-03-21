@@ -8,6 +8,9 @@
 
 #include "PropertiesGroupBox.h"
 
+#include <exception>
+#include <stdexcept>
+
 #include "Book.h"
 #include "Theme.h"
 #include "Author.h"
@@ -21,15 +24,14 @@ PropertiesGroupBox::PropertiesGroupBox(QWidget *parent) : QGroupBox(parent)
 
 unsigned short int PropertiesGroupBox::getSelectedRadioButton()
 {
-	unsigned short int ret = 1;
+	unsigned short int ret = 0;
 	for(QList<QRadioButton*>::iterator it = radButtons.begin(); it != radButtons.end(); it++)
 	{
 		if((*it)->isChecked())
 			return ret;
 		ret++;
 	}
-	return 0;
-		
+	throw std::out_of_range("No radio button selected.");
 }
 
 void PropertiesGroupBox::init(type t)
@@ -45,18 +47,19 @@ void PropertiesGroupBox::init(type t)
 		setTitle("Author Properties");
 		props = Author::getHeaders();
 	}
-	if(t == publisher)
+	else if(t == publisher)
 	{
 		setTitle("Publisher Properties");
 		props = Publisher::getHeaders();
 	}
-	if(t == theme)
+	else if(t == theme)
 	{
 		setTitle("Theme Properties");
 		props = Theme::getHeaders();
 	}
 
 	//Creates radio buttons
+	radButtons.clear();
 	for(QStringList::iterator it = props.begin(); it != props.end(); it++)
 	{
 		QRadioButton *rad = new QRadioButton(*it, this);
