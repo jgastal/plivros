@@ -49,9 +49,9 @@ class Author : public DataObject
 			a_themes
 		};
 		static author_field getHeader(unsigned short int i);
+		static void initHeaders();
 
 	private:
-		static void initHeaders();
 		QString firstName;
 		QString lastName;
 		QString critique;

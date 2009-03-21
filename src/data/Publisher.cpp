@@ -18,8 +18,6 @@ Publisher::Publisher() : DataObject("", 0)
 	setCritique("");
 	setLogo("");
 	setThemes(QList<Theme>());
-	if(!propertiesCount)
-		Publisher::initHeaders();
 }
 
 Publisher::Publisher(QString nm, QString desc, QString cri, QString logo, QList<Theme> t, unsigned int id) : DataObject(desc, id)
@@ -28,8 +26,6 @@ Publisher::Publisher(QString nm, QString desc, QString cri, QString logo, QList<
 	setCritique(cri);
 	setLogo(logo);
 	setThemes(t);
-	if(!propertiesCount)
-		Publisher::initHeaders();
 }
 
 QString Publisher::getName() const

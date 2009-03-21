@@ -20,8 +20,6 @@ Author::Author() : DataObject("", 0)
 	setRating(0);
 	setPicture("");
 	setThemes(QList<Theme>());
-	if(!propertiesCount)
-		Author::initHeaders();
 }
 
 Author::Author(QString fn, QString ln, QString desc, QString cri,
@@ -33,8 +31,6 @@ Author::Author(QString fn, QString ln, QString desc, QString cri,
 	setRating(rat);
 	setPicture(pic);
 	setThemes(t);
-	if(!propertiesCount)
-		Author::initHeaders();
 }
 
 QString Author::getFirstName() const

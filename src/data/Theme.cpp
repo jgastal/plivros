@@ -13,15 +13,11 @@
 Theme::Theme() : DataObject("", 0)
 {
 	setName("");
-	if(!propertiesCount)
-		Theme::initHeaders();
 }
 
 Theme::Theme(QString nm, QString desc, unsigned int id) : DataObject(desc, id)
 {
 	setName(nm);
-	if(!propertiesCount)
-		Theme::initHeaders();
 }
 
 QString Theme::getName() const

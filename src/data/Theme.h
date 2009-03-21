@@ -29,9 +29,9 @@ class Theme : public DataObject
 			t_description
 		};
 		static theme_field getHeader(unsigned short int i);
+		static void initHeaders();
 
 	private:
-		static void initHeaders();
 		QString name;
 } ;
 

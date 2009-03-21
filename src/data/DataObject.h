@@ -16,12 +16,12 @@ class DataObject
 
 		static unsigned short int getPropertiesCount();
 		static QStringList getHeaders();
+		static void initHeaders();
 
 	protected:
 		unsigned int id;
 		QString description;
 
-		static void initHeaders();
 		static QStringList headers;
 		static unsigned short int propertiesCount;
 } ;

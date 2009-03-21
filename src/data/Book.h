@@ -77,9 +77,9 @@ class Book : public DataObject
 			b_themes
 		};
 		static book_field getHeader(unsigned short int i);
+		static void initHeaders();
 
 	private:
-		static void initHeaders();
 		char isbn[14]; //International Standard Book Number + '/0'
 		QString title;
 		unsigned short int edition;

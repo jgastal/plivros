@@ -10,10 +10,7 @@
 #include <QList>
 #include <QStringList>
 
-#include "Book.h"
-#include "Author.h"
-#include "Publisher.h"
-#include "Theme.h"
+#include "Data.h"
 #include "DataObject.h"
 
 Book::Book() : DataObject("", 0)
@@ -31,8 +28,6 @@ Book::Book() : DataObject("", 0)
 	setTranslator(Author());
 	setPublishers(QList<Publisher>());
 	setThemes(QList<Theme>());
-	if(!propertiesCount)
-		Book::initHeaders();
 }
 
 Book::Book(char isbn[13], QString title, unsigned short int ed, QString cri,
@@ -53,8 +48,6 @@ Book::Book(char isbn[13], QString title, unsigned short int ed, QString cri,
 	setTranslator(tr);
 	setPublishers(p);
 	setThemes(t);
-	if(!propertiesCount)
-		Book::initHeaders();
 }
 
 const char* Book::getIsbn() const
