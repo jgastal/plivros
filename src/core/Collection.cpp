@@ -526,7 +526,7 @@ PreparedStatement Collection::simpleSearchBooks(Book::book_field field, QString 
 	else if(field == Book::b_ebook)
 		query.arg("ebook");
 	else if(field == Book::b_pubdate)
-		query.arg("pubdate");
+		query.arg("publishingyear");
 	else if(field == Book::b_UDC)
 		query.arg("UDC");
 	
@@ -555,7 +555,7 @@ PreparedStatement Collection::compositeSearchBooks(Book::book_field field, QStri
 	/*
 	 * The composing of the query is first done using QString(and not PreparedStatements) because
 	 * otherwise ' in '%1' would be escaped and that is obviously unwanted. There might be a more
-	 * elagant solution(one that doesn't depend on QString) but this one works and is readable.
+	 * elegant solution(one that doesn't depend on QString) but this one works and is readable.
 	 */
 	QString query("SELECT * FROM books WHERE id IN (%1)");
 
@@ -563,7 +563,7 @@ PreparedStatement Collection::compositeSearchBooks(Book::book_field field, QStri
 	{
 		QString refQuery("SELECT booksid FROM booksauthors WHERE authorsid IN (%1)");
 		query = query.arg(refQuery); //select from reference table
-		QString authorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' OR lastname LIKE '%%2%')");
+		QString authorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' OR lastname LIKE '%%1%')");
 		query = query.arg(authorQuery); //select from authors table
 	}
 	else if(field == Book::b_publishers)
@@ -582,12 +582,11 @@ PreparedStatement Collection::compositeSearchBooks(Book::book_field field, QStri
 	}
 	else if(field == Book::b_translator)
 	{
-		QString translatorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' OR lastname LIKE '%%2%')");
+		QString translatorQuery("SELECT id FROM authors WHERE (firstname LIKE '%%1%' OR lastname LIKE '%%1%')");
 		query = query.arg(translatorQuery);
 	}
 
 	PreparedStatement ret(query.toStdString(), db->getType());
-	ret.arg(name.toStdString());
 	ret.arg(name.toStdString());
 
 	return ret;
