@@ -32,7 +32,7 @@ class DataTableWidget : public QTableWidget
 		QList<DataObject*> curDataList;
 
 	signals:
-		void currentItemChanged(DataObject *curItem);
+		void currentItemChanged(DataObject*);
 } ;
 
 #endif //DATATABLEWIDGET_H
