@@ -28,8 +28,11 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
 	private slots:
 		void createAddThemeForm();
+		void createSearchThemeForm();
 		void createAddPublisherForm();
 		void createSearchPublisherForm();
+		void createSearchAuthorForm();
+		void createSearchBookForm();
 		void closeTab(int);
 		void closeTab();
 
