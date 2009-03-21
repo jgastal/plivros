@@ -2,6 +2,7 @@
 
 DataTableWidget::DataTableWidget(QWidget *parent) : QTableWidget(parent)
 {
+	setEditTriggers(0);
 	connect(this, SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
 		 this, SLOT(setCurItem(QTableWidgetItem*, QTableWidgetItem*)));
 }
@@ -37,7 +38,10 @@ void DataTableWidget::populateTable(QList<Theme> dataList)
 
 void DataTableWidget::setCurItem(QTableWidgetItem *oldItem, QTableWidgetItem *newItem)
 {
-	emit currentItemChanged(curDataList.at(newItem->row()));
+	if(newItem)
+		emit currentItemChanged(curDataList.at(newItem->row()));
+	else
+		emit currentItemChanged(NULL);
 }
 
 template <class Type>
