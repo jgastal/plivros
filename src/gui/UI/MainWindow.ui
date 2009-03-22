@@ -15,6 +15,9 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="margin">
+     <number>0</number>
+    </property>
     <item>
      <widget class="QToolBox" name="toolBox">
       <property name="minimumSize">
@@ -38,224 +41,185 @@
          <x>0</x>
          <y>0</y>
          <width>145</width>
-         <height>454</height>
+         <height>462</height>
         </rect>
        </property>
        <attribute name="label">
         <string>Books</string>
        </attribute>
-       <widget class="QWidget" name="booksOps" native="true">
-        <property name="geometry">
-         <rect>
-          <x>-10</x>
-          <y>0</y>
-          <width>151</width>
-          <height>401</height>
-         </rect>
-        </property>
-        <widget class="QPushButton" name="bookAdd">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>10</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Add</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bookSearch">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>40</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Search</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bookEdit">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>70</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Edit</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bookRemove">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>100</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Remove</string>
-         </property>
-        </widget>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="bookAdd">
+          <property name="text">
+           <string>Add</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="bookSearch">
+          <property name="text">
+           <string>Search</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="bookEdit">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Edit</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="bookRemove">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Remove</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="booksVerticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>319</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="authorsPage">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>94</width>
-         <height>24</height>
+         <width>145</width>
+         <height>462</height>
         </rect>
        </property>
        <attribute name="label">
         <string>Authors</string>
        </attribute>
-       <widget class="QWidget" name="authorsOps" native="true">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>151</width>
-          <height>401</height>
-         </rect>
-        </property>
-        <widget class="QPushButton" name="authorAdd">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>10</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Add</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="authorSearch">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>40</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Search</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="authorEdit">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>70</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Edit</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="authorRemove">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>100</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Remove</string>
-         </property>
-        </widget>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QPushButton" name="authorAdd">
+          <property name="text">
+           <string>Add</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="authorSearch">
+          <property name="text">
+           <string>Search</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="authorEdit">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Edit</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="authorRemove">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Remove</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="authorsVerticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>319</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="publishersPage">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>94</width>
-         <height>24</height>
+         <width>145</width>
+         <height>462</height>
         </rect>
        </property>
        <attribute name="label">
         <string>Publishers</string>
        </attribute>
-       <widget class="QWidget" name="publihsersOps" native="true">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>151</width>
-          <height>401</height>
-         </rect>
-        </property>
-        <widget class="QPushButton" name="publisherAdd">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>10</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Add</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="publisherSearch">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>40</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Search</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="publisherEdit">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>70</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Edit</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="publisherRemove">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>100</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Remove</string>
-         </property>
-        </widget>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QPushButton" name="publisherAdd">
+          <property name="text">
+           <string>Add</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="publisherSearch">
+          <property name="text">
+           <string>Search</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="publisherEdit">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Edit</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="publisherRemove">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Remove</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="publishersVerticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>319</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="themesPage">
        <property name="geometry">
@@ -263,74 +227,61 @@
          <x>0</x>
          <y>0</y>
          <width>145</width>
-         <height>454</height>
+         <height>462</height>
         </rect>
        </property>
        <attribute name="label">
         <string>Themes</string>
        </attribute>
-       <widget class="QWidget" name="themesOps" native="true">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>10</y>
-          <width>151</width>
-          <height>401</height>
-         </rect>
-        </property>
-        <widget class="QPushButton" name="themeAdd">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>10</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Add</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="themeSearch">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>40</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Search</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="themeEdit">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>70</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Edit</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="themeRemove">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>100</y>
-           <width>131</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Remove</string>
-         </property>
-        </widget>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QPushButton" name="themeAdd">
+          <property name="text">
+           <string>Add</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="themeSearch">
+          <property name="text">
+           <string>Search</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="themeEdit">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Edit</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="themeRemove">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Remove</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="themesVerticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>319</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -346,6 +297,8 @@
        <attribute name="title">
         <string>Tab 1</string>
        </attribute>
+       <zorder>toolBox</zorder>
+       <zorder>toolBox</zorder>
       </widget>
      </widget>
     </item>
