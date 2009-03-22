@@ -1,3 +1,11 @@
+/**
+ * @file DataTableWidget.h
+ *
+ * @date 20/03/2009
+ * @author Jonas M. Gastal
+ * @brief Provides the class definition.
+ */
+
 #ifndef DATATABLEWIDGET_H
 #define DATATABLEWIDGET_H
 

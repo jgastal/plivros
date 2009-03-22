@@ -1,3 +1,11 @@
+/**
+ * @file DataTableWidget.cpp
+ *
+ * @date 20/03/2009
+ * @author Jonas M. Gastal
+ * @brief Provides the class implementation.
+ */
+
 #include "DataTableWidget.h"
 
 DataTableWidget::DataTableWidget(QWidget *parent) : QTableWidget(parent)

@@ -1,3 +1,11 @@
+/**
+ * @file AuthorForm.cpp
+ *
+ * @date 21/03/2009
+ * @author Jonas M. Gastal
+ * @brief Provides the class implementation.
+ */
+
 #include <QList>
 #include <QFileDialog>
 

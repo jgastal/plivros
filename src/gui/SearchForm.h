@@ -1,3 +1,11 @@
+/**
+ * @file SearchForm.h
+ *
+ * @date 22/03/2009
+ * @author Jonas M. Gastal
+ * @brief Provides the class definition.
+ */
+
 #ifndef SEARCHFORM_H
 #define SEARCHFORM_H
 

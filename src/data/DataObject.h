@@ -1,3 +1,11 @@
+/**
+ * @file SearchForm.h
+ *
+ * @date 17/03/2009
+ * @author Jonas M. Gastal
+ * @brief Provides the class definition.
+ */
+
 #ifndef DATAOBJECT_H
 #define DATAOBJECT_H
 

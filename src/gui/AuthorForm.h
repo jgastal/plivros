@@ -1,3 +1,11 @@
+/**
+ * @file AuthorForm.h
+ *
+ * @date 21/03/2009
+ * @author Jonas M. Gastal
+ * @brief Provides the class definition.
+ */
+
 #ifndef AUTHORFORM_H
 #define AUTHORFORM_H
 

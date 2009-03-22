@@ -1,3 +1,11 @@
+/**
+ * @file SearchForm.cpp
+ *
+ * @date 22/03/2009
+ * @author Jonas M. Gastal
+ * @brief Provides the class implementation.
+ */
+
 #include "SearchForm.h"
 
 #include <QMessageBox>
