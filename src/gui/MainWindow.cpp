@@ -9,6 +9,7 @@
 #include "SearchForm.h"
 #include "AddTheme.h"
 #include "AddPublisher.h"
+#include "AddAuthor.h"
 
 #include "MainWindow.h"
 
@@ -30,9 +31,11 @@ MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
 	connect(publisherSearch, SIGNAL(clicked()), this, SLOT(createSearchPublisherForm()));
 
 	//Author buttons actions
+	connect(authorAdd, SIGNAL(clicked()), this, SLOT(createAddAuthorForm()));
 	connect(authorSearch, SIGNAL(clicked()), this, SLOT(createSearchAuthorForm()));
 
 	//Book buttons actions
+	connect(bookAdd, SIGNAL(clicked()), this, SLOT(createAddBookForm()));
 	connect(bookSearch, SIGNAL(clicked()), this, SLOT(createSearchBookForm()));
 
 	//Close tab slot
@@ -87,6 +90,17 @@ void MainWindow::createSearchPublisherForm()
 	tabWidget->setUpdatesEnabled(true);
 }
 
+void MainWindow::createAddAuthorForm()
+{
+	tabWidget->setUpdatesEnabled(false);
+	AddAuthor *aa = new AddAuthor(c, tabWidget);
+	connect(c, SIGNAL(themesChanged()), aa, SLOT(populateThemesListWidget()));
+	connect(aa, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	int pos = tabWidget->addTab(aa, tr("Add Author"));
+	tabWidget->setCurrentIndex(pos);
+	tabWidget->setUpdatesEnabled(true);
+}
+
 void MainWindow::createSearchAuthorForm()
 {
 	tabWidget->setUpdatesEnabled(false);
@@ -95,6 +109,10 @@ void MainWindow::createSearchAuthorForm()
 	int pos = tabWidget->addTab(sf, tr("Search Author"));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
+}
+
+void MainWindow::createAddBookForm()
+{
 }
 
 void MainWindow::createSearchBookForm()

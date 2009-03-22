@@ -1,0 +1,34 @@
+#ifndef AUTHORFORM_H
+#define AUTHORFORM_H
+
+#include "ui_AuthorForm.h"
+
+#include "Author.h"
+
+class Collection;
+
+class AuthorForm : public QWidget, protected Ui::AuthorForm
+{
+	Q_OBJECT
+
+	public:
+		AuthorForm(Collection *c, QWidget *parent = 0);
+
+	public slots:
+		void populateThemesListWidget();
+		
+	protected slots:
+		virtual void save() = 0;
+		void picFileChooser();
+		
+	protected:
+		bool validateInput();
+		QList<Theme> getSelectedThemes();
+		Collection *c;
+		QList<Theme> themeList;
+		
+	signals:
+		void closeRequested();
+} ;
+
+#endif //AUTHORFORM_H

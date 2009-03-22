@@ -11,6 +11,8 @@ set( headers
 	PublisherForm.h
 	AddPublisher.h
 	EditPublisher.h
+	AuthorForm.h
+	AddAuthor.h
 	PropertiesGroupBox.h
 	DataTableWidget.h
 	MessageBoxDataBaseException.h )
@@ -23,6 +25,8 @@ set( sources
 	PublisherForm.cpp
 	AddPublisher.cpp
 	EditPublisher.cpp
+	AuthorForm.cpp
+	AddAuthor.cpp
 	PropertiesGroupBox.cpp
 	DataTableWidget.cpp
 	MessageBoxDataBaseException.cpp )
@@ -32,6 +36,8 @@ set( UI_FILES
 	"UI/MainWindow.ui"
 	"UI/ThemeForm.ui"
 	"UI/PublisherForm.ui"
+	"UI/AuthorForm.ui"
+	"UI/BookForm.ui"
 	"UI/SearchForm.ui" )
 qt4_wrap_ui( ui_out ${UI_FILES} )
 #The gui headers include uic generated files
