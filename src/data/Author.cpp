@@ -43,7 +43,7 @@ QString Author::getFirstName() const
 	return firstName;
 }
 
-void Author::setFirstName(QString FirstName)
+void Author::setFirstName(QString firstName)
 {
 	this->firstName = firstName;
 }
