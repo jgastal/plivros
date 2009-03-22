@@ -1,5 +1,5 @@
 /**
- * @file SearchForm.h
+ * @file DataObject.h
  *
  * @date 17/03/2009
  * @author Jonas M. Gastal
@@ -12,6 +12,11 @@
 #include <QString>
 #include <QStringList>
 
+/**
+ * @class 
+ *
+ *
+ */
 class DataObject
 {
 	public:

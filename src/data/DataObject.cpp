@@ -1,5 +1,5 @@
 /**
- * @file SearchForm.cpp
+ * @file DataObject.cpp
  *
  * @date 17/03/2009
  * @author Jonas M. Gastal
