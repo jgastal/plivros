@@ -37,7 +37,6 @@ class PublisherForm : public QWidget, protected Ui::PublisherForm
 	protected:
 		bool validateInput();
 		QList<Theme> getSelectedThemes();
-		QWidget *parent;
 		Collection *c;
 		QList<Theme> themeList;
 

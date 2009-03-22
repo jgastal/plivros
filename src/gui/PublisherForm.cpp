@@ -19,7 +19,6 @@
 
 PublisherForm::PublisherForm(Collection *c, QWidget *parent) : QWidget(parent)
 {
-	this->parent = parent;
 	this->c = c;
 	setupUi(this);
 	populateThemesListWidget();
