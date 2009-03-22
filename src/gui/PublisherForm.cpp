@@ -34,7 +34,7 @@ bool PublisherForm::validateInput()
 	QMessageBox q(this);
 	q.setIcon(QMessageBox::Warning);
 	q.setWindowTitle(tr("Invalid input"));
-	q.setText(tr("You must enter the publisher name."));
+	q.setText(tr("You must enter the publisher's name."));
 	q.setDefaultButton(QMessageBox::Retry);
 	q.exec();
 	nameLineEdit->setFocus();
