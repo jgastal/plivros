@@ -21,8 +21,8 @@ ThemeForm::ThemeForm(Collection *c, QWidget *parent) : QWidget(parent)
 	this->parent = parent;
 	this->c = c;
 	setupUi(this);
-	connect(cancelPushButton, SIGNAL(clicked(bool)), this, SIGNAL(closeRequested()));
-	connect(savePushButton, SIGNAL(clicked(bool)), this, SLOT(save()));
+	connect(cancelPushButton, SIGNAL(clicked()), this, SIGNAL(closeRequested()));
+	connect(savePushButton, SIGNAL(clicked()), this, SLOT(save()));
 }
 
 ///@brief Makes sure the name has been filed out.

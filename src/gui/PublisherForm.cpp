@@ -23,9 +23,9 @@ PublisherForm::PublisherForm(Collection *c, QWidget *parent) : QWidget(parent)
 	this->c = c;
 	setupUi(this);
 	populateThemesListWidget();
-	connect(savePushButton, SIGNAL(clicked(bool)), this, SLOT(save()));
-	connect(cancelPushButton, SIGNAL(clicked(bool)), this, SIGNAL(closeRequested()));
-	connect(logoPushButton, SIGNAL(clicked(bool)), this, SLOT(logoFileChooser()));
+	connect(savePushButton, SIGNAL(clicked()), this, SLOT(save()));
+	connect(cancelPushButton, SIGNAL(clicked()), this, SIGNAL(closeRequested()));
+	connect(logoPushButton, SIGNAL(clicked()), this, SLOT(logoFileChooser()));
 }
 
 bool PublisherForm::validateInput()
