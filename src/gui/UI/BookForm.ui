@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>633</height>
+    <height>637</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QFormLayout" name="formLayout_2">
+  <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
     <widget class="QLabel" name="isbnLabel">
      <property name="text">
@@ -82,7 +82,23 @@
     </widget>
    </item>
    <item row="6" column="1">
-    <widget class="QLineEdit" name="coverLineEdit"/>
+    <widget class="QWidget" name="coverWidget" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLineEdit" name="coverLineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="coverPushButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item row="7" column="0">
     <widget class="QLabel" name="ebookLabel">
@@ -91,82 +107,114 @@
      </property>
     </widget>
    </item>
-   <item row="7" column="1">
-    <widget class="QLineEdit" name="ebookLineEdit"/>
-   </item>
-   <item row="8" column="0">
+   <item row="9" column="0">
     <widget class="QLabel" name="pubDateLabel">
      <property name="text">
       <string>Publishing Date:</string>
      </property>
     </widget>
    </item>
-   <item row="8" column="1">
-    <widget class="QLineEdit" name="pubDateLineEdit"/>
-   </item>
-   <item row="9" column="0">
+   <item row="10" column="0">
     <widget class="QLabel" name="udcLabel">
      <property name="text">
       <string>UDC:</string>
      </property>
     </widget>
    </item>
-   <item row="9" column="1">
+   <item row="10" column="1">
     <widget class="QLineEdit" name="udcLineEdit"/>
    </item>
-   <item row="10" column="0">
+   <item row="11" column="0">
     <widget class="QLabel" name="authorsLabel">
      <property name="text">
       <string>Auhtors:</string>
      </property>
     </widget>
    </item>
-   <item row="11" column="0">
+   <item row="11" column="1">
+    <widget class="QListWidget" name="authorsListWidget">
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="0">
     <widget class="QLabel" name="translatorLabel">
      <property name="text">
       <string>Translator:</string>
      </property>
     </widget>
    </item>
-   <item row="12" column="0">
+   <item row="12" column="1">
+    <widget class="QListWidget" name="translatorListWidget">
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="0">
     <widget class="QLabel" name="publishersLabel">
      <property name="text">
       <string>Publishers:</string>
      </property>
     </widget>
    </item>
-   <item row="13" column="0">
+   <item row="13" column="1">
+    <widget class="QListWidget" name="publisherListWidget">
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="0">
     <widget class="QLabel" name="themesLabel">
      <property name="text">
       <string>Themes:</string>
      </property>
     </widget>
    </item>
-   <item row="14" column="0">
+   <item row="14" column="1">
+    <widget class="QListWidget" name="themesListWidget">
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="0">
     <widget class="QPushButton" name="cancelPushButton">
      <property name="text">
       <string>Cancel</string>
      </property>
     </widget>
    </item>
-   <item row="14" column="1">
+   <item row="15" column="1">
     <widget class="QPushButton" name="savePushButton">
      <property name="text">
       <string>Save</string>
      </property>
     </widget>
    </item>
-   <item row="10" column="1">
-    <widget class="QListWidget" name="authorsListWidget"/>
+   <item row="7" column="1">
+    <widget class="QWidget" name="ebookWidget" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLineEdit" name="ebookLineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="ebookPushButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
-   <item row="11" column="1">
-    <widget class="QListWidget" name="translatorListWidget"/>
-   </item>
-   <item row="12" column="1">
-    <widget class="QListWidget" name="publisherListWidget"/>
-   </item>
-   <item row="13" column="1">
-    <widget class="QListWidget" name="themesListWidget"/>
+   <item row="9" column="1">
+    <widget class="QDateEdit" name="pubDateEdit"/>
    </item>
   </layout>
  </widget>

@@ -13,6 +13,8 @@ set( headers
 	EditPublisher.h
 	AuthorForm.h
 	AddAuthor.h
+	BookForm.h
+	AddBook.h
 	PropertiesGroupBox.h
 	DataTableWidget.h
 	MessageBoxDataBaseException.h )
@@ -27,6 +29,8 @@ set( sources
 	EditPublisher.cpp
 	AuthorForm.cpp
 	AddAuthor.cpp
+	BookForm.cpp
+	AddBook.cpp
 	PropertiesGroupBox.cpp
 	DataTableWidget.cpp
 	MessageBoxDataBaseException.cpp )

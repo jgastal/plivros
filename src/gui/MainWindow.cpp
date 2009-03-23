@@ -10,6 +10,7 @@
 #include "AddTheme.h"
 #include "AddPublisher.h"
 #include "AddAuthor.h"
+#include "AddBook.h"
 
 #include "MainWindow.h"
 
@@ -113,6 +114,13 @@ void MainWindow::createSearchAuthorForm()
 
 void MainWindow::createAddBookForm()
 {
+	tabWidget->setUpdatesEnabled(false);
+	AddBook *ab = new AddBook(c, tabWidget);
+	connect(c, SIGNAL(themesChanged()), ab, SLOT(populateThemesListWidget()));
+	connect(ab, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	int pos = tabWidget->addTab(ab, tr("Add Author"));
+	tabWidget->setCurrentIndex(pos);
+	tabWidget->setUpdatesEnabled(true);
 }
 
 void MainWindow::createSearchBookForm()
