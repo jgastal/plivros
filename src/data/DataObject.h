@@ -13,9 +13,13 @@
 #include <QStringList>
 
 /**
- * @class 
+ * @class DataObject DataObject.h
  *
+ * @brief Class is pure-virtual super class of all classes that declare data types.
  *
+ * DataObject is a abstraction of common properties of all data types. Ideally
+ * headers and propertiesCount would be virtual, however I can't  because I can't
+ * declare static virtual members.
  */
 class DataObject
 {
