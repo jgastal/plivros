@@ -147,7 +147,7 @@ void BookForm::populateAuthorsListWidget()
 Author BookForm::getSelectedTranslator()
 {
 	Author a;
-	for(int i = 0; i < authorsListWidget->count(); i++)
+	for(int i = 0; i < translatorListWidget->count(); i++)
 	{
 		if(authorsListWidget->item(i)->isSelected())
 			a = authorList.at(i);
