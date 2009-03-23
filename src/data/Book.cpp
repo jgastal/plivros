@@ -160,8 +160,8 @@ QString Book::getAuthorsNames() const
 	for(QList<Author>::const_iterator it = authors.begin(); it != authors.end(); it++)
 	{
 		QString name("");
-		name.append(translator.getLastName()).append(", ");
-		name.append(translator.getFirstName());
+		name.append(it->getLastName()).append(", ");
+		name.append(it->getFirstName());
 		str.append(name).append("; ");
 	}
 	return str;
