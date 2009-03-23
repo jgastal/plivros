@@ -15,6 +15,11 @@
 
 class Collection;
 
+/**
+ * @class AuthorForm AuthorForm.h
+ *
+ * @brief This class is a form containing all authors fields.
+ */
 class AuthorForm : public QWidget, protected Ui::AuthorForm
 {
 	Q_OBJECT

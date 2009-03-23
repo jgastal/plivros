@@ -17,15 +17,12 @@
 #include "Author.h"
 #include "Theme.h"
 
-#include <iostream>
-using namespace std;
-
 AddAuthor::AddAuthor(Collection *c, QWidget *parent) : AuthorForm(c, parent)
 {
 	//just calling the parents constructor suffices
 }
 
-///@brief Adds publisher described in the form.
+///@brief Adds author described in the form.
 void AddAuthor::save()
 {
 	if(!validateInput())

@@ -44,6 +44,7 @@ bool AuthorForm::validateInput()
 	return false;
 }
 
+///@brief Returns the themes that are marked in the themesListWidget.
 QList<Theme> AuthorForm::getSelectedThemes()
 {
 	QList<Theme> list;
