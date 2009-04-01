@@ -55,3 +55,4 @@ qt4_wrap_cpp( moc_sources ${headers} )
 add_definitions( -fpic )
 
 add_library( gui SHARED ${headers} ${sources} ${moc_sources} )
+target_link_libraries( gui RatingWidgetPlugin )
