@@ -33,7 +33,7 @@ void AddBook::save()
 	b.setEdition(editionLineEdit->text().toInt());
 	b.setCritique(critiqueLineEdit->text());
 	b.setDescription(descriptionLineEdit->text());
-	b.setRating(ratingLineEdit->text().toInt());
+	b.setRating(ratingWidget->getValue());
 	b.setCover(coverLineEdit->text());
 	b.setEbook(ebookLineEdit->text());
 	b.setPubDate(pubDateEdit->date());

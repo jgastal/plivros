@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>401</width>
     <height>305</height>
    </rect>
   </property>
@@ -64,9 +64,6 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="1">
-    <widget class="QLineEdit" name="ratingLineEdit"/>
-   </item>
    <item row="5" column="0">
     <widget class="QLabel" name="pictureLabel">
      <property name="text">
@@ -121,14 +118,32 @@
      </property>
     </widget>
    </item>
+   <item row="4" column="1">
+    <widget class="RatingWidget" name="ratingWidget">
+     <property name="max">
+      <number>10</number>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RatingWidget</class>
+   <extends>QWidget</extends>
+   <header>RatingWidget.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>firstNameLineEdit</tabstop>
   <tabstop>lastNameLineEdit</tabstop>
   <tabstop>descriptionLineEdit</tabstop>
   <tabstop>critiqueLineEdit</tabstop>
-  <tabstop>ratingLineEdit</tabstop>
+  <tabstop>pictureLineEdit</tabstop>
+  <tabstop>picturePushButton</tabstop>
+  <tabstop>themesListWidget</tabstop>
+  <tabstop>cancelPushButton</tabstop>
+  <tabstop>savePushButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

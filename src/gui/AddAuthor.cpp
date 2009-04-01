@@ -33,7 +33,7 @@ void AddAuthor::save()
 	a.setDescription(descriptionLineEdit->text());
 	a.setCritique(critiqueLineEdit->text());
 	a.setPicture(pictureLineEdit->text());
-	a.setRating(ratingLineEdit->text().toInt());
+	a.setRating(ratingWidget->getValue());
 
 	a.setThemes(getSelectedThemes());
 

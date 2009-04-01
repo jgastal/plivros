@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>432</width>
     <height>637</height>
    </rect>
   </property>
@@ -14,6 +14,9 @@
    <string>Form</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
+   <property name="fieldGrowthPolicy">
+    <enum>QFormLayout::ExpandingFieldsGrow</enum>
+   </property>
    <item row="0" column="0">
     <widget class="QLabel" name="isbnLabel">
      <property name="text">
@@ -71,9 +74,6 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="1">
-    <widget class="QLineEdit" name="ratingLineEdit"/>
-   </item>
    <item row="6" column="0">
     <widget class="QLabel" name="coverLabel">
      <property name="text">
@@ -107,12 +107,34 @@
      </property>
     </widget>
    </item>
+   <item row="7" column="1">
+    <widget class="QWidget" name="ebookWidget" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLineEdit" name="ebookLineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="ebookPushButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item row="9" column="0">
     <widget class="QLabel" name="pubDateLabel">
      <property name="text">
       <string>Publishing Date:</string>
      </property>
     </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QDateEdit" name="pubDateEdit"/>
    </item>
    <item row="10" column="0">
     <widget class="QLabel" name="udcLabel">
@@ -194,30 +216,41 @@
      </property>
     </widget>
    </item>
-   <item row="7" column="1">
-    <widget class="QWidget" name="ebookWidget" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <property name="margin">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QLineEdit" name="ebookLineEdit"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="ebookPushButton">
-        <property name="text">
-         <string>...</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+   <item row="5" column="1">
+    <widget class="RatingWidget" name="ratingWidget">
+     <property name="max">
+      <number>10</number>
+     </property>
     </widget>
-   </item>
-   <item row="9" column="1">
-    <widget class="QDateEdit" name="pubDateEdit"/>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RatingWidget</class>
+   <extends>QWidget</extends>
+   <header>RatingWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>isbnLineEdit</tabstop>
+  <tabstop>titleLineEdit</tabstop>
+  <tabstop>descriptionLineEdit</tabstop>
+  <tabstop>critiqueLineEdit</tabstop>
+  <tabstop>editionLineEdit</tabstop>
+  <tabstop>coverLineEdit</tabstop>
+  <tabstop>coverPushButton</tabstop>
+  <tabstop>ebookLineEdit</tabstop>
+  <tabstop>ebookPushButton</tabstop>
+  <tabstop>pubDateEdit</tabstop>
+  <tabstop>udcLineEdit</tabstop>
+  <tabstop>authorsListWidget</tabstop>
+  <tabstop>translatorListWidget</tabstop>
+  <tabstop>publisherListWidget</tabstop>
+  <tabstop>themesListWidget</tabstop>
+  <tabstop>cancelPushButton</tabstop>
+  <tabstop>savePushButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -14,6 +14,8 @@ include( ${QT_USE_FILE} )
 set( DBWRAPPER_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../DataBaseWrapper/ )
 # Path to DataBaseWrapper headers
 set( DBWRAPPER_INC_DIR ${DBWRAPPER_ROOT}/src/ )
+# Path to RatingWidget headers, CHANGE THIS TO SOMETHING BETTER
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../RatingWidgetPlugin )
 
 if( DEBUG )
 	add_definitions( -O0 -g3 )
