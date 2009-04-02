@@ -35,8 +35,6 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 		void createSearchAuthorForm();
 		void createAddBookForm();
 		void createSearchBookForm();
-		void closeTab(int);
-		void closeTab();
 
 	private:
 		Collection *c;

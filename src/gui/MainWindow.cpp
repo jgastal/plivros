@@ -6,6 +6,14 @@
  * @brief Provides the class implementation.
  */
 
+/**
+ * TODO: Remove code that no longer makes sense.
+ * TODO: Text over images on hover.
+ * TODO: Figure out system user name.
+ * TODO: Should displayWidget be separated from MainWindow?
+ * TODO: searchLabel above searchLineEdit?
+ */
+
 #include "SearchForm.h"
 #include "AddTheme.h"
 #include "AddPublisher.h"
@@ -21,26 +29,8 @@ MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
 {
 	c = new Collection("User");
 	setupUi(this);
-	tabWidget->clear();
 
-	//Theme buttons actions
-	connect(themeAdd, SIGNAL(clicked()), this, SLOT(createAddThemeForm()));
-	connect(themeSearch, SIGNAL(clicked()), this, SLOT(createSearchThemeForm()));
-
-	//Publisher buttons actions
-	connect(publisherAdd, SIGNAL(clicked()), this, SLOT(createAddPublisherForm()));
-	connect(publisherSearch, SIGNAL(clicked()), this, SLOT(createSearchPublisherForm()));
-
-	//Author buttons actions
-	connect(authorAdd, SIGNAL(clicked()), this, SLOT(createAddAuthorForm()));
-	connect(authorSearch, SIGNAL(clicked()), this, SLOT(createSearchAuthorForm()));
-
-	//Book buttons actions
-	connect(bookAdd, SIGNAL(clicked()), this, SLOT(createAddBookForm()));
-	connect(bookSearch, SIGNAL(clicked()), this, SLOT(createSearchBookForm()));
-
-	//Close tab slot
-	connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
+	connect(quitLabel, SIGNAL(linkActivated(QString)), this, SLOT(close()));
 }
 
 MainWindow::~MainWindow()
@@ -51,96 +41,69 @@ MainWindow::~MainWindow()
 ///@brief Adds a tab and creates a form to add a theme in it.
 void MainWindow::createAddThemeForm()
 {
-	tabWidget->setUpdatesEnabled(false);
-	AddTheme *at = new AddTheme(c, tabWidget);
-	connect(at, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(at, tr("Add Theme"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	//set parent!
+	AddTheme *at = new AddTheme(c);
+	//connect(at, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	//Add somewhere
+
 }
 
 void MainWindow::createSearchThemeForm()
 {
-	tabWidget->setUpdatesEnabled(false);
-	SearchForm *sf = new SearchForm(PropertiesGroupBox::theme, c, tabWidget);
-	connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(sf, tr("Search Theme"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	//set parent!
+	SearchForm *sf = new SearchForm(PropertiesGroupBox::theme, c);
+	//connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	//Add somewhere
 }
 
 ///@brief Adds a tab and creates a form to add a publisher in it.
 void MainWindow::createAddPublisherForm()
 {
-	tabWidget->setUpdatesEnabled(false);
-	AddPublisher *ap = new AddPublisher(c, tabWidget);
+	//set parent!
+	AddPublisher *ap = new AddPublisher(c);
 	connect(c, SIGNAL(themesChanged()), ap, SLOT(populateThemesListWidget()));
-	connect(ap, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(ap, tr("Add Publisher"));	
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	//connect(ap, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	//Add somewhere
 }
 
 void MainWindow::createSearchPublisherForm()
 {
-	tabWidget->setUpdatesEnabled(false);
-	SearchForm *sf = new SearchForm(PropertiesGroupBox::publisher, c, tabWidget);
-	connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(sf, tr("Search Publisher"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	//set parent!
+	SearchForm *sf = new SearchForm(PropertiesGroupBox::publisher, c);
+	//connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	//Add somewhere
 }
 
 void MainWindow::createAddAuthorForm()
 {
-	tabWidget->setUpdatesEnabled(false);
-	AddAuthor *aa = new AddAuthor(c, tabWidget);
+	//set parent!
+	AddAuthor *aa = new AddAuthor(c);
 	connect(c, SIGNAL(themesChanged()), aa, SLOT(populateThemesListWidget()));
-	connect(aa, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(aa, tr("Add Author"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	//connect(aa, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	//Add somewhere
 }
 
 void MainWindow::createSearchAuthorForm()
 {
-	tabWidget->setUpdatesEnabled(false);
-	SearchForm *sf = new SearchForm(PropertiesGroupBox::author, c, tabWidget);
-	connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(sf, tr("Search Author"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	//set parent!
+	SearchForm *sf = new SearchForm(PropertiesGroupBox::author, c);
+	//connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	//Add somewhere
 }
 
 void MainWindow::createAddBookForm()
 {
-	tabWidget->setUpdatesEnabled(false);
-	AddBook *ab = new AddBook(c, tabWidget);
+	//set parent!
+	AddBook *ab = new AddBook(c);
 	connect(c, SIGNAL(themesChanged()), ab, SLOT(populateThemesListWidget()));
-	connect(ab, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(ab, tr("Add Author"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	//connect(ab, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	//Add somewhere
 }
 
 void MainWindow::createSearchBookForm()
 {
-	tabWidget->setUpdatesEnabled(false);
-	SearchForm *sf = new SearchForm(PropertiesGroupBox::book, c, tabWidget);
-	connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(sf, tr("Search Book"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
-}
-
-///@brief Closes a tab by deleting widget on position \a index of tabWidget.
-void MainWindow::closeTab(int index)
-{
-	delete tabWidget->widget(index);
-}
-
-///@brief Closes a tab by deleting the sender.
-void MainWindow::closeTab()
-{
-	delete sender();
+	//set parent!
+	SearchForm *sf = new SearchForm(PropertiesGroupBox::book, c);
+	//connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	//Add somewhere
 }
