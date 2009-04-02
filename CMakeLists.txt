@@ -17,6 +17,9 @@ set( DBWRAPPER_INC_DIR ${DBWRAPPER_ROOT}/src/ )
 # Path to RatingWidget headers, CHANGE THIS TO SOMETHING BETTER
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../RatingWidgetPlugin )
 link_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../RatingWidgetPlugin )
+# Path to HoverPushButton headers, CHANGE THIS TO SOMETHING BETTER
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../HoverPushButton )
+link_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../HoverPushButton )
 
 if( DEBUG )
 	add_definitions( -O0 -g3 )

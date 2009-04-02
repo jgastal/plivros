@@ -59,4 +59,4 @@ qt4_add_resources( rc_sources ${RC_FILES} )
 add_definitions( -fpic )
 
 add_library( gui SHARED ${headers} ${sources} ${moc_sources} ${rc_sources} )
-target_link_libraries( gui RatingWidgetPlugin )
+target_link_libraries( gui RatingWidgetPlugin HoverPushButton )

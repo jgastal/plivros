@@ -36,6 +36,13 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 		void createAddBookForm();
 		void createSearchBookForm();
 
+		//for when buttons are hovered
+		void themeEnterHover();
+		void publisherEnterHover();
+		void authorEnterHover();
+		void bookEnterHover();
+		void leaveHover();
+
 	private:
 		Collection *c;
 } ;
