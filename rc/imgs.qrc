@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="imgs" >
+    <file>imgs/Book.gif</file>
+    <file>imgs/Author.gif</file>
+    <file>imgs/Publisher.gif</file>
+    <file>imgs/Logo.gif</file>
+    <file>imgs/pages.jpg</file>
+  </qresource>
+</RCC>

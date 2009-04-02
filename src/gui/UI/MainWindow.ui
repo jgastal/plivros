@@ -13,298 +13,344 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget { background-color: rgb(0, 0, 0) }
+Line { background-color: rgb(0, 45, 0) }
+QLineEdit { background-color: rgb(255, 255, 255) }
+QLabel { color: rgb(255, 255, 255) }</string>
+   </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="margin">
      <number>0</number>
     </property>
     <item>
-     <widget class="QToolBox" name="toolBox">
-      <property name="minimumSize">
-       <size>
-        <width>155</width>
-        <height>0</height>
-       </size>
-      </property>
+     <widget class="QWidget" name="menuWidget" native="true">
       <property name="maximumSize">
        <size>
-        <width>155</width>
+        <width>250</width>
         <height>16777215</height>
        </size>
       </property>
-      <property name="currentIndex">
-       <number>3</number>
-      </property>
-      <widget class="QWidget" name="booksPage">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>145</width>
-         <height>462</height>
-        </rect>
-       </property>
-       <attribute name="label">
-        <string>Books</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QPushButton" name="bookAdd">
-          <property name="text">
-           <string>Add</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="bookSearch">
-          <property name="text">
-           <string>Search</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="bookEdit">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Edit</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="bookRemove">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Remove</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="booksVerticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>319</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="authorsPage">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>145</width>
-         <height>462</height>
-        </rect>
-       </property>
-       <attribute name="label">
-        <string>Authors</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <widget class="QPushButton" name="authorAdd">
-          <property name="text">
-           <string>Add</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="authorSearch">
-          <property name="text">
-           <string>Search</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="authorEdit">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Edit</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="authorRemove">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Remove</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="authorsVerticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>319</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="publishersPage">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>145</width>
-         <height>462</height>
-        </rect>
-       </property>
-       <attribute name="label">
-        <string>Publishers</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <widget class="QPushButton" name="publisherAdd">
-          <property name="text">
-           <string>Add</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="publisherSearch">
-          <property name="text">
-           <string>Search</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="publisherEdit">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Edit</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="publisherRemove">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Remove</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="publishersVerticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>319</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="themesPage">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>145</width>
-         <height>462</height>
-        </rect>
-       </property>
-       <attribute name="label">
-        <string>Themes</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QPushButton" name="themeAdd">
-          <property name="text">
-           <string>Add</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="themeSearch">
-          <property name="text">
-           <string>Search</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="themeEdit">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Edit</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="themeRemove">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Remove</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="themesVerticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>319</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="logoLabel">
+         <property name="maximumSize">
+          <size>
+           <width>180</width>
+           <height>296</height>
+          </size>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="../../../rc/imgs.qrc">:/imgs/imgs/Logo.gif</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="logoLine">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="searchLineEdit"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="searchLabel">
+         <property name="text">
+          <string>Quick Search</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="searchLine">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="changeUserLabel">
+         <property name="text">
+          <string>Change User</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="dataBaseLabel">
+         <property name="text">
+          <string>DataBase</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="manageUsersLabel">
+         <property name="text">
+          <string>Manage Users</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="helpLabel">
+         <property name="text">
+          <string>Help</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="quitLabel">
+         <property name="text">
+          <string>Quit</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>100</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </widget>
     </item>
     <item>
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="currentIndex">
-       <number>0</number>
+     <widget class="Line" name="menuLine">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
       </property>
-      <property name="tabsClosable">
-       <bool>true</bool>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
       </property>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Tab 1</string>
-       </attribute>
-       <zorder>toolBox</zorder>
-       <zorder>toolBox</zorder>
-      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="contentWidget" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="userLabel">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Welcome &lt;user&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="userLine">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="displayWidget" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>500</width>
+           <height>300</height>
+          </size>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <spacer name="displayRightHorizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>13</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QFrame" name="categoryFrame">
+            <property name="maximumSize">
+             <size>
+              <width>860</width>
+              <height>260</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QFrame#categoryFrame { 
+	border: 3px solid rgb(0, 45, 0); 
+	border-radius: 15px;
+}</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="1" column="1">
+              <widget class="QLabel" name="themeLabel">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>50</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>200</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="pixmap">
+                <pixmap resource="../../../rc/imgs.qrc">:/imgs/imgs/pages.jpg</pixmap>
+               </property>
+               <property name="scaledContents">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLabel" name="bookLabel">
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>200</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="pixmap">
+                <pixmap resource="../../../rc/imgs.qrc">:/imgs/imgs/Book.gif</pixmap>
+               </property>
+               <property name="scaledContents">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QLabel" name="authorLabel">
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>200</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="pixmap">
+                <pixmap resource="../../../rc/imgs.qrc">:/imgs/imgs/Author.gif</pixmap>
+               </property>
+               <property name="scaledContents">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QLabel" name="publisherLabel">
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>200</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="pixmap">
+                <pixmap resource="../../../rc/imgs.qrc">:/imgs/imgs/Publisher.gif</pixmap>
+               </property>
+               <property name="scaledContents">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="categoryLabel">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Pick a category</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <spacer name="categoryRightHorizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="1" column="5">
+              <spacer name="categoryLeftHorizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="displayLeftHorizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>12</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../rc/imgs.qrc"/>
+ </resources>
  <connections/>
 </ui>
