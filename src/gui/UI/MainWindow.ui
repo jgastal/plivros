@@ -221,7 +221,7 @@ QLabel { color: rgb(255, 255, 255) }</string>
                 <string/>
                </property>
                <property name="pixmap">
-                <pixmap resource="../../../rc/imgs.qrc">:/imgs/imgs/pages.jpg</pixmap>
+                <pixmap resource="../../../rc/imgs.qrc">:/imgs/imgs/Pages.jpg</pixmap>
                </property>
                <property name="scaledContents">
                 <bool>true</bool>
