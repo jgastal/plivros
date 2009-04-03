@@ -8,12 +8,16 @@ CategoryFrame::CategoryFrame(QWidget *parent) : QFrame(parent)
 
 	connect(themeHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(themeHover()));
 	connect(themeHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
+	connect(themeHoverPushButton, SIGNAL(clicked()), this, SIGNAL(themeClicked()));
 	connect(publisherHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(publisherHover()));
 	connect(publisherHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
+	connect(publisherHoverPushButton, SIGNAL(clicked()), this, SIGNAL(publisherClicked()));
 	connect(authorHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(authorHover()));
 	connect(authorHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
+	connect(authorHoverPushButton, SIGNAL(clicked()), this, SIGNAL(authorClicked()));
 	connect(bookHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(bookHover()));
 	connect(bookHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
+	connect(bookHoverPushButton, SIGNAL(clicked()), this, SIGNAL(bookClicked()));
 }
 
 void CategoryFrame::setThemeText()

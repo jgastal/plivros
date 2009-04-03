@@ -19,9 +19,13 @@ class CategoryFrame : public QFrame, protected Ui::CategoryFrame
 
 	signals:
 		void themeHover();
+		void themeClicked();
 		void publisherHover();
+		void publisherClicked();
 		void authorHover();
+		void authorClicked();
 		void bookHover();
+		void bookClicked();
 		void leaveHover();
 } ;
 
