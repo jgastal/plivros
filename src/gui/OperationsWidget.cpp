@@ -10,43 +10,61 @@
 
 #include "Collection.h"
 
-OperationsWidget::OperationsWidget(Collection *c, section s, QWidget *parent) : QWidget(parent)
+OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *parent) : QWidget(parent)
 {
 	this->c = c;
 	setupUi(this);
-	setType(s);
+	tabWidget->clear();
+	setSection(s);
+	add();
 }
 
-void OperationsWidget::setType(section s)
+void OperationsWidget::setSection(Section::section s)
 {
-	type = s;
-
-	addLabel->disconnect();
-	editLabel->disconnect();
-	eraseLabel->disconnect();
-	connect(addLabel, SIGNAL(linkActivated(QString)), this, SLOT(add()));
-	connect(editLabel, SIGNAL(linkActivated(QString)), this, SLOT(edit()));
-	connect(eraseLabel, SIGNAL(linkActivated(QString)), this, SLOT(erase()));
+	section = s;
 }
 
 void OperationsWidget::add()
 {
+	if(section == Section::Book)
+		createAddBookForm();
+	else if(section == Section::Author)
+		createAddAuthorForm();
+	else if(section == Section::Publisher)
+		createAddPublisherForm();
+	else if(section == Section::Theme)
+		createAddThemeForm();
 }
 
 void OperationsWidget::edit()
 {
+	/*if(section == Section::Book)
+		createEditBookForm();
+	else if(section == Section::Author)
+		createEditAuthorForm();
+	else if(section == Section::Publisher)
+		createEditPublisherForm();
+	else if(section == Section::Theme)
+		createEditThemeForm();*/
 }
 
 void OperationsWidget::erase()
 {
+	/*if(section == Section::Book)
+		eraseBook();
+	else if(section == Section::Author)
+		eraseAuthor();
+	else if(section == Section::Publisher)
+		erasePublisher();
+	else if(section == Section::Theme)
+		eraseTheme();*/
 }
 
 ///@brief Adds a tab and creates a form to add a theme in it.
 void OperationsWidget::createAddThemeForm()
 {
-	//set parent!
-	AddTheme *at = new AddTheme(c);
-	//connect(at, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	AddTheme *at = new AddTheme(c, tabWidget);
+	connect(at, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	//Add somewhere
 	
 }

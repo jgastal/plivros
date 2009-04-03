@@ -3,6 +3,8 @@
 
 #include "ui_CategoryFrame.h"
 
+#include "Section.h"
+
 class CategoryFrame : public QFrame, protected Ui::CategoryFrame
 {
 	Q_OBJECT
@@ -17,15 +19,18 @@ class CategoryFrame : public QFrame, protected Ui::CategoryFrame
 		void setBookText();
 		void setEmptyText();
 
+	private slots:
+		void themeClicked();
+		void publisherClicked();
+		void authorClicked();
+		void bookClicked();
+
 	signals:
 		void themeHover();
-		void themeClicked();
 		void publisherHover();
-		void publisherClicked();
 		void authorHover();
-		void authorClicked();
 		void bookHover();
-		void bookClicked();
+		void clicked(Section::section);
 		void leaveHover();
 } ;
 

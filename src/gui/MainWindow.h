@@ -11,6 +11,8 @@
 
 #include "ui_MainWindow.h"
 
+#include "Section.h"
+
 class Collection;
 class CategoryFrame;
 
@@ -26,6 +28,9 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 	public:
 		MainWindow(QString userName = "User", QMainWindow *parent = 0);
 		~MainWindow();
+
+	protected slots:
+		void createOpsWidget(Section::section s);
 
 	private:
 		Collection *c;

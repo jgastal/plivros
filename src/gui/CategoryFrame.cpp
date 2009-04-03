@@ -2,22 +2,24 @@
 
 #include "CategoryFrame.h"
 
+#include "Section.h"
+
 CategoryFrame::CategoryFrame(QWidget *parent) : QFrame(parent)
 {
 	setupUi(this);
 
 	connect(themeHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(themeHover()));
 	connect(themeHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
-	connect(themeHoverPushButton, SIGNAL(clicked()), this, SIGNAL(themeClicked()));
+	connect(themeHoverPushButton, SIGNAL(clicked()), this, SLOT(themeClicked()));
 	connect(publisherHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(publisherHover()));
 	connect(publisherHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
-	connect(publisherHoverPushButton, SIGNAL(clicked()), this, SIGNAL(publisherClicked()));
+	connect(publisherHoverPushButton, SIGNAL(clicked()), this, SLOT(publisherClicked()));
 	connect(authorHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(authorHover()));
 	connect(authorHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
-	connect(authorHoverPushButton, SIGNAL(clicked()), this, SIGNAL(authorClicked()));
+	connect(authorHoverPushButton, SIGNAL(clicked()), this, SLOT(authorClicked()));
 	connect(bookHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(bookHover()));
 	connect(bookHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
-	connect(bookHoverPushButton, SIGNAL(clicked()), this, SIGNAL(bookClicked()));
+	connect(bookHoverPushButton, SIGNAL(clicked()), this, SLOT(bookClicked()));
 }
 
 void CategoryFrame::setThemeText()
@@ -58,4 +60,24 @@ void CategoryFrame::setEmptyText()
 	QString ss = static_cast<HoverPushButton*>(sender())->styleSheet();
 	ss.remove("\nfont: bold 20pt;");
 	static_cast<HoverPushButton*>(sender())->setStyleSheet(ss);
+}
+
+void CategoryFrame::themeClicked()
+{
+	emit clicked(Section::Theme);
+}
+
+void CategoryFrame::publisherClicked()
+{
+	emit clicked(Section::Publisher);
+}
+
+void CategoryFrame::authorClicked()
+{
+	emit clicked(Section::Author);
+}
+
+void CategoryFrame::bookClicked()
+{
+	emit clicked(Section::Book);
 }

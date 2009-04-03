@@ -11,6 +11,8 @@
  */
 
 #include "CategoryFrame.h"
+#include "OperationsWidget.h"
+#include "Section.h"
 
 #include "MainWindow.h"
 
@@ -29,10 +31,27 @@ MainWindow::MainWindow(QString userName, QMainWindow *parent) : QMainWindow(pare
 	userLabel->setText(userStr);
 
 	cf = new CategoryFrame();
+	connect(cf, SIGNAL(clicked(Section::section)), this, SLOT(createOpsWidget(Section::section)));
 	displayWidget->layout()->addWidget(cf);
 }
 
 MainWindow::~MainWindow()
 {
 	delete c;
+}
+
+void MainWindow::createOpsWidget(Section::section s)
+{
+	OperationsWidget *ow;
+	if(s == Section::Book)
+		ow = new OperationsWidget(c, Section::Book);
+	else if(s == Section::Author)
+		ow = new OperationsWidget(c, Section::Author);
+	else if(s == Section::Publisher)
+		ow = new OperationsWidget(c, Section::Publisher);
+	else if(s == Section::Theme)
+		ow = new OperationsWidget(c, Section::Theme);
+
+	cf->hide();
+	displayWidget->layout()->addWidget(ow);
 }

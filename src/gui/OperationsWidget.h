@@ -3,6 +3,8 @@
 
 #include "ui_OperationsWidget.h"
 
+#include "Section.h"
+
 class Collection;
 
 class OperationsWidget : public QWidget, protected Ui::OperationsWidget
@@ -10,17 +12,9 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 	Q_OBJECT
 
 	public:
-		enum section
-		{
-			book,
-			author,
-			publisher,
-			theme
-		} ;
-
-		OperationsWidget(Collection *c, section s, QWidget *parent = 0);
-		void setType(section s);
-		section getType() const;
+		OperationsWidget(Collection *c, Section::section s, QWidget *parent = 0);
+		void setSection(Section::section s);
+		Section::section getType() const;
 
 	protected slots:
 		void add();
@@ -29,7 +23,7 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 
 	private:
 		Collection *c;
-		section type;
+		Section::section section;
 
 		void createAddThemeForm();
 		void createSearchThemeForm();
