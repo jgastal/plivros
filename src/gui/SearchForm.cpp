@@ -12,13 +12,14 @@
 
 #include "PropertiesGroupBox.h"
 #include "MessageBoxDataBaseException.h"
+#include "Section.h"
 
 #include "Collection.h"
 #include "DataBaseException.h"
 
 #include "Data.h"
 
-SearchForm::SearchForm(PropertiesGroupBox::type t, Collection *c, QWidget *parent) : QWidget(parent)
+SearchForm::SearchForm(Section::section t, Collection *c, QWidget *parent) : QWidget(parent)
 {
 	setupUi(this);
 	propertiesGroupBox->init(t);
@@ -29,7 +30,7 @@ SearchForm::SearchForm(PropertiesGroupBox::type t, Collection *c, QWidget *paren
 	connect(tableWidget, SIGNAL(currentItemChanged(DataObject*)), this, SIGNAL(currentItemChanged(DataObject*)));
 }
 
-PropertiesGroupBox::type SearchForm::getType() const
+Section::section SearchForm::getType() const
 {
 	return t;
 }
@@ -53,22 +54,22 @@ void SearchForm::search()
 	}
 	try
 	{
-		if(t == PropertiesGroupBox::book)
+		if(t == Section::Book)
 		{
 			QList<Book> bList = c->searchBooks(Book::getHeader(prop), searchLineEdit->text());
 			tableWidget->populateTable(bList);
 		}
-		else if(t == PropertiesGroupBox::author)
+		else if(t == Section::Author)
 		{
 			QList<Author> aList = c->searchAuthors(Author::getHeader(prop), searchLineEdit->text());
 			tableWidget->populateTable(aList);
 		}
-		else if(t == PropertiesGroupBox::publisher)
+		else if(t == Section::Publisher)
 		{
 			QList<Publisher> pList = c->searchPublishers(Publisher::getHeader(prop), searchLineEdit->text());
 			tableWidget->populateTable(pList);
 		}
-		else if(t == PropertiesGroupBox::theme)
+		else if(t == Section::Theme)
 		{
 			QList<Theme> tList = c->searchThemes(Theme::getHeader(prop), searchLineEdit->text());
 			tableWidget->populateTable(tList);

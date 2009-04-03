@@ -13,25 +13,19 @@
 #include <QGridLayout>
 #include <QRadioButton>
 
+#include "Section.h"
+
 class PropertiesGroupBox : public QGroupBox
 {
 	public:
-		enum type
-		{
-			book,
-			author,
-			publisher,
-			theme
-		} ;
-
 		PropertiesGroupBox(QWidget *parent = 0);
-		void init(type t);
+		void init(Section::section t);
 		unsigned short int getSelectedRadioButton();
 
 	private:
 		QGridLayout grid;
 		QList<QRadioButton*> radButtons;
-		type t;
+		Section::section t;
 } ;
 
 #endif //PROPERTIESGROUPBOX_H

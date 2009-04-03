@@ -11,7 +11,7 @@
 
 #include "ui_SearchForm.h"
 
-#include "PropertiesGroupBox.h"
+#include "Section.h"
 
 #include <QWidget>
 
@@ -23,8 +23,8 @@ class SearchForm : public QWidget, private Ui::SearchForm
 	Q_OBJECT
 
 	public:
-		SearchForm(PropertiesGroupBox::type t, Collection *c, QWidget *parent = 0);
-		PropertiesGroupBox::type getType() const;
+		SearchForm(Section::section t, Collection *c, QWidget *parent = 0);
+		Section::section getType() const;
 
 	private slots:
 		void search();
@@ -35,7 +35,7 @@ class SearchForm : public QWidget, private Ui::SearchForm
 
 	private:
 		Collection *c;
-		PropertiesGroupBox::type t;
+		Section::section t;
 } ;
 
 #endif //SEARCHFORM_H

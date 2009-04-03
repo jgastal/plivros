@@ -16,6 +16,8 @@
 #include "Author.h"
 #include "Theme.h"
 
+#include "Section.h"
+
 PropertiesGroupBox::PropertiesGroupBox(QWidget *parent) : QGroupBox(parent)
 {
 	grid.setParent(this);
@@ -34,25 +36,25 @@ unsigned short int PropertiesGroupBox::getSelectedRadioButton()
 	throw std::out_of_range("No radio button selected.");
 }
 
-void PropertiesGroupBox::init(type t)
+void PropertiesGroupBox::init(Section::section t)
 {
 	QStringList props;
-	if(t == book)
+	if(t == Section::Book)
 	{
 		setTitle("Book Properties");
 		props = Book::headers;
 	}
-	else if(t == author)
+	else if(t == Section::Author)
 	{
 		setTitle("Author Properties");
 		props = Author::headers;
 	}
-	else if(t == publisher)
+	else if(t == Section::Publisher)
 	{
 		setTitle("Publisher Properties");
 		props = Publisher::headers;
 	}
-	else if(t == theme)
+	else if(t == Section::Theme)
 	{
 		setTitle("Theme Properties");
 		props = Theme::headers;
