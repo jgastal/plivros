@@ -3,22 +3,27 @@
 
 #include "ui_OperationsWidget.h"
 
+class Collection;
+
 class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 {
 	Q_OBJECT
 
 	public:
-		OperationsWidget(QWidget *parent = 0);
+		OperationsWidget(Collection *c, QWidget *parent = 0);
 
 	protected slots:
-		/*void createAddThemeForm();
+		void createAddThemeForm();
 		void createSearchThemeForm();
 		void createAddPublisherForm();
 		void createSearchPublisherForm();
 		void createAddAuthorForm();
 		void createSearchAuthorForm();
 		void createAddBookForm();
-		void createSearchBookForm();*/
+		void createSearchBookForm();
+
+	private:
+		Collection *c;
 } ;
 
 #endif //OPERATIONSWIDGET_H

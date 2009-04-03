@@ -15,6 +15,7 @@ set( headers
 	AddAuthor.h
 	BookForm.h
 	AddBook.h
+	OperationsWidget.h
 	CategoryFrame.h
 	PropertiesGroupBox.h
 	DataTableWidget.h
@@ -32,6 +33,7 @@ set( sources
 	AddAuthor.cpp
 	BookForm.cpp
 	AddBook.cpp
+	OperationsWidget.cpp
 	CategoryFrame.cpp
 	PropertiesGroupBox.cpp
 	DataTableWidget.cpp
@@ -43,7 +45,8 @@ set( UI_FILES
 	"UI/AuthorForm.ui"
 	"UI/BookForm.ui"
 	"UI/SearchForm.ui"
-	"UI/CategoryFrame.ui" )
+	"UI/CategoryFrame.ui"
+	"UI/OperationsWidget.ui" )
 set( RC_FILES
 	"imgs.qrc" )
 

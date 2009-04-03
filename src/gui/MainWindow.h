@@ -27,16 +27,6 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 		MainWindow(QString userName = "User", QMainWindow *parent = 0);
 		~MainWindow();
 
-	private slots:
-		void createAddThemeForm();
-		void createSearchThemeForm();
-		void createAddPublisherForm();
-		void createSearchPublisherForm();
-		void createAddAuthorForm();
-		void createSearchAuthorForm();
-		void createAddBookForm();
-		void createSearchBookForm();
-
 	private:
 		Collection *c;
 		CategoryFrame *cf;
