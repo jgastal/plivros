@@ -31,13 +31,13 @@ MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
 
 	connect(quitLabel, SIGNAL(linkActivated(QString)), this, SLOT(close()));
 
-	cf = new CategoryFrame(displayWidget);
+	cf = new CategoryFrame();
+	displayWidget->layout()->addWidget(cf);
 }
 
 MainWindow::~MainWindow()
 {
 	delete c;
-	delete cf;
 }
 
 ///@brief Adds a tab and creates a form to add a theme in it.

@@ -2,16 +2,18 @@
 
 #include "CategoryFrame.h"
 
-CategoryFrame::CategoryFrame(QWidget *parent) : QWidget(parent)
+CategoryFrame::CategoryFrame(QWidget *parent) : QFrame(parent)
 {
-// 	connect(themeHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(themeHover()));
-// 	connect(themeHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
-// 	connect(publisherHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(publisherHover()));
-// 	connect(publisherHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
-// 	connect(authorHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(authorHover()));
-// 	connect(authorHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
-// 	connect(bookHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(bookHover()));
-// 	connect(bookHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
+	setupUi(this);
+
+	connect(themeHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(themeHover()));
+	connect(themeHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
+	connect(publisherHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(publisherHover()));
+	connect(publisherHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
+	connect(authorHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(authorHover()));
+	connect(authorHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
+	connect(bookHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(bookHover()));
+	connect(bookHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
 }
 
 void CategoryFrame::setThemeText()

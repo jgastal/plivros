@@ -3,7 +3,7 @@
 
 #include "ui_CategoryFrame.h"
 
-class CategoryFrame : public QWidget, protected Ui::CategoryFrame
+class CategoryFrame : public QFrame, protected Ui::CategoryFrame
 {
 	Q_OBJECT
 
