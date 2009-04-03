@@ -10,10 +10,35 @@
 
 #include "Collection.h"
 
-OperationsWidget::OperationsWidget(Collection *c, QWidget *parent) : QWidget(parent)
+OperationsWidget::OperationsWidget(Collection *c, section s, QWidget *parent) : QWidget(parent)
 {
 	this->c = c;
 	setupUi(this);
+	setType(s);
+}
+
+void OperationsWidget::setType(section s)
+{
+	type = s;
+
+	addLabel->disconnect();
+	editLabel->disconnect();
+	eraseLabel->disconnect();
+	connect(addLabel, SIGNAL(linkActivated(QString)), this, SLOT(add()));
+	connect(editLabel, SIGNAL(linkActivated(QString)), this, SLOT(edit()));
+	connect(eraseLabel, SIGNAL(linkActivated(QString)), this, SLOT(erase()));
+}
+
+void OperationsWidget::add()
+{
+}
+
+void OperationsWidget::edit()
+{
+}
+
+void OperationsWidget::erase()
+{
 }
 
 ///@brief Adds a tab and creates a form to add a theme in it.

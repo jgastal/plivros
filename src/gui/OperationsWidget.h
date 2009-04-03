@@ -10,9 +10,27 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 	Q_OBJECT
 
 	public:
-		OperationsWidget(Collection *c, QWidget *parent = 0);
+		enum section
+		{
+			book,
+			author,
+			publisher,
+			theme
+		} ;
+
+		OperationsWidget(Collection *c, section s, QWidget *parent = 0);
+		void setType(section s);
+		section getType() const;
 
 	protected slots:
+		void add();
+		void edit();
+		void erase();
+
+	private:
+		Collection *c;
+		section type;
+
 		void createAddThemeForm();
 		void createSearchThemeForm();
 		void createAddPublisherForm();
@@ -21,9 +39,6 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		void createSearchAuthorForm();
 		void createAddBookForm();
 		void createSearchBookForm();
-
-	private:
-		Collection *c;
 } ;
 
 #endif //OPERATIONSWIDGET_H
