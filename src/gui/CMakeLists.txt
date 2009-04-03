@@ -15,6 +15,7 @@ set( headers
 	AddAuthor.h
 	BookForm.h
 	AddBook.h
+	CategoryFrame.h
 	PropertiesGroupBox.h
 	DataTableWidget.h
 	MessageBoxDataBaseException.h )
@@ -31,6 +32,7 @@ set( sources
 	AddAuthor.cpp
 	BookForm.cpp
 	AddBook.cpp
+	CategoryFrame.cpp
 	PropertiesGroupBox.cpp
 	DataTableWidget.cpp
 	MessageBoxDataBaseException.cpp )
@@ -40,7 +42,8 @@ set( UI_FILES
 	"UI/PublisherForm.ui"
 	"UI/AuthorForm.ui"
 	"UI/BookForm.ui"
-	"UI/SearchForm.ui" )
+	"UI/SearchForm.ui"
+	"UI/CategoryFrame.ui" )
 set( RC_FILES
 	"imgs.qrc" )
 
