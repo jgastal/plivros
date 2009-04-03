@@ -12,6 +12,7 @@
 #include "ui_MainWindow.h"
 
 class Collection;
+class CategoryFrame;
 
 /**
  * @class MainWindow MainWindow.h
@@ -36,15 +37,10 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 		void createAddBookForm();
 		void createSearchBookForm();
 
-		//for when buttons are hovered
-		void themeEnterHover();
-		void publisherEnterHover();
-		void authorEnterHover();
-		void bookEnterHover();
-		void leaveHover();
-
 	private:
 		Collection *c;
+		CategoryFrame *cf;
+		
 } ;
 
 #endif //MAINWINDOW_H

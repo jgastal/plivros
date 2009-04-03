@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CategoryFrame</class>
+ <widget class="QFrame" name="CategoryFrame">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>860</width>
+    <height>260</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>860</width>
+    <height>260</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Frame</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QFrame#categoryFrame { 
+	border: 3px solid rgb(0, 45, 0); 
+	border-radius: 15px;
+}</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="categoryLabel">
+     <property name="text">
+      <string>Pick a category</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="HoverPushButton" name="themeHoverPushButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>200</width>
+       <height>200</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/imgs/imgs/Pages.jpg);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="HoverPushButton" name="publisherHoverPushButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>200</width>
+       <height>200</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/imgs/imgs/Publisher.gif);</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="HoverPushButton" name="authorHoverPushButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>200</width>
+       <height>200</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/imgs/imgs/Author.gif);</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>300</width>
+       <height>300</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="HoverPushButton" name="bookHoverPushButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>200</width>
+       <height>200</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/imgs/imgs/Book.gif);</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>HoverPushButton</class>
+   <extends>QPushButton</extends>
+   <header>HoverPushButton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../imgs.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>themeHoverPushButton</sender>
+   <signal>hoverEnter()</signal>
+   <receiver>CategoryFrame</receiver>
+   <slot>setThemeText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>16</x>
+     <y>65</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>66</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>publisherHoverPushButton</sender>
+   <signal>hoverEnter()</signal>
+   <receiver>CategoryFrame</receiver>
+   <slot>setPublisherText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>259</x>
+     <y>55</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>220</x>
+     <y>82</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>authorHoverPushButton</sender>
+   <signal>hoverEnter()</signal>
+   <receiver>CategoryFrame</receiver>
+   <slot>setAuthorText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>436</x>
+     <y>77</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>426</x>
+     <y>80</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bookHoverPushButton</sender>
+   <signal>hoverEnter()</signal>
+   <receiver>CategoryFrame</receiver>
+   <slot>setBookText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>645</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>637</x>
+     <y>71</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bookHoverPushButton</sender>
+   <signal>hoverLeave()</signal>
+   <receiver>CategoryFrame</receiver>
+   <slot>setEmptyText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>769</x>
+     <y>56</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>769</x>
+     <y>17</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>authorHoverPushButton</sender>
+   <signal>hoverLeave()</signal>
+   <receiver>CategoryFrame</receiver>
+   <slot>setEmptyText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>519</x>
+     <y>45</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>532</x>
+     <y>18</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>publisherHoverPushButton</sender>
+   <signal>hoverLeave()</signal>
+   <receiver>CategoryFrame</receiver>
+   <slot>setEmptyText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>356</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>36</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>themeHoverPushButton</sender>
+   <signal>hoverLeave()</signal>
+   <receiver>CategoryFrame</receiver>
+   <slot>setEmptyText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>192</x>
+     <y>36</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>setThemeText()</slot>
+  <slot>setPublisherText()</slot>
+  <slot>setAuthorText()</slot>
+  <slot>setBookText()</slot>
+  <slot>setEmptyText()</slot>
+ </slots>
+</ui>
