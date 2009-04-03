@@ -17,6 +17,17 @@
 #include "Publisher.h"
 #include "Theme.h"
 
+#ifdef WIN32
+	///TODO: Windows specific way of getting user name
+	#include <windows.h>
+	static const char c_str[256];
+	GetUserName(c_str, 0)
+	static const QString USERNAME(c_str);
+#else //*nix
+	#include <cstdlib>
+	static const QString USERNAME = getenv("USER");
+#endif //WIN32
+
 int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);
@@ -27,7 +38,7 @@ int main(int argc, char **argv)
 	translator.load(QString("plivros_") + locale);
 	app.installTranslator(&translator);
 
-	MainWindow mw;
+	MainWindow mw(USERNAME);
 	mw.show();
 	return app.exec();
 }

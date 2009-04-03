@@ -25,12 +25,16 @@
 #include "Collection.h"
 
 ///@brief Constructor. Creates a collection, setups the gui and connects slots and signals.
-MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent)
+MainWindow::MainWindow(QString userName, QMainWindow *parent) : QMainWindow(parent)
 {
 	c = new Collection("User");
 	setupUi(this);
 
 	connect(quitLabel, SIGNAL(linkActivated(QString)), this, SLOT(close()));
+
+	QString userStr = userLabel->text();
+	userStr.replace("<user>", userName);
+	userLabel->setText(userStr);
 
 	connect(themeHoverPushButton, SIGNAL(hoverEnter()), this, SLOT(themeEnterHover()));
 	connect(themeHoverPushButton, SIGNAL(hoverLeave()), this, SLOT(leaveHover()));

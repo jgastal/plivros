@@ -23,7 +23,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 	Q_OBJECT
 
 	public:
-		MainWindow(QMainWindow *parent = 0);
+		MainWindow(QString userName = "User", QMainWindow *parent = 0);
 		~MainWindow();
 
 	private slots:

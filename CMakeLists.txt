@@ -4,7 +4,8 @@ cmake_minimum_required( VERSION 2.6 )
 project( plivros )
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
-option( DEBUG "Build with debugger symbols" ON )
+option( DEBUG "Build with debugger symbols." ON )
+option( WIN32 "If building for windows OS." OFF )
 
 enable_language( C )
 find_package( Qt4 REQUIRED QtCore QtGUI )
@@ -29,5 +30,9 @@ else( DEBUG )
 	add_definitions( -DQT_NO_DEBUG )
 	set( DBWRAPPER_LINK_DIR ${DBWRAPPER_ROOT}/Release )
 endif( DEBUG )
+
+if( WIN32 )
+	add_definitions( -DWIN32 )
+endif( WIN32 )
 
 add_subdirectory( src )
