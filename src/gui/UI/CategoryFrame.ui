@@ -26,12 +26,27 @@
    <string>Frame</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QFrame#categoryFrame { 
-	border: 3px solid rgb(0, 45, 0); 
-	border-radius: 15px;
+   <string notr="true">QFrame#CategoryFrame { 
+	border: 4px solid rgb(0, 45, 0); 
+	border-radius: 25px;
 }</string>
   </property>
+  <property name="frameShape">
+   <enum>QFrame::StyledPanel</enum>
+  </property>
+  <property name="frameShadow">
+   <enum>QFrame::Raised</enum>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>15</number>
+   </property>
+   <property name="rightMargin">
+    <number>15</number>
+   </property>
+   <property name="horizontalSpacing">
+    <number>4</number>
+   </property>
    <item row="0" column="0">
     <widget class="QLabel" name="categoryLabel">
      <property name="text">
