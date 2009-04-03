@@ -150,6 +150,9 @@ p, li { white-space: pre-wrap; }
    </item>
    <item row="2" column="1" rowspan="5" colspan="2">
     <widget class="QTabWidget" name="tabWidget">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="currentIndex">
       <number>0</number>
      </property>

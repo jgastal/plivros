@@ -21,7 +21,7 @@
 ///@brief Constructor. Creates a collection, setups the gui and connects slots and signals.
 MainWindow::MainWindow(QString userName, QMainWindow *parent) : QMainWindow(parent)
 {
-	c = new Collection("User");
+	c = new Collection(userName);
 	setupUi(this);
 
 	connect(quitLabel, SIGNAL(linkActivated(QString)), this, SLOT(close()));
