@@ -15,6 +15,7 @@
 
 class Collection;
 class CategoryFrame;
+class OperationsWidget;
 
 /**
  * @class MainWindow MainWindow.h
@@ -31,11 +32,12 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
 	protected slots:
 		void createOpsWidget(Section::section s);
+		void home();
 
 	private:
 		Collection *c;
 		CategoryFrame *cf;
-		
+		OperationsWidget *ow;
 } ;
 
 #endif //MAINWINDOW_H

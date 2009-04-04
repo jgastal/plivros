@@ -30,6 +30,7 @@ MainWindow::MainWindow(QString userName, QMainWindow *parent) : QMainWindow(pare
 	userStr.replace("<user>", userName);
 	userLabel->setText(userStr);
 
+	ow = 0;
 	cf = new CategoryFrame();
 	connect(cf, SIGNAL(clicked(Section::section)), this, SLOT(createOpsWidget(Section::section)));
 	displayWidget->layout()->addWidget(cf);
@@ -42,16 +43,24 @@ MainWindow::~MainWindow()
 
 void MainWindow::createOpsWidget(Section::section s)
 {
-	OperationsWidget *ow;
-	if(s == Section::Book)
-		ow = new OperationsWidget(c, Section::Book);
-	else if(s == Section::Author)
-		ow = new OperationsWidget(c, Section::Author);
-	else if(s == Section::Publisher)
-		ow = new OperationsWidget(c, Section::Publisher);
-	else if(s == Section::Theme)
-		ow = new OperationsWidget(c, Section::Theme);
+	if(!ow)
+	{
+		ow = new OperationsWidget(c, s);
+		displayWidget->layout()->addWidget(ow);
+	}
+	else
+	{
+		ow->setSection(s);
+		ow->add();
+	}
 
 	cf->hide();
-	displayWidget->layout()->addWidget(ow);
+	ow->show();
+}
+
+void MainWindow::home()
+{
+	if(ow)
+		ow->hide();
+	cf->show();
 }

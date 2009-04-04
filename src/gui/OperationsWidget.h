@@ -16,11 +16,13 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		void setSection(Section::section s);
 		Section::section getType() const;
 
-	protected slots:
+	public slots:
 		void add();
 		void edit();
 		void erase();
 		void search();
+
+	protected slots:
 		void closeTab();
 		void closeTab(int index);
 
