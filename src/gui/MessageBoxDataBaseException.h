@@ -26,6 +26,8 @@ class DataBaseException;
  */
 class MessageBoxDataBaseException : public QMessageBox
 {
+	Q_OBJECT
+
 	public:
 		MessageBoxDataBaseException(DataBaseException *dbe, QWidget *parent = 0);
 		void appendText(QString str);

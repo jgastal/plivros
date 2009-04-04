@@ -42,7 +42,7 @@ void AddPublisher::save()
 	catch(DataBaseException dbe)
 	{
 		MessageBoxDataBaseException q(&dbe, this);
-		q.appendText(tr("Your publisher has not been added."));
+		q.appendText(tr("The publisher has not been added."));
 		q.exec();
 	}
 	emit closeRequested();

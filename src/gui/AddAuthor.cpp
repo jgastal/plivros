@@ -44,7 +44,7 @@ void AddAuthor::save()
 	catch(DataBaseException dbe)
 	{
 		MessageBoxDataBaseException q(&dbe, this);
-		q.appendText(tr("Your author has not been added."));
+		q.appendText(tr("The author has not been added."));
 		q.exec();
 	}
 	emit closeRequested();

@@ -35,7 +35,7 @@ void AddTheme::save()
 	catch(DataBaseException dbe)
 	{
 		MessageBoxDataBaseException q(&dbe, this);
-		q.appendText(tr("Your theme has not been added."));
+		q.appendText(tr("The theme has not been added."));
 		q.exec();
 	}
 	emit closeRequested();
