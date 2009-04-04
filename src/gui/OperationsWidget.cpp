@@ -60,6 +60,18 @@ void OperationsWidget::erase()
 		eraseTheme();*/
 }
 
+void OperationsWidget::search()
+{
+	if(section == Section::Book)
+		createSearchBookForm();
+	else if(section == Section::Author)
+		createSearchAuthorForm();
+	else if(section == Section::Publisher)
+		createSearchPublisherForm();
+	else if(section == Section::Theme)
+		createSearchThemeForm();
+}
+
 ///@brief Adds a tab and creates a form to add a theme in it.
 void OperationsWidget::createAddThemeForm()
 {
@@ -146,4 +158,9 @@ void OperationsWidget::createSearchBookForm()
 	int pos = tabWidget->addTab(sf, tr("Search Books"));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
+}
+
+void OperationsWidget::closeTab()
+{
+	delete sender();
 }

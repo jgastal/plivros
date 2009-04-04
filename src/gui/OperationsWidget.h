@@ -20,6 +20,8 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		void add();
 		void edit();
 		void erase();
+		void search();
+		void closeTab();
 
 	private:
 		Collection *c;
