@@ -248,5 +248,76 @@ p, li { white-space: pre-wrap; }
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>addLabel</sender>
+   <signal>linkActivated(QString)</signal>
+   <receiver>OperationsWidget</receiver>
+   <slot>add()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>19</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>25</x>
+     <y>77</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>editLabel</sender>
+   <signal>linkActivated(QString)</signal>
+   <receiver>OperationsWidget</receiver>
+   <slot>edit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>47</x>
+     <y>108</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>61</x>
+     <y>111</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>eraseLabel</sender>
+   <signal>linkActivated(QString)</signal>
+   <receiver>OperationsWidget</receiver>
+   <slot>erase()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>51</x>
+     <y>137</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>60</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>searchLabel</sender>
+   <signal>linkActivated(QString)</signal>
+   <receiver>OperationsWidget</receiver>
+   <slot>search()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>46</x>
+     <y>165</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>60</x>
+     <y>169</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>add()</slot>
+  <slot>edit()</slot>
+  <slot>erase()</slot>
+  <slot>search()</slot>
+ </slots>
 </ui>

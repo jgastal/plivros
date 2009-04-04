@@ -160,8 +160,8 @@ QPushButton { color: rgb(60, 60, 60); }</string>
    <slot>setThemeText()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>16</x>
-     <y>65</y>
+     <x>37</x>
+     <y>109</y>
     </hint>
     <hint type="destinationlabel">
      <x>6</x>
@@ -281,6 +281,70 @@ QPushButton { color: rgb(60, 60, 60); }</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>themeHoverPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CategoryFrame</receiver>
+   <slot>themeClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>34</x>
+     <y>131</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>12</x>
+     <y>137</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>publisherHoverPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CategoryFrame</receiver>
+   <slot>publisherClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>249</x>
+     <y>202</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>222</x>
+     <y>211</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>authorHoverPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CategoryFrame</receiver>
+   <slot>authorClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>441</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>154</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bookHoverPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CategoryFrame</receiver>
+   <slot>bookClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>653</x>
+     <y>124</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>635</x>
+     <y>132</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>setThemeText()</slot>
@@ -288,5 +352,9 @@ QPushButton { color: rgb(60, 60, 60); }</string>
   <slot>setAuthorText()</slot>
   <slot>setBookText()</slot>
   <slot>setEmptyText()</slot>
+  <slot>themeClicked()</slot>
+  <slot>publisherClicked()</slot>
+  <slot>authorClicked()</slot>
+  <slot>bookClicked()</slot>
  </slots>
 </ui>
