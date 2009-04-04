@@ -6,6 +6,7 @@
 #include "Section.h"
 
 class Collection;
+class QButtonGroup;
 
 class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 {
@@ -21,13 +22,16 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		void edit();
 		void erase();
 		void search();
+		void setSectionButton();
 
 	protected slots:
 		void closeTab();
 		void closeTab(int index);
+		void setSection(QAbstractButton *bt);
 
 	private:
 		Collection *c;
+		QButtonGroup *btGroup;
 		Section::section section;
 
 		void createAddThemeForm();

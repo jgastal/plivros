@@ -14,14 +14,51 @@ OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *p
 {
 	this->c = c;
 	setupUi(this);
+
+	btGroup = new QButtonGroup(this);
+	btGroup->addButton(themeToolButton);
+	btGroup->addButton(publisherToolButton);
+	btGroup->addButton(authorToolButton);
+	btGroup->addButton(bookToolButton);
+	connect(btGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(setSection(QAbstractButton*)));
+
 	tabWidget->clear();
 	setSection(s);
+	setSectionButton();
 	add();
 }
 
 void OperationsWidget::setSection(Section::section s)
 {
 	section = s;
+}
+
+void OperationsWidget::setSectionButton()
+{
+	if(section == Section::Book)
+	{
+		bookToolButton->blockSignals(true);
+		bookToolButton->setChecked(true);
+		bookToolButton->blockSignals(false);
+	}
+	else if(section == Section::Author)
+	{
+		authorToolButton->blockSignals(true);
+		authorToolButton->setChecked(true);
+		authorToolButton->blockSignals(false);
+	}
+	else if(section == Section::Publisher)
+	{
+		publisherToolButton->blockSignals(true);
+		publisherToolButton->setChecked(true);
+		publisherToolButton->blockSignals(false);
+	}
+	else if(section == Section::Theme)
+	{
+		themeToolButton->blockSignals(true);
+		themeToolButton->setChecked(true);
+		themeToolButton->blockSignals(false);
+	}
 }
 
 void OperationsWidget::add()
@@ -168,4 +205,16 @@ void OperationsWidget::closeTab()
 void OperationsWidget::closeTab(int index)
 {
 	delete tabWidget->widget(index);
+}
+
+void OperationsWidget::setSection(QAbstractButton *bt)
+{
+	if(bt == themeToolButton)
+		setSection(Section::Theme);
+	else if(bt == publisherToolButton)
+		setSection(Section::Publisher);
+	else if(bt == authorToolButton)
+		setSection(Section::Author);
+	else if(bt == bookToolButton)
+		setSection(Section::Book);
 }

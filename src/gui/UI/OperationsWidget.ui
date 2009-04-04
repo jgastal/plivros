@@ -339,5 +339,6 @@ p, li { white-space: pre-wrap; }
   <slot>erase()</slot>
   <slot>search()</slot>
   <slot>closeTab(int)</slot>
+  <slot>setSection()</slot>
  </slots>
 </ui>

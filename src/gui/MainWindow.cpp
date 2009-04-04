@@ -51,6 +51,7 @@ void MainWindow::createOpsWidget(Section::section s)
 	else
 	{
 		ow->setSection(s);
+		ow->setSectionButton();
 		ow->add();
 	}
 
