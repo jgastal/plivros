@@ -156,6 +156,9 @@ p, li { white-space: pre-wrap; }
      <property name="currentIndex">
       <number>0</number>
      </property>
+     <property name="tabsClosable">
+      <bool>true</bool>
+     </property>
      <widget class="QWidget" name="tab_5">
       <attribute name="title">
        <string>Tab 1</string>
@@ -313,11 +316,28 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tabWidget</sender>
+   <signal>tabCloseRequested(int)</signal>
+   <receiver>OperationsWidget</receiver>
+   <slot>closeTab(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>63</x>
+     <y>206</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>60</x>
+     <y>208</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>add()</slot>
   <slot>edit()</slot>
   <slot>erase()</slot>
   <slot>search()</slot>
+  <slot>closeTab(int)</slot>
  </slots>
 </ui>

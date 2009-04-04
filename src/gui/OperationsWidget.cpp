@@ -164,3 +164,8 @@ void OperationsWidget::closeTab()
 {
 	delete sender();
 }
+
+void OperationsWidget::closeTab(int index)
+{
+	delete tabWidget->widget(index);
+}

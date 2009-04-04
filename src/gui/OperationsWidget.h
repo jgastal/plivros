@@ -22,6 +22,7 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		void erase();
 		void search();
 		void closeTab();
+		void closeTab(int index);
 
 	private:
 		Collection *c;
