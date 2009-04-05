@@ -10,6 +10,15 @@
 
 #include "Collection.h"
 
+#include <iostream>
+using namespace std;
+
+static QString bgss = "QWidget#%1 { \n"
+"\tbackground: rgba(0, 0, 0, 0) url(:/imgs/imgs/%2);\n"
+"\tbackground-repeat: no-repeat;\n"
+"\tbackground-position: center center;\n}\n"
+"QLabel, QTabBar { background-color: rgba(0, 0, 0, 0); }";
+
 OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *parent) : QWidget(parent)
 {
 	this->c = c;
@@ -22,6 +31,7 @@ OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *p
 	btGroup->addButton(bookToolButton);
 	connect(btGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(setSection(QAbstractButton*)));
 
+	bgss = bgss.arg(objectName());
 	tabWidget->clear();
 	setSection(s);
 	setSectionButton();
@@ -31,6 +41,16 @@ OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *p
 void OperationsWidget::setSection(Section::section s)
 {
 	section = s;
+
+	if(section == Section::Book)
+		setStyleSheet(bgss.arg("big_books.jpeg"));
+	else if(section == Section::Author)
+		setStyleSheet(bgss.arg("big_authors.jpeg"));
+	else if(section == Section::Publisher)
+		setStyleSheet(bgss.arg("big_publishers.jpeg"));
+	else if(section == Section::Theme)
+		setStyleSheet(bgss.arg("big_themes.jpeg"));
+	cout << styleSheet().toStdString() << endl;
 }
 
 void OperationsWidget::setSectionButton()

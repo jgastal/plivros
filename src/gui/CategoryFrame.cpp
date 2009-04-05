@@ -4,6 +4,11 @@
 
 #include "Section.h"
 
+static QString bgss = "QWidget#displayWidget { "
+"background: url(:/imgs/imgs/%1);\n"
+"background-repeat: no-repeat;\n"
+"background-position: center center; }";
+
 CategoryFrame::CategoryFrame(QWidget *parent) : QFrame(parent)
 {
 	setupUi(this);
@@ -24,6 +29,9 @@ void CategoryFrame::setThemeText()
 	QString ss = themeHoverPushButton->styleSheet();
 	ss += "\nfont: bold 20pt;";
 	themeHoverPushButton->setStyleSheet(ss);
+	ss = parentWidget()->styleSheet();
+	ss += bgss.arg("big_themes.jpeg");
+	parentWidget()->setStyleSheet(ss);
 }
 
 void CategoryFrame::setPublisherText()
@@ -32,6 +40,9 @@ void CategoryFrame::setPublisherText()
 	QString ss = publisherHoverPushButton->styleSheet();
 	ss += "\nfont: bold 20pt;";
 	publisherHoverPushButton->setStyleSheet(ss);
+	ss = parentWidget()->styleSheet();
+	ss += bgss.arg("big_publishers.jpeg");
+	parentWidget()->setStyleSheet(ss);
 }
 
 void CategoryFrame::setAuthorText()
@@ -40,6 +51,9 @@ void CategoryFrame::setAuthorText()
 	QString ss = authorHoverPushButton->styleSheet();
 	ss += "\nfont: bold 20pt;";
 	authorHoverPushButton->setStyleSheet(ss);
+	ss = parentWidget()->styleSheet();
+	ss += bgss.arg("big_authors.jpeg");
+	parentWidget()->setStyleSheet(ss);
 }
 
 void CategoryFrame::setBookText()
@@ -48,6 +62,9 @@ void CategoryFrame::setBookText()
 	QString ss = bookHoverPushButton->styleSheet();
 	ss += "\nfont: bold 20pt;";
 	bookHoverPushButton->setStyleSheet(ss);
+	ss = parentWidget()->styleSheet();
+	ss += bgss.arg("big_books.jpeg");
+	parentWidget()->setStyleSheet(ss);
 }
 
 void CategoryFrame::setEmptyText()
@@ -56,6 +73,7 @@ void CategoryFrame::setEmptyText()
 	QString ss = static_cast<HoverPushButton*>(sender())->styleSheet();
 	ss.remove("\nfont: bold 20pt;");
 	static_cast<HoverPushButton*>(sender())->setStyleSheet(ss);
+	parentWidget()->setStyleSheet("");
 }
 
 void CategoryFrame::themeClicked()
