@@ -10,14 +10,10 @@
 
 #include "Collection.h"
 
-#include <iostream>
-using namespace std;
-
-static QString bgss = "QWidget#%1 { \n"
-"\tbackground: rgba(0, 0, 0, 0) url(:/imgs/imgs/%2);\n"
-"\tbackground-repeat: no-repeat;\n"
-"\tbackground-position: center center;\n}\n"
-"QLabel, QTabBar { background-color: rgba(0, 0, 0, 0); }";
+static QString bgss = "QWidget#%1 { "
+"background: url(:/imgs/imgs/%2);\n"
+"background-repeat: no-repeat;\n"
+"background-position: center center; }";
 
 OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *parent) : QWidget(parent)
 {
@@ -50,7 +46,6 @@ void OperationsWidget::setSection(Section::section s)
 		setStyleSheet(bgss.arg("big_publishers.jpeg"));
 	else if(section == Section::Theme)
 		setStyleSheet(bgss.arg("big_themes.jpeg"));
-	cout << styleSheet().toStdString() << endl;
 }
 
 void OperationsWidget::setSectionButton()
@@ -176,6 +171,7 @@ void OperationsWidget::createAddAuthorForm()
 {
 	tabWidget->setUpdatesEnabled(false);
 	AddAuthor *aa = new AddAuthor(c, tabWidget);
+	aa->setStyleSheet("QWidget#AuthorForm { background: url(:/imgs/imgs/big_authors.jpeg); }");
 	connect(c, SIGNAL(themesChanged()), aa, SLOT(populateThemesListWidget()));
 	connect(aa, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = tabWidget->addTab(aa, tr("Add Author"));

@@ -4,8 +4,8 @@
 
 #include "Section.h"
 
-static QString bgss = "QWidget#displayWidget { "
-"background: url(:/imgs/imgs/%1);\n"
+static QString bgss = "QWidget#%1 { "
+"background: url(:/imgs/imgs/%2);\n"
 "background-repeat: no-repeat;\n"
 "background-position: center center; }";
 
@@ -21,6 +21,8 @@ CategoryFrame::CategoryFrame(QWidget *parent) : QFrame(parent)
 	connect(authorHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
 	connect(bookHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(bookHover()));
 	connect(bookHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
+
+	bgss = bgss.arg(parentWidget()->objectName());
 }
 
 void CategoryFrame::setThemeText()
