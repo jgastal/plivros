@@ -140,7 +140,7 @@ Fechando esta aba.</translation>
     <message>
         <location filename="../src/gui/BookForm.cpp" line="40"/>
         <source>You must enter the books&apos;s title.</source>
-        <translation type="unfinished"></translation>
+        <translation>Você precisa digitar o titulo do livro.</translation>
     </message>
     <message>
         <location filename="../src/gui/BookForm.cpp" line="74"/>
@@ -174,17 +174,17 @@ Closing this tab.</source>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="14"/>
         <source>Book Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulario de livro</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="23"/>
         <source>ISBN:</source>
-        <translation type="unfinished"></translation>
+        <translation>ISBN:</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="33"/>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Titulo:</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="43"/>
@@ -199,7 +199,7 @@ Closing this tab.</source>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="63"/>
         <source>Edition:</source>
-        <translation type="unfinished"></translation>
+        <translation>Edição:</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="73"/>
@@ -209,7 +209,7 @@ Closing this tab.</source>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="80"/>
         <source>Cover:</source>
-        <translation type="unfinished"></translation>
+        <translation>Capa:</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="96"/>
@@ -220,17 +220,17 @@ Closing this tab.</source>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="106"/>
         <source>E-Book:</source>
-        <translation type="unfinished"></translation>
+        <translation>E-Livro:</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="132"/>
         <source>Publishing Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Data de publicação:</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="142"/>
         <source>UDC:</source>
-        <translation type="unfinished"></translation>
+        <translation>CDU:</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="152"/>
@@ -240,12 +240,12 @@ Closing this tab.</source>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="166"/>
         <source>Translator:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tradutor:</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="180"/>
         <source>Publishers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Editoras:</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="194"/>
@@ -288,12 +288,12 @@ Closing this tab.</source>
     <message>
         <location filename="../src/gui/UI/CategoryFrame.ui" line="26"/>
         <source>Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Moldura</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/CategoryFrame.ui" line="54"/>
         <source>Pick a category</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha uma categoria</translation>
     </message>
 </context>
 <context>
