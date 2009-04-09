@@ -27,7 +27,7 @@ OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *p
 	btGroup->addButton(bookToolButton);
 	connect(btGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(setSection(QAbstractButton*)));
 
-	bgss = bgss.arg(objectName());
+	bgss = bgss.arg(centralWidget->objectName());
 	tabWidget->clear();
 	setSection(s);
 	setSectionButton();
@@ -39,13 +39,13 @@ void OperationsWidget::setSection(Section::section s)
 	section = s;
 
 	if(section == Section::Book)
-		setStyleSheet(bgss.arg("big_books2.jpeg"));
+		centralWidget->setStyleSheet(bgss.arg("big_books2.jpeg"));
 	else if(section == Section::Author)
-		setStyleSheet(bgss.arg("big_authors.jpeg"));
+		centralWidget->setStyleSheet(bgss.arg("big_authors.jpeg"));
 	else if(section == Section::Publisher)
-		setStyleSheet(bgss.arg("big_publishers.jpeg"));
+		centralWidget->setStyleSheet(bgss.arg("big_publishers.jpeg"));
 	else if(section == Section::Theme)
-		setStyleSheet(bgss.arg("big_themes2.jpeg"));
+		centralWidget->setStyleSheet(bgss.arg("big_themes2.jpeg"));
 }
 
 void OperationsWidget::setSectionButton()
@@ -171,7 +171,6 @@ void OperationsWidget::createAddAuthorForm()
 {
 	tabWidget->setUpdatesEnabled(false);
 	AddAuthor *aa = new AddAuthor(c, tabWidget);
-	aa->setStyleSheet("QWidget#AuthorForm { background: url(:/imgs/imgs/big_authors.jpeg); }");
 	connect(c, SIGNAL(themesChanged()), aa, SLOT(populateThemesListWidget()));
 	connect(aa, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = tabWidget->addTab(aa, tr("Add Author"));
