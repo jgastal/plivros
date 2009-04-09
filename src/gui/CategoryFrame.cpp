@@ -32,7 +32,7 @@ void CategoryFrame::setThemeText()
 	ss += "\nfont: bold 20pt;";
 	themeHoverPushButton->setStyleSheet(ss);
 	ss = parentWidget()->styleSheet();
-	ss += bgss.arg("big_themes.jpeg");
+	ss += bgss.arg("big_themes2.jpeg");
 	parentWidget()->setStyleSheet(ss);
 }
 
@@ -65,7 +65,7 @@ void CategoryFrame::setBookText()
 	ss += "\nfont: bold 20pt;";
 	bookHoverPushButton->setStyleSheet(ss);
 	ss = parentWidget()->styleSheet();
-	ss += bgss.arg("big_books.jpeg");
+	ss += bgss.arg("big_books2.jpeg");
 	parentWidget()->setStyleSheet(ss);
 }
 

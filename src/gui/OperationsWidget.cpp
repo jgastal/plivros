@@ -39,13 +39,13 @@ void OperationsWidget::setSection(Section::section s)
 	section = s;
 
 	if(section == Section::Book)
-		setStyleSheet(bgss.arg("big_books.jpeg"));
+		setStyleSheet(bgss.arg("big_books2.jpeg"));
 	else if(section == Section::Author)
 		setStyleSheet(bgss.arg("big_authors.jpeg"));
 	else if(section == Section::Publisher)
 		setStyleSheet(bgss.arg("big_publishers.jpeg"));
 	else if(section == Section::Theme)
-		setStyleSheet(bgss.arg("big_themes.jpeg"));
+		setStyleSheet(bgss.arg("big_themes2.jpeg"));
 }
 
 void OperationsWidget::setSectionButton()
