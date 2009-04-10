@@ -327,6 +327,22 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tabWidget</sender>
+   <signal>tabCloseRequested(int)</signal>
+   <receiver>OperationsWidget</receiver>
+   <slot>closeTab(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>68</x>
+     <y>308</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1</x>
+     <y>328</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>add()</slot>
