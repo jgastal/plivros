@@ -153,19 +153,22 @@ Fechando esta aba.</translation>
         <location filename="../src/gui/BookForm.cpp" line="106"/>
         <source>Couldn&apos;t populate list of publishers.
 Closing this tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possivel popular a lista de editoras.
+Fechando esta aba.</translation>
     </message>
     <message>
         <location filename="../src/gui/BookForm.cpp" line="142"/>
         <source>Couldn&apos;t populate list of authors.
 Closing this tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possivel popular a lista de autores.
+Fechando esta aba.</translation>
     </message>
     <message>
         <location filename="../src/gui/BookForm.cpp" line="176"/>
         <source>Couldn&apos;t populate list of translators.
 Closing this tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possivel popular a lista de tradutores.
+Fechando esta aba.</translation>
     </message>
     <message>
         <source>Form</source>
@@ -234,8 +237,8 @@ Closing this tab.</source>
     </message>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="152"/>
-        <source>Auhtors:</source>
-        <translation type="unfinished"></translation>
+        <source>Authors:</source>
+        <translation>Autores:</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/BookForm.ui" line="166"/>
@@ -316,7 +319,7 @@ Closing this tab.</source>
     <message>
         <location filename="../src/gui/EditPublisher.cpp" line="49"/>
         <source>Your publisher has not been added.</source>
-        <translation type="unfinished"></translation>
+        <translation>A editora não foi adicionada.</translation>
     </message>
 </context>
 <context>
@@ -324,15 +327,19 @@ Closing this tab.</source>
     <message>
         <location filename="../src/gui/EditTheme.cpp" line="39"/>
         <source>Your theme has not been added.</source>
-        <translation type="unfinished"></translation>
+        <translation>O tema não foi adicionado.</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="14"/>
         <source>MainWindow</source>
-        <translation>Janela Principal</translation>
+        <translation type="obsolete">Janela Principal</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/UI/MainWindow.ui" line="14"/>
+        <source>Parabola Biblioteca</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/gui/UI/MainWindow.ui" line="56"/>
@@ -354,12 +361,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="101"/>
+        <location filename="../src/gui/UI/MainWindow.ui" line="98"/>
         <source>Quick Search</source>
         <translation>Busca rapida</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="115"/>
+        <location filename="../src/gui/UI/MainWindow.ui" line="112"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -368,7 +375,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="126"/>
+        <location filename="../src/gui/UI/MainWindow.ui" line="123"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -377,7 +384,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="137"/>
+        <location filename="../src/gui/UI/MainWindow.ui" line="134"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -386,7 +393,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="148"/>
+        <location filename="../src/gui/UI/MainWindow.ui" line="145"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -395,7 +402,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="159"/>
+        <location filename="../src/gui/UI/MainWindow.ui" line="156"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -404,7 +411,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="205"/>
+        <location filename="../src/gui/UI/MainWindow.ui" line="202"/>
         <source>Welcome &lt;user&gt;</source>
         <translation>Bem vindo &lt;user&gt;</translation>
     </message>
@@ -458,20 +465,23 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/gui/MessageBoxDataBaseException.cpp" line="25"/>
         <source>Data Base Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro de banco de dados</translation>
     </message>
     <message>
         <location filename="../src/gui/MessageBoxDataBaseException.cpp" line="26"/>
         <source>A very serious and unexpected error ocurred.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Um erro grave e inesperado ocorreu.
+</translation>
     </message>
     <message>
         <location filename="../src/gui/MessageBoxDataBaseException.cpp" line="28"/>
         <source>What: %1
 Caused by: %2
 Error code: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>O que: %1
+Causa: %2
+Codigo de erro: %3</translation>
     </message>
 </context>
 <context>
@@ -484,7 +494,7 @@ Error code: %3</source>
     <message>
         <location filename="../src/gui/OperationsWidget.cpp" line="128"/>
         <source>Search Themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar Temas</translation>
     </message>
     <message>
         <location filename="../src/gui/OperationsWidget.cpp" line="140"/>
@@ -494,27 +504,27 @@ Error code: %3</source>
     <message>
         <location filename="../src/gui/OperationsWidget.cpp" line="150"/>
         <source>Search Publishers</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar Editoras</translation>
     </message>
     <message>
         <location filename="../src/gui/OperationsWidget.cpp" line="161"/>
         <source>Add Author</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar Autor</translation>
     </message>
     <message>
         <location filename="../src/gui/OperationsWidget.cpp" line="171"/>
         <source>Search Authors</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar Autor</translation>
     </message>
     <message>
         <location filename="../src/gui/OperationsWidget.cpp" line="185"/>
         <source>Add Book</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar Livro</translation>
     </message>
     <message>
         <location filename="../src/gui/OperationsWidget.cpp" line="195"/>
         <source>Search Books</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar Livros</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/OperationsWidget.ui" line="20"/>
@@ -605,7 +615,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/gui/PublisherForm.cpp" line="37"/>
         <source>You must enter the publisher&apos;s name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Você deve digitar o nome da editora.</translation>
     </message>
     <message>
         <location filename="../src/gui/PublisherForm.cpp" line="70"/>
@@ -621,7 +631,7 @@ Fechando esta aba.</translation>
     <message>
         <location filename="../src/gui/UI/PublisherForm.ui" line="14"/>
         <source>Publisher Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulario de editora</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/PublisherForm.ui" line="20"/>
@@ -669,7 +679,7 @@ Fechando esta aba.</translation>
     <message>
         <location filename="../src/gui/SearchForm.cpp" line="49"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso</translation>
     </message>
     <message>
         <location filename="../src/gui/SearchForm.cpp" line="50"/>
@@ -683,7 +693,7 @@ Fechando esta aba.</translation>
     <message>
         <location filename="../src/gui/UI/SearchForm.ui" line="14"/>
         <source>Search Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulario de busca</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/SearchForm.ui" line="29"/>
@@ -693,12 +703,12 @@ Fechando esta aba.</translation>
     <message>
         <location filename="../src/gui/UI/SearchForm.ui" line="39"/>
         <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <translation>CaixaGrupo</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/SearchForm.ui" line="65"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar</translation>
     </message>
 </context>
 <context>
@@ -720,7 +730,7 @@ Fechando esta aba.</translation>
     <message>
         <location filename="../src/gui/UI/ThemeForm.ui" line="14"/>
         <source>Theme Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulario de temas</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/ThemeForm.ui" line="23"/>
