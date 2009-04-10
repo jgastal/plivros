@@ -13,7 +13,8 @@
 static QString bgss = "QWidget#%1 { "
 "background: url(:/imgs/imgs/%2);\n"
 "background-repeat: no-repeat;\n"
-"background-position: center center; }";
+"background-position: center center;\n}\n"
+"QLabel { background: rgba(0, 0, 0, 0); }";
 
 OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *parent) : QWidget(parent)
 {
