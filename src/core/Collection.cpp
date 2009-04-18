@@ -44,6 +44,40 @@ Collection::Collection(QString u, QString customDbName, bool ro) throw(bad_alloc
 	pc = new PublisherCollection(db);
 	tc = new ThemeCollection(db);
 
+	initConnects();
+}
+
+Collection::Collection(QString h, QString u, QString p, QString n, bool ro) throw(bad_alloc)
+{
+	readOnly = ro;
+	user = u;
+
+	db = new DataBase(n.toStdString(), u.toStdString(), h.toStdString(), p.toStdString());
+	bc = new BookCollection(db);
+	ac = new AuthorCollection(db);
+	pc = new PublisherCollection(db);
+	tc = new ThemeCollection(db);
+	
+	initConnects();
+}
+
+///@brief Closes database.
+Collection::~Collection() throw()
+{
+	delete db;
+	db = 0;
+	delete bc;
+	bc = 0;
+	delete ac;
+	ac = 0;
+	delete pc;
+	pc =  0;
+	delete tc;
+	tc = 0;
+}
+
+void Collection::initConnects()
+{
 	//reflects any change in the books table
 	connect(this, SIGNAL(bookInserted()), this, SIGNAL(booksChanged()));
 	connect(this, SIGNAL(bookDeleted()), this, SIGNAL(booksChanged()));
@@ -60,21 +94,6 @@ Collection::Collection(QString u, QString customDbName, bool ro) throw(bad_alloc
 	connect(this, SIGNAL(themeInserted()), this, SIGNAL(themesChanged()));
 	connect(this, SIGNAL(themeDeleted()), this, SIGNAL(themesChanged()));
 	connect(this, SIGNAL(themeUpdated()), this, SIGNAL(themesChanged()));
-}
-
-///@brief Closes database.
-Collection::~Collection() throw()
-{
-	delete db;
-	db = 0;
-	delete bc;
-	bc = 0;
-	delete ac;
-	ac = 0;
-	delete pc;
-	pc =  0;
-	delete tc;
-	tc = 0;
 }
 
 /**

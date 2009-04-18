@@ -46,8 +46,8 @@ class Collection : public QObject
 	Q_OBJECT
 
 	public:
-		//TODO Add constructor for collection with a MySQL backend.
 		Collection(QString u, QString customDbName = "", bool ro = false) throw(bad_alloc);
+		Collection(QString h, QString u, QString p, QString n, bool ro = false) throw(bad_alloc);
 		virtual ~Collection() throw();
 
 		bool insertBook(Book &b) throw(DataBaseException);
@@ -114,6 +114,8 @@ class Collection : public QObject
 		QString dbName;
 		bool readOnly;
 
+		void initConnects();
+
 		//private methods to deal with references
 		void updateThemeReference(Book b) throw(DataBaseException);
 		void updateThemeReference(Author a) throw(DataBaseException);
@@ -144,7 +146,7 @@ class Collection : public QObject
 		QList<Publisher> parsePublisherResultSet(ResultSet &rs) throw(DataBaseException);
 		QList<Theme> getPublishersThemes(int id) throw(DataBaseException);
 
-		//private methods to deal with author search
+		//private methods to deal with theme search
 		QList<Theme> parseThemeResultSet(ResultSet &rs) throw(DataBaseException);
 };
 
