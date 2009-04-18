@@ -33,6 +33,9 @@ int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);
 	QTranslator translator;
+
+	//Makes these fonts available for the program
+	//Zurich BT, Zurich Lt BT, Arno Pro
 	QFontDatabase::addApplicationFont("fonts/zurich_bt.ttf");
 	QFontDatabase::addApplicationFont("fonts/zurich_light_bt.ttf");
 	QFontDatabase::addApplicationFont("fonts/ARNOPRO-BOLDCAPTION.OTF");
@@ -43,6 +46,10 @@ int main(int argc, char **argv)
 	QString locale = QLocale::system().name();
 	translator.load(QString("plivros_") + locale);
 	app.installTranslator(&translator);
+
+	//Changes default program font
+	app.setFont(QFont("Zurich Lt BT"));
+	app.setFont(QFont("Arno Pro"), "HoverPushButton");
 
 	MainWindow mw(USERNAME);
 	mw.show();
