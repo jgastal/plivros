@@ -7,6 +7,7 @@
  */
 
 #include <QApplication>
+#include <QFontDatabase>
 #include <QTranslator>
 #include <QLocale>
 
@@ -32,6 +33,11 @@ int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);
 	QTranslator translator;
+	QFontDatabase::addApplicationFont("fonts/zurich_bt.ttf");
+	QFontDatabase::addApplicationFont("fonts/zurich_light_bt.ttf");
+	QFontDatabase::addApplicationFont("fonts/ARNOPRO-BOLDCAPTION.OTF");
+	QFontDatabase::addApplicationFont("fonts/ARNOPRO-ITALICCAPTION.OTF");
+	QFontDatabase::addApplicationFont("fonts/ARNOPRO-CAPTION.OTF");
 
 	//translate to currently used locale
 	QString locale = QLocale::system().name();
