@@ -73,7 +73,7 @@ void OperationsWidget::add()
 		createAddThemeForm();
 }
 
-void OperationsWidget::edit()
+void OperationsWidget::edit(DataObject *dobj)
 {
 	/*if(section == Section::Book)
 		createEditBookForm();
@@ -85,7 +85,7 @@ void OperationsWidget::edit()
 		createEditThemeForm();*/
 }
 
-void OperationsWidget::erase()
+void OperationsWidget::erase(DataObject *dobj)
 {
 	/*if(section == Section::Book)
 		eraseBook();
@@ -99,14 +99,24 @@ void OperationsWidget::erase()
 
 void OperationsWidget::search()
 {
+	tabWidget->setUpdatesEnabled(false);
+	SearchForm *sf = new SearchForm(section, c, tabWidget);
+	connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	connect(sf, SIGNAL(edit(DataObject*)), this, SLOT(edit(DataObject*)));
+	connect(sf, SIGNAL(del(DataObject*)), this, SLOT(erase(DataObject*)));
+
+	int pos;
 	if(section == Section::Book)
-		createSearchBookForm();
+		pos = tabWidget->addTab(sf, tr("Search Books"));
 	else if(section == Section::Author)
-		createSearchAuthorForm();
+		pos = tabWidget->addTab(sf, tr("Search Authors"));
 	else if(section == Section::Publisher)
-		createSearchPublisherForm();
+		pos = tabWidget->addTab(sf, tr("Search Publishers"));
 	else if(section == Section::Theme)
-		createSearchThemeForm();
+		pos = tabWidget->addTab(sf, tr("Search Themes"));
+
+	tabWidget->setCurrentIndex(pos);
+	tabWidget->setUpdatesEnabled(true);
 }
 
 ///@brief Adds a tab and creates a form to add a theme in it.
@@ -116,16 +126,6 @@ void OperationsWidget::createAddThemeForm()
 	AddTheme *at = new AddTheme(c, tabWidget);
 	connect(at, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = tabWidget->addTab(at, tr("Add Theme"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
-}
-
-void OperationsWidget::createSearchThemeForm()
-{
-	tabWidget->setUpdatesEnabled(false);
-	SearchForm *sf = new SearchForm(Section::Theme, c, tabWidget);
-	connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(sf, tr("Search Themes"));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }
@@ -142,16 +142,6 @@ void OperationsWidget::createAddPublisherForm()
 	tabWidget->setUpdatesEnabled(true);
 }
 
-void OperationsWidget::createSearchPublisherForm()
-{
-	tabWidget->setUpdatesEnabled(false);
-	SearchForm *sf = new SearchForm(Section::Publisher, c, tabWidget);
-	connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(sf, tr("Search Publishers"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
-}
-
 void OperationsWidget::createAddAuthorForm()
 {
 	tabWidget->setUpdatesEnabled(false);
@@ -159,16 +149,6 @@ void OperationsWidget::createAddAuthorForm()
 	connect(c, SIGNAL(themesChanged()), aa, SLOT(populateThemesListWidget()));
 	connect(aa, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = tabWidget->addTab(aa, tr("Add Author"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
-}
-
-void OperationsWidget::createSearchAuthorForm()
-{
-	tabWidget->setUpdatesEnabled(false);
-	SearchForm *sf = new SearchForm(Section::Author, c, tabWidget);
-	connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(sf, tr("Search Authors"));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }
@@ -183,16 +163,6 @@ void OperationsWidget::createAddBookForm()
 	connect(c, SIGNAL(authorsChanged()), ab, SLOT(populateTranslatorListWidget()));
 	connect(ab, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = tabWidget->addTab(ab, tr("Add Book"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
-}
-
-void OperationsWidget::createSearchBookForm()
-{
-	tabWidget->setUpdatesEnabled(false);
-	SearchForm *sf = new SearchForm(Section::Book, c, tabWidget);
-	connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(sf, tr("Search Books"));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }

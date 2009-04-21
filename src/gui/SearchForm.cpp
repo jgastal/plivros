@@ -27,7 +27,10 @@ SearchForm::SearchForm(Section::section t, Collection *c, QWidget *parent) : QWi
 	this->t = t;
 	connect(closePushButton, SIGNAL(clicked()), this, SIGNAL(closeRequested()));
 	connect(searchPushButton, SIGNAL(clicked()), this, SLOT(search()));
-	connect(tableWidget, SIGNAL(currentItemChanged(DataObject*)), this, SIGNAL(currentItemChanged(DataObject*)));
+
+	connect(tableWidget, SIGNAL(edit(DataObject*)), this, SIGNAL(edit(DataObject*)));
+	connect(tableWidget, SIGNAL(del(DataObject*)), this, SIGNAL(del(DataObject*)));
+	connect(tableWidget, SIGNAL(view(DataObject*)), this, SIGNAL(view(DataObject*)));
 }
 
 Section::section SearchForm::getType() const

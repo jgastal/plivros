@@ -31,7 +31,9 @@ class SearchForm : public QWidget, private Ui::SearchForm
 
 	signals:
 		void closeRequested();
-		void currentItemChanged(DataObject*);
+		void edit(DataObject*);
+		void del(DataObject*);
+		void view(DataObject*);
 
 	private:
 		Collection *c;

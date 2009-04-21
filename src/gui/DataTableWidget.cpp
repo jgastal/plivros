@@ -6,13 +6,22 @@
  * @brief Provides the class implementation.
  */
 
+#include <QAction>
+#include <QMenu>
+#include <QContextMenuEvent>
+
 #include "DataTableWidget.h"
 
 DataTableWidget::DataTableWidget(QWidget *parent) : QTableWidget(parent)
 {
 	setEditTriggers(0);
-	connect(this, SIGNAL(currentItemChanged(QTableWidgetItem*, QTableWidgetItem*)),
-		 this, SLOT(setCurItem(QTableWidgetItem*, QTableWidgetItem*)));
+
+	edit_act = new QAction(QIcon(":/icons/edit.png"), tr("Edit"), this);
+	connect(edit_act, SIGNAL(triggered()), this, SLOT(edit()));
+	del_act = new QAction(QIcon(":/icons/delete.png"), tr("Delete"), this);
+	connect(del_act, SIGNAL(triggered()), this, SLOT(del()));
+	view_act = new QAction(QIcon(":/icons/view_details.png"), tr("View details"), this);
+	connect(view_act, SIGNAL(triggered()), this, SLOT(view()));
 }
 
 void DataTableWidget::populateTable(QList<Book> dataList)
@@ -44,12 +53,19 @@ void DataTableWidget::populateTable(QList<Theme> dataList)
 	loop(dataList);
 }
 
-void DataTableWidget::setCurItem(QTableWidgetItem *oldItem, QTableWidgetItem *newItem)
+void DataTableWidget::edit()
 {
-	if(newItem)
-		emit currentItemChanged(curDataList.at(newItem->row()));
-	else
-		emit currentItemChanged(NULL);
+	emit edit(curDataList.at(currentColumn()));
+}
+
+void DataTableWidget::del()
+{
+	emit del(curDataList.at(currentColumn()));
+}
+
+void DataTableWidget::view()
+{
+	emit view(curDataList.at(currentColumn()));
 }
 
 template <class Type>
@@ -69,4 +85,13 @@ void DataTableWidget::loop(QList<Type> dataList)
 		curDataList.append(&(*it));
 		row++;
 	}
+}
+
+void DataTableWidget::contextMenuEvent(QContextMenuEvent *event)
+{
+	QMenu menu(this);
+	menu.addAction(edit_act);
+	menu.addAction(del_act);
+	menu.addAction(view_act);
+	menu.exec(event->globalPos());
 }

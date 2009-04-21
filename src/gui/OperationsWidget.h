@@ -7,6 +7,7 @@
 
 class Collection;
 class QButtonGroup;
+class DataObject;
 
 class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 {
@@ -19,8 +20,8 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 
 	public slots:
 		void add();
-		void edit();
-		void erase();
+		void edit(DataObject*);
+		void erase(DataObject*);
 		void search();
 		void setSectionButton();
 
@@ -35,13 +36,9 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		Section::section section;
 
 		void createAddThemeForm();
-		void createSearchThemeForm();
 		void createAddPublisherForm();
-		void createSearchPublisherForm();
 		void createAddAuthorForm();
-		void createSearchAuthorForm();
 		void createAddBookForm();
-		void createSearchBookForm();
 } ;
 
 #endif //OPERATIONSWIDGET_H

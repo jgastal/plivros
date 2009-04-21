@@ -17,6 +17,7 @@
 #include "Theme.h"
 
 class DataObject;
+class QAction;
 
 class DataTableWidget : public QTableWidget
 {
@@ -31,16 +32,26 @@ class DataTableWidget : public QTableWidget
 		void populateTable(QList<Publisher> dataList);
 		void populateTable(QList<Theme> dataList);
 
+	signals:
+		void edit(DataObject*);
+		void del(DataObject*);
+		void view(DataObject*);
+
 	private slots:
-		void setCurItem(QTableWidgetItem *oldItem, QTableWidgetItem *newItem);
+		void edit();
+		void del();
+		void view();
 
 	private:
 		template <class Type>
 		void loop(QList<Type> dataList);
 		QList<DataObject*> curDataList;
+		QAction *edit_act;
+		QAction *del_act;
+		QAction *view_act;
 
-	signals:
-		void currentItemChanged(DataObject*);
+	protected:
+		void contextMenuEvent(QContextMenuEvent *event);
 } ;
 
 #endif //DATATABLEWIDGET_H
