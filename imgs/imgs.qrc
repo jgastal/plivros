@@ -4,6 +4,10 @@
     <file>Book.gif</file>
     <file>Pages.jpg</file>
     <file>Publisher.gif</file>
+    <file>big_authors.jpeg</file>
+    <file>big_books2.jpeg</file>
+    <file>big_publishers.jpeg</file>
+    <file>big_themes2.jpeg</file>
   </qresource>
   <qresource prefix="icons" >
     <file>Logo.gif</file>

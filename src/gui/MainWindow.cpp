@@ -31,7 +31,7 @@ MainWindow::MainWindow(QString userName, QMainWindow *parent) : QMainWindow(pare
 	userLabel->setText(userStr);
 
 	ow = 0;
-	cf = new CategoryFrame();
+	cf = new CategoryFrame(displayWidget);
 	connect(cf, SIGNAL(clicked(Section::section)), this, SLOT(createOpsWidget(Section::section)));
 	displayWidget->layout()->addWidget(cf);
 }
@@ -45,7 +45,7 @@ void MainWindow::createOpsWidget(Section::section s)
 {
 	if(!ow)
 	{
-		ow = new OperationsWidget(c, s);
+		ow = new OperationsWidget(c, s, displayWidget);
 		displayWidget->layout()->addWidget(ow);
 	}
 	else

@@ -11,8 +11,13 @@
 #include "AddBook.h"
 
 #include "Collection.h"
-
 #include "Data.h"
+
+static QString bgss = "QWidget#%1 { "
+"background: url(:bgs/%2);\n"
+"background-repeat: no-repeat;\n"
+"background-position: center center;\n}\n"
+"QLabel { background: rgba(0, 0, 0, 0); }";
 
 OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *parent) : QWidget(parent)
 {
@@ -26,6 +31,7 @@ OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *p
 	btGroup->addButton(bookToolButton);
 	connect(btGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(setSection(QAbstractButton*)));
 
+	bgss = bgss.arg(centralWidget->objectName());
 	tabWidget->clear();
 	setSection(s);
 	setSectionButton();
@@ -35,6 +41,15 @@ OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *p
 void OperationsWidget::setSection(Section::section s)
 {
 	section = s;
+
+	if(section == Section::Book)
+		centralWidget->setStyleSheet(bgss.arg("big_books2.jpeg"));
+	else if(section == Section::Author)
+		centralWidget->setStyleSheet(bgss.arg("big_authors.jpeg"));
+	else if(section == Section::Publisher)
+		centralWidget->setStyleSheet(bgss.arg("big_publishers.jpeg"));
+	else if(section == Section::Theme)
+		centralWidget->setStyleSheet(bgss.arg("big_themes2.jpeg"));
 }
 
 void OperationsWidget::setSectionButton()
