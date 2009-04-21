@@ -8,6 +8,7 @@
 #include "AddPublisher.h"
 #include "EditPublisher.h"
 #include "AddAuthor.h"
+#include "EditAuthor.h"
 #include "AddBook.h"
 
 #include "Collection.h"
@@ -97,7 +98,7 @@ void OperationsWidget::edit(DataObject *dobj)
 	if(section == Section::Book)
 		;//createEditBookForm();
 	else if(section == Section::Author)
-		;//createEditAuthorForm();
+		createEditAuthorForm((Author*)dobj);
 	else if(section == Section::Publisher)
 		createEditPublisherForm((Publisher*)dobj);
 	else if(section == Section::Theme)
@@ -201,6 +202,17 @@ void OperationsWidget::createAddAuthorForm()
 	connect(c, SIGNAL(themesChanged()), aa, SLOT(populateThemesListWidget()));
 	connect(aa, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = tabWidget->addTab(aa, tr("Add Author"));
+	tabWidget->setCurrentIndex(pos);
+	tabWidget->setUpdatesEnabled(true);
+}
+
+void OperationsWidget::createEditAuthorForm(Author *a)
+{
+	tabWidget->setUpdatesEnabled(false);
+	EditAuthor *ea = new EditAuthor(c, *a, tabWidget);
+	connect(c, SIGNAL(themesChanged()), ea, SLOT(populateThemesListWidget()));
+	connect(ea, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	int pos = tabWidget->addTab(ea, tr("Edit Author"));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }

@@ -13,6 +13,7 @@ set( headers
 	EditPublisher.h
 	AuthorForm.h
 	AddAuthor.h
+	EditAuthor.h
 	BookForm.h
 	AddBook.h
 	OperationsWidget.h
@@ -31,6 +32,7 @@ set( sources
 	EditPublisher.cpp
 	AuthorForm.cpp
 	AddAuthor.cpp
+	EditAuthor.cpp
 	BookForm.cpp
 	AddBook.cpp
 	OperationsWidget.cpp
