@@ -107,13 +107,25 @@ void OperationsWidget::search()
 
 	int pos;
 	if(section == Section::Book)
+	{
+		connect(c, SIGNAL(booksChanged()), sf, SLOT(search()));
 		pos = tabWidget->addTab(sf, tr("Search Books"));
+	}
 	else if(section == Section::Author)
+	{
+		connect(c, SIGNAL(authorsChanged()), sf, SLOT(search()));
 		pos = tabWidget->addTab(sf, tr("Search Authors"));
+	}
 	else if(section == Section::Publisher)
+	{
+		connect(c, SIGNAL(publishersChanged()), sf, SLOT(search()));
 		pos = tabWidget->addTab(sf, tr("Search Publishers"));
+	}
 	else if(section == Section::Theme)
+	{
+		connect(c, SIGNAL(themesChanged()), sf, SLOT(search()));
 		pos = tabWidget->addTab(sf, tr("Search Themes"));
+	}
 
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);

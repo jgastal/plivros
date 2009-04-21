@@ -26,7 +26,7 @@ class SearchForm : public QWidget, private Ui::SearchForm
 		SearchForm(Section::section t, Collection *c, QWidget *parent = 0);
 		Section::section getType() const;
 
-	private slots:
+	public slots:
 		void search();
 
 	signals:
