@@ -35,4 +35,5 @@ if( WIN32 )
 	add_definitions( -DWIN32 )
 endif( WIN32 )
 
+add_subdirectory( imgs )
 add_subdirectory( src )

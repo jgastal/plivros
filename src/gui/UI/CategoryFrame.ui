@@ -70,7 +70,7 @@ QPushButton { color: rgb(60, 60, 60); }</string>
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/imgs/imgs/Pages.jpg);</string>
+      <string notr="true">background-image: url(:/bgs/Pages.jpg);</string>
      </property>
      <property name="text">
       <string/>
@@ -92,7 +92,7 @@ QPushButton { color: rgb(60, 60, 60); }</string>
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/imgs/imgs/Publisher.gif);</string>
+      <string notr="true">background-image: url(:/bgs/Publisher.gif);</string>
      </property>
     </widget>
    </item>
@@ -111,7 +111,7 @@ QPushButton { color: rgb(60, 60, 60); }</string>
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/imgs/imgs/Author.gif);</string>
+      <string notr="true">background-image: url(:/bgs/Author.gif);</string>
      </property>
      <property name="iconSize">
       <size>
@@ -136,7 +136,7 @@ QPushButton { color: rgb(60, 60, 60); }</string>
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/imgs/imgs/Book.gif);</string>
+      <string notr="true">background-image: url(:/bgs/Book.gif);</string>
      </property>
     </widget>
    </item>
@@ -150,7 +150,7 @@ QPushButton { color: rgb(60, 60, 60); }</string>
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../imgs.qrc"/>
+  <include location="../../../imgs/imgs.qrc"/>
  </resources>
  <connections>
   <connection>

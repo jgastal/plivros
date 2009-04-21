@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="bgs" >
+    <file>Author.gif</file>
+    <file>Book.gif</file>
+    <file>Pages.jpg</file>
+    <file>Publisher.gif</file>
+  </qresource>
+  <qresource prefix="icons" >
+    <file>Logo.gif</file>
+    <file>edit.png</file>
+    <file>delete.png</file>
+    <file>view_details.png</file>
+  </qresource>
+</RCC>

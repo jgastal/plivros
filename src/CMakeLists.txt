@@ -20,6 +20,6 @@ add_subdirectory( core )
 add_subdirectory( data )
 
 add_executable( plivros main.cpp )
-target_link_libraries( plivros collection data gui ${QT_LIBRARIES} )
+target_link_libraries( plivros collection data gui rcc ${QT_LIBRARIES} )
 
 add_dependencies( plivros gui collection data )
