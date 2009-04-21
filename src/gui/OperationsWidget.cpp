@@ -87,14 +87,14 @@ void OperationsWidget::edit(DataObject *dobj)
 
 void OperationsWidget::erase(DataObject *dobj)
 {
-	/*if(section == Section::Book)
-		eraseBook();
+	if(section == Section::Book)
+		c->deleteBook(dobj->getId());
 	else if(section == Section::Author)
-		eraseAuthor();
+		c->deleteAuthor(dobj->getId());
 	else if(section == Section::Publisher)
-		erasePublisher();
+		c->deletePublisher(dobj->getId());
 	else if(section == Section::Theme)
-		eraseTheme();*/
+		c->deleteTheme(dobj->getId());
 }
 
 void OperationsWidget::search()

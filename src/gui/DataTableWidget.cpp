@@ -16,12 +16,14 @@ DataTableWidget::DataTableWidget(QWidget *parent) : QTableWidget(parent)
 {
 	setEditTriggers(0);
 
-	edit_act = new QAction(QIcon(":/icons/edit.png"), tr("Edit"), this);
-	connect(edit_act, SIGNAL(triggered()), this, SLOT(edit()));
-	del_act = new QAction(QIcon(":/icons/delete.png"), tr("Delete"), this);
-	connect(del_act, SIGNAL(triggered()), this, SLOT(del()));
-	view_act = new QAction(QIcon(":/icons/view_details.png"), tr("View details"), this);
-	connect(view_act, SIGNAL(triggered()), this, SLOT(view()));
+	initActions();
+	setContextMenuPolicy(Qt::ActionsContextMenu);
+}
+
+DataTableWidget::~DataTableWidget()
+{
+	for(int i = 0; i < curDataList.size(); i++)
+		delete curDataList.at(i);
 }
 
 void DataTableWidget::populateTable(QList<Book> dataList)
@@ -29,7 +31,6 @@ void DataTableWidget::populateTable(QList<Book> dataList)
 	setColumnCount(Book::propertiesCount);
 	setHorizontalHeaderLabels(Book::headers);
 	loop(dataList);
-	
 }
 
 void DataTableWidget::populateTable(QList<Author> dataList)
@@ -55,17 +56,20 @@ void DataTableWidget::populateTable(QList<Theme> dataList)
 
 void DataTableWidget::edit()
 {
-	emit edit(curDataList.at(currentColumn()));
+	if(curDataList.size())
+		emit edit(curDataList.at(currentColumn()));
 }
 
 void DataTableWidget::del()
 {
-	emit del(curDataList.at(currentColumn()));
+	if(curDataList.size())
+		emit del(curDataList.at(currentRow()));
 }
 
 void DataTableWidget::view()
 {
-	emit view(curDataList.at(currentColumn()));
+	if(curDataList.size())
+		emit view(curDataList.at(currentColumn()));
 }
 
 template <class Type>
@@ -82,16 +86,21 @@ void DataTableWidget::loop(QList<Type> dataList)
 			QTableWidgetItem *qtwi = new QTableWidgetItem(*p_it);
 			setItem(row, col++, qtwi);
 		}
-		curDataList.append(&(*it));
+		curDataList.append(new Type(*it));
 		row++;
 	}
 }
 
-void DataTableWidget::contextMenuEvent(QContextMenuEvent *event)
+void DataTableWidget::initActions()
 {
-	QMenu menu(this);
-	menu.addAction(edit_act);
-	menu.addAction(del_act);
-	menu.addAction(view_act);
-	menu.exec(event->globalPos());
+	edit_act = new QAction(QIcon(":/icons/edit.png"), tr("Edit"), this);
+	connect(edit_act, SIGNAL(triggered()), this, SLOT(edit()));
+	del_act = new QAction(QIcon(":/icons/delete.png"), tr("Delete"), this);
+	connect(del_act, SIGNAL(triggered()), this, SLOT(del()));
+	view_act = new QAction(QIcon(":/icons/view_details.png"), tr("View details"), this);
+	connect(view_act, SIGNAL(triggered()), this, SLOT(view()));
+
+	addAction(edit_act);
+	addAction(del_act);
+	addAction(view_act);
 }

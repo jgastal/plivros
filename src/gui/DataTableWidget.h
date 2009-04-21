@@ -25,6 +25,7 @@ class DataTableWidget : public QTableWidget
 
 	public:
 		DataTableWidget(QWidget *parent = 0);
+		virtual ~DataTableWidget();
 
 	public slots:
 		void populateTable(QList<Book> dataList);
@@ -45,13 +46,11 @@ class DataTableWidget : public QTableWidget
 	private:
 		template <class Type>
 		void loop(QList<Type> dataList);
+		void initActions();
 		QList<DataObject*> curDataList;
 		QAction *edit_act;
 		QAction *del_act;
 		QAction *view_act;
-
-	protected:
-		void contextMenuEvent(QContextMenuEvent *event);
 } ;
 
 #endif //DATATABLEWIDGET_H
