@@ -4,11 +4,15 @@
 
 #include "SearchForm.h"
 #include "AddTheme.h"
+#include "EditTheme.h"
 #include "AddPublisher.h"
+#include "EditPublisher.h"
 #include "AddAuthor.h"
 #include "AddBook.h"
 
 #include "Collection.h"
+
+#include "Data.h"
 
 OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *parent) : QWidget(parent)
 {
@@ -75,14 +79,14 @@ void OperationsWidget::add()
 
 void OperationsWidget::edit(DataObject *dobj)
 {
-	/*if(section == Section::Book)
-		createEditBookForm();
+	if(section == Section::Book)
+		;//createEditBookForm();
 	else if(section == Section::Author)
-		createEditAuthorForm();
+		;//createEditAuthorForm();
 	else if(section == Section::Publisher)
-		createEditPublisherForm();
+		createEditPublisherForm((Publisher*)dobj);
 	else if(section == Section::Theme)
-		createEditThemeForm();*/
+		createEditThemeForm((Theme*)dobj);
 }
 
 void OperationsWidget::erase(DataObject *dobj)
@@ -142,6 +146,16 @@ void OperationsWidget::createAddThemeForm()
 	tabWidget->setUpdatesEnabled(true);
 }
 
+void OperationsWidget::createEditThemeForm(Theme *t)
+{
+	tabWidget->setUpdatesEnabled(false);
+	EditTheme *et = new EditTheme(c, *t, tabWidget);
+	connect(et, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	int pos = tabWidget->addTab(et, tr("Edit Theme"));
+	tabWidget->setCurrentIndex(pos);
+	tabWidget->setUpdatesEnabled(true);
+}
+
 ///@brief Adds a tab and creates a form to add a publisher in it.
 void OperationsWidget::createAddPublisherForm()
 {
@@ -150,6 +164,17 @@ void OperationsWidget::createAddPublisherForm()
 	connect(c, SIGNAL(themesChanged()), ap, SLOT(populateThemesListWidget()));
 	connect(ap, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = tabWidget->addTab(ap, tr("Add Publisher"));
+	tabWidget->setCurrentIndex(pos);
+	tabWidget->setUpdatesEnabled(true);
+}
+
+void OperationsWidget::createEditPublisherForm(Publisher *p)
+{
+	tabWidget->setUpdatesEnabled(false);
+	EditPublisher *ep = new EditPublisher(c, *p, tabWidget);
+	connect(c, SIGNAL(themesChanged()), ep, SLOT(populateThemesListWidget()));
+	connect(ep, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	int pos = tabWidget->addTab(ep, tr("Edit Publisher"));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }

@@ -8,6 +8,10 @@
 class Collection;
 class QButtonGroup;
 class DataObject;
+class Theme;
+class Publisher;
+class Author;
+class Book;
 
 class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 {
@@ -36,9 +40,13 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		Section::section section;
 
 		void createAddThemeForm();
+		void createEditThemeForm(Theme *t);
 		void createAddPublisherForm();
+		void createEditPublisherForm(Publisher *p);
 		void createAddAuthorForm();
+		void createEditAuthorForm(Author *a);
 		void createAddBookForm();
+		void createEditBookForm(Book *b);
 } ;
 
 #endif //OPERATIONSWIDGET_H
