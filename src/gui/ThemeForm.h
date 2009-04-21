@@ -14,7 +14,7 @@
 class Collection;
 
 /**
- * @class ThemeFOrm ThemeForm.h
+ * @class ThemeForm ThemeForm.h
  *
  * @brief This widget is a form to add a theme.
  */
