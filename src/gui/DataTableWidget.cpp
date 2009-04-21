@@ -57,7 +57,7 @@ void DataTableWidget::populateTable(QList<Theme> dataList)
 void DataTableWidget::edit()
 {
 	if(curDataList.size())
-		emit edit(curDataList.at(currentColumn()));
+		emit edit(curDataList.at(currentRow()));
 }
 
 void DataTableWidget::del()
@@ -69,7 +69,7 @@ void DataTableWidget::del()
 void DataTableWidget::view()
 {
 	if(curDataList.size())
-		emit view(curDataList.at(currentColumn()));
+		emit view(curDataList.at(currentRow()));
 }
 
 template <class Type>
