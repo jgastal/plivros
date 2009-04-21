@@ -80,10 +80,12 @@ void AuthorCollection::updateAuthor(Author a) throw(DataBaseException)
 		"lastname = '%2', description = '%3', critique = '%4', rating = "
 		"'%5', picture = '%6' WHERE id = '%7'", db->getType());
 	updAuthor.arg(a.getFirstName().toStdString());
+	updAuthor.arg(a.getLastName().toStdString());
 	updAuthor.arg(a.getDescription().toStdString());
 	updAuthor.arg(a.getCritique().toStdString());
 	updAuthor.arg(a.getRating());
 	updAuthor.arg(a.getPicture().toStdString());
+	updAuthor.arg(a.getId());
 
 	db->exec(updAuthor);
 }
