@@ -80,9 +80,9 @@ void BookForm::populateThemesListWidget()
 QList<Publisher> BookForm::getSelectedPublishers()
 {
 	QList<Publisher> list;
-	for(int i = 0; i < publisherListWidget->count(); i++)
+	for(int i = 0; i < publishersListWidget->count(); i++)
 	{
-		if(publisherListWidget->item(i)->isSelected())
+		if(publishersListWidget->item(i)->isSelected())
 			list.append(publisherList.at(i));
 	}
 	return list;
@@ -97,8 +97,8 @@ void BookForm::populatePublishersListWidget()
 		QStringList strList;
 		for(QList<Publisher>::iterator it = publisherList.begin(); it != publisherList.end(); it++)
 			strList.append(it->getName());
-		publisherListWidget->clear();
-		publisherListWidget->insertItems(0, strList);
+		publishersListWidget->clear();
+		publishersListWidget->insertItems(0, strList);
 	}
 	catch(DataBaseException dbe)
 	{
@@ -146,16 +146,10 @@ void BookForm::populateAuthorsListWidget()
 
 Author BookForm::getSelectedTranslator()
 {
-	Author a;
-	for(int i = 0; i < translatorListWidget->count(); i++)
-	{
-		if(authorsListWidget->item(i)->isSelected())
-			a = authorList.at(i);
-	}
-	return a;
+	return authorList.at(translatorComboBox->currentIndex());
 }
 
-///@brief Fills authorsListWidget with all existing authors.
+///@brief Fills translatorComboBox with all existing authors.
 void BookForm::populateTranslatorListWidget()
 {
 	try
@@ -167,8 +161,8 @@ void BookForm::populateTranslatorListWidget()
 			str.append(it->getLastName()).append(", ").append(it->getFirstName());
 			strList.append(str);
 		}
-		translatorListWidget->clear();
-		translatorListWidget->insertItems(0, strList);
+		translatorComboBox->clear();
+		translatorComboBox->insertItems(0, strList);
 	}
 	catch(DataBaseException dbe)
 	{

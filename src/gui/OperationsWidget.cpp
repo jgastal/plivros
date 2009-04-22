@@ -10,6 +10,7 @@
 #include "AddAuthor.h"
 #include "EditAuthor.h"
 #include "AddBook.h"
+#include "EditBook.h"
 
 #include "Collection.h"
 #include "Data.h"
@@ -96,7 +97,7 @@ void OperationsWidget::add()
 void OperationsWidget::edit(DataObject *dobj)
 {
 	if(section == Section::Book)
-		;//createEditBookForm();
+		createEditBookForm((Book*)dobj);
 	else if(section == Section::Author)
 		createEditAuthorForm((Author*)dobj);
 	else if(section == Section::Publisher)
@@ -227,6 +228,20 @@ void OperationsWidget::createAddBookForm()
 	connect(c, SIGNAL(authorsChanged()), ab, SLOT(populateTranslatorListWidget()));
 	connect(ab, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = tabWidget->addTab(ab, tr("Add Book"));
+	tabWidget->setCurrentIndex(pos);
+	tabWidget->setUpdatesEnabled(true);
+}
+
+void OperationsWidget::createEditBookForm(Book *b)
+{
+	tabWidget->setUpdatesEnabled(false);
+	EditBook *eb = new EditBook(c, *b, tabWidget);
+	connect(c, SIGNAL(themesChanged()), eb, SLOT(populateThemesListWidget()));
+	connect(c, SIGNAL(publishersChanged()), eb, SLOT(populatePublishersListWidget()));
+	connect(c, SIGNAL(authorsChanged()), eb, SLOT(populateAuthorsListWidget()));
+	connect(c, SIGNAL(authorsChanged()), eb, SLOT(populateTranslatorListWidget()));
+	connect(eb, SIGNAL(closeRequested()), this, SLOT(closeTab()));
+	int pos = tabWidget->addTab(eb, tr("Edit Book"));
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }

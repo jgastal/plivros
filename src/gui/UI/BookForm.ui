@@ -167,13 +167,6 @@
      </property>
     </widget>
    </item>
-   <item row="12" column="1">
-    <widget class="QListWidget" name="translatorListWidget">
-     <property name="selectionMode">
-      <enum>QAbstractItemView::SingleSelection</enum>
-     </property>
-    </widget>
-   </item>
    <item row="13" column="0">
     <widget class="QLabel" name="publishersLabel">
      <property name="text">
@@ -182,7 +175,7 @@
     </widget>
    </item>
    <item row="13" column="1">
-    <widget class="QListWidget" name="publisherListWidget">
+    <widget class="QListWidget" name="publishersListWidget">
      <property name="selectionMode">
       <enum>QAbstractItemView::ExtendedSelection</enum>
      </property>
@@ -223,6 +216,16 @@
      </property>
     </widget>
    </item>
+   <item row="12" column="1">
+    <widget class="QComboBox" name="translatorComboBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -245,8 +248,7 @@
   <tabstop>pubDateEdit</tabstop>
   <tabstop>udcLineEdit</tabstop>
   <tabstop>authorsListWidget</tabstop>
-  <tabstop>translatorListWidget</tabstop>
-  <tabstop>publisherListWidget</tabstop>
+  <tabstop>publishersListWidget</tabstop>
   <tabstop>themesListWidget</tabstop>
   <tabstop>cancelPushButton</tabstop>
   <tabstop>savePushButton</tabstop>

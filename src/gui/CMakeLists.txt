@@ -16,6 +16,7 @@ set( headers
 	EditAuthor.h
 	BookForm.h
 	AddBook.h
+	EditBook.h
 	OperationsWidget.h
 	CategoryFrame.h
 	PropertiesGroupBox.h
@@ -35,6 +36,7 @@ set( sources
 	EditAuthor.cpp
 	BookForm.cpp
 	AddBook.cpp
+	EditBook.cpp
 	OperationsWidget.cpp
 	CategoryFrame.cpp
 	PropertiesGroupBox.cpp
