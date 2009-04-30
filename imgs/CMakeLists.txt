@@ -4,4 +4,4 @@ set( RC_FILES
 qt4_add_resources( rc_sources ${RC_FILES} )
 
 add_library( rcc SHARED ${rc_sources} )
-
+target_link_libraries( rcc ${QT_LIBRARIES} )

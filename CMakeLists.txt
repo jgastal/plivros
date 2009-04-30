@@ -9,6 +9,7 @@ option( WIN32 "If building for windows OS." OFF )
 
 enable_language( C )
 find_package( Qt4 REQUIRED QtCore QtGUI )
+set( QT_USE_QTMAIN 1 )
 include( ${QT_USE_FILE} )
 
 # Path to DataBaseWrapper project

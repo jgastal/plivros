@@ -26,4 +26,4 @@ qt4_wrap_cpp( moc_out ${moc_in} )
 add_definitions( -fpic )
 
 add_library( collection SHARED ${headers} ${sources} ${moc_out} )
-target_link_libraries( collection DataBaseWrapper )
+target_link_libraries( collection DataBaseWrapper ${QT_LIBRARIES} )
