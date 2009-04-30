@@ -12,10 +12,11 @@ find_package( Qt4 REQUIRED QtCore QtGUI )
 set( QT_USE_QTMAIN 1 )
 include( ${QT_USE_FILE} )
 
-# Path to DataBaseWrapper project
-set( DBWRAPPER_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../DataBaseWrapper/ )
-# Path to DataBaseWrapper headers
-set( DBWRAPPER_INC_DIR ${DBWRAPPER_ROOT}/src/ )
+#Also search for modules in the project roo
+set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR} )
+find_package( DataBaseWrapper REQUIRED )
+include_directories( ${DBWRAPPER_INCLUDE_DIR} )
+
 # Path to RatingWidget headers, CHANGE THIS TO SOMETHING BETTER
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../RatingWidgetPlugin )
 link_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../RatingWidgetPlugin )
