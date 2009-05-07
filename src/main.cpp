@@ -10,6 +10,7 @@
 #include <QFontDatabase>
 #include <QTranslator>
 #include <QLocale>
+#include <QResource>
 
 #include "MainWindow.h"
 
@@ -51,6 +52,7 @@ int main(int argc, char **argv)
 	app.setFont(QFont("Zurich Lt BT"));
 	app.setFont(QFont("Arno Pro"), "HoverPushButton");
 
+	QResource::registerResource(QCoreApplication::applicationDirPath().append("/imgs/imgs.big"));
 	MainWindow mw(USERNAME);
 	mw.show();
 	return app.exec();
