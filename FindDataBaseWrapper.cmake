@@ -19,7 +19,7 @@ else(DBWRAPPER_INCLUDE_DIR AND DBWRAPPER_LIBRARIES)
   find_package( SQLITE3 REQUIRED )
   find_package( MySQL REQUIRED )
 
-  find_path(DBWRAPPER_INCLUDE_DIR DataBase.h
+  find_path(DBWRAPPER_INC_DIR DataBase.h
       /usr/include/DataBaseWrapper
       /usr/local/include/DataBaseWrapper
       $ENV{ProgramFiles}/DataBaseWrapper/include
@@ -27,7 +27,7 @@ else(DBWRAPPER_INCLUDE_DIR AND DBWRAPPER_LIBRARIES)
       $ENV{ProgramFiles}/DataBaseWrapper
       $ENV{SystemDrive}/DataBaseWrapper
       )
-  set( DBWRAPPER_INCLUDE_DIR ${DBWRAPPER_INCLUDE_DIR} ${SQLITE3_INCLUDE_DIR} ${MYSQL_INCLUDE_DIR} )
+  set( DBWRAPPER_INCLUDE_DIR "${DBWRAPPER_INC_DIR};${SQLITE3_INCLUDE_DIR};${MYSQL_INCLUDE_DIR}" )
 
   find_library(DBWRAPPER_LIBRARIES NAMES DataBaseWrapper
       PATHS
@@ -41,7 +41,7 @@ else(DBWRAPPER_INCLUDE_DIR AND DBWRAPPER_LIBRARIES)
 
   if(DBWRAPPER_INCLUDE_DIR AND DBWRAPPER_LIBRARIES)
     set(DBWRAPPER_FOUND TRUE)
-    message(STATUS "Found SQLite3: ${DBWRAPPER_INCLUDE_DIR}, ${DBWRAPPER_LIBRARIES}")
+    message(STATUS "Found DataBaseWrapper: ${DBWRAPPER_INCLUDE_DIR}, ${DBWRAPPER_LIBRARIES}")
   else(DBWRAPPER_INCLUDE_DIR AND DBWRAPPER_LIBRARIES)
     set(DBWRAPPER_FOUND FALSE)
     message(STATUS "DataBaseWrapper not found.")
