@@ -21,11 +21,15 @@
 #include "Theme.h"
 
 #ifdef WIN32
-	///TODO: Windows specific way of getting user name
-	/*#include <windows.h>
-	static const char c_str[256];
-	GetUserName(c_str, 0)*/
-	static const QString USERNAME("username");
+	#include <windows.h>
+	static const char* getUName()
+	{
+		char uname[256];
+		DWORD nUserName = sizeof(uname);
+		GetUserName(uname, &nUserName);
+		return uname;
+	}
+	static const QString USERNAME(getUName());
 #else //*nix
 	#include <cstdlib>
 	static const QString USERNAME = getenv("USER");
