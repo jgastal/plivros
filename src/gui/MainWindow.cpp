@@ -52,7 +52,6 @@ void MainWindow::createOpsWidget(Section::section s)
 	{
 		ow->setSection(s);
 		ow->setSectionButton();
-		ow->add();
 	}
 
 	cf->hide();

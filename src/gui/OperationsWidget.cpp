@@ -37,7 +37,6 @@ OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *p
 	tabWidget->clear();
 	setSection(s);
 	setSectionButton();
-	add();
 }
 
 void OperationsWidget::setSection(Section::section s)
@@ -52,6 +51,7 @@ void OperationsWidget::setSection(Section::section s)
 		centralWidget->setStyleSheet(bgss.arg("big_publishers.jpeg"));
 	else if(section == Section::Theme)
 		centralWidget->setStyleSheet(bgss.arg("big_themes2.jpeg"));
+	add();
 }
 
 void OperationsWidget::setSectionButton()
