@@ -21,5 +21,8 @@ add_subdirectory( data )
 
 add_executable( plivros main.cpp )
 target_link_libraries( plivros collection data gui ${QT_LIBRARIES} )
+if( WIN32 )
+	SET_TARGET_PROPERTIES( plivros PROPERTIES LINK_FLAGS -Wl,-subsystem,windows )
+endif( WIN32 )
 
 add_dependencies( plivros gui collection data )

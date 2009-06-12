@@ -53,8 +53,6 @@ int main(int argc, char **argv)
 	app.setFont(QFont("Zurich Lt BT"));
 	app.setFont(QFont("Arno Pro"), "HoverPushButton");
 
-	app.addLibraryPath(app.applicationDirPath().append("/lib/"));
-	app.setStyle(QStyleFactory::create("OxygenStyle"));
 	QResource::registerResource(QCoreApplication::applicationDirPath().append("/imgs/imgs.big"));
 	MainWindow mw(USERNAME);
 	mw.show();
