@@ -1,7 +1,3 @@
-#This project libraries' are located here
-link_directories( ${EXECUTABLE_OUTPUT_PATH}/core/ )
-link_directories( ${EXECUTABLE_OUTPUT_PATH}/data/ )
-link_directories( ${EXECUTABLE_OUTPUT_PATH}/gui/ )
 #DataBaseWrapper library dir
 link_directories( ${DBWRAPPER_LINK_DIR} )
 
