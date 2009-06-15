@@ -44,7 +44,7 @@ class Author : public DataObject
 		void setFirstName(QString);
 		QString getLastName() const;
 		void setLastName(QString);
-		QString getName();
+		QString getName() const;
 		QString getCritique() const;
 		void setCritique(QString);
 		unsigned short int getRating() const;

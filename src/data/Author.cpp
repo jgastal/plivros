@@ -76,7 +76,7 @@ void Author::setLastName(QString lastName)
 	this->lastName = lastName;
 }
 
-QString Author::getName()
+QString Author::getName() const
 {
 	return QString(lastName + ", " + firstName);
 }
