@@ -17,6 +17,7 @@ set( headers
 	BookForm.h
 	AddBook.h
 	EditBook.h
+	BookDetails.h
 	OperationsWidget.h
 	CategoryFrame.h
 	PropertiesGroupBox.h
@@ -37,6 +38,7 @@ set( sources
 	BookForm.cpp
 	AddBook.cpp
 	EditBook.cpp
+	BookDetails.cpp
 	OperationsWidget.cpp
 	CategoryFrame.cpp
 	PropertiesGroupBox.cpp
@@ -48,6 +50,7 @@ set( UI_FILES
 	"UI/PublisherForm.ui"
 	"UI/AuthorForm.ui"
 	"UI/BookForm.ui"
+	"UI/BookDetails.ui"
 	"UI/SearchForm.ui"
 	"UI/CategoryFrame.ui"
 	"UI/OperationsWidget.ui" )

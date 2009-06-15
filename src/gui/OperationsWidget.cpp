@@ -29,6 +29,7 @@
 #include "EditAuthor.h"
 #include "AddBook.h"
 #include "EditBook.h"
+#include "BookDetails.h"
 
 #include "Collection.h"
 #include "Data.h"
@@ -138,6 +139,19 @@ void OperationsWidget::erase(DataObject *dobj)
 		c->deleteTheme(dobj->getId());
 }
 
+void OperationsWidget::view(DataObject *dobj)
+{
+	Section::section s = ((SearchForm*)sender())->getType();
+	if(s == Section::Book)
+		createViewBookDetails((Book*)dobj);
+	else if(s == Section::Author)
+		;//c->deleteAuthor(dobj->getId());
+	else if(s == Section::Publisher)
+		;//c->deletePublisher(dobj->getId());
+	else if(s == Section::Theme)
+		;//c->deleteTheme(dobj->getId());
+}
+
 void OperationsWidget::search()
 {
 	tabWidget->setUpdatesEnabled(false);
@@ -145,6 +159,7 @@ void OperationsWidget::search()
 	connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	connect(sf, SIGNAL(edit(DataObject*)), this, SLOT(edit(DataObject*)));
 	connect(sf, SIGNAL(del(DataObject*)), this, SLOT(erase(DataObject*)));
+	connect(sf, SIGNAL(view(DataObject*)), this, SLOT(view(DataObject*)));
 
 	int pos;
 	if(section == Section::Book)
@@ -262,6 +277,15 @@ void OperationsWidget::createEditBookForm(Book *b)
 	connect(c, SIGNAL(authorsChanged()), eb, SLOT(populateTranslatorListWidget()));
 	connect(eb, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = tabWidget->addTab(eb, tr("Edit Book"));
+	tabWidget->setCurrentIndex(pos);
+	tabWidget->setUpdatesEnabled(true);
+}
+
+void OperationsWidget::createViewBookDetails(Book* b)
+{
+	tabWidget->setUpdatesEnabled(false);
+	BookDetails *bd = new BookDetails(b, tabWidget);
+	int pos = tabWidget->addTab(bd, b->getTitle());
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }

@@ -44,6 +44,7 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		void add();
 		void edit(DataObject*);
 		void erase(DataObject*);
+		void view(DataObject*);
 		void search();
 		void setSectionButton();
 
@@ -65,6 +66,7 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		void createEditAuthorForm(Author *a);
 		void createAddBookForm();
 		void createEditBookForm(Book *b);
+		void createViewBookDetails(Book *b);
 } ;
 
 #endif //OPERATIONSWIDGET_H
