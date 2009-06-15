@@ -114,25 +114,27 @@ void OperationsWidget::add()
 
 void OperationsWidget::edit(DataObject *dobj)
 {
-	if(section == Section::Book)
+	Section::section s = ((SearchForm*)sender())->getType();
+	if(s == Section::Book)
 		createEditBookForm((Book*)dobj);
-	else if(section == Section::Author)
+	else if(s == Section::Author)
 		createEditAuthorForm((Author*)dobj);
-	else if(section == Section::Publisher)
+	else if(s == Section::Publisher)
 		createEditPublisherForm((Publisher*)dobj);
-	else if(section == Section::Theme)
+	else if(s == Section::Theme)
 		createEditThemeForm((Theme*)dobj);
 }
 
 void OperationsWidget::erase(DataObject *dobj)
 {
-	if(section == Section::Book)
+	Section::section s = ((SearchForm*)sender())->getType();
+	if(s == Section::Book)
 		c->deleteBook(dobj->getId());
-	else if(section == Section::Author)
+	else if(s == Section::Author)
 		c->deleteAuthor(dobj->getId());
-	else if(section == Section::Publisher)
+	else if(s == Section::Publisher)
 		c->deletePublisher(dobj->getId());
-	else if(section == Section::Theme)
+	else if(s == Section::Theme)
 		c->deleteTheme(dobj->getId());
 }
 
