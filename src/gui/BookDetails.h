@@ -20,14 +20,31 @@
 #define BOOKDETAILS_H
 
 #include <QWidget>
+#include <QString>
 
 #include "ui_BookDetails.h"
 #include "Book.h"
 
-class BookDetails : public Ui::BookDetails, public QWidget
+class BookDetails : public QWidget, protected Ui::BookDetails
 {
+	Q_OBJECT
+
 	public:
 		BookDetails(Book *b, QWidget* parent = 0);
+
+	private slots:
+		void authorClicked();
+		void publisherClicked();
+
+	private:
+		void initAuthors();
+		void initPublishers();
+		template <class T>
+		QString makeLink(T &data);
+		static const QString link;
+		static const QString beginHTML;
+		static const QString endHTML;
+		Book *book;
 };
 
 #endif // BOOKDETAILS_H

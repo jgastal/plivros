@@ -18,14 +18,21 @@
  */
 #include "BookDetails.h"
 
+#include <QWidget>
+#include <QString>
+#include <QList>
+
+const QString BookDetails::link = QString("<a href=\"<link>\"><span style=\" text-decoration: underline; color:#0000ff;\"><name></span></a>");
+
 BookDetails::BookDetails(Book *b, QWidget* parent): QWidget(parent)
 {
+	book = b;
 	setupUi(this);
 	cover->setPixmap(QPixmap(b->getCover()));
 	title->setText(b->getTitle());
-	authors->setText(b->getAuthorsNames());
-	translator->setText(b->getTranslator().getName());
-	publishers->setText(b->getPublishersNames());
+	initAuthors();
+	translator->setText(makeLink((const Author)b->getTranslator()));
+	initPublishers();
 	pubDate->setText(b->getPubDate().toString());
 	edition->setText(QString::number(b->getEdition()));
 	udc->setText(b->getUDC());
@@ -39,4 +46,40 @@ BookDetails::BookDetails(Book *b, QWidget* parent): QWidget(parent)
 	wikiLink.replace("<title>", b->getTitle().replace(" ", "_"));
 	wikipediaLink->setText(wikiLink);
 	ebookLink->setText(ebookLink->text().replace("<ebook>", b->getEbook()));
+}
+
+void BookDetails::authorClicked()
+{
+}
+
+void BookDetails::publisherClicked()
+{
+}
+
+void BookDetails::initAuthors()
+{
+	QString html;
+	QList<Author> aList = book->getAuthors();
+	for(int i = 0; i < aList.size(); i++)
+		html.append(makeLink(aList.at(i)));
+	authors->setText(html);
+}
+
+void BookDetails::initPublishers()
+{
+	QString html;
+	QList<Publisher> pList = book->getPublishers();
+	for(int i = 0; i < pList.size(); i++)
+		html.append(makeLink(pList.at(i)));
+	publishers->setText(html);
+}
+
+template <class T>
+QString BookDetails::makeLink(T &data)
+{
+	QString ret = link;
+	ret.replace("<link>", "view://"+data.getName());
+	ret.replace("<name>", data.getName());
+	ret.append("<a>; </a>");
+	return ret;
 }
