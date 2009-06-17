@@ -29,6 +29,7 @@
 #include <QTranslator>
 #include <QLocale>
 #include <QResource>
+#include <QDir>
 #include <QStyleFactory>
 
 #include "MainWindow.h"
@@ -58,13 +59,16 @@ int main(int argc, char **argv)
 	QApplication app(argc, argv);
 	QTranslator translator;
 
+	QDir::addSearchPath("resource", IMGS_FOLDER);
+	QDir::addSearchPath("font", FONTS_FOLDER);
+
 	//Makes these fonts available for the program
 	//Zurich BT, Zurich Lt BT, Arno Pro
-	QFontDatabase::addApplicationFont("fonts/zurich_bt.ttf");
-	QFontDatabase::addApplicationFont("fonts/zurich_light_bt.ttf");
-	QFontDatabase::addApplicationFont("fonts/ARNOPRO-BOLDCAPTION.OTF");
-	QFontDatabase::addApplicationFont("fonts/ARNOPRO-ITALICCAPTION.OTF");
-	QFontDatabase::addApplicationFont("fonts/ARNOPRO-CAPTION.OTF");
+	QFontDatabase::addApplicationFont("fonts:zurich_bt.ttf");
+	QFontDatabase::addApplicationFont("fonts:zurich_light_bt.ttf");
+	QFontDatabase::addApplicationFont("fonts:ARNOPRO-BOLDCAPTION.OTF");
+	QFontDatabase::addApplicationFont("fonts:ARNOPRO-ITALICCAPTION.OTF");
+	QFontDatabase::addApplicationFont("fonts:ARNOPRO-CAPTION.OTF");
 
 	//translate to currently used locale
 	QString locale = QLocale::system().name();
@@ -75,7 +79,7 @@ int main(int argc, char **argv)
 	app.setFont(QFont("Zurich Lt BT"));
 	app.setFont(QFont("Arno Pro"), "HoverPushButton");
 
-	QResource::registerResource(QCoreApplication::applicationDirPath().append("/imgs/imgs.big"));
+	QResource::registerResource("resource:imgs.big");
 	MainWindow mw(USERNAME);
 	mw.show();
 	return app.exec();
