@@ -49,6 +49,7 @@ void DataTableWidget::populateTable(QList<Book> dataList)
 	setColumnCount(Book::propertiesCount);
 	setHorizontalHeaderLabels(Book::headers);
 	loop(dataList);
+	addAction(view_act);
 }
 
 void DataTableWidget::populateTable(QList<Author> dataList)
@@ -56,6 +57,7 @@ void DataTableWidget::populateTable(QList<Author> dataList)
 	setColumnCount(Author::propertiesCount);
 	setHorizontalHeaderLabels(Author::headers);
 	loop(dataList);
+	addAction(view_act);
 }
 
 void DataTableWidget::populateTable(QList<Publisher> dataList)
@@ -63,6 +65,7 @@ void DataTableWidget::populateTable(QList<Publisher> dataList)
 	setColumnCount(Publisher::propertiesCount);
 	setHorizontalHeaderLabels(Publisher::headers);
 	loop(dataList);
+	addAction(view_act);
 }
 
 void DataTableWidget::populateTable(QList<Theme> dataList)
@@ -120,5 +123,4 @@ void DataTableWidget::initActions()
 
 	addAction(edit_act);
 	addAction(del_act);
-	addAction(view_act);
 }
