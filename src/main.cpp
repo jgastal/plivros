@@ -30,14 +30,8 @@
 #include <QLocale>
 #include <QResource>
 #include <QDir>
-#include <QStyleFactory>
 
 #include "MainWindow.h"
-
-#include "Book.h"
-#include "Author.h"
-#include "Publisher.h"
-#include "Theme.h"
 
 #ifdef WIN32
 	#include <windows.h>
