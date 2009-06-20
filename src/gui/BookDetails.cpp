@@ -39,6 +39,7 @@ BookDetails::BookDetails(Book *b, QWidget* parent): QWidget(parent)
 	descriptionTextBrowser->setText(b->getDescription());
 	critiqueTextBrowser->setText(b->getCritique());
 	isbn->setText(b->getIsbn());
+	themes->setText(b->getThemesNames());
 	QString wikiLink = wikipediaLink->text();
 	QString lc = QLocale::system().name();
 	lc.truncate(2);
