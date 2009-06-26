@@ -35,12 +35,12 @@
 
 #ifdef WIN32
 	#include <windows.h>
-	static const char* getUName()
+	static QString getUName()
 	{
 		char uname[256];
 		DWORD nUserName = sizeof(uname);
 		GetUserName(uname, &nUserName);
-		return uname;
+		return QString(uname);
 	}
 	static const QString USERNAME(getUName());
 #else //*nix
@@ -53,8 +53,13 @@ int main(int argc, char **argv)
 	QApplication app(argc, argv);
 	QTranslator translator;
 
-	QDir::addSearchPath("resource", IMGS_FOLDER);
-	QDir::addSearchPath("font", FONTS_FOLDER);
+#ifdef WIN32
+	QDir::addSearchPath("resource", QCoreApplication::applicationDirPath()+"/imgs/");
+	QDir::addSearchPath("fonts", QCoreApplication::applicationDirPath()+"/fonts/");
+#else
+	QDir::addSearchPath("resource", "/usr/share/plivros/");
+	QDir::addSearchPath("fonts", "/usr/share/fonts/misc/");
+#endif
 
 	//Makes these fonts available for the program
 	//Zurich BT, Zurich Lt BT, Arno Pro
@@ -74,6 +79,8 @@ int main(int argc, char **argv)
 	app.setFont(QFont("Arno Pro"), "HoverPushButton");
 
 	QResource::registerResource("resource:imgs.big");
+	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
+
 	MainWindow mw(USERNAME);
 	mw.show();
 	return app.exec();
