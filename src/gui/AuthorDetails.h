@@ -23,7 +23,7 @@
 #include <QString>
 
 #include "ui_AuthorDetails.h"
-#include "Book.h"
+#include "Author.h"
 
 class AuthorDetails : public QWidget, protected Ui::AuthorDetails
 {
