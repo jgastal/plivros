@@ -14,6 +14,7 @@ set( headers
 	AuthorForm.h
 	AddAuthor.h
 	EditAuthor.h
+	AuthorDetails.h
 	BookForm.h
 	AddBook.h
 	EditBook.h
@@ -35,6 +36,7 @@ set( sources
 	AuthorForm.cpp
 	AddAuthor.cpp
 	EditAuthor.cpp
+	AuthorDetails.cpp
 	BookForm.cpp
 	AddBook.cpp
 	EditBook.cpp
@@ -49,6 +51,7 @@ set( UI_FILES
 	"UI/ThemeForm.ui"
 	"UI/PublisherForm.ui"
 	"UI/AuthorForm.ui"
+	"UI/AuthorDetails.ui"
 	"UI/BookForm.ui"
 	"UI/BookDetails.ui"
 	"UI/SearchForm.ui"

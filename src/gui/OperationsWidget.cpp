@@ -27,6 +27,7 @@
 #include "EditPublisher.h"
 #include "AddAuthor.h"
 #include "EditAuthor.h"
+#include "AuthorDetails.h"
 #include "AddBook.h"
 #include "EditBook.h"
 #include "BookDetails.h"
@@ -145,7 +146,7 @@ void OperationsWidget::view(DataObject *dobj)
 	if(s == Section::Book)
 		createViewBookDetails((Book*)dobj);
 	else if(s == Section::Author)
-		;//c->deleteAuthor(dobj->getId());
+		createViewAuthorDetails((Author*)dobj);
 	else if(s == Section::Publisher)
 		;//c->deletePublisher(dobj->getId());
 	else if(s == Section::Theme)
@@ -249,6 +250,15 @@ void OperationsWidget::createEditAuthorForm(Author *a)
 	connect(c, SIGNAL(themesChanged()), ea, SLOT(populateThemesListWidget()));
 	connect(ea, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = tabWidget->addTab(ea, tr("Edit Author"));
+	tabWidget->setCurrentIndex(pos);
+	tabWidget->setUpdatesEnabled(true);
+}
+
+void OperationsWidget::createViewAuthorDetails(Author *a)
+{
+	tabWidget->setUpdatesEnabled(false);
+	AuthorDetails *ad = new AuthorDetails(a, tabWidget);
+	int pos = tabWidget->addTab(ad, a->getName());
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
 }

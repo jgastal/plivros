@@ -73,6 +73,7 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		void createEditPublisherForm(Publisher *p);
 		void createAddAuthorForm();
 		void createEditAuthorForm(Author *a);
+		void createViewAuthorDetails(Author *a);
 		void createAddBookForm();
 		void createEditBookForm(Book *b);
 		void createViewBookDetails(Book *b);
