@@ -79,7 +79,7 @@ void AuthorForm::populateThemesListWidget()
 {
 	try
 	{
-		themeList = c->searchThemes(Theme::t_name, "");
+		themeList = c->getThemes();
 		QStringList strList;
 		for(QList<Theme>::iterator it = themeList.begin(); it != themeList.end(); it++)
 			strList.append(it->getName());

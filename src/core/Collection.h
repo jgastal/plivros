@@ -77,16 +77,19 @@ class Collection : public QObject
 		bool deleteAuthor(unsigned int id) throw(DataBaseException);
 		bool updateAuthor(Author a) throw(DataBaseException);
 		QList<Author> searchAuthors(Author::author_field field, QString name) throw(DataBaseException);
+		QList<Author> getAuthors() throw(DataBaseException);
 
 		bool insertPublisher(Publisher &p) throw(DataBaseException);
 		bool deletePublisher(unsigned int id) throw(DataBaseException);
 		bool updatePublisher(Publisher p) throw(DataBaseException);
 		QList<Publisher> searchPublishers(Publisher::publisher_field field, QString name) throw(DataBaseException);
+		QList<Publisher> getPublishers() throw(DataBaseException);
 
 		bool insertTheme(Theme &t) throw(DataBaseException);
 		bool deleteTheme(unsigned int id) throw(DataBaseException);
 		bool updateTheme(Theme t) throw(DataBaseException);
 		QList<Theme> searchThemes(Theme::theme_field field, QString name) throw(DataBaseException);
+		QList<Theme> getThemes() throw(DataBaseException);
 
 	signals:
 		///@brief Emited when a book is inserted in this collection.

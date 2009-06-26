@@ -314,6 +314,13 @@ QList<Author> Collection::searchAuthors(Author::author_field field, QString name
 	return parseAuthorResultSet(authorrs);
 }
 
+///@brief Gets all authors.
+QList<Author> Collection::getAuthors() throw(DataBaseException)
+{
+	ResultSet rs = db->query("SELECT * FROM authors");
+	return parseAuthorResultSet(rs);
+}
+
 /**
  * @brief Adds publisher \a p to the collection.
  *
@@ -388,6 +395,13 @@ QList<Publisher> Collection::searchPublishers(Publisher::publisher_field field, 
 
 	ResultSet pubrs = db->query(query);
 	return parsePublisherResultSet(pubrs);
+}
+
+///@brief Gets all publisher.
+QList<Publisher> Collection::getPublishers() throw(DataBaseException)
+{
+	ResultSet rs = db->query("SELECT * FROM publishers");
+	return parsePublisherResultSet(rs);
 }
 
 /**
@@ -481,6 +495,13 @@ QList<Theme> Collection::searchThemes(Theme::theme_field field, QString name) th
 
 	ResultSet themers = db->query(query);
 	return parseThemeResultSet(themers);
+}
+
+///@brief Gets all themes.
+QList<Theme> Collection::getThemes() throw(DataBaseException)
+{
+	ResultSet rs = db->query("SELECT * FROM themes");
+	return parseThemeResultSet(rs);
 }
 
 /**

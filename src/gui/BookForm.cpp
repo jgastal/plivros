@@ -79,7 +79,7 @@ void BookForm::populateThemesListWidget()
 {
 	try
 	{
-		themeList = c->searchThemes(Theme::t_name, "");
+		themeList = c->getThemes();
 		QStringList strList;
 		for(QList<Theme>::iterator it = themeList.begin(); it != themeList.end(); it++)
 			strList.append(it->getName());
@@ -111,7 +111,7 @@ void BookForm::populatePublishersListWidget()
 {
 	try
 	{
-		publisherList = c->searchPublishers(Publisher::p_name, "");
+		publisherList = c->getPublishers();
 		QStringList strList;
 		for(QList<Publisher>::iterator it = publisherList.begin(); it != publisherList.end(); it++)
 			strList.append(it->getName());
@@ -143,7 +143,7 @@ void BookForm::populateAuthorsListWidget()
 {
 	try
 	{
-		authorList = c->searchAuthors(Author::a_description, "");
+		authorList = c->getAuthors();
 		QStringList strList;
 		for(QList<Author>::iterator it = authorList.begin(); it != authorList.end(); it++)
 		{
