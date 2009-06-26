@@ -76,7 +76,7 @@ class Collection : public QObject
 		bool insertAuthor(Author &a) throw(DataBaseException);
 		bool deleteAuthor(unsigned int id) throw(DataBaseException);
 		bool updateAuthor(Author a) throw(DataBaseException);
-		QList<Author> searchAuthors(Author::author_field field, QString name);
+		QList<Author> searchAuthors(Author::author_field field, QString name) throw(DataBaseException);
 
 		bool insertPublisher(Publisher &p) throw(DataBaseException);
 		bool deletePublisher(unsigned int id) throw(DataBaseException);

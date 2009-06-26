@@ -302,7 +302,7 @@ bool Collection::updateAuthor(Author a) throw(DataBaseException)
  * If the search is done theme it will be considered a match if the name matches the
  * searched value.
  */
-QList<Author> Collection::searchAuthors(Author::author_field field, QString name)
+QList<Author> Collection::searchAuthors(Author::author_field field, QString name) throw(DataBaseException)
 {
 	PreparedStatement query("", db->getType());
 	if(field == Author::a_themes)
