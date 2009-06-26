@@ -232,6 +232,10 @@ void OperationsWidget::createEditPublisherForm(Publisher *p)
 	tabWidget->setUpdatesEnabled(true);
 }
 
+void OperationsWidget::createViewPublisherDetails(Publisher *p)
+{
+}
+
 void OperationsWidget::createAddAuthorForm()
 {
 	tabWidget->setUpdatesEnabled(false);
@@ -295,6 +299,8 @@ void OperationsWidget::createViewBookDetails(Book* b)
 {
 	tabWidget->setUpdatesEnabled(false);
 	BookDetails *bd = new BookDetails(b, tabWidget);
+	connect(bd, SIGNAL(authorClicked(QString)), this, SLOT(viewAuthor(QString)));
+	connect(bd, SIGNAL(publisherClicked(QString)), this, SLOT(viewPublisher(QString)));
 	int pos = tabWidget->addTab(bd, b->getTitle());
 	tabWidget->setCurrentIndex(pos);
 	tabWidget->setUpdatesEnabled(true);
@@ -320,4 +326,34 @@ void OperationsWidget::setSection(QAbstractButton *bt)
 		setSection(Section::Author);
 	else if(bt == bookToolButton)
 		setSection(Section::Book);
+}
+
+void OperationsWidget::viewAuthor(QString url)
+{
+	if(!url.startsWith("view://"))
+		return;
+	url.replace("view://", "");
+	/*
+	 * Strictly speaking this is bad cause the widget will be around for 
+	 * longer than the parameter, but since it won't be used in after the 
+	 * constructor it works. The parameter isn't passed directly to avoid
+	 * compiler warnings.
+	 */
+	Author a = c->getAuthor(url.toInt());
+	createViewAuthorDetails(&a);
+}
+
+void OperationsWidget::viewPublisher(QString url)
+{
+	if(!url.startsWith("view://"))
+		return;
+	url.replace("view://", "");
+	/*
+	 * Strictly speaking this is bad cause the widget will be around for 
+	 * longer than the parameter, but since it won't be used in after the 
+	 * constructor it works. The parameter isn't passed directly to avoid
+	 * compiler warnings.
+	 */
+	Publisher p = c->getPublisher(url.toInt());
+	createViewPublisherDetails(&p);
 }

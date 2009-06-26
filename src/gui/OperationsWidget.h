@@ -56,6 +56,8 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		void view(DataObject*);
 		void search();
 		void setSectionButton();
+		void viewAuthor(QString url);
+		void viewPublisher(QString url);
 
 	protected slots:
 		void closeTab();
@@ -71,6 +73,7 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		void createEditThemeForm(Theme *t);
 		void createAddPublisherForm();
 		void createEditPublisherForm(Publisher *p);
+		void createViewPublisherDetails(Publisher *p);
 		void createAddAuthorForm();
 		void createEditAuthorForm(Author *a);
 		void createViewAuthorDetails(Author *a);

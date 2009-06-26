@@ -32,9 +32,9 @@ class BookDetails : public QWidget, protected Ui::BookDetails
 	public:
 		BookDetails(Book *b, QWidget* parent = 0);
 
-	private slots:
-		void authorClicked();
-		void publisherClicked();
+	signals:
+		void authorClicked(QString);
+		void publisherClicked(QString);
 
 	private:
 		void initAuthors();

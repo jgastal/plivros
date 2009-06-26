@@ -22,7 +22,7 @@
 #include <QString>
 #include <QList>
 
-const QString BookDetails::link = QString("<a href=\"<link>\"><span style=\" text-decoration: underline; color:#0000ff;\"><name></span></a>");
+const QString BookDetails::link = QString("<a href=\"%1%2\"><span style=\" text-decoration: underline; color:#0000ff;\">%3</span></a>");
 
 BookDetails::BookDetails(Book *b, QWidget* parent): QWidget(parent)
 {
@@ -32,6 +32,7 @@ BookDetails::BookDetails(Book *b, QWidget* parent): QWidget(parent)
 	title->setText(b->getTitle());
 	initAuthors();
 	translator->setText(makeLink((const Author)b->getTranslator()));
+	connect(translator, SIGNAL(linkActivated(QString)), this, SIGNAL(authorClicked(QString)));
 	initPublishers();
 	pubDate->setText(b->getPubDate().toString());
 	edition->setText(QString::number(b->getEdition()));
@@ -49,14 +50,6 @@ BookDetails::BookDetails(Book *b, QWidget* parent): QWidget(parent)
 	ebookLink->setText(ebookLink->text().replace("<ebook>", b->getEbook()));
 }
 
-void BookDetails::authorClicked()
-{
-}
-
-void BookDetails::publisherClicked()
-{
-}
-
 void BookDetails::initAuthors()
 {
 	QString html;
@@ -64,6 +57,7 @@ void BookDetails::initAuthors()
 	for(int i = 0; i < aList.size(); i++)
 		html.append(makeLink(aList.at(i)));
 	authors->setText(html);
+	connect(authors, SIGNAL(linkActivated(QString)), this, SIGNAL(authorClicked(QString)));
 }
 
 void BookDetails::initPublishers()
@@ -73,14 +67,15 @@ void BookDetails::initPublishers()
 	for(int i = 0; i < pList.size(); i++)
 		html.append(makeLink(pList.at(i)));
 	publishers->setText(html);
+	connect(publishers, SIGNAL(linkActivated(QString)), this, SIGNAL(publisherClicked(QString)));
 }
 
 template <class T>
 QString BookDetails::makeLink(T &data)
 {
 	QString ret = link;
-	ret.replace("<link>", "view://"+data.getName());
-	ret.replace("<name>", data.getName());
+	ret = ret.arg("view://").arg(data.getId());
+	ret = ret.arg(data.getName());
 	ret.append("<a>; </a>");
 	return ret;
 }
