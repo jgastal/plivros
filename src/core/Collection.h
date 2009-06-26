@@ -78,18 +78,21 @@ class Collection : public QObject
 		bool updateAuthor(Author a) throw(DataBaseException);
 		QList<Author> searchAuthors(Author::author_field field, QString name) throw(DataBaseException);
 		QList<Author> getAuthors() throw(DataBaseException);
+		Author getAuthor(int id) throw(DataBaseException);
 
 		bool insertPublisher(Publisher &p) throw(DataBaseException);
 		bool deletePublisher(unsigned int id) throw(DataBaseException);
 		bool updatePublisher(Publisher p) throw(DataBaseException);
 		QList<Publisher> searchPublishers(Publisher::publisher_field field, QString name) throw(DataBaseException);
 		QList<Publisher> getPublishers() throw(DataBaseException);
+		Publisher getPublisher(int id) throw(DataBaseException);
 
 		bool insertTheme(Theme &t) throw(DataBaseException);
 		bool deleteTheme(unsigned int id) throw(DataBaseException);
 		bool updateTheme(Theme t) throw(DataBaseException);
 		QList<Theme> searchThemes(Theme::theme_field field, QString name) throw(DataBaseException);
 		QList<Theme> getThemes() throw(DataBaseException);
+		Theme getTheme(int id) throw(DataBaseException);
 
 	signals:
 		///@brief Emited when a book is inserted in this collection.
@@ -153,7 +156,6 @@ class Collection : public QObject
 		QList<Author> getBooksAuthors(int id) throw(DataBaseException);
 		QList<Publisher> getBooksPublishers(int id) throw(DataBaseException);
 		QList<Theme> getBooksThemes(int id) throw(DataBaseException);
-		Author getBooksTranslator(int id) throw(DataBaseException);
 
 		//private methods to deal with author search
 		PreparedStatement simpleSearchAuthors(Author::author_field field, QString name) throw(DataBaseException);

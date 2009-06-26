@@ -322,6 +322,27 @@ QList<Author> Collection::getAuthors() throw(DataBaseException)
 }
 
 /**
+ * @brief Gets the Author with id \a id.
+ *
+ * @param id id of desired author.
+ *
+ * @return Author associated with this id.
+ */
+Author Collection::getAuthor(int id) throw(DataBaseException)
+{
+	PreparedStatement author("SELECT * FROM authors WHERE id = '%1'", db->getType());
+	author.arg(id);
+
+	ResultSet rs = db->query(author);
+	QList<Author> aList = parseAuthorResultSet(rs);
+
+	if(aList.empty())
+		return Author();
+	else
+		return aList.first();
+}
+
+/**
  * @brief Adds publisher \a p to the collection.
  *
  * @param p Publisher to be added.
@@ -402,6 +423,27 @@ QList<Publisher> Collection::getPublishers() throw(DataBaseException)
 {
 	ResultSet rs = db->query("SELECT * FROM publishers");
 	return parsePublisherResultSet(rs);
+}
+
+/**
+ * @brief Gets the Publisher with id \a id.
+ *
+ * @param id id of desired publisher.
+ *
+ * @return Publisher associated with this id.
+ */
+Publisher Collection::getPublisher(int id) throw(DataBaseException)
+{
+	PreparedStatement pub("SELECT * FROM publishers WHERE id = '%1'", db->getType());
+	pub.arg(id);
+
+	ResultSet rs = db->query(pub);
+	QList<Publisher> pList = parsePublisherResultSet(rs);
+
+	if(pList.empty())
+		return Publisher();
+	else
+		return pList.first();
 }
 
 /**
@@ -502,6 +544,27 @@ QList<Theme> Collection::getThemes() throw(DataBaseException)
 {
 	ResultSet rs = db->query("SELECT * FROM themes");
 	return parseThemeResultSet(rs);
+}
+
+/**
+ * @brief Gets the Theme with id \a id.
+ *
+ * @param id id of desired theme.
+ *
+ * @return Theme associated with this id.
+ */
+Theme Collection::getTheme(int id) throw(DataBaseException)
+{
+	PreparedStatement theme("SELECT * FROM publishers WHERE id = '%1'", db->getType());
+	theme.arg(id);
+
+	ResultSet rs = db->query(theme);
+	QList<Theme> tList = parseThemeResultSet(rs);
+
+	if(tList.empty())
+		return Theme();
+	else
+		return tList.first();
 }
 
 /**
@@ -678,7 +741,7 @@ QList<Book> Collection::parseBookResultSet(ResultSet &rs) throw(DataBaseExceptio
 		b.setUDC(rs.getString("udc").c_str());
 		b.setId(rs.getInt("id"));
 		b.setAuthors(getBooksAuthors(rs.getInt("id")));
-		b.setTranslator(getBooksTranslator(rs.getInt("translator")));
+		b.setTranslator(getAuthor(rs.getInt("translator")));
 		b.setPublishers(getBooksPublishers(rs.getInt("id")));
 		b.setThemes(getBooksThemes(rs.getInt("id")));
 
@@ -739,27 +802,6 @@ QList<Theme> Collection::getBooksThemes(int id) throw(DataBaseException)
 	
 	ResultSet rs = db->query(themes);
 	return parseThemeResultSet(rs);
-}
-
-/**
- * @brief Gets the translator of a given book.
- *
- * @param id id of book whose translator is desired.
- *
- * @return Author associated with this book as translator.
- */
-Author Collection::getBooksTranslator(int id) throw(DataBaseException)
-{
-	PreparedStatement translator("SELECT * FROM authors WHERE id = '%1'", db->getType());
-	translator.arg(id);
-
-	ResultSet rs = db->query(translator);
-	QList<Author> aList = parseAuthorResultSet(rs);
-
-	if(aList.empty())
-		return Author();
-	else
-		return aList.first();
 }
 
 /**
