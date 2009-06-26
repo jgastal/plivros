@@ -31,6 +31,15 @@ class Publisher;
 class Author;
 class Book;
 
+/**
+ * @class OperationsWidget OperationgsWidget.h
+ *
+ * @brief This class contains offers the user access to the apps standard opeartions.
+ *
+ * This class offers the add and search operations for all four sections(Books,
+ * Authors, Publishers, Themes). The add and search buttons actions depend on which
+ * section is selected.
+ */
 class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 {
 	Q_OBJECT
