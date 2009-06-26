@@ -31,9 +31,6 @@ class AuthorDetails : public QWidget, protected Ui::AuthorDetails
 
 	public:
 		AuthorDetails(Author *a, QWidget* parent = 0);
-
-	private:
-		Author *author;
 };
 
 #endif // AUTHORDETAILS_H

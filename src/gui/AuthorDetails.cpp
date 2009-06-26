@@ -24,7 +24,6 @@
 
 AuthorDetails::AuthorDetails(Author *a, QWidget* parent): QWidget(parent)
 {
-	author = a;
 	setupUi(this);
 	firstName->setText(a->getFirstName());
 	lastName->setText(a->getLastName());
