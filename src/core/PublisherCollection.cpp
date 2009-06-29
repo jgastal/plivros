@@ -95,6 +95,7 @@ void PublisherCollection::updatePublisher(Publisher p) throw(DataBaseException)
 	updPub.arg(p.getDescription().toStdString());
 	updPub.arg(p.getCritique().toStdString());
 	updPub.arg(p.getLogo().toStdString());
+	updPub.arg(p.getId());
 
 	db->exec(updPub);
 }
