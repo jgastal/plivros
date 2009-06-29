@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>1120</width>
     <height>600</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1120</width>
+    <height>550</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Parabola Biblioteca</string>
@@ -190,7 +196,19 @@ p, li { white-space: pre-wrap; }
     </item>
     <item>
      <widget class="QWidget" name="contentWidget" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>860</width>
+        <height>0</height>
+       </size>
+      </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QLabel" name="userLabel">
          <property name="maximumSize">
@@ -215,11 +233,18 @@ p, li { white-space: pre-wrap; }
         <widget class="QWidget" name="displayWidget" native="true">
          <property name="minimumSize">
           <size>
-           <width>500</width>
+           <width>860</width>
            <height>300</height>
           </size>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+         </layout>
         </widget>
        </item>
       </layout>
