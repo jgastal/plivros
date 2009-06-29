@@ -67,6 +67,7 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 	private:
 		Collection *c;
 		QButtonGroup *btGroup;
+		QTabWidget *bTab, *aTab, *pTab, *tTab;
 		Section::section section;
 
 		void createAddThemeForm();

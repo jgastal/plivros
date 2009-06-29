@@ -55,7 +55,8 @@ OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *p
 	connect(btGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(setSection(QAbstractButton*)));
 
 	bgss = bgss.arg(centralWidget->objectName());
-	tabWidget->clear();
+	bTab = aTab = pTab = tTab = 0;
+
 	setSection(s);
 	setSectionButton();
 }
@@ -63,16 +64,72 @@ OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *p
 void OperationsWidget::setSection(Section::section s)
 {
 	section = s;
+	if(bTab)
+		bTab->hide();
+	if(aTab)
+		aTab->hide();
+	if(pTab)
+		pTab->hide();
+	if(tTab)
+		tTab->hide();
 
+	QGridLayout *layout = (QGridLayout*)centralWidget->layout();
 	if(section == Section::Book)
+	{
+		if(!bTab)
+		{
+			bTab = new QTabWidget();
+			bTab->setTabsClosable(true);
+			connect(bTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
+			layout->addWidget(bTab, 1, 1, 10, 2);
+		}
+		bTab->setVisible(true);
 		centralWidget->setStyleSheet(bgss.arg("big_books2.jpeg"));
+		if(!bTab->count())
+			add();
+	}
 	else if(section == Section::Author)
+	{
+		if(!aTab)
+		{
+			aTab = new QTabWidget();
+			aTab->setTabsClosable(true);
+			connect(aTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
+			layout->addWidget(aTab, 1, 1, 10, 2);
+		}
+		aTab->setVisible(true);
 		centralWidget->setStyleSheet(bgss.arg("big_authors.jpeg"));
+		if(!aTab->count())
+			add();
+	}
 	else if(section == Section::Publisher)
+	{
+		if(!pTab)
+		{
+			pTab = new QTabWidget();
+			pTab->setTabsClosable(true);
+			connect(pTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
+			layout->addWidget(pTab, 1, 1, 10, 2);
+		}
+		pTab->setVisible(true);
 		centralWidget->setStyleSheet(bgss.arg("big_publishers.jpeg"));
+		if(!pTab->count())
+			add();
+	}
 	else if(section == Section::Theme)
+	{
+		if(!tTab)
+		{
+			tTab = new QTabWidget();
+			tTab->setTabsClosable(true);
+			connect(tTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
+			layout->addWidget(tTab, 1, 1, 10, 2);
+		}
+		tTab->setVisible(true);
 		centralWidget->setStyleSheet(bgss.arg("big_themes2.jpeg"));
-	add();
+		if(!tTab->count())
+			add();
+	}
 }
 
 void OperationsWidget::setSectionButton()
@@ -154,8 +211,7 @@ void OperationsWidget::view(DataObject *dobj)
 
 void OperationsWidget::search()
 {
-	tabWidget->setUpdatesEnabled(false);
-	SearchForm *sf = new SearchForm(section, c, tabWidget);
+	SearchForm *sf = new SearchForm(section, c);
 	connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	connect(sf, SIGNAL(edit(DataObject*)), this, SLOT(edit(DataObject*)));
 	connect(sf, SIGNAL(del(DataObject*)), this, SLOT(erase(DataObject*)));
@@ -164,150 +220,151 @@ void OperationsWidget::search()
 	int pos;
 	if(section == Section::Book)
 	{
+		sf->setParent(bTab);
 		connect(c, SIGNAL(booksChanged()), sf, SLOT(search()));
-		pos = tabWidget->addTab(sf, tr("Search Books"));
+		pos = bTab->addTab(sf, tr("Search Books"));
 	}
 	else if(section == Section::Author)
 	{
+		sf->setParent(aTab);
 		connect(c, SIGNAL(authorsChanged()), sf, SLOT(search()));
-		pos = tabWidget->addTab(sf, tr("Search Authors"));
+		pos = aTab->addTab(sf, tr("Search Authors"));
 	}
 	else if(section == Section::Publisher)
 	{
+		sf->setParent(pTab);
 		connect(c, SIGNAL(publishersChanged()), sf, SLOT(search()));
-		pos = tabWidget->addTab(sf, tr("Search Publishers"));
+		pos = pTab->addTab(sf, tr("Search Publishers"));
 	}
 	else if(section == Section::Theme)
 	{
+		sf->setParent(tTab);
 		connect(c, SIGNAL(themesChanged()), sf, SLOT(search()));
-		pos = tabWidget->addTab(sf, tr("Search Themes"));
+		pos = tTab->addTab(sf, tr("Search Themes"));
 	}
-
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
 }
 
 ///@brief Adds a tab and creates a form to add a theme in it.
 void OperationsWidget::createAddThemeForm()
 {
-	tabWidget->setUpdatesEnabled(false);
-	AddTheme *at = new AddTheme(c, tabWidget);
+	tTab->setUpdatesEnabled(false);
+	AddTheme *at = new AddTheme(c, tTab);
 	connect(at, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(at, tr("Add Theme"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	int pos = tTab->addTab(at, tr("Add Theme"));
+	tTab->setCurrentIndex(pos);
+	tTab->setUpdatesEnabled(true);
 }
 
 void OperationsWidget::createEditThemeForm(Theme *t)
 {
-	tabWidget->setUpdatesEnabled(false);
-	EditTheme *et = new EditTheme(c, *t, tabWidget);
+	tTab->setUpdatesEnabled(false);
+	EditTheme *et = new EditTheme(c, *t, tTab);
 	connect(et, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(et, tr("Edit Theme"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	int pos = tTab->addTab(et, tr("Edit Theme"));
+	tTab->setCurrentIndex(pos);
+	tTab->setUpdatesEnabled(true);
 }
 
 ///@brief Adds a tab and creates a form to add a publisher in it.
 void OperationsWidget::createAddPublisherForm()
 {
-	tabWidget->setUpdatesEnabled(false);
-	AddPublisher *ap = new AddPublisher(c, tabWidget);
+	pTab->setUpdatesEnabled(false);
+	AddPublisher *ap = new AddPublisher(c, pTab);
 	connect(c, SIGNAL(themesChanged()), ap, SLOT(populateThemesListWidget()));
 	connect(ap, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(ap, tr("Add Publisher"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	int pos = pTab->addTab(ap, tr("Add Publisher"));
+	pTab->setCurrentIndex(pos);
+	pTab->setUpdatesEnabled(true);
 }
 
 void OperationsWidget::createEditPublisherForm(Publisher *p)
 {
-	tabWidget->setUpdatesEnabled(false);
-	EditPublisher *ep = new EditPublisher(c, *p, tabWidget);
+	pTab->setUpdatesEnabled(false);
+	EditPublisher *ep = new EditPublisher(c, *p, pTab);
 	connect(c, SIGNAL(themesChanged()), ep, SLOT(populateThemesListWidget()));
 	connect(ep, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(ep, tr("Edit Publisher"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	int pos = pTab->addTab(ep, tr("Edit Publisher"));
+	pTab->setCurrentIndex(pos);
+	pTab->setUpdatesEnabled(true);
 }
 
 void OperationsWidget::createViewPublisherDetails(Publisher *p)
 {
-	tabWidget->setUpdatesEnabled(false);
-	PublisherDetails *pd = new PublisherDetails(p, tabWidget);
-	int pos = tabWidget->addTab(pd, p->getName());
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	pTab->setUpdatesEnabled(false);
+	PublisherDetails *pd = new PublisherDetails(p, pTab);
+	int pos = pTab->addTab(pd, p->getName());
+	pTab->setCurrentIndex(pos);
+	pTab->setUpdatesEnabled(true);
 }
 
 void OperationsWidget::createAddAuthorForm()
 {
-	tabWidget->setUpdatesEnabled(false);
-	AddAuthor *aa = new AddAuthor(c, tabWidget);
+	aTab->setUpdatesEnabled(false);
+	AddAuthor *aa = new AddAuthor(c, aTab);
 	connect(c, SIGNAL(themesChanged()), aa, SLOT(populateThemesListWidget()));
 	connect(aa, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(aa, tr("Add Author"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	int pos = aTab->addTab(aa, tr("Add Author"));
+	aTab->setCurrentIndex(pos);
+	aTab->setUpdatesEnabled(true);
 }
 
 void OperationsWidget::createEditAuthorForm(Author *a)
 {
-	tabWidget->setUpdatesEnabled(false);
-	EditAuthor *ea = new EditAuthor(c, *a, tabWidget);
+	aTab->setUpdatesEnabled(false);
+	EditAuthor *ea = new EditAuthor(c, *a, aTab);
 	connect(c, SIGNAL(themesChanged()), ea, SLOT(populateThemesListWidget()));
 	connect(ea, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(ea, tr("Edit Author"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	int pos = aTab->addTab(ea, tr("Edit Author"));
+	aTab->setCurrentIndex(pos);
+	aTab->setUpdatesEnabled(true);
 }
 
 void OperationsWidget::createViewAuthorDetails(Author *a)
 {
-	tabWidget->setUpdatesEnabled(false);
-	AuthorDetails *ad = new AuthorDetails(a, tabWidget);
-	int pos = tabWidget->addTab(ad, a->getName());
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	aTab->setUpdatesEnabled(false);
+	AuthorDetails *ad = new AuthorDetails(a, aTab);
+	int pos = aTab->addTab(ad, a->getName());
+	aTab->setCurrentIndex(pos);
+	aTab->setUpdatesEnabled(true);
 }
 
 void OperationsWidget::createAddBookForm()
 {
-	tabWidget->setUpdatesEnabled(false);
-	AddBook *ab = new AddBook(c, tabWidget);
+	bTab->setUpdatesEnabled(false);
+	AddBook *ab = new AddBook(c, bTab);
 	connect(c, SIGNAL(themesChanged()), ab, SLOT(populateThemesListWidget()));
 	connect(c, SIGNAL(publishersChanged()), ab, SLOT(populatePublishersListWidget()));
 	connect(c, SIGNAL(authorsChanged()), ab, SLOT(populateAuthorsListWidget()));
 	connect(c, SIGNAL(authorsChanged()), ab, SLOT(populateTranslatorListWidget()));
 	connect(ab, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(ab, tr("Add Book"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	int pos = bTab->addTab(ab, tr("Add Book"));
+	bTab->setCurrentIndex(pos);
+	bTab->setUpdatesEnabled(true);
 }
 
 void OperationsWidget::createEditBookForm(Book *b)
 {
-	tabWidget->setUpdatesEnabled(false);
-	EditBook *eb = new EditBook(c, *b, tabWidget);
+	bTab->setUpdatesEnabled(false);
+	EditBook *eb = new EditBook(c, *b, bTab);
 	connect(c, SIGNAL(themesChanged()), eb, SLOT(populateThemesListWidget()));
 	connect(c, SIGNAL(publishersChanged()), eb, SLOT(populatePublishersListWidget()));
 	connect(c, SIGNAL(authorsChanged()), eb, SLOT(populateAuthorsListWidget()));
 	connect(c, SIGNAL(authorsChanged()), eb, SLOT(populateTranslatorListWidget()));
 	connect(eb, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	int pos = tabWidget->addTab(eb, tr("Edit Book"));
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	int pos = bTab->addTab(eb, tr("Edit Book"));
+	bTab->setCurrentIndex(pos);
+	bTab->setUpdatesEnabled(true);
 }
 
 void OperationsWidget::createViewBookDetails(Book* b)
 {
-	tabWidget->setUpdatesEnabled(false);
-	BookDetails *bd = new BookDetails(b, tabWidget);
+	bTab->setUpdatesEnabled(false);
+	BookDetails *bd = new BookDetails(b, bTab);
 	connect(bd, SIGNAL(authorClicked(QString)), this, SLOT(viewAuthor(QString)));
 	connect(bd, SIGNAL(publisherClicked(QString)), this, SLOT(viewPublisher(QString)));
-	int pos = tabWidget->addTab(bd, b->getTitle());
-	tabWidget->setCurrentIndex(pos);
-	tabWidget->setUpdatesEnabled(true);
+	int pos = bTab->addTab(bd, b->getTitle());
+	bTab->setCurrentIndex(pos);
+	bTab->setUpdatesEnabled(true);
 }
 
 void OperationsWidget::closeTab()
@@ -317,7 +374,14 @@ void OperationsWidget::closeTab()
 
 void OperationsWidget::closeTab(int index)
 {
-	delete tabWidget->widget(index);
+	if(section == Section::Book)
+		delete bTab->widget(index);
+	else if(section == Section::Author)
+		delete aTab->widget(index);
+	else if(section == Section::Publisher)
+		delete pTab->widget(index);
+	else if(section == Section::Theme)
+		delete tTab->widget(index);
 }
 
 void OperationsWidget::setSection(QAbstractButton *bt)
