@@ -898,7 +898,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/data/Publisher.cpp" line="34"/>
         <source>Logo</source>
-        <translation>Logotipo</translation>
+        <translation>Marca</translation>
     </message>
 </context>
 <context>
@@ -920,7 +920,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/gui/UI/PublisherDetails.ui" line="40"/>
         <source>Logo</source>
-        <translation>Logotipo</translation>
+        <translation>Marca</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/PublisherDetails.ui" line="47"/>
@@ -997,7 +997,7 @@ Fechando esta aba.</translation>
     <message>
         <location filename="../src/gui/UI/PublisherForm.ui" line="50"/>
         <source>Logo:</source>
-        <translation>Logotipo:</translation>
+        <translation>Marca:</translation>
     </message>
     <message>
         <location filename="../src/gui/UI/PublisherForm.ui" line="66"/>
