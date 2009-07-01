@@ -164,7 +164,11 @@ void BookForm::populateAuthorsListWidget()
 
 Author BookForm::getSelectedTranslator()
 {
-	return authorList.at(translatorComboBox->currentIndex());
+	int idx = translatorComboBox->currentIndex();
+	if(idx >= 0 && idx <= authorList.size())
+		return authorList.at(idx);
+	else
+		return Author();
 }
 
 ///@brief Fills translatorComboBox with all existing authors.
