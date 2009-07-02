@@ -22,3 +22,6 @@ if( WIN32 )
 endif( WIN32 )
 
 add_dependencies( plivros gui collection data )
+
+install( TARGETS plivros DESTINATION bin )
+install( FILES ${CMAKE_CURRENT_BINARY_DIR}/../imgs/imgs.big DESTINATION share/plivros )
