@@ -37,5 +37,9 @@ if( WIN32 )
 	add_definitions( -DWIN32 )
 endif( WIN32 )
 
+if( NOT DEFINED LIB_DIR )
+	set( LIB_DIR ${CMAKE_INSTALL_PREFIX}"/lib" )
+endif( NOT DEFINED LIB_DIR )
+
 add_subdirectory( imgs )
 add_subdirectory( src )
