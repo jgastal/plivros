@@ -25,6 +25,7 @@
 
 class Collection;
 class QButtonGroup;
+class QTabWidget;
 class DataObject;
 class Theme;
 class Publisher;
