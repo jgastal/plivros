@@ -38,7 +38,7 @@ class PropertiesGroupBox : public QGroupBox
 	public:
 		PropertiesGroupBox(QWidget *parent = 0);
 		void init(Section::section t);
-		unsigned short int getSelectedRadioButton();
+		unsigned short int getSelectedRadioButton() throw(std::out_of_range);
 
 	private:
 		QGridLayout grid;

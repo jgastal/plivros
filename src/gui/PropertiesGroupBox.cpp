@@ -26,7 +26,6 @@
 
 #include "PropertiesGroupBox.h"
 
-#include <exception>
 #include <stdexcept>
 
 #include "Book.h"
@@ -42,7 +41,7 @@ PropertiesGroupBox::PropertiesGroupBox(QWidget *parent) : QGroupBox(parent)
 	setLayout(&grid);
 }
 
-unsigned short int PropertiesGroupBox::getSelectedRadioButton()
+unsigned short int PropertiesGroupBox::getSelectedRadioButton() throw(std::out_of_range)
 {
 	unsigned short int ret = 0;
 	for(QList<QRadioButton*>::iterator it = radButtons.begin(); it != radButtons.end(); it++)

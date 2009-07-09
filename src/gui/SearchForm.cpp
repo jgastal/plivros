@@ -62,19 +62,6 @@ void SearchForm::search()
 	try
 	{
 		prop = propertiesGroupBox->getSelectedRadioButton();
-	}
-	catch(std::out_of_range ofr)
-	{
-		QMessageBox mb(this);
-		mb.setIcon(QMessageBox::Warning);
-		mb.setWindowTitle(tr("Warning"));
-		mb.setText(tr("You must select a property in which to search."));
-		mb.setStandardButtons(QMessageBox::Ok);
-		mb.exec();
-		return;
-	}
-	try
-	{
 		if(t == Section::Book)
 		{
 			QList<Book> bList = c->searchBooks(Book::getHeader(prop), searchLineEdit->text());
@@ -101,5 +88,15 @@ void SearchForm::search()
 		MessageBoxDataBaseException mbdbe(&dbe, this);
 		mbdbe.appendText("Unable to perform requested search.");
 		mbdbe.exec();
+	}
+	catch(std::out_of_range ofr)
+	{
+		QMessageBox mb(this);
+		mb.setIcon(QMessageBox::Warning);
+		mb.setWindowTitle(tr("Warning"));
+		mb.setText(tr("You must select a property in which to search."));
+		mb.setStandardButtons(QMessageBox::Ok);
+		mb.exec();
+		return;
 	}
 }
