@@ -21,6 +21,7 @@
 #include <QWidget>
 #include <QString>
 #include <QList>
+#include <QLocale>
 
 PublisherDetails::PublisherDetails(Publisher *p, QWidget* parent): QWidget(parent)
 {

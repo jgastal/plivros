@@ -27,6 +27,7 @@
 #ifndef PROPERTIESGROUPBOX_H
 #define PROPERTIESGROUPBOX_H
 
+#include <stdexcept>
 #include <QGroupBox>
 #include <QGridLayout>
 #include <QRadioButton>
@@ -39,6 +40,7 @@ class PropertiesGroupBox : public QGroupBox
 		PropertiesGroupBox(QWidget *parent = 0);
 		void init(Section::section t);
 		unsigned short int getSelectedRadioButton() throw(std::out_of_range);
+		void setSelectedRadioButton(unsigned short int idx) throw (std::out_of_range);
 
 	private:
 		QGridLayout grid;

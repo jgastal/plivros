@@ -53,6 +53,19 @@ unsigned short int PropertiesGroupBox::getSelectedRadioButton() throw(std::out_o
 	throw std::out_of_range("No radio button selected.");
 }
 
+void PropertiesGroupBox::setSelectedRadioButton(unsigned short int idx) throw(std::out_of_range)
+{
+	for(int i = 0; i < radButtons.size(); i++)
+	{
+		if(i == idx)
+		{
+			radButtons.at(i)->setChecked(true);
+			return;
+		}
+	}
+	throw std::out_of_range("No radio button selected.");
+}
+
 void PropertiesGroupBox::init(Section::section t)
 {
 	QStringList props;

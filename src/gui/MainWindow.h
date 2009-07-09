@@ -51,6 +51,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 	protected slots:
 		void createOpsWidget(Section::section s);
 		void home();
+		void quickSearch();
 
 	private:
 		Collection *c;

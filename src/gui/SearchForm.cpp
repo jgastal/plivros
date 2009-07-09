@@ -100,3 +100,23 @@ void SearchForm::search()
 		return;
 	}
 }
+
+void SearchForm::search(unsigned short int where, QString what)
+{
+	try
+	{
+		propertiesGroupBox->setSelectedRadioButton(where);
+		searchLineEdit->setText(what);
+		search();
+	}
+	catch(std::out_of_range e)
+	{
+		QMessageBox mb(this);
+		mb.setIcon(QMessageBox::Warning);
+		mb.setWindowTitle(tr("Warning"));
+		mb.setText(tr("Property selection error."));
+		mb.setStandardButtons(QMessageBox::Ok);
+		mb.exec();
+		return;
+	}
+}

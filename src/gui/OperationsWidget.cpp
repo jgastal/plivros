@@ -248,6 +248,13 @@ void OperationsWidget::search()
 	}
 }
 
+void OperationsWidget::searchBook(unsigned short int idx, QString str)
+{
+	search();
+	SearchForm *sf = (SearchForm*)bTab->currentWidget();
+	sf->search(idx, str);
+}
+
 ///@brief Adds a tab and creates a form to add a theme in it.
 void OperationsWidget::createAddThemeForm()
 {

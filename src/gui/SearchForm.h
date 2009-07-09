@@ -46,6 +46,7 @@ class SearchForm : public QWidget, private Ui::SearchForm
 
 	public slots:
 		void search();
+		void search(unsigned short int where, QString what);
 
 	signals:
 		void closeRequested();

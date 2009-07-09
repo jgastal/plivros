@@ -103,7 +103,7 @@ p, li { white-space: pre-wrap; }
            <widget class="QLineEdit" name="searchLineEdit"/>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="searchPushButton">
             <property name="text">
              <string>Go</string>
             </property>
@@ -239,6 +239,22 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel">
      <x>259</x>
      <y>52</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>searchLineEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>searchPushButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>148</x>
+     <y>386</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>198</x>
+     <y>388</y>
     </hint>
    </hints>
   </connection>

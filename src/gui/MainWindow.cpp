@@ -31,6 +31,7 @@
 #include "CategoryFrame.h"
 #include "OperationsWidget.h"
 #include "Section.h"
+#include "Book.h"
 
 #include "MainWindow.h"
 
@@ -52,6 +53,8 @@ MainWindow::MainWindow(QString userName, QMainWindow *parent) : QMainWindow(pare
 	cf = new CategoryFrame(displayWidget);
 	connect(cf, SIGNAL(clicked(Section::section)), this, SLOT(createOpsWidget(Section::section)));
 	displayWidget->layout()->addWidget(cf);
+
+	connect(searchPushButton, SIGNAL(pressed()), this, SLOT(quickSearch()));
 }
 
 MainWindow::~MainWindow()
@@ -81,4 +84,10 @@ void MainWindow::home()
 	if(ow)
 		ow->hide();
 	cf->show();
+}
+
+void MainWindow::quickSearch()
+{
+	createOpsWidget(Section::Book);
+	ow->searchBook(Book::b_title, searchLineEdit->text());
 }

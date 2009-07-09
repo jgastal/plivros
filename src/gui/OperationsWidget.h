@@ -56,6 +56,7 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		void erase(DataObject*);
 		void view(DataObject*);
 		void search();
+		void searchBook(unsigned short int idx, QString what);
 		void setSectionButton();
 		void viewAuthor(QString url);
 		void viewPublisher(QString url);
