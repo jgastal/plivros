@@ -223,24 +223,28 @@ void OperationsWidget::search()
 		sf->setParent(bTab);
 		connect(c, SIGNAL(booksChanged()), sf, SLOT(search()));
 		pos = bTab->addTab(sf, tr("Search Books"));
+		bTab->setCurrentIndex(pos);
 	}
 	else if(section == Section::Author)
 	{
 		sf->setParent(aTab);
 		connect(c, SIGNAL(authorsChanged()), sf, SLOT(search()));
 		pos = aTab->addTab(sf, tr("Search Authors"));
+		aTab->setCurrentIndex(pos);
 	}
 	else if(section == Section::Publisher)
 	{
 		sf->setParent(pTab);
 		connect(c, SIGNAL(publishersChanged()), sf, SLOT(search()));
 		pos = pTab->addTab(sf, tr("Search Publishers"));
+		pTab->setCurrentIndex(pos);
 	}
 	else if(section == Section::Theme)
 	{
 		sf->setParent(tTab);
 		connect(c, SIGNAL(themesChanged()), sf, SLOT(search()));
 		pos = tTab->addTab(sf, tr("Search Themes"));
+		tTab->setCurrentIndex(pos);
 	}
 }
 
