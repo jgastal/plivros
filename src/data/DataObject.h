@@ -49,9 +49,6 @@ class DataObject
 		void setDescription(const QString description);
 		virtual QStringList getProperties() const = 0;
 
-		static QStringList headers;
-		static unsigned short int propertiesCount;
-
 	protected:
 		unsigned int id;
 		QString description;

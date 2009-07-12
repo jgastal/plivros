@@ -28,9 +28,6 @@
 
 #include <QString>
 
-unsigned short int DataObject::propertiesCount = 0;
-QStringList DataObject::headers = QStringList();
-
 DataObject::DataObject(const QString desc, const unsigned int id)
 {
 	setDescription(desc);
