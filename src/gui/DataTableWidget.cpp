@@ -46,32 +46,32 @@ DataTableWidget::~DataTableWidget()
 
 void DataTableWidget::populateTable(QList<Book> dataList)
 {
-	setColumnCount(Book::propertiesCount);
-	setHorizontalHeaderLabels(Book::headers);
+	setColumnCount(Book::getHeaders().size());
+	setHorizontalHeaderLabels(Book::getHeaders());
 	loop(dataList);
 	addAction(view_act);
 }
 
 void DataTableWidget::populateTable(QList<Author> dataList)
 {
-	setColumnCount(Author::propertiesCount);
-	setHorizontalHeaderLabels(Author::headers);
+	setColumnCount(Author::getHeaders().size());
+	setHorizontalHeaderLabels(Author::getHeaders());
 	loop(dataList);
 	addAction(view_act);
 }
 
 void DataTableWidget::populateTable(QList<Publisher> dataList)
 {
-	setColumnCount(Publisher::propertiesCount);
-	setHorizontalHeaderLabels(Publisher::headers);
+	setColumnCount(Publisher::getHeaders().size());
+	setHorizontalHeaderLabels(Publisher::getHeaders());
 	loop(dataList);
 	addAction(view_act);
 }
 
 void DataTableWidget::populateTable(QList<Theme> dataList)
 {
-	setColumnCount(Theme::propertiesCount);
-	setHorizontalHeaderLabels(Theme::headers);
+	setColumnCount(Theme::getHeaders().size());
+	setHorizontalHeaderLabels(Theme::getHeaders());
 	loop(dataList);
 }
 

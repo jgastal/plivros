@@ -25,13 +25,19 @@
 
 #include <QString>
 #include <QList>
+#include <QCoreApplication>
 
 #include "Publisher.h"
 #include "Theme.h"
 #include "DataObject.h"
 
-const QStringList Publisher::headers = QStringList() << QT_TR_NOOP("Name") <<
-QT_TR_NOOP("Description") << QT_TR_NOOP("Critique") << QT_TR_NOOP("Logo") << QT_TR_NOOP("Themes");
+const char* Publisher::headers[] = {
+	QT_TRANSLATE_NOOP("Publisher", "Name"),
+	QT_TRANSLATE_NOOP("Publisher", "Description"),
+	QT_TRANSLATE_NOOP("Publisher", "Critique"),
+	QT_TRANSLATE_NOOP("Publisher", "Logo"),
+	QT_TRANSLATE_NOOP("Publisher", "Themes")
+};
 const unsigned short int Publisher::propertiesCount = 5;
 
 Publisher::Publisher() : DataObject("", 0)
@@ -132,9 +138,10 @@ Publisher::publisher_field Publisher::getHeader(unsigned short int i)
 	}
 }
 
-/*void Publisher::initHeaders()
+QStringList Publisher::getHeaders()
 {
-	Publisher::headers << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
-	Publisher::headers << QT_TR_NOOP("Critique") << QT_TR_NOOP("Logo") << QT_TR_NOOP("Themes");
-	Publisher::propertiesCount = 5;
-}*/
+	QStringList ret;
+	for(int i = 0; i < propertiesCount; i++)
+		ret << QCoreApplication::translate("Publisher", headers[i]);
+	return ret;
+}

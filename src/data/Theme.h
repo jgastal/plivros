@@ -47,11 +47,12 @@ class Theme : public DataObject
 			t_description
 		};
 		static theme_field getHeader(unsigned short int i);
-		static const QStringList headers;
-		static const unsigned short int propertiesCount;
+		static QStringList getHeaders();
 
 	private:
 		QString name;
+		static const char* headers[];
+		static const unsigned short int propertiesCount;
 } ;
 
 #endif /* THEME_H_ */

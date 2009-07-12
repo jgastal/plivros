@@ -36,37 +36,37 @@
 <context>
     <name>Author</name>
     <message>
-        <location filename="../src/data/Author.cpp" line="33"/>
+        <location filename="../src/data/Author.cpp" line="34"/>
         <source>First Name</source>
         <translation>Primeiro nome</translation>
     </message>
     <message>
-        <location filename="../src/data/Author.cpp" line="34"/>
+        <location filename="../src/data/Author.cpp" line="35"/>
         <source>Last Name</source>
         <translation>Sobrenome</translation>
     </message>
     <message>
-        <location filename="../src/data/Author.cpp" line="34"/>
+        <location filename="../src/data/Author.cpp" line="36"/>
         <source>Description</source>
         <translation>Descrição</translation>
     </message>
     <message>
-        <location filename="../src/data/Author.cpp" line="34"/>
+        <location filename="../src/data/Author.cpp" line="37"/>
         <source>Critique</source>
         <translation>Critica</translation>
     </message>
     <message>
-        <location filename="../src/data/Author.cpp" line="35"/>
+        <location filename="../src/data/Author.cpp" line="40"/>
         <source>Themes</source>
         <translation>Temas</translation>
     </message>
     <message>
-        <location filename="../src/data/Author.cpp" line="35"/>
+        <location filename="../src/data/Author.cpp" line="38"/>
         <source>Rating</source>
         <translation>Classificação</translation>
     </message>
     <message>
-        <location filename="../src/data/Author.cpp" line="35"/>
+        <location filename="../src/data/Author.cpp" line="39"/>
         <source>Picture</source>
         <translation>Foto</translation>
     </message>
@@ -200,72 +200,72 @@ Fechando esta aba.</translation>
 <context>
     <name>Book</name>
     <message>
-        <location filename="../src/data/Book.cpp" line="34"/>
+        <location filename="../src/data/Book.cpp" line="35"/>
         <source>ISBN</source>
         <translation>ISBN</translation>
     </message>
     <message>
-        <location filename="../src/data/Book.cpp" line="35"/>
+        <location filename="../src/data/Book.cpp" line="36"/>
         <source>Title</source>
         <translation>Titulo</translation>
     </message>
     <message>
-        <location filename="../src/data/Book.cpp" line="35"/>
+        <location filename="../src/data/Book.cpp" line="37"/>
         <source>Edition</source>
         <translation>Edição</translation>
     </message>
     <message>
-        <location filename="../src/data/Book.cpp" line="35"/>
+        <location filename="../src/data/Book.cpp" line="38"/>
         <source>Critique</source>
         <translation>Critica</translation>
     </message>
     <message>
-        <location filename="../src/data/Book.cpp" line="36"/>
+        <location filename="../src/data/Book.cpp" line="39"/>
         <source>Description</source>
         <translation>Descrição</translation>
     </message>
     <message>
-        <location filename="../src/data/Book.cpp" line="36"/>
+        <location filename="../src/data/Book.cpp" line="40"/>
         <source>Rating</source>
         <translation>Classificação</translation>
     </message>
     <message>
-        <location filename="../src/data/Book.cpp" line="36"/>
+        <location filename="../src/data/Book.cpp" line="41"/>
         <source>Cover</source>
         <translation>Capa</translation>
     </message>
     <message>
-        <location filename="../src/data/Book.cpp" line="37"/>
+        <location filename="../src/data/Book.cpp" line="42"/>
         <source>E-Book</source>
         <translation>E-Livro</translation>
     </message>
     <message>
-        <location filename="../src/data/Book.cpp" line="37"/>
+        <location filename="../src/data/Book.cpp" line="43"/>
         <source>Publishing Date</source>
         <translation>Data de publicação</translation>
     </message>
     <message>
-        <location filename="../src/data/Book.cpp" line="37"/>
+        <location filename="../src/data/Book.cpp" line="44"/>
         <source>U.D.C.</source>
         <translation>C.D.U.</translation>
     </message>
     <message>
-        <location filename="../src/data/Book.cpp" line="38"/>
+        <location filename="../src/data/Book.cpp" line="45"/>
         <source>Authors</source>
         <translation>Autores</translation>
     </message>
     <message>
-        <location filename="../src/data/Book.cpp" line="38"/>
+        <location filename="../src/data/Book.cpp" line="47"/>
         <source>Publishers</source>
         <translation>Editoras</translation>
     </message>
     <message>
-        <location filename="../src/data/Book.cpp" line="38"/>
+        <location filename="../src/data/Book.cpp" line="46"/>
         <source>Translator</source>
         <translation>Tradutor</translation>
     </message>
     <message>
-        <location filename="../src/data/Book.cpp" line="39"/>
+        <location filename="../src/data/Book.cpp" line="48"/>
         <source>Themes</source>
         <translation>Temas</translation>
     </message>
@@ -398,7 +398,7 @@ Closing this tab.</source>
 Fechando esta aba.</translation>
     </message>
     <message>
-        <location filename="../src/gui/BookForm.cpp" line="188"/>
+        <location filename="../src/gui/BookForm.cpp" line="192"/>
         <source>Couldn&apos;t populate list of translators.
 Closing this tab.</source>
         <translation>Não foi possivel popular a lista de tradutores.
@@ -548,17 +548,17 @@ Fechando esta aba.</translation>
         <translation type="obsolete">Temas</translation>
     </message>
     <message>
-        <location filename="../src/gui/DataTableWidget.cpp" line="117"/>
+        <location filename="../src/gui/DataTableWidget.cpp" line="129"/>
         <source>Edit</source>
         <translation>Editar</translation>
     </message>
     <message>
-        <location filename="../src/gui/DataTableWidget.cpp" line="119"/>
+        <location filename="../src/gui/DataTableWidget.cpp" line="131"/>
         <source>Delete</source>
         <translation>Apagar</translation>
     </message>
     <message>
-        <location filename="../src/gui/DataTableWidget.cpp" line="121"/>
+        <location filename="../src/gui/DataTableWidget.cpp" line="133"/>
         <source>View details</source>
         <translation>Ver detalhes</translation>
     </message>
@@ -602,64 +602,60 @@ Fechando esta aba.</translation>
         <translation type="obsolete">Janela Principal</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="14"/>
+        <location filename="../src/gui/UI/MainWindow.ui" line="20"/>
         <source>Parabola Biblioteca</source>
         <translation>Parabola Biblioteca</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="113"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;internal:/user&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ffffff;&quot;&gt;Change User&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;internal:/user&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ffffff;&quot;&gt;Trocar de usuario&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="124"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;internal:/db&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ffffff;&quot;&gt;DataBase&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;internal:/db&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ffffff;&quot;&gt;Banco de dados&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="135"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;internal:/users&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ffffff;&quot;&gt;Manage Users&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;internal:/users&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ffffff;&quot;&gt;Gerenciar Usuarios&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="146"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;internal:/help&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ffffff;&quot;&gt;Help&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;internal:/help&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ffffff;&quot;&gt;Ajuda&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="157"/>
+        <location filename="../src/gui/UI/MainWindow.ui" line="132"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -672,12 +668,17 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;internal:/quit&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ffffff;&quot;&gt;Sair&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="99"/>
+        <location filename="../src/gui/UI/MainWindow.ui" line="118"/>
         <source>Quick Search</source>
         <translation>Busca rapida</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/MainWindow.ui" line="203"/>
+        <location filename="../src/gui/UI/MainWindow.ui" line="108"/>
+        <source>Go</source>
+        <translation>Ir</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/UI/MainWindow.ui" line="190"/>
         <source>Welcome &lt;user&gt;</source>
         <translation>Bem vindo &lt;user&gt;</translation>
     </message>
@@ -753,62 +754,62 @@ Codigo de erro: %3</translation>
 <context>
     <name>OperationsWidget</name>
     <message>
-        <location filename="../src/gui/OperationsWidget.cpp" line="196"/>
+        <location filename="../src/gui/OperationsWidget.cpp" line="264"/>
         <source>Add Theme</source>
         <translation>Adicionar Tema</translation>
     </message>
     <message>
-        <location filename="../src/gui/OperationsWidget.cpp" line="183"/>
+        <location filename="../src/gui/OperationsWidget.cpp" line="246"/>
         <source>Search Themes</source>
         <translation>Procurar Temas</translation>
     </message>
     <message>
-        <location filename="../src/gui/OperationsWidget.cpp" line="206"/>
+        <location filename="../src/gui/OperationsWidget.cpp" line="274"/>
         <source>Edit Theme</source>
         <translation>Editar Tema</translation>
     </message>
     <message>
-        <location filename="../src/gui/OperationsWidget.cpp" line="218"/>
+        <location filename="../src/gui/OperationsWidget.cpp" line="286"/>
         <source>Add Publisher</source>
         <translation>Adicionar Editora</translation>
     </message>
     <message>
-        <location filename="../src/gui/OperationsWidget.cpp" line="297"/>
+        <location filename="../src/gui/OperationsWidget.cpp" line="365"/>
         <source>Edit Book</source>
         <translation>Editar Livro</translation>
     </message>
     <message>
-        <location filename="../src/gui/OperationsWidget.cpp" line="178"/>
+        <location filename="../src/gui/OperationsWidget.cpp" line="239"/>
         <source>Search Publishers</source>
         <translation>Procurar Editoras</translation>
     </message>
     <message>
-        <location filename="../src/gui/OperationsWidget.cpp" line="229"/>
+        <location filename="../src/gui/OperationsWidget.cpp" line="297"/>
         <source>Edit Publisher</source>
         <translation>Editar Editora</translation>
     </message>
     <message>
-        <location filename="../src/gui/OperationsWidget.cpp" line="249"/>
+        <location filename="../src/gui/OperationsWidget.cpp" line="317"/>
         <source>Add Author</source>
         <translation>Adicionar Autor</translation>
     </message>
     <message>
-        <location filename="../src/gui/OperationsWidget.cpp" line="173"/>
+        <location filename="../src/gui/OperationsWidget.cpp" line="232"/>
         <source>Search Authors</source>
         <translation>Procurar Autor</translation>
     </message>
     <message>
-        <location filename="../src/gui/OperationsWidget.cpp" line="260"/>
+        <location filename="../src/gui/OperationsWidget.cpp" line="328"/>
         <source>Edit Author</source>
         <translation>Editar Autor</translation>
     </message>
     <message>
-        <location filename="../src/gui/OperationsWidget.cpp" line="283"/>
+        <location filename="../src/gui/OperationsWidget.cpp" line="351"/>
         <source>Add Book</source>
         <translation>Adicionar Livro</translation>
     </message>
     <message>
-        <location filename="../src/gui/OperationsWidget.cpp" line="168"/>
+        <location filename="../src/gui/OperationsWidget.cpp" line="225"/>
         <source>Search Books</source>
         <translation>Procurar Livros</translation>
     </message>
@@ -855,7 +856,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;internal:/add&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ffffff;&quot;&gt;Adicionar&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/OperationsWidget.ui" line="174"/>
+        <location filename="../src/gui/UI/OperationsWidget.ui" line="156"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -868,35 +869,57 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;internal:/search&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ffffff;&quot;&gt;Procurar&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/gui/UI/OperationsWidget.ui" line="154"/>
         <source>Tab 1</source>
-        <translation>Aba 1</translation>
+        <translation type="obsolete">Aba 1</translation>
+    </message>
+</context>
+<context>
+    <name>PropertiesGroupBox</name>
+    <message>
+        <location filename="../src/gui/PropertiesGroupBox.cpp" line="78"/>
+        <source>Book Properties</source>
+        <translation>Campos de Livro</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/PropertiesGroupBox.cpp" line="84"/>
+        <source>Author Properties</source>
+        <translation>Campos de Autor</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/PropertiesGroupBox.cpp" line="90"/>
+        <source>Publisher Properties</source>
+        <translation>Campos de Editora</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/PropertiesGroupBox.cpp" line="96"/>
+        <source>Theme Properties</source>
+        <translation>Campos de Temas</translation>
     </message>
 </context>
 <context>
     <name>Publisher</name>
     <message>
-        <location filename="../src/data/Publisher.cpp" line="33"/>
+        <location filename="../src/data/Publisher.cpp" line="34"/>
         <source>Name</source>
         <translation>Nome</translation>
     </message>
     <message>
-        <location filename="../src/data/Publisher.cpp" line="34"/>
+        <location filename="../src/data/Publisher.cpp" line="38"/>
         <source>Themes</source>
         <translation>Temas</translation>
     </message>
     <message>
-        <location filename="../src/data/Publisher.cpp" line="34"/>
+        <location filename="../src/data/Publisher.cpp" line="35"/>
         <source>Description</source>
         <translation>Descrição</translation>
     </message>
     <message>
-        <location filename="../src/data/Publisher.cpp" line="34"/>
+        <location filename="../src/data/Publisher.cpp" line="36"/>
         <source>Critique</source>
         <translation>Critica</translation>
     </message>
     <message>
-        <location filename="../src/data/Publisher.cpp" line="34"/>
+        <location filename="../src/data/Publisher.cpp" line="37"/>
         <source>Logo</source>
         <translation>Marca</translation>
     </message>
@@ -1023,14 +1046,20 @@ Fechando esta aba.</translation>
 <context>
     <name>SearchForm</name>
     <message>
-        <location filename="../src/gui/SearchForm.cpp" line="70"/>
+        <location filename="../src/gui/SearchForm.cpp" line="96"/>
+        <location filename="../src/gui/SearchForm.cpp" line="116"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
     <message>
-        <location filename="../src/gui/SearchForm.cpp" line="71"/>
+        <location filename="../src/gui/SearchForm.cpp" line="97"/>
         <source>You must select a property in which to search.</source>
         <translation>Você deve escolher um campo no qual fazer a busca.</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/SearchForm.cpp" line="117"/>
+        <source>Property selection error.</source>
+        <translation>Erro na seleção do campo.</translation>
     </message>
     <message>
         <source>Form</source>
@@ -1060,12 +1089,12 @@ Fechando esta aba.</translation>
 <context>
     <name>Theme</name>
     <message>
-        <location filename="../src/data/Theme.cpp" line="31"/>
+        <location filename="../src/data/Theme.cpp" line="32"/>
         <source>Name</source>
         <translation>Nome</translation>
     </message>
     <message>
-        <location filename="../src/data/Theme.cpp" line="31"/>
+        <location filename="../src/data/Theme.cpp" line="33"/>
         <source>Description</source>
         <translation>Descrição</translation>
     </message>

@@ -36,6 +36,8 @@
 
 class PropertiesGroupBox : public QGroupBox
 {
+	Q_OBJECT
+
 	public:
 		PropertiesGroupBox(QWidget *parent = 0);
 		void init(Section::section t);

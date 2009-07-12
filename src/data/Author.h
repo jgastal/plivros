@@ -68,8 +68,7 @@ class Author : public DataObject
 			a_themes
 		};
 		static author_field getHeader(unsigned short int i);
-		static const QStringList headers;
-		static const unsigned short int propertiesCount;
+		static QStringList getHeaders();
 
 	private:
 		QString firstName;
@@ -78,6 +77,8 @@ class Author : public DataObject
 		unsigned short int rating;
 		QString picture; //path to picture of author
 		QList<Theme> themes; //List of themes
+		static const char* headers[];
+		static const unsigned short int propertiesCount;
 };
 
 #endif /* AUTHOR_H_ */

@@ -24,11 +24,15 @@
  */
 
 #include <QString>
+#include <QCoreApplication>
 
 #include "Theme.h"
 #include "DataObject.h"
 
-const QStringList Theme::headers = QStringList() << QT_TR_NOOP("Name") << QT_TR_NOOP("Description");
+const char *Theme::headers[] = {
+	QT_TRANSLATE_NOOP("Theme", "Name"),
+	QT_TRANSLATE_NOOP("Theme", "Description")
+};
 const unsigned short int Theme::propertiesCount = 2;
 
 Theme::Theme() : DataObject("", 0)
@@ -74,4 +78,12 @@ Theme::theme_field Theme::getHeader(unsigned short int i)
 		case t_description:
 			return t_description;
 	}
+}
+
+QStringList Theme::getHeaders()
+{
+	QStringList ret;
+	for(int i = 0; i < propertiesCount; i++)
+		ret << QCoreApplication::translate("Theme", headers[i]);
+	return ret;
 }

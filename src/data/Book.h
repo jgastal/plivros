@@ -95,8 +95,7 @@ class Book : public DataObject
 			b_themes
 		};
 		static book_field getHeader(unsigned short int i);
-		static const QStringList headers;
-		static const unsigned short int propertiesCount;
+		static QStringList getHeaders();
 
 	private:
 		char isbn[14]; //International Standard Book Number + '/0'
@@ -112,6 +111,8 @@ class Book : public DataObject
 		Author translator;
 		QList<Publisher> publishers;
 		QList<Theme> themes;
+		static const char *headers[];
+		static const unsigned short int propertiesCount;
 };
 
 #endif /* BOOK_H_ */

@@ -71,23 +71,23 @@ void PropertiesGroupBox::init(Section::section t)
 	QStringList props;
 	if(t == Section::Book)
 	{
-		setTitle("Book Properties");
-		props = Book::headers;
+		setTitle(tr("Book Properties"));
+		props = Book::getHeaders();
 	}
 	else if(t == Section::Author)
 	{
-		setTitle("Author Properties");
-		props = Author::headers;
+		setTitle(tr("Author Properties"));
+		props = Author::getHeaders();
 	}
 	else if(t == Section::Publisher)
 	{
-		setTitle("Publisher Properties");
-		props = Publisher::headers;
+		setTitle(tr("Publisher Properties"));
+		props = Publisher::getHeaders();
 	}
 	else if(t == Section::Theme)
 	{
-		setTitle("Theme Properties");
-		props = Theme::headers;
+		setTitle(tr("Theme Properties"));
+		props = Theme::getHeaders();
 	}
 
 	//Creates radio buttons

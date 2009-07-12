@@ -25,14 +25,21 @@
 
 #include <QString>
 #include <QList>
+#include <QCoreApplication>
 
 #include "Author.h"
 #include "Theme.h"
 #include "DataObject.h"
 
-const QStringList Author::headers = QStringList() << QT_TR_NOOP("First Name") <<
-QT_TR_NOOP("Last Name") << QT_TR_NOOP("Description") << QT_TR_NOOP("Critique") <<
-QT_TR_NOOP("Rating") << QT_TR_NOOP("Picture") << QT_TR_NOOP("Themes");
+const char* Author::headers[] = {
+	QT_TRANSLATE_NOOP("Author", "First Name"),
+	QT_TRANSLATE_NOOP("Author", "Last Name"),
+	QT_TRANSLATE_NOOP("Author", "Description"),
+	QT_TRANSLATE_NOOP("Author", "Critique"),
+	QT_TRANSLATE_NOOP("Author", "Rating"),
+	QT_TRANSLATE_NOOP("Author", "Picture"),
+	QT_TRANSLATE_NOOP("Author", "Themes")
+};
 const unsigned short int Author::propertiesCount = 7;
 
 Author::Author() : DataObject("", 0)
@@ -166,4 +173,12 @@ Author::author_field Author::getHeader(unsigned short int i)
 		case a_themes:
 			return a_themes;
 	}
+}
+
+QStringList Author::getHeaders()
+{
+	QStringList ret;
+	for(int i = 0; i < propertiesCount; i++)
+		ret << QCoreApplication::translate("Author", headers[i]);
+	return ret;
 }

@@ -27,16 +27,27 @@
 #include <QString>
 #include <QList>
 #include <QStringList>
+#include <QCoreApplication>
 
 #include "Data.h"
 #include "DataObject.h"
 
-const QStringList Book::headers = QStringList() << QT_TR_NOOP("ISBN") <<
-QT_TR_NOOP("Title") << QT_TR_NOOP("Edition") << QT_TR_NOOP("Critique") <<
-QT_TR_NOOP("Description") << QT_TR_NOOP("Rating") << QT_TR_NOOP("Cover") <<
-QT_TR_NOOP("E-Book") << QT_TR_NOOP("Publishing Date") << QT_TR_NOOP("U.D.C.") <<
-QT_TR_NOOP("Authors") << QT_TR_NOOP("Translator") << QT_TR_NOOP("Publishers") <<
-QT_TR_NOOP("Themes");
+const char *Book::headers[] = {
+	QT_TRANSLATE_NOOP("Book", "ISBN"),
+	QT_TRANSLATE_NOOP("Book", "Title"),
+	QT_TRANSLATE_NOOP("Book", "Edition"),
+	QT_TRANSLATE_NOOP("Book", "Critique"),
+	QT_TRANSLATE_NOOP("Book", "Description"),
+	QT_TRANSLATE_NOOP("Book", "Rating"),
+	QT_TRANSLATE_NOOP("Book", "Cover"),
+	QT_TRANSLATE_NOOP("Book", "E-Book"),
+	QT_TRANSLATE_NOOP("Book", "Publishing Date"),
+	QT_TRANSLATE_NOOP("Book", "U.D.C."),
+	QT_TRANSLATE_NOOP("Book", "Authors"),
+	QT_TRANSLATE_NOOP("Book", "Translator"),
+	QT_TRANSLATE_NOOP("Book", "Publishers"),
+	QT_TRANSLATE_NOOP("Book", "Themes")
+};
 const unsigned short int Book::propertiesCount = 14;
 
 Book::Book() : DataObject("", 0)
@@ -301,4 +312,12 @@ Book::book_field Book::getHeader(unsigned short int i)
 		case b_themes:
 			return b_themes;
 	}
+}
+
+QStringList Book::getHeaders()
+{
+	QStringList ret;
+	for(int i = 0; i < propertiesCount; i++)
+		ret << QCoreApplication::translate("Book", headers[i]);
+	return ret;
 }

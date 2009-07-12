@@ -60,14 +60,15 @@ class Publisher : public DataObject
 			p_themes
 		};
 		static publisher_field getHeader(unsigned short int i);
-		static const QStringList headers;
-		static const unsigned short int propertiesCount;
+		static QStringList getHeaders();
 
 	private:
 		QString name;
 		QString critique;
 		QString logo;
 		QList<Theme> themes;
+		static const char* headers[];
+		static const unsigned short int propertiesCount;
 };
 
 #endif /* PUBLISHER_H_ */
