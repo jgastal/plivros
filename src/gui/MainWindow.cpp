@@ -36,11 +36,12 @@
 #include "MainWindow.h"
 
 #include "Collection.h"
+#include "OS.h"
 
 ///@brief Constructor. Creates a collection, setups the gui and connects slots and signals.
 MainWindow::MainWindow(QString userName, QMainWindow *parent) : QMainWindow(parent)
 {
-	c = new Collection(userName);
+	c = new Collection(userName, QString(dbPath).append(userName).append(".db"));
 	setupUi(this);
 
 	connect(quitLabel, SIGNAL(linkActivated(QString)), this, SLOT(close()));

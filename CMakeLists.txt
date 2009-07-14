@@ -17,12 +17,8 @@ set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR} )
 find_package( DataBaseWrapper REQUIRED )
 include_directories( ${DBWRAPPER_INCLUDE_DIR} )
 
-# Path to RatingWidget headers, CHANGE THIS TO SOMETHING BETTER
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../RatingWidgetPlugin )
-link_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../RatingWidgetPlugin )
-# Path to HoverPushButton headers, CHANGE THIS TO SOMETHING BETTER
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../HoverPushButton )
-link_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../HoverPushButton )
+#lib dirs for HoverPushButton and RatingWidgetPlugin
+link_directories( ${QT_PLUGINS_DIR}/designer )
 
 if( DEBUG )
 	add_definitions( -O0 -g3 )
@@ -38,8 +34,9 @@ if( WIN32 )
 endif( WIN32 )
 
 if( NOT DEFINED LIB_DIR )
-	set( LIB_DIR ${CMAKE_INSTALL_PREFIX}"/lib" )
+	set( LIB_DIR "${CMAKE_INSTALL_PREFIX}/lib" )
 endif( NOT DEFINED LIB_DIR )
 
 add_subdirectory( imgs )
+add_subdirectory( ts )
 add_subdirectory( src )

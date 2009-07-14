@@ -2,6 +2,7 @@
 link_directories( ${DBWRAPPER_LINK_DIR} )
 
 #includes from this project
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 include_directories( "${CMAKE_CURRENT_SOURCE_DIR}/data" )
 include_directories( "${CMAKE_CURRENT_SOURCE_DIR}/core" )
 include_directories( "${CMAKE_CURRENT_SOURCE_DIR}/gui" )
@@ -15,7 +16,7 @@ add_subdirectory( gui )
 add_subdirectory( core )
 add_subdirectory( data )
 
-add_executable( plivros main.cpp )
+add_executable( plivros main.cpp OS.h )
 target_link_libraries( plivros collection data gui ${QT_LIBRARIES} )
 if( WIN32 )
 	SET_TARGET_PROPERTIES( plivros PROPERTIES LINK_FLAGS -Wl,-subsystem,windows )
@@ -24,4 +25,3 @@ endif( WIN32 )
 add_dependencies( plivros gui collection data )
 
 install( TARGETS plivros DESTINATION bin )
-install( FILES ${CMAKE_CURRENT_BINARY_DIR}/../imgs/imgs.big DESTINATION share/plivros )

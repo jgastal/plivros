@@ -29,37 +29,14 @@
 #include <QTranslator>
 #include <QLocale>
 #include <QResource>
-#include <QDir>
 
 #include "MainWindow.h"
-
-#ifdef WIN32
-	#include <windows.h>
-	static QString getUName()
-	{
-		char uname[256];
-		DWORD nUserName = sizeof(uname);
-		GetUserName(uname, &nUserName);
-		return QString(uname);
-	}
-	static const QString USERNAME(getUName());
-#else //*nix
-	#include <cstdlib>
-	static const QString USERNAME = getenv("USER");
-#endif //WIN32
+#include "OS.h"
 
 int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);
 	QTranslator translator;
-
-#ifdef WIN32
-	QDir::addSearchPath("resource", QCoreApplication::applicationDirPath()+"/imgs/");
-	QDir::addSearchPath("fonts", QCoreApplication::applicationDirPath()+"/fonts/");
-#else
-	QDir::addSearchPath("resource", "/usr/share/plivros/");
-	QDir::addSearchPath("fonts", "/usr/share/fonts/misc/");
-#endif
 
 	//Makes these fonts available for the program
 	//Zurich BT, Zurich Lt BT, Arno Pro
@@ -71,7 +48,7 @@ int main(int argc, char **argv)
 
 	//translate to currently used locale
 	QString locale = QLocale::system().name();
-	translator.load(QString("plivros_") + locale);
+	translator.load(QString("resource:plivros_") + locale);
 	app.installTranslator(&translator);
 
 	//Changes default program font
