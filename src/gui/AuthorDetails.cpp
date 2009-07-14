@@ -21,6 +21,7 @@
 #include <QWidget>
 #include <QString>
 #include <QList>
+#include <QLocale>
 
 AuthorDetails::AuthorDetails(Author *a, QWidget* parent): QWidget(parent)
 {

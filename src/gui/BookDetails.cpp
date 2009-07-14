@@ -21,6 +21,7 @@
 #include <QWidget>
 #include <QString>
 #include <QList>
+#include <QLocale>
 
 const QString BookDetails::link = QString("<a href=\"%1%2\"><span style=\" text-decoration: underline; color:#0000ff;\">%3</span></a>");
 
