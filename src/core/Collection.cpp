@@ -47,7 +47,7 @@
  * @param customDbName Name to be used for the database file, if empty user name
  * will be used.
  */
-Collection::Collection(QString u, QString customDbName, bool ro) throw(bad_alloc)
+Collection::Collection(QString u, QString customDbName, bool ro) throw(DataBaseException, bad_alloc)
 {
 	readOnly = ro;
 	user = u;
@@ -65,7 +65,7 @@ Collection::Collection(QString u, QString customDbName, bool ro) throw(bad_alloc
 	initConnects();
 }
 
-Collection::Collection(QString h, QString u, QString p, QString n, bool ro) throw(bad_alloc)
+Collection::Collection(QString h, QString u, QString p, QString n, bool ro) throw(DataBaseException, bad_alloc)
 {
 	readOnly = ro;
 	user = u;

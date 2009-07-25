@@ -36,13 +36,25 @@
 #include "MainWindow.h"
 
 #include "Collection.h"
+#include "DataBaseException.h"
+#include "MessageBoxDataBaseException.h"
 #include "OS.h"
 
 ///@brief Constructor. Creates a collection, setups the gui and connects slots and signals.
 MainWindow::MainWindow(QString userName, QMainWindow *parent) : QMainWindow(parent)
 {
-	c = new Collection(userName, QString(dbPath).append(userName).append(".db"));
-	setupUi(this);
+	try
+	{
+		c = new Collection(userName, QString(dbPath).append(userName).append(".db"));
+		setupUi(this);
+	}
+	catch(DataBaseException dbe)
+	{
+		MessageBoxDataBaseException mbdbe(&dbe);
+		mbdbe.appendText(tr("Couldn't open Data Base file. Exiting."));
+		mbdbe.exec();
+		exit(dbe.getCode());
+	}
 
 	connect(quitLabel, SIGNAL(linkActivated(QString)), this, SLOT(close()));
 

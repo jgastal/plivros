@@ -64,8 +64,8 @@ class Collection : public QObject
 	Q_OBJECT
 
 	public:
-		Collection(QString u, QString customDbName = "", bool ro = false) throw(bad_alloc);
-		Collection(QString h, QString u, QString p, QString n, bool ro = false) throw(bad_alloc);
+		Collection(QString u, QString customDbName = "", bool ro = false) throw(DataBaseException, bad_alloc);
+		Collection(QString h, QString u, QString p, QString n, bool ro = false) throw(DataBaseException, bad_alloc);
 		virtual ~Collection() throw();
 
 		bool insertBook(Book &b) throw(DataBaseException);
