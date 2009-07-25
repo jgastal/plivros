@@ -16,6 +16,16 @@ add_subdirectory( gui )
 add_subdirectory( core )
 add_subdirectory( data )
 
+# When building normal RPATH
+SET(CMAKE_SKIP_BUILD_RPATH  FALSE)
+
+# when building, don't use the install RPATH already
+# (but later on when installing)
+SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
+
+# the RPATH to be used when installing
+SET(CMAKE_INSTALL_RPATH "${QT_PLUGINS_DIR}/designer/")
+
 add_executable( plivros main.cpp OS.h )
 target_link_libraries( plivros collection data gui ${QT_LIBRARIES} )
 if( WIN32 )
