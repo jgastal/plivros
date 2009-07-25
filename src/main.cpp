@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 	app.setFont(QFont("Zurich Lt BT"));
 	app.setFont(QFont("Arno Pro"), "HoverPushButton");
 
-	QResource::registerResource("resource:imgs.big");
+	QResource::registerResource("resource:imgs.bqrc");
 	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
 
 	MainWindow mw(USERNAME);
