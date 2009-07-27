@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Parabola Biblioteca
+Comment=Manage your book collection.
+Comment[pt]=Gerencie sua coleção de livros.
+Categories=Application;Utility;X-Red-Hat-Base;
+Icon=/usr/share/pixmaps/plivros.png
+Exec=/usr/bin/plivros
+Type=Application
+Terminal=false
+Encoding=UTF-8
+
