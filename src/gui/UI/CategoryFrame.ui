@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>860</width>
-    <height>260</height>
+    <width>600</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -16,10 +16,16 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>450</height>
+   </size>
+  </property>
   <property name="maximumSize">
    <size>
-    <width>860</width>
-    <height>260</height>
+    <width>600</width>
+    <height>450</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -27,7 +33,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QFrame#CategoryFrame { 
-	border: 4px solid rgb(0, 45, 0); 
+	border: 2px solid rgb(255, 255, 255); 
 	border-radius: 25px;
 }
 QPushButton { color: rgb(60, 60, 60); }</string>
@@ -38,25 +44,28 @@ QPushButton { color: rgb(60, 60, 60); }</string>
   <property name="frameShadow">
    <enum>QFrame::Raised</enum>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
     <number>15</number>
+   </property>
+   <property name="topMargin">
+    <number>4</number>
    </property>
    <property name="rightMargin">
     <number>15</number>
    </property>
-   <property name="horizontalSpacing">
-    <number>4</number>
+   <property name="bottomMargin">
+    <number>15</number>
    </property>
-   <item row="0" column="0">
+   <item>
     <widget class="QLabel" name="categoryLabel">
      <property name="text">
       <string>Pick a category</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="HoverPushButton" name="themeHoverPushButton">
+   <item>
+    <widget class="HoverPushButton" name="bookHoverPushButton">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -65,38 +74,16 @@ QPushButton { color: rgb(60, 60, 60); }</string>
      </property>
      <property name="maximumSize">
       <size>
-       <width>200</width>
-       <height>200</height>
+       <width>16777215</width>
+       <height>100</height>
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/bgs/Pages.jpg);</string>
-     </property>
-     <property name="text">
-      <string/>
+      <string notr="true">background-image: url(:/bgs/Book.gif);</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
-    <widget class="HoverPushButton" name="publisherHoverPushButton">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>200</width>
-       <height>200</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-image: url(:/bgs/Publisher.gif);</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
+   <item>
     <widget class="HoverPushButton" name="authorHoverPushButton">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -106,8 +93,8 @@ QPushButton { color: rgb(60, 60, 60); }</string>
      </property>
      <property name="maximumSize">
       <size>
-       <width>200</width>
-       <height>200</height>
+       <width>16777215</width>
+       <height>100</height>
       </size>
      </property>
      <property name="styleSheet">
@@ -121,8 +108,8 @@ QPushButton { color: rgb(60, 60, 60); }</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="3">
-    <widget class="HoverPushButton" name="bookHoverPushButton">
+   <item>
+    <widget class="HoverPushButton" name="publisherHoverPushButton">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -131,12 +118,34 @@ QPushButton { color: rgb(60, 60, 60); }</string>
      </property>
      <property name="maximumSize">
       <size>
-       <width>200</width>
-       <height>200</height>
+       <width>16777215</width>
+       <height>100</height>
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/bgs/Book.gif);</string>
+      <string notr="true">background-image: url(:/bgs/Publisher.gif);</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="HoverPushButton" name="themeHoverPushButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/bgs/Pages.jpg);</string>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </item>

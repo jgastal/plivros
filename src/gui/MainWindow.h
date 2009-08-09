@@ -57,6 +57,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 		Collection *c;
 		CategoryFrame *cf;
 		OperationsWidget *ow;
+		QHBoxLayout* dwLayout;
 } ;
 
 #endif //MAINWINDOW_H

@@ -63,9 +63,10 @@ MainWindow::MainWindow(QString userName, QMainWindow *parent) : QMainWindow(pare
 	userLabel->setText(userStr);
 
 	ow = 0;
+	dwLayout = (QHBoxLayout*)displayWidget->layout();
 	cf = new CategoryFrame(displayWidget);
 	connect(cf, SIGNAL(clicked(Section::section)), this, SLOT(createOpsWidget(Section::section)));
-	displayWidget->layout()->addWidget(cf);
+	dwLayout->insertWidget(1, cf);
 
 	connect(searchPushButton, SIGNAL(pressed()), this, SLOT(quickSearch()));
 }
@@ -80,7 +81,7 @@ void MainWindow::createOpsWidget(Section::section s)
 	if(!ow)
 	{
 		ow = new OperationsWidget(c, s, displayWidget);
-		displayWidget->layout()->addWidget(ow);
+		dwLayout->insertWidget(1, ow);
 	}
 	else
 	{

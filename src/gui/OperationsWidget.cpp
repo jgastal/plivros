@@ -36,12 +36,6 @@
 #include "Collection.h"
 #include "Data.h"
 
-static QString bgss = "QWidget#%1 { "
-"background: url(:bgs/%2);\n"
-"background-repeat: no-repeat;\n"
-"background-position: center center;\n}\n"
-"QLabel { background: rgba(0, 0, 0, 0); }";
-
 OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *parent) : QWidget(parent)
 {
 	this->c = c;
@@ -54,7 +48,6 @@ OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *p
 	btGroup->addButton(bookToolButton);
 	connect(btGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(setSection(QAbstractButton*)));
 
-	bgss = bgss.arg(centralWidget->objectName());
 	bTab = aTab = pTab = tTab = 0;
 
 	setSection(s);
@@ -81,10 +74,9 @@ void OperationsWidget::setSection(Section::section s)
 			bTab = new QTabWidget();
 			bTab->setTabsClosable(true);
 			connect(bTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
-			layout->addWidget(bTab, 1, 1, 10, 2);
+			layout->addWidget(bTab, 1, 0, 10, 10);
 		}
 		bTab->setVisible(true);
-		centralWidget->setStyleSheet(bgss.arg("big_books2.jpeg"));
 		if(!bTab->count())
 			add();
 	}
@@ -95,10 +87,9 @@ void OperationsWidget::setSection(Section::section s)
 			aTab = new QTabWidget();
 			aTab->setTabsClosable(true);
 			connect(aTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
-			layout->addWidget(aTab, 1, 1, 10, 2);
+			layout->addWidget(aTab, 1, 0, 10, 10);
 		}
 		aTab->setVisible(true);
-		centralWidget->setStyleSheet(bgss.arg("big_authors.jpeg"));
 		if(!aTab->count())
 			add();
 	}
@@ -109,10 +100,9 @@ void OperationsWidget::setSection(Section::section s)
 			pTab = new QTabWidget();
 			pTab->setTabsClosable(true);
 			connect(pTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
-			layout->addWidget(pTab, 1, 1, 10, 2);
+			layout->addWidget(pTab, 1, 0, 10, 10);
 		}
 		pTab->setVisible(true);
-		centralWidget->setStyleSheet(bgss.arg("big_publishers.jpeg"));
 		if(!pTab->count())
 			add();
 	}
@@ -123,10 +113,9 @@ void OperationsWidget::setSection(Section::section s)
 			tTab = new QTabWidget();
 			tTab->setTabsClosable(true);
 			connect(tTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
-			layout->addWidget(tTab, 1, 1, 10, 2);
+			layout->addWidget(tTab, 1, 0, 10, 10);
 		}
 		tTab->setVisible(true);
-		centralWidget->setStyleSheet(bgss.arg("big_themes2.jpeg"));
 		if(!tTab->count())
 			add();
 	}
