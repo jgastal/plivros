@@ -13,217 +13,245 @@
   <property name="windowTitle">
    <string>Book Form</string>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <property name="fieldGrowthPolicy">
-    <enum>QFormLayout::ExpandingFieldsGrow</enum>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="margin">
+    <number>4</number>
    </property>
    <item row="0" column="0">
-    <widget class="QLabel" name="isbnLabel">
-     <property name="text">
-      <string>ISBN:</string>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
      </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLineEdit" name="isbnLineEdit"/>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="titleLabel">
-     <property name="text">
-      <string>Title:</string>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
      </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="titleLineEdit"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="descriptionLabel">
-     <property name="text">
-      <string>Description:</string>
+     <property name="widgetResizable">
+      <bool>true</bool>
      </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QLineEdit" name="descriptionLineEdit"/>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="critiqueLabel">
-     <property name="text">
-      <string>Critique:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QLineEdit" name="critiqueLineEdit"/>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="editionLabel">
-     <property name="text">
-      <string>Edition:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QLineEdit" name="editionLineEdit"/>
-   </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="ratingLabel">
-     <property name="text">
-      <string>Rating:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="coverLabel">
-     <property name="text">
-      <string>Cover:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="QWidget" name="coverWidget" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <property name="margin">
-       <number>0</number>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>424</width>
+        <height>629</height>
+       </rect>
       </property>
-      <item>
-       <widget class="QLineEdit" name="coverLineEdit"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="coverPushButton">
-        <property name="text">
-         <string>...</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="7" column="0">
-    <widget class="QLabel" name="ebookLabel">
-     <property name="text">
-      <string>E-Book:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="1">
-    <widget class="QWidget" name="ebookWidget" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <property name="margin">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QLineEdit" name="ebookLineEdit"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="ebookPushButton">
-        <property name="text">
-         <string>...</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="9" column="0">
-    <widget class="QLabel" name="pubDateLabel">
-     <property name="text">
-      <string>Publishing Date:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="1">
-    <widget class="QDateEdit" name="pubDateEdit"/>
-   </item>
-   <item row="10" column="0">
-    <widget class="QLabel" name="udcLabel">
-     <property name="text">
-      <string>UDC:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="10" column="1">
-    <widget class="QLineEdit" name="udcLineEdit"/>
-   </item>
-   <item row="11" column="0">
-    <widget class="QLabel" name="authorsLabel">
-     <property name="text">
-      <string>Authors:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="11" column="1">
-    <widget class="QListWidget" name="authorsListWidget">
-     <property name="selectionMode">
-      <enum>QAbstractItemView::ExtendedSelection</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="12" column="0">
-    <widget class="QLabel" name="translatorLabel">
-     <property name="text">
-      <string>Translator:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="13" column="0">
-    <widget class="QLabel" name="publishersLabel">
-     <property name="text">
-      <string>Publishers:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="13" column="1">
-    <widget class="QListWidget" name="publishersListWidget">
-     <property name="selectionMode">
-      <enum>QAbstractItemView::ExtendedSelection</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="14" column="0">
-    <widget class="QLabel" name="themesLabel">
-     <property name="text">
-      <string>Themes:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="14" column="1">
-    <widget class="QListWidget" name="themesListWidget">
-     <property name="selectionMode">
-      <enum>QAbstractItemView::ExtendedSelection</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="15" column="0">
-    <widget class="QPushButton" name="cancelPushButton">
-     <property name="text">
-      <string>Cancel</string>
-     </property>
-    </widget>
-   </item>
-   <item row="15" column="1">
-    <widget class="QPushButton" name="savePushButton">
-     <property name="text">
-      <string>Save</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="RatingWidget" name="ratingWidget">
-     <property name="max">
-      <number>10</number>
-     </property>
-    </widget>
-   </item>
-   <item row="12" column="1">
-    <widget class="QComboBox" name="translatorComboBox">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
+      <layout class="QFormLayout" name="formLayout">
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="isbnLabel">
+         <property name="text">
+          <string>ISBN:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="isbnLineEdit"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="titleLabel">
+         <property name="text">
+          <string>Title:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="titleLineEdit"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="descriptionLabel">
+         <property name="text">
+          <string>Description:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="descriptionLineEdit"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="critiqueLabel">
+         <property name="text">
+          <string>Critique:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="critiqueLineEdit"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="editionLabel">
+         <property name="text">
+          <string>Edition:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="editionLineEdit"/>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="ratingLabel">
+         <property name="text">
+          <string>Rating:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="RatingWidget" name="ratingWidget">
+         <property name="max">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="coverLabel">
+         <property name="text">
+          <string>Cover:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QWidget" name="coverWidget" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLineEdit" name="coverLineEdit"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="coverPushButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="ebookLabel">
+         <property name="text">
+          <string>E-Book:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QWidget" name="ebookWidget" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLineEdit" name="ebookLineEdit"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="ebookPushButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="pubDateLabel">
+         <property name="text">
+          <string>Publishing Date:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QDateEdit" name="pubDateEdit"/>
+       </item>
+       <item row="9" column="0">
+        <widget class="QLabel" name="udcLabel">
+         <property name="text">
+          <string>UDC:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1">
+        <widget class="QLineEdit" name="udcLineEdit"/>
+       </item>
+       <item row="10" column="0">
+        <widget class="QLabel" name="authorsLabel">
+         <property name="text">
+          <string>Authors:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="1">
+        <widget class="QListWidget" name="authorsListWidget">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <widget class="QLabel" name="translatorLabel">
+         <property name="text">
+          <string>Translator:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1">
+        <widget class="QComboBox" name="translatorComboBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0">
+        <widget class="QLabel" name="publishersLabel">
+         <property name="text">
+          <string>Publishers:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="1">
+        <widget class="QListWidget" name="publishersListWidget">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0">
+        <widget class="QLabel" name="themesLabel">
+         <property name="text">
+          <string>Themes:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="1">
+        <widget class="QListWidget" name="themesListWidget">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="0">
+        <widget class="QPushButton" name="cancelPushButton">
+         <property name="text">
+          <string>Cancel</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="1">
+        <widget class="QPushButton" name="savePushButton">
+         <property name="text">
+          <string>Save</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
@@ -236,22 +264,10 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>isbnLineEdit</tabstop>
-  <tabstop>titleLineEdit</tabstop>
-  <tabstop>descriptionLineEdit</tabstop>
-  <tabstop>critiqueLineEdit</tabstop>
-  <tabstop>editionLineEdit</tabstop>
   <tabstop>coverLineEdit</tabstop>
   <tabstop>coverPushButton</tabstop>
   <tabstop>ebookLineEdit</tabstop>
   <tabstop>ebookPushButton</tabstop>
-  <tabstop>pubDateEdit</tabstop>
-  <tabstop>udcLineEdit</tabstop>
-  <tabstop>authorsListWidget</tabstop>
-  <tabstop>publishersListWidget</tabstop>
-  <tabstop>themesListWidget</tabstop>
-  <tabstop>cancelPushButton</tabstop>
-  <tabstop>savePushButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>
