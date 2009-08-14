@@ -109,16 +109,21 @@ p, li { white-space: pre-wrap; }
            <widget class="QLabel" name="searchLabel">
             <property name="font">
              <font>
-              <pointsize>7</pointsize>
+              <pointsize>8</pointsize>
              </font>
             </property>
             <property name="text">
-             <string>Quick Search</string>
+             <string>Search</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="searchPushButton">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Go</string>
             </property>
