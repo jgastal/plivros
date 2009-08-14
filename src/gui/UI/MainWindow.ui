@@ -175,7 +175,7 @@ p, li { white-space: pre-wrap; }
      <widget class="QWidget" name="contentWidget" native="true">
       <property name="minimumSize">
        <size>
-        <width>700</width>
+        <width>630</width>
         <height>0</height>
        </size>
       </property>
@@ -184,7 +184,7 @@ p, li { white-space: pre-wrap; }
         <number>15</number>
        </property>
        <property name="rightMargin">
-        <number>0</number>
+        <number>15</number>
        </property>
        <item>
         <widget class="QLabel" name="userLabel">
