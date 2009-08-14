@@ -47,6 +47,7 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 
 	public:
 		OperationsWidget(Collection *c, Section::section s, QWidget *parent = 0);
+		virtual ~OperationsWidget();
 		void setSection(Section::section s);
 		Section::section getType() const;
 
@@ -70,6 +71,7 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		Collection *c;
 		QButtonGroup *btGroup;
 		QTabWidget *bTab, *aTab, *pTab, *tTab;
+		QPixmap *bPix, *aPix, *pPix, *tPix;
 		Section::section section;
 
 		void createAddThemeForm();

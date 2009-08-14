@@ -54,6 +54,14 @@ OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *p
 	setSectionButton();
 }
 
+OperationsWidget::~OperationsWidget()
+{
+	delete bPix;
+	delete aPix;
+	delete pPix;
+	delete tPix;
+}
+
 void OperationsWidget::setSection(Section::section s)
 {
 	section = s;
@@ -75,7 +83,9 @@ void OperationsWidget::setSection(Section::section s)
 			bTab->setTabsClosable(true);
 			connect(bTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 			layout->addWidget(bTab, 1, 0, 10, 10);
+			bPix = new QPixmap(":/bgs/big_books2.jpeg");
 		}
+		pictureLabel->setPixmap(*bPix);
 		bTab->setVisible(true);
 		if(!bTab->count())
 			add();
@@ -88,7 +98,9 @@ void OperationsWidget::setSection(Section::section s)
 			aTab->setTabsClosable(true);
 			connect(aTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 			layout->addWidget(aTab, 1, 0, 10, 10);
+			aPix = new QPixmap(":/bgs/big_authors.jpeg");
 		}
+		pictureLabel->setPixmap(*aPix);
 		aTab->setVisible(true);
 		if(!aTab->count())
 			add();
@@ -101,7 +113,9 @@ void OperationsWidget::setSection(Section::section s)
 			pTab->setTabsClosable(true);
 			connect(pTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 			layout->addWidget(pTab, 1, 0, 10, 10);
+			pPix = new QPixmap(":/bgs/big_publishers.jpeg");
 		}
+		pictureLabel->setPixmap(*pPix);
 		pTab->setVisible(true);
 		if(!pTab->count())
 			add();
@@ -114,7 +128,9 @@ void OperationsWidget::setSection(Section::section s)
 			tTab->setTabsClosable(true);
 			connect(tTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 			layout->addWidget(tTab, 1, 0, 10, 10);
+			tPix = new QPixmap(":/bgs/big_themes2.jpeg");
 		}
+		pictureLabel->setPixmap(*tPix);
 		tTab->setVisible(true);
 		if(!tTab->count())
 			add();
