@@ -36,6 +36,8 @@
 #include "Collection.h"
 #include "Data.h"
 
+const QString BGSS = "QFrame#formFrame { background-color: %1; }";
+
 OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *parent) : QWidget(parent)
 {
 	this->c = c;
@@ -74,18 +76,19 @@ void OperationsWidget::setSection(Section::section s)
 	if(tTab)
 		tTab->hide();
 
-	QGridLayout *layout = (QGridLayout*)centralWidget->layout();
+	QLayout *layout = formFrame->layout();
 	if(section == Section::Book)
 	{
 		if(!bTab)
 		{
-			bTab = new QTabWidget();
+			bTab = new QTabWidget(formFrame);
 			bTab->setTabsClosable(true);
 			connect(bTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
-			layout->addWidget(bTab, 1, 0, 10, 10);
+			layout->addWidget(bTab);
 			bPix = new QPixmap(":/bgs/big_books2.jpeg");
 		}
 		pictureLabel->setPixmap(*bPix);
+		formFrame->setStyleSheet(BGSS.arg("red"));
 		bTab->setVisible(true);
 		if(!bTab->count())
 			add();
@@ -94,13 +97,14 @@ void OperationsWidget::setSection(Section::section s)
 	{
 		if(!aTab)
 		{
-			aTab = new QTabWidget();
+			aTab = new QTabWidget(formFrame);
 			aTab->setTabsClosable(true);
 			connect(aTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
-			layout->addWidget(aTab, 1, 0, 10, 10);
+			layout->addWidget(aTab);
 			aPix = new QPixmap(":/bgs/big_authors.jpeg");
 		}
 		pictureLabel->setPixmap(*aPix);
+		formFrame->setStyleSheet(BGSS.arg("green"));
 		aTab->setVisible(true);
 		if(!aTab->count())
 			add();
@@ -109,14 +113,15 @@ void OperationsWidget::setSection(Section::section s)
 	{
 		if(!pTab)
 		{
-			pTab = new QTabWidget();
+			pTab = new QTabWidget(formFrame);
 			pTab->setTabsClosable(true);
 			connect(pTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
-			layout->addWidget(pTab, 1, 0, 10, 10);
+			layout->addWidget(pTab);
 			pPix = new QPixmap(":/bgs/big_publishers.jpeg");
 		}
 		pictureLabel->setPixmap(*pPix);
 		pTab->setVisible(true);
+		formFrame->setStyleSheet(BGSS.arg("blue"));
 		if(!pTab->count())
 			add();
 	}
@@ -124,13 +129,14 @@ void OperationsWidget::setSection(Section::section s)
 	{
 		if(!tTab)
 		{
-			tTab = new QTabWidget();
+			tTab = new QTabWidget(formFrame);
 			tTab->setTabsClosable(true);
 			connect(tTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
-			layout->addWidget(tTab, 1, 0, 10, 10);
+			layout->addWidget(tTab);
 			tPix = new QPixmap(":/bgs/big_themes2.jpeg");
 		}
 		pictureLabel->setPixmap(*tPix);
+		formFrame->setStyleSheet(BGSS.arg("yellow"));
 		tTab->setVisible(true);
 		if(!tTab->count())
 			add();
