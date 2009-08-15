@@ -51,6 +51,7 @@ OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *p
 	connect(btGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(setSection(QAbstractButton*)));
 
 	bTab = aTab = pTab = tTab = 0;
+	bPix = aPix = pPix = tPix = 0;
 
 	setSection(s);
 	setSectionButton();
