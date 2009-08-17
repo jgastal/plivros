@@ -6,4 +6,8 @@ QT4_ADD_TRANSLATION( qm_files ${CMAKE_CURRENT_SOURCE_DIR}/${TS_FILES} )
 
 add_custom_target(ts DEPENDS ${qm_files} )
 
-install( FILES ${qm_files} DESTINATION share/plivros )
+if( WIN32 )
+	install( FILES ${qm_files} DESTINATION bin )
+else( WIN32 )
+	install( FILES ${qm_files} DESTINATION share/plivros )
+endif( WIN32 )

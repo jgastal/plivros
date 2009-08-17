@@ -5,7 +5,6 @@ project( plivros )
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 option( DEBUG "Build with debugger symbols." ON )
-option( WIN32 "If building for windows OS." OFF )
 
 enable_language( C )
 find_package( Qt4 REQUIRED QtCore QtGUI )
@@ -34,7 +33,11 @@ if( WIN32 )
 endif( WIN32 )
 
 if( NOT DEFINED LIB_DIR )
-	set( LIB_DIR "${CMAKE_INSTALL_PREFIX}/lib" )
+	if( WIN32 )
+                set( LIB_DIR "${CMAKE_INSTALL_PREFIX}/plivros/" )
+        else( WIN32 )
+                set( LIB_DIR "${CMAKE_INSTALL_PREFIX}/lib/" )
+	endif( WIN32 )
 endif( NOT DEFINED LIB_DIR )
 
 add_subdirectory( imgs )

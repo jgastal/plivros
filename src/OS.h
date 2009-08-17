@@ -11,11 +11,11 @@
 		return QString(uname);
 	}
 	static const QString USERNAME(getUName());
-	static const QString dbPath = QCoreApplication::applicationDirPath()+"/dbs/";
+	static const QString dbPath = "./dbs/";
 	static int initPaths()
 	{
-		QDir::addSearchPath("resource", QCoreApplication::applicationDirPath()+"/resources/");
-		QDir::addSearchPath("fonts", QCoreApplication::applicationDirPath()+"/fonts/");
+		QDir::addSearchPath("resource", "./resources/");
+		QDir::addSearchPath("fonts", "./fonts/");
 		return 1;
 	}
 	static const int inited = initPaths();

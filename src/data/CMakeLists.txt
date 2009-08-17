@@ -18,5 +18,5 @@ add_definitions( -fpic )
 add_library( data SHARED ${headers} ${sources} )
 target_link_libraries( data ${QT_LIBRARIES} )
 
-install( TARGETS data LIBRARY DESTINATION ${LIB_DIR} )
+install( TARGETS data DESTINATION ${LIB_DIR} )
 
