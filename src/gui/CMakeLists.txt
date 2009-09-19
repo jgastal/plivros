@@ -73,7 +73,7 @@ qt4_wrap_cpp( moc_sources ${headers} )
 add_definitions( -fpic )
 
 add_library( gui SHARED ${headers} ${sources} ${moc_sources} )
-target_link_libraries( gui collection RatingWidgetPlugin HoverPushButton ${QT_LIBRARIES} )
+target_link_libraries( gui collection RatingWidgetPlugin ${QT_LIBRARIES} )
 
 install( TARGETS gui DESTINATION ${LIB_DIR} )
 

@@ -16,7 +16,7 @@ set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR} )
 find_package( DataBaseWrapper REQUIRED )
 include_directories( ${DBWRAPPER_INCLUDE_DIR} )
 
-#lib dirs for HoverPushButton and RatingWidgetPlugin
+#lib dirs for RatingWidgetPlugin
 link_directories( ${QT_PLUGINS_DIR}/designer )
 
 if( DEBUG )
