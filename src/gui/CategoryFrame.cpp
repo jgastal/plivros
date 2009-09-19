@@ -31,24 +31,20 @@ CategoryFrame::CategoryFrame(QWidget *parent) : QFrame(parent)
 {
 	setupUi(this);
 
-	connect(themeHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(themeHover()));
-	connect(themeHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
-	connect(publisherHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(publisherHover()));
-	connect(publisherHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
-	connect(authorHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(authorHover()));
-	connect(authorHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
-	connect(bookHoverPushButton, SIGNAL(hoverEnter()), this, SIGNAL(bookHover()));
-	connect(bookHoverPushButton, SIGNAL(hoverLeave()), this, SIGNAL(leaveHover()));
+	themePushButton->installEventFilter(this);
+	publisherPushButton->installEventFilter(this);
+	authorPushButton->installEventFilter(this);
+	bookPushButton->installEventFilter(this);
 
 	bgss = bgss.arg(parentWidget()->objectName());
 }
 
 void CategoryFrame::setThemeText()
 {
-	themeHoverPushButton->setText(tr("Themes"));
-	QString ss = themeHoverPushButton->styleSheet();
+	themePushButton->setText(tr("Themes"));
+	QString ss = themePushButton->styleSheet();
 	ss += "\nfont: bold 20pt;";
-	themeHoverPushButton->setStyleSheet(ss);
+	themePushButton->setStyleSheet(ss);
 	ss = parentWidget()->styleSheet();
 	ss += bgss.arg("big_themes2.jpeg");
 	parentWidget()->setStyleSheet(ss);
@@ -56,10 +52,10 @@ void CategoryFrame::setThemeText()
 
 void CategoryFrame::setPublisherText()
 {
-	publisherHoverPushButton->setText(tr("Publishers"));
-	QString ss = publisherHoverPushButton->styleSheet();
+	publisherPushButton->setText(tr("Publishers"));
+	QString ss = publisherPushButton->styleSheet();
 	ss += "\nfont: bold 20pt;";
-	publisherHoverPushButton->setStyleSheet(ss);
+	publisherPushButton->setStyleSheet(ss);
 	ss = parentWidget()->styleSheet();
 	ss += bgss.arg("big_publishers.jpeg");
 	parentWidget()->setStyleSheet(ss);
@@ -67,10 +63,10 @@ void CategoryFrame::setPublisherText()
 
 void CategoryFrame::setAuthorText()
 {
-	authorHoverPushButton->setText(tr("Authors"));
-	QString ss = authorHoverPushButton->styleSheet();
+	authorPushButton->setText(tr("Authors"));
+	QString ss = authorPushButton->styleSheet();
 	ss += "\nfont: bold 20pt;";
-	authorHoverPushButton->setStyleSheet(ss);
+	authorPushButton->setStyleSheet(ss);
 	ss = parentWidget()->styleSheet();
 	ss += bgss.arg("big_authors.jpeg");
 	parentWidget()->setStyleSheet(ss);
@@ -78,21 +74,21 @@ void CategoryFrame::setAuthorText()
 
 void CategoryFrame::setBookText()
 {
-	bookHoverPushButton->setText(tr("Books"));
-	QString ss = bookHoverPushButton->styleSheet();
+	bookPushButton->setText(tr("Books"));
+	QString ss = bookPushButton->styleSheet();
 	ss += "\nfont: bold 20pt;";
-	bookHoverPushButton->setStyleSheet(ss);
+	bookPushButton->setStyleSheet(ss);
 	ss = parentWidget()->styleSheet();
 	ss += bgss.arg("big_books2.jpeg");
 	parentWidget()->setStyleSheet(ss);
 }
 
-void CategoryFrame::setEmptyText()
+void CategoryFrame::setEmptyText(QPushButton *bt)
 {
-	static_cast<HoverPushButton*>(sender())->setText("");
-	QString ss = static_cast<HoverPushButton*>(sender())->styleSheet();
+	bt->setText("");
+	QString ss = bt->styleSheet();
 	ss.remove("\nfont: bold 20pt;");
-	static_cast<HoverPushButton*>(sender())->setStyleSheet(ss);
+	bt->setStyleSheet(ss);
 	parentWidget()->setStyleSheet("");
 }
 
@@ -114,4 +110,37 @@ void CategoryFrame::authorClicked()
 void CategoryFrame::bookClicked()
 {
 	emit clicked(Section::Book);
+}
+
+bool CategoryFrame::eventFilter(QObject *obj, QEvent *event)
+{
+	if(event->type() == QEvent::HoverLeave)
+	{
+		emit leaveHover();
+		setEmptyText(qobject_cast<QPushButton*>(obj));
+	}
+	else if(event->type() == QEvent::HoverEnter)
+	{
+		if(obj == themePushButton)
+		{
+			emit themeHover();
+			setThemeText();
+		}
+		else if(obj == publisherPushButton)
+		{
+			emit publisherHover();
+			setPublisherText();
+		}
+		else if(obj == authorPushButton)
+		{
+			emit authorHover();
+			setAuthorText();
+		}
+		else if(obj == bookPushButton)
+		{
+			emit bookHover();
+			setBookText();
+		}
+	}
+	return QFrame::eventFilter(obj, event);
 }

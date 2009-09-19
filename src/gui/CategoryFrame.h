@@ -29,13 +29,14 @@ class CategoryFrame : public QFrame, protected Ui::CategoryFrame
 
 	public:
 		CategoryFrame(QWidget *parent = 0);
+		virtual bool eventFilter(QObject *watched, QEvent *event);
 
 	protected slots:
 		void setThemeText();
 		void setPublisherText();
 		void setAuthorText();
 		void setBookText();
-		void setEmptyText();
+		void setEmptyText(QPushButton *bt);
 
 	private slots:
 		void themeClicked();
