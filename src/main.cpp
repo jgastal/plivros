@@ -51,10 +51,7 @@ int main(int argc, char **argv)
 	translator.load(QString("resource:plivros_") + locale);
 	app.installTranslator(&translator);
 
-	//Changes default program font
-	app.setFont(QFont("Zurich Lt BT"));
-	app.setFont(QFont("Arno Pro"), "HoverPushButton");
-
+	//Loads img resources
 	QResource::registerResource("resource:imgs.bqrc");
 	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
 

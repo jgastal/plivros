@@ -43,7 +43,7 @@ void CategoryFrame::setThemeText()
 {
 	themePushButton->setText(tr("Themes"));
 	QString ss = themePushButton->styleSheet();
-	ss += "\nfont: bold 20pt;";
+	ss += "\nfont: bold 20pt \"Arno Pro\";";
 	themePushButton->setStyleSheet(ss);
 	ss = parentWidget()->styleSheet();
 	ss += bgss.arg("big_themes2.jpeg");
@@ -54,7 +54,7 @@ void CategoryFrame::setPublisherText()
 {
 	publisherPushButton->setText(tr("Publishers"));
 	QString ss = publisherPushButton->styleSheet();
-	ss += "\nfont: bold 20pt;";
+	ss += "\nfont: bold 20pt \"Arno Pro\";";
 	publisherPushButton->setStyleSheet(ss);
 	ss = parentWidget()->styleSheet();
 	ss += bgss.arg("big_publishers.jpeg");
@@ -65,7 +65,7 @@ void CategoryFrame::setAuthorText()
 {
 	authorPushButton->setText(tr("Authors"));
 	QString ss = authorPushButton->styleSheet();
-	ss += "\nfont: bold 20pt;";
+	ss += "\nfont: bold 20pt \"Arno Pro\";";
 	authorPushButton->setStyleSheet(ss);
 	ss = parentWidget()->styleSheet();
 	ss += bgss.arg("big_authors.jpeg");
@@ -76,7 +76,7 @@ void CategoryFrame::setBookText()
 {
 	bookPushButton->setText(tr("Books"));
 	QString ss = bookPushButton->styleSheet();
-	ss += "\nfont: bold 20pt;";
+	ss += "\nfont: bold 20pt \"Arno Pro\";";
 	bookPushButton->setStyleSheet(ss);
 	ss = parentWidget()->styleSheet();
 	ss += bgss.arg("big_books2.jpeg");
@@ -87,7 +87,7 @@ void CategoryFrame::setEmptyText(QPushButton *bt)
 {
 	bt->setText("");
 	QString ss = bt->styleSheet();
-	ss.remove("\nfont: bold 20pt;");
+	ss += "\nfont: bold 20pt \"Arno Pro\";";
 	bt->setStyleSheet(ss);
 	parentWidget()->setStyleSheet("");
 }
