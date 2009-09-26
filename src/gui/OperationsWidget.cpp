@@ -36,7 +36,15 @@
 #include "Collection.h"
 #include "Data.h"
 
-const QString BGSS = "QFrame#formFrame { background-color: %1; }";
+static const QString SS = "QWidget#%1 { background-color: %2; }";
+static const QString THEMEBGCOLOR = "rgb(102, 67, 100)";
+static const QString THEMEBTCOLOR = "rgb(125, 90, 193)";
+static const QString PUBLISHERBGCOLOR = "rgb(122, 28, 45)";
+static const QString PUBLISHERBTCOLOR = "rgb(171, 51, 61)";
+static const QString AUTHORBGCOLOR = "rgb(63, 90, 111)";
+static const QString AUTHORBTCOLOR = "rgb(140, 173, 223)";
+static const QString BOOKBGCOLOR = "rgb(98, 115, 96)";
+static const QString BOOKBTCOLOR = "rgb(115, 138, 115)";
 
 OperationsWidget::OperationsWidget(Collection *c, Section::section s, QWidget *parent) : QWidget(parent)
 {
@@ -77,6 +85,12 @@ void OperationsWidget::setSection(Section::section s)
 	if(tTab)
 		tTab->hide();
 
+	//Making all buttons apear unselected, later on apropriate one will have apearance changed
+	bookToolButton->setStyleSheet("");
+	authorToolButton->setStyleSheet("");
+	publisherToolButton->setStyleSheet("");
+	themeToolButton->setStyleSheet("");
+
 	QLayout *layout = formFrame->layout();
 	if(section == Section::Book)
 	{
@@ -89,7 +103,8 @@ void OperationsWidget::setSection(Section::section s)
 			bPix = new QPixmap(":/bgs/big_books2.jpeg");
 		}
 		pictureLabel->setPixmap(*bPix);
-		formFrame->setStyleSheet(BGSS.arg("red"));
+		formFrame->setStyleSheet(SS.arg(formFrame->objectName()).arg(BOOKBGCOLOR));
+		bookToolButton->setStyleSheet(SS.arg(bookToolButton->objectName()).arg(BOOKBTCOLOR));
 		bTab->setVisible(true);
 		if(!bTab->count())
 			add();
@@ -105,7 +120,8 @@ void OperationsWidget::setSection(Section::section s)
 			aPix = new QPixmap(":/bgs/big_authors.jpeg");
 		}
 		pictureLabel->setPixmap(*aPix);
-		formFrame->setStyleSheet(BGSS.arg("green"));
+		formFrame->setStyleSheet(SS.arg(formFrame->objectName()).arg(AUTHORBGCOLOR));
+		authorToolButton->setStyleSheet(SS.arg(authorToolButton->objectName()).arg(AUTHORBTCOLOR));
 		aTab->setVisible(true);
 		if(!aTab->count())
 			add();
@@ -122,7 +138,8 @@ void OperationsWidget::setSection(Section::section s)
 		}
 		pictureLabel->setPixmap(*pPix);
 		pTab->setVisible(true);
-		formFrame->setStyleSheet(BGSS.arg("blue"));
+		formFrame->setStyleSheet(SS.arg(formFrame->objectName()).arg(PUBLISHERBGCOLOR));
+		publisherToolButton->setStyleSheet(SS.arg(publisherToolButton->objectName()).arg(PUBLISHERBTCOLOR));
 		if(!pTab->count())
 			add();
 	}
@@ -137,7 +154,8 @@ void OperationsWidget::setSection(Section::section s)
 			tPix = new QPixmap(":/bgs/big_themes2.jpeg");
 		}
 		pictureLabel->setPixmap(*tPix);
-		formFrame->setStyleSheet(BGSS.arg("yellow"));
+		formFrame->setStyleSheet(SS.arg(formFrame->objectName()).arg(THEMEBGCOLOR));
+		themeToolButton->setStyleSheet(SS.arg(themeToolButton->objectName()).arg(THEMEBTCOLOR));
 		tTab->setVisible(true);
 		if(!tTab->count())
 			add();
