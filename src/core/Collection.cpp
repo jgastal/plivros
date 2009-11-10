@@ -75,7 +75,7 @@ Collection::Collection(QString h, QString u, QString p, QString n, bool ro) thro
 	ac = new AuthorCollection(db);
 	pc = new PublisherCollection(db);
 	tc = new ThemeCollection(db);
-	
+
 	initConnects();
 }
 
@@ -213,9 +213,32 @@ QList<Book> Collection::searchBooks(Book::book_field field, QString name) throw(
 		query = compositeSearchBooks(field, name);
 	else
 		query = simpleSearchBooks(field, name);
-	
+
 	ResultSet bookRS = db->query(query);
 	return parseBookResultSet(bookRS);
+}
+
+/**
+ * @brief Gets a book by it's id.
+ *
+ * @param id The ID of the desired book.
+ *
+ * @return If a book with this id exists that book is returned, otherwise an empty book is returned.
+ *
+ * @exception DataBaseException In case there is a database error.
+ */
+Book Collection::getBook(int id) throw(DataBaseException)
+{
+	PreparedStatement book("SELECT * FROM books WHERE id = '%1'", db->getType());
+	book.arg(id);
+
+	ResultSet rs = db->query(book);
+	QList<Book> bList = parseBookResultSet(rs);
+
+	if(bList.empty())
+		return Book();
+	else
+		return bList.first();
 }
 
 /**
@@ -650,7 +673,7 @@ PreparedStatement Collection::simpleSearchBooks(Book::book_field field, QString 
 		query.arg("publishingyear");
 	else if(field == Book::b_UDC)
 		query.arg("UDC");
-	
+
 	query.arg(name.toStdString()); //search term
 	return query;
 }
@@ -669,7 +692,7 @@ PreparedStatement Collection::simpleSearchBooks(Book::book_field field, QString 
  * This method creates a PreparedStatement that searches for a given keyword
  * contained in the first or last name of authors or translator, name of publisher
  * or theme. As mentioned the search is not done by exact match but rather by
- * "contains". 
+ * "contains".
  */
 PreparedStatement Collection::compositeSearchBooks(Book::book_field field, QString name) throw(DataBaseException)
 {
@@ -781,7 +804,7 @@ QList<Publisher> Collection::getBooksPublishers(int id) throw(DataBaseException)
 	string publishersbooks("SELECT publishersid FROM bookspublishers WHERE booksid = %1");
 	publishers.arg(publishersbooks);
 	publishers.arg(id);
-	
+
 	ResultSet rs = db->query(publishers);
 	return parsePublisherResultSet(rs);
 }
@@ -799,7 +822,7 @@ QList<Theme> Collection::getBooksThemes(int id) throw(DataBaseException)
 	string themesbooks("SELECT themesid FROM booksthemes WHERE booksid = %1");
 	themes.arg(themesbooks);
 	themes.arg(id);
-	
+
 	ResultSet rs = db->query(themes);
 	return parseThemeResultSet(rs);
 }
@@ -864,7 +887,7 @@ PreparedStatement Collection::compositeSearchAuthors(Author::author_field field,
 		query.arg("name");
 		query.arg(name.toStdString());
 	}
-	
+
 	return query;
 }
 
@@ -914,7 +937,7 @@ QList<Theme> Collection::getAuthorsThemes(int id) throw(DataBaseException)
 	string themesauthors("SELECT themesid FROM authorsthemes WHERE authorsid = %1");
 	themes.arg(themesauthors);
 	themes.arg(id);
-	
+
 	ResultSet rs = db->query(themes);
 	return parseThemeResultSet(rs);
 }
@@ -977,7 +1000,7 @@ PreparedStatement Collection::compositeSearchPublishers(Publisher::publisher_fie
 		query.arg("name");
 		query.arg(name.toStdString());
 	}
-	
+
 	return query;
 }
 
@@ -1025,7 +1048,7 @@ QList<Theme> Collection::getPublishersThemes(int id) throw(DataBaseException)
 	string themespublishers("SELECT themesid FROM publishersthemes WHERE publishersid = %1");
 	themes.arg(themespublishers);
 	themes.arg(id);
-	
+
 	ResultSet rs = db->query(themes);
 	return parseThemeResultSet(rs);
 }
