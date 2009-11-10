@@ -33,9 +33,9 @@
 #include "DataBaseException.h"
 #include "Theme.h"
 
-EditTheme::EditTheme(Collection *c, Theme t, QWidget *parent) : ThemeForm(c, parent)
+EditTheme::EditTheme(Collection *c, int id, QWidget *parent) : ThemeForm(c, parent)
 {
-	this->t = t;
+	t = c->getTheme(id);
 	nameLineEdit->setText(t.getName());
 	descriptionLineEdit->setText(t.getDescription());
 }

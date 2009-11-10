@@ -37,9 +37,9 @@
 #include "Author.h"
 #include "Theme.h"
 
-EditBook::EditBook(Collection *c, Book b, QWidget *parent) : BookForm(c, parent)
+EditBook::EditBook(Collection *c, int id, QWidget *parent) : BookForm(c, parent)
 {
-	this->b = b;
+	b = c->getBook(id);
 	isbnLineEdit->setText(b.getIsbn());
 	titleLineEdit->setText(b.getTitle());
 	editionLineEdit->setText(QString::number(b.getEdition()));
@@ -71,7 +71,7 @@ void EditBook::save()
 	b.setEbook(ebookLineEdit->text());
 	b.setPubDate(pubDateEdit->date());
 	b.setUDC(udcLineEdit->text());
-	
+
 	b.setThemes(getSelectedThemes());
 	b.setPublishers(getSelectedPublishers());
 	b.setAuthors(getSelectedAuthors());

@@ -44,7 +44,7 @@ class EditAuthor : public AuthorForm
 	Q_OBJECT
 
 	public:
-		EditAuthor(Collection *c, Author p, QWidget *parent = 0);
+		EditAuthor(Collection *c, int id, QWidget *parent = 0);
 
 	private slots:
 		void save();

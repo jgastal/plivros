@@ -35,9 +35,9 @@
 #include "Author.h"
 #include "Theme.h"
 
-EditAuthor::EditAuthor(Collection *c, Author a, QWidget *parent) : AuthorForm(c, parent)
+EditAuthor::EditAuthor(Collection *c, int id, QWidget *parent) : AuthorForm(c, parent)
 {
-	this->a = a;
+	a = c->getAuthor(id);
 	firstNameLineEdit->setText(a.getFirstName());
 	lastNameLineEdit->setText(a.getLastName());
 	descriptionLineEdit->setText(a.getDescription());

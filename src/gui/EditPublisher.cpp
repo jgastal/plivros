@@ -35,9 +35,9 @@
 #include "Publisher.h"
 #include "Theme.h"
 
-EditPublisher::EditPublisher(Collection *c, Publisher p, QWidget *parent) : PublisherForm(c, parent)
+EditPublisher::EditPublisher(Collection *c, int id, QWidget *parent) : PublisherForm(c, parent)
 {
-	this->p = p;
+	p = c->getPublisher(id);
 	nameLineEdit->setText(p.getName());
 	descriptionLineEdit->setText(p.getDescription());
 	critiqueLineEdit->setText(p.getCritique());

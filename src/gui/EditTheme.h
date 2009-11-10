@@ -43,7 +43,7 @@ class EditTheme : public ThemeForm
 	Q_OBJECT
 
 	public:
-		EditTheme(Collection *c, Theme t, QWidget *parent = 0);
+		EditTheme(Collection *c, int id, QWidget *parent = 0);
 
 	private slots:
 		void save();

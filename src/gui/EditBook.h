@@ -46,7 +46,7 @@ class EditBook : public BookForm
 	Q_OBJECT
 
 	public:
-		EditBook(Collection *c, Book b, QWidget *parent = 0);
+		EditBook(Collection *c, int id, QWidget *parent = 0);
 
 	private slots:
 		void save();

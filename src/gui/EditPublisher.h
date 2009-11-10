@@ -44,7 +44,7 @@ class EditPublisher : public PublisherForm
 	Q_OBJECT
 
 	public:
-		EditPublisher(Collection *c, Publisher p, QWidget *parent = 0);
+		EditPublisher(Collection *c, int id, QWidget *parent = 0);
 
 	private slots:
 		void save();
