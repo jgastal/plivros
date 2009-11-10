@@ -202,50 +202,50 @@ void OperationsWidget::add()
 		createAddThemeForm();
 }
 
-void OperationsWidget::edit(DataObject *dobj)
+void OperationsWidget::edit(int id)
 {
 	Section::section s = ((SearchForm*)sender())->getType();
 	if(s == Section::Book)
-		createEditBookForm((Book*)dobj);
+		createEditBookForm(id);
 	else if(s == Section::Author)
-		createEditAuthorForm((Author*)dobj);
+		createEditAuthorForm(id);
 	else if(s == Section::Publisher)
-		createEditPublisherForm((Publisher*)dobj);
+		createEditPublisherForm(id);
 	else if(s == Section::Theme)
-		createEditThemeForm((Theme*)dobj);
+		createEditThemeForm(id);
 }
 
-void OperationsWidget::erase(DataObject *dobj)
+void OperationsWidget::erase(int id)
 {
 	Section::section s = ((SearchForm*)sender())->getType();
 	if(s == Section::Book)
-		c->deleteBook(dobj->getId());
+		c->deleteBook(id);
 	else if(s == Section::Author)
-		c->deleteAuthor(dobj->getId());
+		c->deleteAuthor(id);
 	else if(s == Section::Publisher)
-		c->deletePublisher(dobj->getId());
+		c->deletePublisher(id);
 	else if(s == Section::Theme)
-		c->deleteTheme(dobj->getId());
+		c->deleteTheme(id);
 }
 
-void OperationsWidget::view(DataObject *dobj)
+void OperationsWidget::view(int id)
 {
 	Section::section s = ((SearchForm*)sender())->getType();
 	if(s == Section::Book)
-		createViewBookDetails((Book*)dobj);
+		createViewBookDetails(id);
 	else if(s == Section::Author)
-		createViewAuthorDetails((Author*)dobj);
+		createViewAuthorDetails(id);
 	else if(s == Section::Publisher)
-		createViewPublisherDetails((Publisher*)dobj);
+		createViewPublisherDetails(id);
 }
 
 void OperationsWidget::search()
 {
 	SearchForm *sf = new SearchForm(section, c);
 	connect(sf, SIGNAL(closeRequested()), this, SLOT(closeTab()));
-	connect(sf, SIGNAL(edit(DataObject*)), this, SLOT(edit(DataObject*)));
-	connect(sf, SIGNAL(del(DataObject*)), this, SLOT(erase(DataObject*)));
-	connect(sf, SIGNAL(view(DataObject*)), this, SLOT(view(DataObject*)));
+	connect(sf, SIGNAL(edit(int)), this, SLOT(edit(int)));
+	connect(sf, SIGNAL(del(int)), this, SLOT(erase(int)));
+	connect(sf, SIGNAL(view(int)), this, SLOT(view(int)));
 
 	int pos;
 	if(section == Section::Book)
@@ -296,10 +296,10 @@ void OperationsWidget::createAddThemeForm()
 	tTab->setUpdatesEnabled(true);
 }
 
-void OperationsWidget::createEditThemeForm(Theme *t)
+void OperationsWidget::createEditThemeForm(int id)
 {
 	tTab->setUpdatesEnabled(false);
-	EditTheme *et = new EditTheme(c, *t, tTab);
+	EditTheme *et = new EditTheme(c, id, tTab);
 	connect(et, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = tTab->addTab(et, tr("Edit Theme"));
 	tTab->setCurrentIndex(pos);
@@ -318,10 +318,10 @@ void OperationsWidget::createAddPublisherForm()
 	pTab->setUpdatesEnabled(true);
 }
 
-void OperationsWidget::createEditPublisherForm(Publisher *p)
+void OperationsWidget::createEditPublisherForm(int id)
 {
 	pTab->setUpdatesEnabled(false);
-	EditPublisher *ep = new EditPublisher(c, *p, pTab);
+	EditPublisher *ep = new EditPublisher(c, id, pTab);
 	connect(c, SIGNAL(themesChanged()), ep, SLOT(populateThemesListWidget()));
 	connect(ep, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = pTab->addTab(ep, tr("Edit Publisher"));
@@ -329,11 +329,13 @@ void OperationsWidget::createEditPublisherForm(Publisher *p)
 	pTab->setUpdatesEnabled(true);
 }
 
-void OperationsWidget::createViewPublisherDetails(Publisher *p)
+void OperationsWidget::createViewPublisherDetails(int id)
 {
+	Publisher p = c->getPublisher(id);
 	pTab->setUpdatesEnabled(false);
 	PublisherDetails *pd = new PublisherDetails(p, pTab);
-	int pos = pTab->addTab(pd, p->getName());
+
+	int pos = pTab->addTab(pd, p.getName());
 	pTab->setCurrentIndex(pos);
 	pTab->setUpdatesEnabled(true);
 }
@@ -349,10 +351,10 @@ void OperationsWidget::createAddAuthorForm()
 	aTab->setUpdatesEnabled(true);
 }
 
-void OperationsWidget::createEditAuthorForm(Author *a)
+void OperationsWidget::createEditAuthorForm(int id)
 {
 	aTab->setUpdatesEnabled(false);
-	EditAuthor *ea = new EditAuthor(c, *a, aTab);
+	EditAuthor *ea = new EditAuthor(c, id, aTab);
 	connect(c, SIGNAL(themesChanged()), ea, SLOT(populateThemesListWidget()));
 	connect(ea, SIGNAL(closeRequested()), this, SLOT(closeTab()));
 	int pos = aTab->addTab(ea, tr("Edit Author"));
@@ -360,11 +362,12 @@ void OperationsWidget::createEditAuthorForm(Author *a)
 	aTab->setUpdatesEnabled(true);
 }
 
-void OperationsWidget::createViewAuthorDetails(Author *a)
+void OperationsWidget::createViewAuthorDetails(int id)
 {
+	Author a = c->getAuthor(id);
 	aTab->setUpdatesEnabled(false);
 	AuthorDetails *ad = new AuthorDetails(a, aTab);
-	int pos = aTab->addTab(ad, a->getName());
+	int pos = aTab->addTab(ad, a.getName());
 	aTab->setCurrentIndex(pos);
 	aTab->setUpdatesEnabled(true);
 }
@@ -383,10 +386,10 @@ void OperationsWidget::createAddBookForm()
 	bTab->setUpdatesEnabled(true);
 }
 
-void OperationsWidget::createEditBookForm(Book *b)
+void OperationsWidget::createEditBookForm(int id)
 {
 	bTab->setUpdatesEnabled(false);
-	EditBook *eb = new EditBook(c, *b, bTab);
+	EditBook *eb = new EditBook(c, id, bTab);
 	connect(c, SIGNAL(themesChanged()), eb, SLOT(populateThemesListWidget()));
 	connect(c, SIGNAL(publishersChanged()), eb, SLOT(populatePublishersListWidget()));
 	connect(c, SIGNAL(authorsChanged()), eb, SLOT(populateAuthorsListWidget()));
@@ -397,13 +400,14 @@ void OperationsWidget::createEditBookForm(Book *b)
 	bTab->setUpdatesEnabled(true);
 }
 
-void OperationsWidget::createViewBookDetails(Book* b)
+void OperationsWidget::createViewBookDetails(int id)
 {
+	Book b = c->getBook(id);
 	bTab->setUpdatesEnabled(false);
 	BookDetails *bd = new BookDetails(b, bTab);
 	connect(bd, SIGNAL(authorClicked(QString)), this, SLOT(viewAuthor(QString)));
 	connect(bd, SIGNAL(publisherClicked(QString)), this, SLOT(viewPublisher(QString)));
-	int pos = bTab->addTab(bd, b->getTitle());
+	int pos = bTab->addTab(bd, b.getTitle());
 	bTab->setCurrentIndex(pos);
 	bTab->setUpdatesEnabled(true);
 }
@@ -442,14 +446,7 @@ void OperationsWidget::viewAuthor(QString url)
 	if(!url.startsWith("view://"))
 		return;
 	url.replace("view://", "");
-	/*
-	 * Strictly speaking this is bad cause the widget will be around for 
-	 * longer than the parameter, but since it won't be used in after the 
-	 * constructor it works. The parameter isn't passed directly to avoid
-	 * compiler warnings.
-	 */
-	Author a = c->getAuthor(url.toInt());
-	createViewAuthorDetails(&a);
+	createViewAuthorDetails(url.toInt());
 }
 
 void OperationsWidget::viewPublisher(QString url)
@@ -457,12 +454,5 @@ void OperationsWidget::viewPublisher(QString url)
 	if(!url.startsWith("view://"))
 		return;
 	url.replace("view://", "");
-	/*
-	 * Strictly speaking this is bad cause the widget will be around for 
-	 * longer than the parameter, but since it won't be used in after the 
-	 * constructor it works. The parameter isn't passed directly to avoid
-	 * compiler warnings.
-	 */
-	Publisher p = c->getPublisher(url.toInt());
-	createViewPublisherDetails(&p);
+	createViewPublisherDetails(url.toInt());
 }

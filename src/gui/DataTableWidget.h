@@ -43,7 +43,6 @@ class DataTableWidget : public QTableWidget
 
 	public:
 		DataTableWidget(QWidget *parent = 0);
-		virtual ~DataTableWidget();
 
 	public slots:
 		void populateTable(QList<Book> dataList);
@@ -52,9 +51,9 @@ class DataTableWidget : public QTableWidget
 		void populateTable(QList<Theme> dataList);
 
 	signals:
-		void edit(DataObject*);
-		void del(DataObject*);
-		void view(DataObject*);
+		void edit(int);
+		void del(int);
+		void view(int);
 
 	private slots:
 		void edit();
@@ -65,7 +64,7 @@ class DataTableWidget : public QTableWidget
 		template <class Type>
 		void loop(QList<Type> dataList);
 		void initActions();
-		QList<DataObject*> curDataList;
+		QList<int> curIdList;
 		QAction *edit_act;
 		QAction *del_act;
 		QAction *view_act;

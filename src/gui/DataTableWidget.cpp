@@ -38,12 +38,6 @@ DataTableWidget::DataTableWidget(QWidget *parent) : QTableWidget(parent)
 	setContextMenuPolicy(Qt::ActionsContextMenu);
 }
 
-DataTableWidget::~DataTableWidget()
-{
-	for(int i = 0; i < curDataList.size(); i++)
-		delete curDataList.at(i);
-}
-
 void DataTableWidget::populateTable(QList<Book> dataList)
 {
 	setColumnCount(Book::getHeaders().size());
@@ -77,20 +71,20 @@ void DataTableWidget::populateTable(QList<Theme> dataList)
 
 void DataTableWidget::edit()
 {
-	if(curDataList.size())
-		emit edit(curDataList.at(currentRow()));
+	if(curIdList.size())
+		emit edit(curIdList.at(currentRow()));
 }
 
 void DataTableWidget::del()
 {
-	if(curDataList.size())
-		emit del(curDataList.at(currentRow()));
+	if(curIdList.size())
+		emit del(curIdList.at(currentRow()));
 }
 
 void DataTableWidget::view()
 {
-	if(curDataList.size())
-		emit view(curDataList.at(currentRow()));
+	if(curIdList.size())
+		emit view(curIdList.at(currentRow()));
 }
 
 template <class Type>
@@ -107,7 +101,7 @@ void DataTableWidget::loop(QList<Type> dataList)
 			QTableWidgetItem *qtwi = new QTableWidgetItem(*p_it);
 			setItem(row, col++, qtwi);
 		}
-		curDataList.append(new Type(*it));
+		curIdList.append(it->getId());
 		row++;
 	}
 }

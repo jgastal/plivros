@@ -53,9 +53,9 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 
 	public slots:
 		void add();
-		void edit(DataObject*);
-		void erase(DataObject*);
-		void view(DataObject*);
+		void edit(int);
+		void erase(int);
+		void view(int);
 		void search();
 		void searchBook(unsigned short int idx, QString what);
 		void setSectionButton();
@@ -75,16 +75,16 @@ class OperationsWidget : public QWidget, protected Ui::OperationsWidget
 		Section::section section;
 
 		void createAddThemeForm();
-		void createEditThemeForm(Theme *t);
+		void createEditThemeForm(int id);
 		void createAddPublisherForm();
-		void createEditPublisherForm(Publisher *p);
-		void createViewPublisherDetails(Publisher *p);
+		void createEditPublisherForm(int id);
+		void createViewPublisherDetails(int id);
 		void createAddAuthorForm();
-		void createEditAuthorForm(Author *a);
-		void createViewAuthorDetails(Author *a);
+		void createEditAuthorForm(int id);
+		void createViewAuthorDetails(int id);
 		void createAddBookForm();
-		void createEditBookForm(Book *b);
-		void createViewBookDetails(Book *b);
+		void createEditBookForm(int id);
+		void createViewBookDetails(int id);
 } ;
 
 #endif //OPERATIONSWIDGET_H
