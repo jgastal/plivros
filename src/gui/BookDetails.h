@@ -30,21 +30,20 @@ class BookDetails : public QWidget, protected Ui::BookDetails
 	Q_OBJECT
 
 	public:
-		BookDetails(Book *b, QWidget* parent = 0);
+		BookDetails(Book &b, QWidget* parent = 0);
 
 	signals:
 		void authorClicked(QString);
 		void publisherClicked(QString);
 
 	private:
-		void initAuthors();
-		void initPublishers();
+		void initAuthors(Book &b);
+		void initPublishers(Book &b);
 		template <class T>
 		QString makeLink(T &data);
 		static const QString link;
 		static const QString beginHTML;
 		static const QString endHTML;
-		Book *book;
 };
 
 #endif // BOOKDETAILS_H

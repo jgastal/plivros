@@ -23,18 +23,18 @@
 #include <QList>
 #include <QLocale>
 
-PublisherDetails::PublisherDetails(Publisher *p, QWidget* parent): QWidget(parent)
+PublisherDetails::PublisherDetails(Publisher &p, QWidget* parent): QWidget(parent)
 {
 	setupUi(this);
-	name->setText(p->getName());
-	logo->setPixmap(QPixmap(p->getLogo()));
-	descriptionTextBrowser->setText(p->getDescription());
-	critiqueTextBrowser->setText(p->getCritique());
-	themes->setText(p->getThemesNames());
+	name->setText(p.getName());
+	logo->setPixmap(QPixmap(p.getLogo()));
+	descriptionTextBrowser->setText(p.getDescription());
+	critiqueTextBrowser->setText(p.getCritique());
+	themes->setText(p.getThemesNames());
 	QString wikiLink = wikipediaLink->text();
 	QString lc = QLocale::system().name();
 	lc.truncate(2);
 	wikiLink.replace("<lc>", lc);
-	wikiLink.replace("<title>", p->getName().replace(" ", "_"));
+	wikiLink.replace("<title>", p.getName().replace(" ", "_"));
 	wikipediaLink->setText(wikiLink);
 }

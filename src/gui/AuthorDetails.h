@@ -30,7 +30,7 @@ class AuthorDetails : public QWidget, protected Ui::AuthorDetails
 	Q_OBJECT
 
 	public:
-		AuthorDetails(Author *a, QWidget* parent = 0);
+		AuthorDetails(Author &a, QWidget* parent = 0);
 };
 
 #endif // AUTHORDETAILS_H

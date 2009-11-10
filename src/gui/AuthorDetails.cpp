@@ -23,19 +23,19 @@
 #include <QList>
 #include <QLocale>
 
-AuthorDetails::AuthorDetails(Author *a, QWidget* parent): QWidget(parent)
+AuthorDetails::AuthorDetails(Author &a, QWidget* parent): QWidget(parent)
 {
 	setupUi(this);
-	firstName->setText(a->getFirstName());
-	lastName->setText(a->getLastName());
-	picture->setPixmap(QPixmap(a->getPicture()));
-	descriptionTextBrowser->setText(a->getDescription());
-	critiqueTextBrowser->setText(a->getCritique());
-	themes->setText(a->getThemesNames());
+	firstName->setText(a.getFirstName());
+	lastName->setText(a.getLastName());
+	picture->setPixmap(QPixmap(a.getPicture()));
+	descriptionTextBrowser->setText(a.getDescription());
+	critiqueTextBrowser->setText(a.getCritique());
+	themes->setText(a.getThemesNames());
 	QString wikiLink = wikipediaLink->text();
 	QString lc = QLocale::system().name();
 	lc.truncate(2);
 	wikiLink.replace("<lc>", lc);
-	wikiLink.replace("<title>", a->getFirstName().append(a->getLastName()).replace(" ", "_"));
+	wikiLink.replace("<title>", a.getFirstName().append(a.getLastName()).replace(" ", "_"));
 	wikipediaLink->setText(wikiLink);
 }

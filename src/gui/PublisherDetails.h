@@ -30,7 +30,7 @@ class PublisherDetails : public QWidget, protected Ui::PublisherDetails
 	Q_OBJECT
 
 	public:
-		PublisherDetails(Publisher *p, QWidget* parent = 0);
+		PublisherDetails(Publisher &p, QWidget* parent = 0);
 };
 
 #endif // PUBLISHERDETAILS_H

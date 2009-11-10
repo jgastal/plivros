@@ -25,46 +25,45 @@
 
 const QString BookDetails::link = QString("<a href=\"%1%2\"><span style=\" text-decoration: underline; color:#0000ff;\">%3</span></a>");
 
-BookDetails::BookDetails(Book *b, QWidget* parent): QWidget(parent)
+BookDetails::BookDetails(Book &b, QWidget* parent): QWidget(parent)
 {
-	book = b;
 	setupUi(this);
-	cover->setPixmap(QPixmap(b->getCover()));
-	title->setText(b->getTitle());
-	initAuthors();
-	translator->setText(makeLink((const Author)b->getTranslator()));
+	cover->setPixmap(QPixmap(b.getCover()));
+	title->setText(b.getTitle());
+	initAuthors(b);
+	translator->setText(makeLink((const Author)b.getTranslator()));
 	connect(translator, SIGNAL(linkActivated(QString)), this, SIGNAL(authorClicked(QString)));
-	initPublishers();
-	pubDate->setText(b->getPubDate().toString());
-	edition->setText(QString::number(b->getEdition()));
-	udc->setText(b->getUDC());
-	descriptionTextBrowser->setText(b->getDescription());
-	critiqueTextBrowser->setText(b->getCritique());
-	isbn->setText(b->getIsbn());
-	themes->setText(b->getThemesNames());
+	initPublishers(b);
+	pubDate->setText(b.getPubDate().toString());
+	edition->setText(QString::number(b.getEdition()));
+	udc->setText(b.getUDC());
+	descriptionTextBrowser->setText(b.getDescription());
+	critiqueTextBrowser->setText(b.getCritique());
+	isbn->setText(b.getIsbn());
+	themes->setText(b.getThemesNames());
 	QString wikiLink = wikipediaLink->text();
 	QString lc = QLocale::system().name();
 	lc.truncate(2);
 	wikiLink.replace("<lc>", lc);
-	wikiLink.replace("<title>", b->getTitle().replace(" ", "_"));
+	wikiLink.replace("<title>", b.getTitle().replace(" ", "_"));
 	wikipediaLink->setText(wikiLink);
-	ebookLink->setText(ebookLink->text().replace("<ebook>", b->getEbook()));
+	ebookLink->setText(ebookLink->text().replace("<ebook>", b.getEbook()));
 }
 
-void BookDetails::initAuthors()
+void BookDetails::initAuthors(Book &b)
 {
 	QString html;
-	QList<Author> aList = book->getAuthors();
+	QList<Author> aList = b.getAuthors();
 	for(int i = 0; i < aList.size(); i++)
 		html.append(makeLink(aList.at(i)));
 	authors->setText(html);
 	connect(authors, SIGNAL(linkActivated(QString)), this, SIGNAL(authorClicked(QString)));
 }
 
-void BookDetails::initPublishers()
+void BookDetails::initPublishers(Book &b)
 {
 	QString html;
-	QList<Publisher> pList = book->getPublishers();
+	QList<Publisher> pList = b.getPublishers();
 	for(int i = 0; i < pList.size(); i++)
 		html.append(makeLink(pList.at(i)));
 	publishers->setText(html);
