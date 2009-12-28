@@ -578,7 +578,7 @@ QList<Theme> Collection::getThemes() throw(DataBaseException)
  */
 Theme Collection::getTheme(int id) throw(DataBaseException)
 {
-	PreparedStatement theme("SELECT * FROM publishers WHERE id = '%1'", db->getType());
+	PreparedStatement theme("SELECT * FROM themes WHERE id = '%1'", db->getType());
 	theme.arg(id);
 
 	ResultSet rs = db->query(theme);
