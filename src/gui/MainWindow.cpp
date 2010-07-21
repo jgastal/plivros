@@ -41,12 +41,11 @@
 #include "OS.h"
 
 ///@brief Constructor. Creates a collection, setups the gui and connects slots and signals.
-MainWindow::MainWindow(QString userName, QMainWindow *parent) : QMainWindow(parent)
+MainWindow::MainWindow(QString userName) : QMainWindow(NULL)
 {
 	try
 	{
 		c = new Collection(userName, QString(dbPath).append(userName).append(".db"));
-		setupUi(this);
 	}
 	catch(DataBaseException dbe)
 	{
@@ -56,6 +55,7 @@ MainWindow::MainWindow(QString userName, QMainWindow *parent) : QMainWindow(pare
 		exit(dbe.getCode());
 	}
 
+	setupUi(this);
 	connect(quitLabel, SIGNAL(linkActivated(QString)), this, SLOT(close()));
 
 	QString userStr = userLabel->text();
